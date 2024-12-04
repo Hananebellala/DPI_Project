@@ -52,53 +52,133 @@ Ensure your code is reviewed and tested before merging into the main branch.
 
 ### Backend
 
-backend/
-├── config/                   # Configuration for the Django project
-│   ├── __init__.py
-│   ├── settings.py           # Main settings file (includes DB config for MySQL)
-│   ├── urls.py               # Root URL configuration
-│   ├── asgi.py               # ASGI entry point
-│   └── wsgi.py               # WSGI entry point
-├── apps/                     # Custom Django apps
-│   ├── __init__.py
-│   ├── users/                # Example app for user management
-│   │   ├── migrations/       # Database migrations for the app
-│   │   │   └── __init__.py
-│   │   ├── __init__.py
-│   │   ├── admin.py          # Admin panel customization
-│   │   ├── apps.py           # App configuration
-│   │   ├── models.py         # Database models
-│   │   ├── serializers.py    # DRF serializers for API data
-│   │   ├── urls.py           # App-specific URLs
-│   │   └── views.py          # Views for API endpoints
-│   └── ...                   # Additional apps (e.g., profiles, records, etc.)
-├── api/                      # API for interop using REST
-│   ├── __init__.py
-│   ├── urls.py               # API endpoint routes
-│   └── views.py              # Generic or shared API views
-├── static/                   # Static files (CSS, JS, Images)
-├── templates/                # HTML templates if using Django templating
-├── db/                       # Database-related files
-│   ├── schema.sql            # Optional: SQL schema definition for MySQL
-├── manage.py                 # Django's CLI utility
-└── requirements.txt          # Python dependencies
+folders:
+- name: backend
+  description: Django backend project
+  content:
+    - name: config
+      description: Django project configuration
+      content:
+        - name: __init__.py
+        - name: settings.py  # Main settings file (includes DB config for MySQL)
+        - name: urls.py  # Root URL configuration
+        - name: asgi.py  # ASGI entry point
+        - name: wsgi.py  # WSGI entry point
+    - name: apps
+      description: Custom Django apps
+      content:
+        - name: users
+          description: App for user management
+          content:
+            - name: migrations
+              description: Database migrations for the app
+              content:
+                - name: __init__.py
+            - name: __init__.py
+            - name: admin.py  # Admin panel customization
+            - name: apps.py  # App configuration
+            - name: models.py  # Database models
+            - name: serializers.py  # DRF serializers for API data
+            - name: urls.py  # App-specific URLs
+            - name: views.py  # Views for API endpoints
+    - name: api
+      description: REST API for interop
+      content:
+        - name: __init__.py
+        - name: urls.py  # API endpoint routes
+        - name: views.py  # Generic or shared API views
+    - name: static
+      description: Static files (CSS, JS, Images)
+    - name: templates
+      description: HTML templates if using Django templating
+    - name: db
+      description: Database-related files
+      content:
+        - name: schema.sql  # Optional: SQL schema definition for MySQL
+    - name: manage.py  # Django's CLI utility
+    - name: requirements.txt  # Python dependencies
+
+## Frontend
+Here’s your folder structure in the requested format:
+
+```yaml
+folders:
+- name: backend
+  description: Django backend project
+  content:
+    - name: config
+      description: Django project configuration
+      content:
+        - name: __init__.py
+        - name: settings.py  # Main settings file (includes DB config for MySQL)
+        - name: urls.py  # Root URL configuration
+        - name: asgi.py  # ASGI entry point
+        - name: wsgi.py  # WSGI entry point
+    - name: apps
+      description: Custom Django apps
+      content:
+        - name: users
+          description: App for user management
+          content:
+            - name: migrations
+              description: Database migrations for the app
+              content:
+                - name: __init__.py
+            - name: __init__.py
+            - name: admin.py  # Admin panel customization
+            - name: apps.py  # App configuration
+            - name: models.py  # Database models
+            - name: serializers.py  # DRF serializers for API data
+            - name: urls.py  # App-specific URLs
+            - name: views.py  # Views for API endpoints
+    - name: api
+      description: REST API for interop
+      content:
+        - name: __init__.py
+        - name: urls.py  # API endpoint routes
+        - name: views.py  # Generic or shared API views
+    - name: static
+      description: Static files (CSS, JS, Images)
+    - name: templates
+      description: HTML templates if using Django templating
+    - name: db
+      description: Database-related files
+      content:
+        - name: schema.sql  # Optional: SQL schema definition for MySQL
+    - name: manage.py  # Django's CLI utility
+    - name: requirements.txt  # Python dependencies
+```
 
 ### Frontend
 
-src/
-├── app/                        # Main application logic
-│   ├── core/                   # Singleton services, guards, interceptors
-│   ├── shared/                 # Reusable components, pipes, directives, models
-│   ├── features/               # Feature-specific modules (e.g., auth, dashboard)
-│   ├── app-routing.module.ts   # Application-wide routing
-│   ├── app.component.*         # Root component files
-│   └── app.module.ts           # Root application module
-├── assets/                     # Static assets like images and fonts
-├── environments/               # Environment-specific configurations
-├── styles.scss                 # Global styles
-├── main.ts                     # Application entry point
-├── index.html                  # Main HTML template
-└── angular.json                # Angular CLI configuration
+```yaml
+folders:
+- name: frontend
+  description: Angular frontend project
+  content:
+    - name: src
+      content:
+        - name: app
+          description: Main application logic
+          content:
+            - name: core
+              description: Singleton services, guards, interceptors
+            - name: shared
+              description: Reusable components, pipes, directives, models
+            - name: features
+              description: Feature-specific modules (e.g., auth, dashboard)
+            - name: app-routing.module.ts  # Application-wide routing
+            - name: app.component.*  # Root component files
+            - name: app.module.ts  # Root application module
+        - name: assets
+          description: Static assets like images and fonts
+        - name: environments
+          description: Environment-specific configurations
+        - name: styles.scss  # Global styles
+        - name: main.ts  # Application entry point
+        - name: index.html  # Main HTML template
+    - name: angular.json  # Angular CLI configuration
+```
 
 ---
 
