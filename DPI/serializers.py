@@ -4,8 +4,8 @@ from DPI.models import Hopital,CompteAdministrateur,CompteMedecin,CompteInfirmie
 class HopitalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hopital
-        fields = ('id',
-                  'nom')
+        fields = '__all__'
+        
     def create(self, validated_data):
         instance = Hopital.objects.create(**validated_data)
         return instance    
@@ -58,16 +58,7 @@ class ComptePatientSerializer(serializers.ModelSerializer):
 class DPISerializer(serializers.ModelSerializer):
     class Meta:
         model = DPI
-        fields = ('id',
-                  'NSS',
-                  'nom',
-                  'prenom',
-                  'dateDeNaissance',
-                  'adresse',
-                  'telephone',
-                  'mutuelle',
-                  'idMedecinTraitant',
-                  'personneAcontacter')
+        fields = '__all__'
         
     def create(self, validated_data):
             instance = DPI.objects.create(**validated_data)
@@ -76,9 +67,7 @@ class DPISerializer(serializers.ModelSerializer):
 class OrdonnanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ordonnance
-        fields = ('id',
-                  'idDiagnostic',
-                  'dateOrdonnance')
+        fields = '__all__'
         
     def create(self, validated_data):
             instance = Ordonnance.objects.create(**validated_data)
@@ -87,11 +76,7 @@ class OrdonnanceSerializer(serializers.ModelSerializer):
 class SoinSerializer(serializers.ModelSerializer):
     class Meta:
         model = Soin
-        fields = ('id',
-                  'idSoin',
-                  'idInfirmier',
-                  'typeSoin',
-                  'resume')
+        fields = '__all__'
         
     def create(self, validated_data):
             instance = Soin.objects.create(**validated_data)
@@ -100,9 +85,7 @@ class SoinSerializer(serializers.ModelSerializer):
 class ConsultationMedicaleSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConsultationMedicale
-        fields = ('id',
-                  'idSejour',
-                  'dateConsultation')
+        fields = '__all__'
         
     def create(self, validated_data):
             instance = ConsultationMedicale.objects.create(**validated_data)
@@ -111,9 +94,7 @@ class ConsultationMedicaleSerializer(serializers.ModelSerializer):
 class ExamenComplementaireSerializer(serializers.ModelSerializer):       
     class Meta:
         model = ExamenComplementaire
-        fields = ('id',
-                  'dateExamen',
-                  'resultat')
+        fields = '__all__'
 
     def create(self, validated_data):
             instance = ExamenComplementaire.objects.create(**validated_data)
@@ -122,8 +103,7 @@ class ExamenComplementaireSerializer(serializers.ModelSerializer):
 class MedicamentSerializer(serializers.ModelSerializer):     
     class Meta:
         model = Medicament
-        fields = ('nomMedicament',
-                  'forme')
+        fields = '__all__'
     
     def create(self, validated_data):
             instance = Medicament.objects.create(**validated_data)
@@ -132,12 +112,7 @@ class MedicamentSerializer(serializers.ModelSerializer):
 class SejourSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sejour
-        fields = ('id',
-                  'idDossierPatient',
-                  'idCompteMedecin',
-                  'dateDebutSejour',
-                  'dateFinSejour',
-                  'motifAdmission')
+        fields = '__all__'
     
     def create(self, validated_data):
             instance = Sejour.objects.create(**validated_data)
@@ -146,9 +121,7 @@ class SejourSerializer(serializers.ModelSerializer):
 class DiagnosticSerializer(serializers.ModelSerializer):   
     class Meta:
         model = Diagnostic
-        fields = ('id',
-                  'idSejour',
-                  'descriptionMaladie')
+        fields = '__all__'
         
     def create(self, validated_data):
             instance = Diagnostic.objects.create(**validated_data)
@@ -157,11 +130,7 @@ class DiagnosticSerializer(serializers.ModelSerializer):
 class PosologieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Posologie
-        fields = ('id',
-                  'idOrdonnance',
-                  'nomMedicament',
-                  'dose',
-                  'dureePrise')
+        fields = '__all__'
     
     def create(self, validated_data):
             instance = Posologie.objects.create(**validated_data)
@@ -170,10 +139,7 @@ class PosologieSerializer(serializers.ModelSerializer):
 class FactureSerializer(serializers.ModelSerializer):        
     class Meta:
         model = Facture
-        fields = ('id',
-                  'idSejour',
-                  'dateFacture',
-                  'montant')
+        fields = '__all__'
         
     def create(self, validated_data):
             instance = Facture.objects.create(**validated_data)
@@ -182,10 +148,7 @@ class FactureSerializer(serializers.ModelSerializer):
 class LigneFactureSerializer(serializers.ModelSerializer):
     class Meta:
         model = LigneFacture
-        fields = ('id',
-                  'idFacture',
-                  'idSoin',
-                  'fraisSoin')
+        fields = '__all__'
         
     def create(self, validated_data):
             instance = LigneFacture.objects.create(**validated_data)
@@ -194,9 +157,7 @@ class LigneFactureSerializer(serializers.ModelSerializer):
 class EffetSecondaireSerializer(serializers.ModelSerializer):
     class Meta:
         model = EffetSecondaire
-        fields = ('idEffetSecondaire',
-                  'nomMedicament',
-                  'descriptionEffetSecondaire')
+        fields = '__all__'
         
     def create(self, validated_data):
             instance = EffetSecondaire.objects.create(**validated_data)
