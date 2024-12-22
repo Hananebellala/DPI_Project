@@ -4,18 +4,17 @@ from django.db import models
 # Create your models here.
 
 class Hopital(models.Model):
-    id = models.CharField(primary_key=True, max_length=10)
-    nom = models.CharField(max_length=50)
+    nom = models.CharField(primary_key=True,max_length=50)
 
 class ComptePersonne(models.Model):
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
-    nomUtilisateur = models.CharField(primary_key=True, max_length=30, default="USERNAME")
+    nomUtilisateur = models.CharField(primary_key=True, max_length=30)
     motDePasse = models.CharField(max_length=255)
     class Meta:
         abstract = True
 
-class CompteEmployee(models.Model):
+class CompteEmployee(ComptePersonne):
     idHopital = models.ForeignKey(Hopital, on_delete=models.CASCADE, default="Hopital")
     class Meta:
         abstract = True
@@ -24,40 +23,42 @@ class CompteAdministrateur(CompteEmployee):
     mdpHopital = models.CharField(max_length=50)
 
 class CompteMedecin(CompteEmployee):
-    class SpecialiteType(models.TextChoices):
-        GENERALISTE = 'Généraliste'
-        PEDIATRE = 'Pédiatre'
-        DERMATOLOGUE = 'Dermatologue'
-        NEUROLOGUE = 'Neurologue'
-        OBSTETRICIEN = 'Obstétricien'
-        OSTEOLOGUE = 'Ostéologue'
-        OPHTALMOLOGUE = 'Ophtalmologue'
-        ORL = 'ORL'
-        GASTROENTEROLOGUE = 'Gastro-entérologue'
-    specialite = models.CharField(default="Généraliste", max_length=30, choices=SpecialiteType.choices)
+    SPEC_CHOIX = [
+        ('Généraliste', 'Généraliste'),
+        ('Pédiatre', 'Pédiatre'),
+        ('Dermatologe', 'Dermatologue'),
+        ('Neurologe','Neurologue'),
+        ('Obstétricien','Obstétricien'),
+        ('Ostéologue','Ostéologue'),
+        ('Ophtalmologue','Ophtalmologue'),
+        ('ORL','ORL'),
+        ('Gastro-entérologue','Gastro-entérologue'),
+    ]
+    specialite = models.CharField(default="Généraliste", max_length=30, choices=SPEC_CHOIX)
 
 class CompteInfirmier(CompteEmployee):
-    class SpecialiteType(models.TextChoices):
-        AIDE_SOIGNANT = 'Aide Soignant'
-        SAGE_FEMME = 'Sage femme'
-    specialite = models.CharField(max_length=30, choices=SpecialiteType.choices)
+    SPEC_CHOIX = [
+        ('Aide soignant', 'Aide soignant'),
+        ('Sage femme', 'Sage femme'),
+    ]
+    specialite = models.CharField(max_length=30, choices=SPEC_CHOIX)
 
 class ComptePersonnelAdministratif(CompteEmployee):
-    class SpecialiteType(models.TextChoices):
-        URGENCES = 'Urgences'
-        PEDIATRIE = 'Pédiatrie'
-        DERMATOLOGIE = 'Dermatologue'
-        NEUROLOGIE = 'Neurologue'
-        OBSTETRIQUE = 'Obstétrique'
-        OSTEOLOGIE = 'Ostéologie'
-        OPHTALMOLOGiE = 'Ophtalmologie'
-        ORL = 'ORL'
-        GASTROENTEROLOGiE = 'Gastro-entérologie'
-    service = models.CharField(default="Urgences",max_length=30, choices=SpecialiteType.choices)
+    SERVICE_CHOIX = [
+        ('Urgences', 'Urgences'),
+        ('Pédiatrie', 'Pédiatrie'),
+        ('Dermatologie', 'Dermatologie'),
+        ('Neurologie','Neurologie'),
+        ('Obstétrique','Obstétrique'),
+        ('Ostéologie','Ostéologie'),
+        ('Ophtalmologie','Ophtalmologie'),
+        ('ORL','ORL'),
+        ('Gastro-entérologie','Gastro-entérologie'),
+    ]
+    service = models.CharField(default="Urgences",max_length=30, choices=SERVICE_CHOIX)
     
 class DPI(models.Model):
-    idDossierPatient = models.CharField(max_length=10, primary_key=True)
-    numeroSecuriteSociale = models.CharField(max_length=13)
+    numeroSecuriteSociale = models.CharField(primary_key=True, max_length=13)
     dateDeNaissance = models.DateField(default=datetime.date.today)
     adresse = models.TextField(default='Alger')
     telephone = models.DecimalField(max_digits = 10, decimal_places = 0)
@@ -87,10 +88,19 @@ class Ordonnance(models.Model):
     dateOrdonnance = models.DateField(default=datetime.date.today)
 
 class Soin(models.Model):
+    SOIN_CHOIX = [
+        ('Soin d\'hygiène et de confort', 'Soin d\'hygiène et de confort'),
+        ('Surveillance clinique', 'Surveillance clinique'),
+        ('Soin medical', 'Soin médical'),
+        ('Soin spécifique','Soin spécifique'),
+        ('Soin psycho-social','Soin psycho-social'),
+        ('Soin d\'éducation/prévention','Soin d\'éducation/prévention'),
+        ('Soin en cas d\'urgence','Soin en cas d\'urgence'),
+    ]
     idSoin = models.CharField(max_length = 18, primary_key=True)
     idSejour = models.ForeignKey(Sejour, on_delete=models.CASCADE, default="Soin")
-    idInfirmier = models.ForeignKey(CompteInfirmier, on_delete=models.DO_NOTHING, default="Infirmier")
-    typeSoin = models.TextChoices("Soin1", "Soin2")
+    idInfirmier = models.ForeignKey(CompteInfirmier, on_delete=models.DO_NOTHING, to_field='nomUtilisateur')
+    typeSoin = models.CharField(default="Soin medical",max_length=50, choices=SOIN_CHOIX)
     resumeSoin = models.TextField(default="Fait")
 
 class ConsultationMedicale(models.Model):
@@ -124,7 +134,7 @@ class Facture(models.Model):
 class LigneFacture(models.Model):
     idLigneFacture = models.CharField(max_length = 15, primary_key=True)
     idFacture = models.ForeignKey(Facture, on_delete=models.CASCADE, default="Facture")
-    idSoin = models.TextChoices("soin1", "soin2")
+    idSoin = models.ForeignKey(Soin, on_delete=models.CASCADE, default="Soin")
     fraisSoin = models.DecimalField(max_digits=10, decimal_places=2)
 
 class EffetSecondaire(models.Model):
