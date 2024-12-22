@@ -24,6 +24,18 @@ class ComptePersonnelAdministratifViewSet(viewsets.ModelViewSet):
     queryset = ComptePersonnelAdministratif.objects.all()
     serializer_class = ComptePersonnelAdministratifSerializer
 
+class CompteRadiologueViewSet(viewsets.ModelViewSet):
+    queryset = CompteRadiologue.objects.all()
+    serializer_class = CompteRadiologueSerializer
+
+class CompteLaborantinViewSet(viewsets.ModelViewSet):
+    queryset = CompteLaborantin.objects.all()
+    serializer_class = CompteLaborantinSerializer
+
+class ComptePharmacienViewSet(viewsets.ModelViewSet):
+    queryset = ComptePharmacien.objects.all()
+    serializer_class = ComptePharmacienSerializer
+
 class ComptePatientViewSet(viewsets.ModelViewSet):
     queryset = ComptePatient.objects.all()
     serializer_class = ComptePatientSerializer

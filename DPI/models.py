@@ -81,6 +81,9 @@ class CompteRadiologue(CompteEmployeeHopital):
 class CompteLaborantin(CompteEmployeeHopital):
     pass
 
+class ComptePharmacien(CompteEmployeeHopital):
+    pass
+
 class DPI(models.Model):
     numeroSecuriteSociale = models.CharField(primary_key=True, max_length=13)
     dateDeNaissance = models.DateField(default=datetime.date.today)
@@ -188,6 +191,7 @@ class Medicament(models.Model):
     ]
     nomMedicament = models.CharField(max_length=50, primary_key=True,)
     forme = models.CharField(default="Orale", max_length=20, choices=TYPE_MED)
+    quantiteStock = models.PositiveIntegerField(default=0)
 
 class Posologie(models.Model):
     idOrdonnance = models.ForeignKey(Ordonnance, on_delete=models.CASCADE)

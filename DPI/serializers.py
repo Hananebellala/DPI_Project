@@ -46,6 +46,33 @@ class ComptePersonnelAdministratifSerializer(serializers.ModelSerializer):
             instance = ComptePersonnelAdministratif.objects.create(**validated_data)
             return instance 
     
+class LaborantinSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompteLaborantin
+        fields = '__all__'
+        
+    def create(self, validated_data):
+            instance = CompteLaborantin.objects.create(**validated_data)
+            return instance 
+    
+class RadiologueSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompteRadiologue
+        fields = '__all__'
+        
+    def create(self, validated_data):
+            instance = CompteRadiologue.objects.create(**validated_data)
+            return instance 
+
+class PharmacienSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompteLaborantin
+        fields = '__all__'
+        
+    def create(self, validated_data):
+            instance = ComptePharmacien.objects.create(**validated_data)
+            return instance 
+    
 class ComptePatientSerializer(serializers.ModelSerializer):
     class Meta:
         model = ComptePatient
