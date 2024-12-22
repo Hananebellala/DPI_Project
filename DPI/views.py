@@ -1,6 +1,6 @@
-from .models import Hopital,CompteAdministrateur,CompteMedecin,CompteInfirmier,ComptePatient,ComptePersonnelAdministratif,DPI,Ordonnance,Soin,ConsultationMedicale,ExamenComplementaire,Medicament,Sejour,Diagnostic,Posologie,Facture,LigneFacture,EffetSecondaire
+from .models import *
 from rest_framework import permissions, viewsets # DRF class for creating views
-from .serializers import HopitalSerializer,CompteAdministrateurSerializer,CompteMedecinSerializer,CompteInfirmierSerializer,ComptePatientSerializer,ComptePersonnelAdministratifSerializer,DPISerializer,OrdonnanceSerializer,SoinSerializer,ConsultationMedicaleSerializer,ExamenComplementaireSerializer,MedicamentSerializer,SejourSerializer,DiagnosticSerializer,PosologieSerializer,FactureSerializer,LigneFactureSerializer,EffetSecondaireSerializer
+from .serializers import *
 
 
 # Defining the view for each model
@@ -44,10 +44,6 @@ class ConsultationMedicaleViewSet(viewsets.ModelViewSet):
     queryset = ConsultationMedicale.objects.all()
     serializer_class = ConsultationMedicaleSerializer
 
-class ExamenComplementaireViewSet(viewsets.ModelViewSet):
-    queryset = ExamenComplementaire.objects.all()
-    serializer_class = ExamenComplementaireSerializer
-
 class MedicamentViewSet(viewsets.ModelViewSet):
     queryset = Medicament.objects.all()
     serializer_class = MedicamentSerializer
@@ -59,6 +55,18 @@ class SejourViewSet(viewsets.ModelViewSet):
 class DiagnosticViewSet(viewsets.ModelViewSet):
     queryset = Diagnostic.objects.all()
     serializer_class = DiagnosticSerializer
+
+class BilanRadiologiqueViewSet(viewsets.ModelViewSet):
+    queryset = BilanRadiologique.objects.all()
+    serializer_class = BilanRadiologiqueSerializer
+
+class BilanBiologiqueViewSet(viewsets.ModelViewSet):
+    queryset = BilanBiologique.objects.all()
+    serializer_class = BilanBiologiqueSerializer
+
+class LigneBilanBiologiqueViewSet(viewsets.ModelViewSet):
+    queryset = LigneBilanBiologique.objects.all()
+    serializer_class = LigneBilanBiologiqueSerializer
 
 class PosologieViewSet(viewsets.ModelViewSet):
     queryset = Posologie.objects.all()

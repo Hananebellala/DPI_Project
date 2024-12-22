@@ -1,5 +1,5 @@
 from rest_framework import serializers 
-from DPI.models import Hopital,CompteAdministrateur,CompteMedecin,CompteInfirmier,ComptePatient,ComptePersonnelAdministratif,DPI,Ordonnance,Soin,ConsultationMedicale,ExamenComplementaire,Medicament,Sejour,Diagnostic,Posologie,Facture,LigneFacture,EffetSecondaire
+from DPI.models import *
 
 class HopitalSerializer(serializers.ModelSerializer):
     class Meta:
@@ -91,15 +91,6 @@ class ConsultationMedicaleSerializer(serializers.ModelSerializer):
             instance = ConsultationMedicale.objects.create(**validated_data)
             return instance
         
-class ExamenComplementaireSerializer(serializers.ModelSerializer):       
-    class Meta:
-        model = ExamenComplementaire
-        fields = '__all__'
-
-    def create(self, validated_data):
-            instance = ExamenComplementaire.objects.create(**validated_data)
-            return instance
-
 class MedicamentSerializer(serializers.ModelSerializer):     
     class Meta:
         model = Medicament
@@ -125,6 +116,33 @@ class DiagnosticSerializer(serializers.ModelSerializer):
         
     def create(self, validated_data):
             instance = Diagnostic.objects.create(**validated_data)
+            return instance
+
+class BilanRadiologiqueSerializer(serializers.ModelSerializer):   
+    class Meta:
+        model = BilanRadiologique
+        fields = '__all__'
+        
+    def create(self, validated_data):
+            instance = BilanRadiologique.objects.create(**validated_data)
+            return instance
+    
+class BilanBiologiqueSerializer(serializers.ModelSerializer):   
+    class Meta:
+        model = BilanBiologique
+        fields = '__all__'
+        
+    def create(self, validated_data):
+            instance = BilanBiologique.objects.create(**validated_data)
+            return instance
+
+class LigneBilanBiologiqueSerializer(serializers.ModelSerializer):   
+    class Meta:
+        model = LigneBilanBiologique
+        fields = '__all__'
+        
+    def create(self, validated_data):
+            instance = LigneBilanBiologique.objects.create(**validated_data)
             return instance
 
 class PosologieSerializer(serializers.ModelSerializer):
