@@ -5,19 +5,25 @@ import { MissionComponent } from './mission/mission.component';
 import { ServicesComponent } from './services/services.component';
 import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
+import { AdminModule } from './admin/admin.module';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  standalone: true, // Mark this component as standalone
-  imports: [ // Add all the required components here
+  
+  imports: [ 
     NavbarComponent,
     HeroComponent,
     MissionComponent,
     ServicesComponent,
     ContactComponent,
     FooterComponent,
+    AdminModule,
+    RouterModule
+    
   ],
+  
 })
 export class AppComponent {
   

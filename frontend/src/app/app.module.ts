@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routes';
+import { RouterModule } from '@angular/router';
 
 // Import standalone components directly
 import { NavbarComponent } from './navbar/navbar.component';
@@ -10,22 +11,29 @@ import { MissionComponent } from './mission/mission.component';
 import { ServicesComponent } from './services/services.component';
 import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
-    AppComponent, // Only AppComponent is declared
+    AppComponent, 
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     AppRoutingModule,
-    NavbarComponent, // Import standalone components
+    NavbarComponent, 
     HeroComponent,
     MissionComponent,
     ServicesComponent,
     ContactComponent,
-    FooterComponent
+    FooterComponent,
+    
+    AdminModule,
+    
+    
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [RouterModule]
 })
 export class AppModule {}
