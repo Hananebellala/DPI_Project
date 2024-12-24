@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { AddMemberComponent } from './dialogs/add-member/add-member.component';
+import { AddHospitalComponent } from './dialogs/add-hospital/add-hospital.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { AddMemberComponent } from './dialogs/add-member/add-member.component';
     MatDialogModule,
     MatButtonModule,
     AddMemberComponent,
+    AddHospitalComponent,
     
     RouterModule.forChild([
       { path: '', loadComponent: () => import('./admin.component').then(m => m.AdminComponent) },
