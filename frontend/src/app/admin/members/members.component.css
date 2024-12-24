@@ -94,7 +94,12 @@ td img{
   border-radius: 10px;
   height: 30px;
   width: 200px;
+  cursor: pointer; 
 
+}
+
+.table-top .add-member-btn:hover{
+  background-color: #EF9A9A; 
 }
 
 .members-table .delete-btn{
@@ -105,6 +110,11 @@ td img{
   border-radius: 10px;
   height: 30px;
   width: 200px;
+  cursor: pointer; 
+}
+
+.members-table .delete-btn:hover{
+  background-color: #EF5350; 
 }
 
 .table-container {

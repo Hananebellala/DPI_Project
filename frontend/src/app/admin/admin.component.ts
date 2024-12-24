@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MembersComponent } from './members/members.component';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AddMemberComponent } from './dialogs/add-member/add-member.component';
 
 @Component({
   selector: 'app-admin',
@@ -19,6 +21,8 @@ export class AdminComponent {
     { name: 'Name3 LastName3', username: 'username3', email: 'email3@gmail.com' },
     { name: 'Name4 LastName4', username: 'username4', email: 'email4@gmail.com' },
   ];
+
+  
 
   deleteMember(index: number): void {
     this.members.splice(index, 1); // Removes the selected member
