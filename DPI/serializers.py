@@ -46,33 +46,6 @@ class ComptePersonnelAdministratifSerializer(serializers.ModelSerializer):
             instance = ComptePersonnelAdministratif.objects.create(**validated_data)
             return instance 
     
-class LaborantinSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CompteLaborantin
-        fields = '__all__'
-        
-    def create(self, validated_data):
-            instance = CompteLaborantin.objects.create(**validated_data)
-            return instance 
-    
-class RadiologueSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CompteRadiologue
-        fields = '__all__'
-        
-    def create(self, validated_data):
-            instance = CompteRadiologue.objects.create(**validated_data)
-            return instance 
-
-class PharmacienSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CompteLaborantin
-        fields = '__all__'
-        
-    def create(self, validated_data):
-            instance = ComptePharmacien.objects.create(**validated_data)
-            return instance 
-    
 class ComptePatientSerializer(serializers.ModelSerializer):
     class Meta:
         model = ComptePatient
@@ -207,3 +180,29 @@ class EffetSecondaireSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
             instance = EffetSecondaire.objects.create(**validated_data)
             return instance
+
+# serializers.py la partie de ajout de emplyee 
+from rest_framework import serializers
+
+class EmployeeSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    nom = serializers.CharField(max_length=50)
+    prenom = serializers.CharField(max_length=50)
+    motDePasse = serializers.CharField(max_length=255)
+    profession = serializers.CharField(max_length=50)
+    hopital = serializers.CharField(max_length=50)
+
+class CompteRadiologueSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompteRadiologue
+        fields = '__all__'
+
+class CompteLaborantinSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompteLaborantin
+        fields = '__all__'
+
+class ComptePharmacienSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ComptePharmacien
+        fields = '__all__'

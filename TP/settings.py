@@ -24,6 +24,7 @@ SECRET_KEY = 'django-insecure-*s&u3d!kx8hwrt%+y2a@@^6e@og_cmxz1$)(al!h&h!s0c(%dh
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+APPEND_SLASH = True
 
 ALLOWED_HOSTS = []
 
@@ -38,10 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # DPI application 
-    'DPI.apps.DpiConfig',
+    'DPI.apps.DpiConfig',  # Keep only this line, remove the other 'DPI' entry
     'corsheaders',
 ]
+
 
 """not recommended"""
 CORS_ORIGIN_ALLOW_ALL = False
