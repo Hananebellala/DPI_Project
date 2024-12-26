@@ -45,6 +45,42 @@ class ComptePersonnelAdministratifSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
             instance = ComptePersonnelAdministratif.objects.create(**validated_data)
             return instance 
+class ComptePersonnelAdministratifSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ComptePersonnelAdministratif
+        fields = '__all__'
+        
+    def create(self, validated_data):
+            instance = ComptePersonnelAdministratif.objects.create(**validated_data)
+            return instance 
+    
+class CompteLaborantinSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompteLaborantin
+        fields = '__all__'
+        
+    def create(self, validated_data):
+            instance = CompteLaborantin.objects.create(**validated_data)
+            return instance 
+    
+class CompteRadiologueSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompteRadiologue
+        fields = '__all__'
+        
+    def create(self, validated_data):
+            instance = CompteRadiologue.objects.create(**validated_data)
+            return instance 
+
+class ComptePharmacienSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CompteLaborantin
+        fields = '__all__'
+        
+    def create(self, validated_data):
+            instance = ComptePharmacien.objects.create(**validated_data)
+            return instance 
+    
     
 class ComptePatientSerializer(serializers.ModelSerializer):
     class Meta:
@@ -54,6 +90,7 @@ class ComptePatientSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
             instance = ComptePatient.objects.create(**validated_data)
             return instance 
+    
     
 class DPISerializer(serializers.ModelSerializer):
     class Meta:
@@ -91,6 +128,15 @@ class ConsultationMedicaleSerializer(serializers.ModelSerializer):
             instance = ConsultationMedicale.objects.create(**validated_data)
             return instance
         
+class AntecedentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Antecedent
+        fields = '__all__'
+        
+    def create(self, validated_data):
+            instance = Antecedent.objects.create(**validated_data)
+            return instance
+
 class MedicamentSerializer(serializers.ModelSerializer):     
     class Meta:
         model = Medicament

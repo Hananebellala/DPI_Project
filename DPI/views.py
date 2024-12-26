@@ -45,6 +45,18 @@ class ComptePatientViewSet(viewsets.ModelViewSet):
     queryset = ComptePatient.objects.all()
     serializer_class = ComptePatientSerializer
 
+class CompteRadiologueViewSet(viewsets.ModelViewSet):
+    queryset = CompteRadiologue.objects.all()
+    serializer_class = CompteRadiologueSerializer
+
+class ComptePharmacienViewSet(viewsets.ModelViewSet):
+    queryset = ComptePharmacien.objects.all()
+    serializer_class = ComptePharmacienSerializer
+
+class CompteLaborantinViewSet(viewsets.ModelViewSet):
+    queryset = CompteLaborantin.objects.all()
+    serializer_class = CompteLaborantinSerializer
+
 class DPIViewSet(viewsets.ModelViewSet):
     queryset = DPI.objects.all()
     serializer_class = DPISerializer
@@ -60,6 +72,10 @@ class SoinViewSet(viewsets.ModelViewSet):
 class ConsultationMedicaleViewSet(viewsets.ModelViewSet):
     queryset = ConsultationMedicale.objects.all()
     serializer_class = ConsultationMedicaleSerializer
+
+class AntecedentViewSet(viewsets.ModelViewSet):
+    queryset = Antecedent.objects.all()
+    serializer_class = AntecedentSerializer
 
 class MedicamentViewSet(viewsets.ModelViewSet):
     queryset = Medicament.objects.all()
@@ -157,76 +173,6 @@ def loginPage(request):
 
 def essaye(request):
     return HttpResponse( "it's work ")
-
-# views.py
-
-"""
-@csrf_exempt
-def add_employee_api(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)  # Charger les données JSON envoyées dans la requête
-            first_name = data.get('first_name')
-            last_name = data.get('last_name')
-            email = data.get('email')
-            profession = data.get('profession')
-            hospital_name = data.get('hospital')
-            password = data.get('password')
-
-            # Vérification des champs obligatoires
-            if not all([first_name, last_name, email, profession, hospital_name, password]):
-                return JsonResponse({'error': 'Tous les champs sont requis.'}, status=400)
-
-            # Récupérer l'hôpital
-            try:
-                hospital = Hopital.objects.get(nom=hospital_name)
-            except Hopital.DoesNotExist:
-                return JsonResponse({'error': 'Hôpital introuvable.'}, status=404)
-
-            # Créer l'utilisateur Django
-            user = User.objects.create_user(
-                username=email,
-                email=email,
-                password=password,
-                first_name=first_name,
-                last_name=last_name
-            )
-
-            # Créer le compte en fonction de la profession
-            if profession == 'medecin':
-                CompteMedecin.objects.create(
-                    user=user,
-                    nom=last_name,
-                    prenom=first_name,
-                    email=email,
-                    idHopital=hospital
-                )
-            elif profession == 'infirmier':
-                CompteInfirmier.objects.create(
-                    user=user,
-                    nom=last_name,
-                    prenom=first_name,
-                    email=email,
-                    idHopital=hospital
-                )
-            elif profession == 'pharmacien':
-                ComptePharmacien.objects.create(
-                    user=user,
-                    nom=last_name,
-                    prenom=first_name,
-                    email=email,
-                    idHopital=hospital
-                )
-            else:
-                return JsonResponse({'error': 'Profession non valide.'}, status=400)
-
-            return JsonResponse({'success': 'Employé ajouté avec succès.'}, status=201)
-
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Format JSON invalide.'}, status=400)
-
-    return JsonResponse({'error': 'Méthode non autorisée.'}, status=405)
-"""
 
 
 # views.py la partie de add emplyee -------------------------------------------------------------------
@@ -609,3 +555,6 @@ class SejourViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Sejour.DoesNotExist:
             return Response({'detail': 'Séjour non trouvé'}, status=status.HTTP_404_NOT_FOUND)
+            
+#---------------------------------------------------------------------------------------------------------------
+#la creation du consultation est deja faite  il faut que recuperer le id du sejour et type de l outil qu on fait avec lui la consultation 

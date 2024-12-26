@@ -136,6 +136,17 @@ class ConsultationMedicale(models.Model):
     dateConsultation = models.DateField(default=datetime.date.today)
     OutilsConsultation = models.CharField(default="Stéthoscope", max_length=50, choices=OUTILS)
 
+class Antecedent(models.Model):
+    TYPE = [
+        ('Médical personnel','Médical personnel'),
+        ('Familial','Familial'),
+        ('Médicamenteux','Médicamenteux'),
+        ('Social et environnemental','Social et environnemental'),
+        ('Obstétrical et gynécologique','Obstétrical et gynécologique'),
+    ]
+    TypeAntecedent = models.CharField(default="Médical personnel", max_length=50, choices=TYPE)
+    description = models.CharField(max_length=500)
+
 class ExamenComplementaire(models.Model):
     idConsultation = models.ForeignKey(ConsultationMedicale,on_delete=models.CASCADE)
     dateExamen = models.DateField(default=datetime.date.today)
