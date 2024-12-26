@@ -7,6 +7,7 @@ import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
 import { AdminModule } from './admin/admin.module';
 import { RouterModule } from '@angular/router';
+import { LaborantinModule } from './laborantin/laborantin.module';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
     ContactComponent,
     FooterComponent,
     AdminModule,
-    RouterModule
+    RouterModule,
+    LaborantinModule
     
   ],
   

@@ -19,6 +19,7 @@ import { MatFormFieldModule, matFormFieldAnimations } from '@angular/material/fo
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { LaborantinModule } from './laborantin/laborantin.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MatButtonModule } from '@angular/material/button';
     FormsModule,
     
     AdminModule,
+    LaborantinModule
    
     
     

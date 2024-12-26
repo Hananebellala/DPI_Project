@@ -10,7 +10,8 @@ export const routes: Routes = [
   { path: 'mission', component: MissionComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'contact', component: ContactComponent },
-  { path: '', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path: '', loadChildren: () => import('./laborantin/laborantin.module').then(m => m.LaborantinModule) },
   { path: '**', redirectTo: '' },
 ];
 
