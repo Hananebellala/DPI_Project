@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { LaborantinModule } from './laborantin/laborantin.module';
+import { RadiologueModule } from './radiologue/radiologue.module';
 
 @NgModule({
   declarations: [
@@ -36,9 +37,9 @@ import { LaborantinModule } from './laborantin/laborantin.module';
     ContactComponent,
     FooterComponent,
     FormsModule,
-    
     AdminModule,
-    LaborantinModule
+    LaborantinModule,
+    RadiologueModule
    
     
     

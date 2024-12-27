@@ -8,6 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AdminModule } from './admin/admin.module';
 import { RouterModule } from '@angular/router';
 import { LaborantinModule } from './laborantin/laborantin.module';
+import { RadiologueModule } from './radiologue/radiologue.module';
 
 @Component({
   selector: 'app-root',
@@ -22,11 +23,15 @@ import { LaborantinModule } from './laborantin/laborantin.module';
     FooterComponent,
     AdminModule,
     RouterModule,
-    LaborantinModule
+    LaborantinModule,
+    RadiologueModule
     
   ],
   
 })
 export class AppComponent {
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
   
 }

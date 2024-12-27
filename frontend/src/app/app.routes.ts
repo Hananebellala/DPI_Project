@@ -10,8 +10,10 @@ export const routes: Routes = [
   { path: 'mission', component: MissionComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'contact', component: ContactComponent },
+  
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
-  { path: '', loadChildren: () => import('./laborantin/laborantin.module').then(m => m.LaborantinModule) },
+  { path: 'laborantin', loadChildren: () => import('./laborantin/laborantin.module').then(m => m.LaborantinModule) },
+  { path: '', loadChildren: () => import('./radiologue/radiologue.module').then(m => m.RadiologueModule) },
   { path: '**', redirectTo: '' },
 ];
 
