@@ -21,6 +21,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { LaborantinModule } from './laborantin/laborantin.module';
 import { RadiologueModule } from './radiologue/radiologue.module';
+import { DoctorModule } from './doctor/doctor.module';
+import { DoctorRoutingModule } from './doctor/doctor-routing.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { RadiologueModule } from './radiologue/radiologue.module';
     FormsModule,
     AdminModule,
     LaborantinModule,
-    RadiologueModule
+    RadiologueModule,
+    DoctorModule,
+    DoctorRoutingModule
    
     
     
