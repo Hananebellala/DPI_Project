@@ -1,0 +1,15 @@
+<h2>Admin SignUp</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Sign Up</button>
+
+  {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="message">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+</form>
