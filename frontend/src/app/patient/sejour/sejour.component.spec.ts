@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SejourPageComponent } from './sejour-page.component';
+import { SejourComponent } from './sejour.component';
 
-describe('PatientPageDiagnosticComponent', () => {
-  let component: SejourPageComponent;
-  let fixture: ComponentFixture<SejourPageComponent>;
+describe('SejourComponent', () => {
+  let component: SejourComponent;
+  let fixture: ComponentFixture<SejourComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SejourPageComponent]
+      imports: [SejourComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SejourPageComponent);
+    fixture = TestBed.createComponent(SejourComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

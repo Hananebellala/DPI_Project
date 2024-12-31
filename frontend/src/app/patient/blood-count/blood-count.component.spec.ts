@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SejourPageComponent } from './sejour-page.component';
+import { BloodCountPageComponent } from './blood-count.component';
 
-describe('PatientPageDiagnosticComponent', () => {
-  let component: SejourPageComponent;
-  let fixture: ComponentFixture<SejourPageComponent>;
+describe('BloodCountPageComponent', () => {
+  let component: BloodCountPageComponent;
+  let fixture: ComponentFixture<BloodCountPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SejourPageComponent]
+      imports: [BloodCountPageComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SejourPageComponent);
+    fixture = TestBed.createComponent(BloodCountPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

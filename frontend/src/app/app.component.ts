@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { LaborantinModule } from './laborantin/laborantin.module';
 import { RadiologueModule } from './radiologue/radiologue.module';
 import { DoctorModule } from './doctor/doctor.module';
+import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ import { DoctorModule } from './doctor/doctor.module';
     RouterModule,
     LaborantinModule,
     RadiologueModule,
+    LoginComponent
     
     
   ],

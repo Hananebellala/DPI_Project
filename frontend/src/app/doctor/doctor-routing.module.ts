@@ -7,10 +7,13 @@ import { LabPageComponent } from './lab-page/lab-page.component';
 import { SoinPageComponent } from './soin-page/soin-page.component';
 import { RadiologyPageComponent } from './radiology-page/radiology-page.component';
 import { BloodCountPageComponent } from './blood-count-page/blood-count-page.component';
+import { PatientsRecordsDoctorAdminComponent } from './patients-records-doctor-admin/patients-records-doctor-admin.component';
+import { AddPatientDoctorComponent } from './add-patient-doctor/add-patient-doctor.component';
+import { SejourPageComponent } from './sejour-page/sejour-page.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'Patient',
     component: DoctorLayoutComponent, // Parent component with layout
     children: [
       { path: 'medication', component: MedicationPageComponent },
@@ -19,10 +22,15 @@ const routes: Routes = [
       { path: 'consultation', component: ConsultationPageComponent },
       { path: 'lab-results', component: LabPageComponent },
       { path: 'soin', component: SoinPageComponent },
-      { path: '', redirectTo: 'consultation', pathMatch: 'full' }, // Set 'consultation' as the default route
+      { path: 'sejour', component: SejourPageComponent },
+      { path: '', redirectTo: 'sejour', pathMatch: 'full' }, // Default route within the layout
     ],
   },
+  // Define PatientsRecordsDoctorAdminComponent as an independent route
+  { path: '', component: PatientsRecordsDoctorAdminComponent },
+  { path: 'Add', component: AddPatientDoctorComponent },
 ];
+
 
 
 @NgModule({

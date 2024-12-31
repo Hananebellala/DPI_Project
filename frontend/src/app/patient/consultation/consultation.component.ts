@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PatientService } from '../patient.service'; // Assuming this is your service
+import { PatientService } from '../../doctor/patient.service';
+ // Assuming this is your service
 
 @Component({
   selector: 'app-consultation-page',
-  templateUrl: './consultation-page.component.html',
-  styleUrls: ['./consultation-page.component.css']
+  templateUrl: './consultation.component.html',
+  styleUrls: ['./consultation.component.css']
 })
 export class ConsultationPageComponent implements OnInit {
   patient: any;

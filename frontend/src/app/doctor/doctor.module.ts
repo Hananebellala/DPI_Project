@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { BloodCountPageComponent } from './blood-count-page/blood-count-page.component';
 
 import { RadiologyPageComponent } from './radiology-page/radiology-page.component';
+import { PatientsRecordsDoctorAdminComponent } from './patients-records-doctor-admin/patients-records-doctor-admin.component';
+import { AddPatientDoctorComponent } from './add-patient-doctor/add-patient-doctor.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { RadiologyPageComponent } from './radiology-page/radiology-page.componen
     SoinPageComponent,
     DoctorLayoutComponent,
     BloodCountPageComponent,
-    RadiologyPageComponent
+    RadiologyPageComponent,
+    PatientsRecordsDoctorAdminComponent,
+    AddPatientDoctorComponent
   ]
 })
 export class DoctorModule {}
