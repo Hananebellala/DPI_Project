@@ -14,10 +14,12 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
-  { path: 'laborantin', loadChildren: () => import('./laborantin/laborantin.module').then(m => m.LaborantinModule) },
+  { path: '', loadChildren: () => import('./laborantin/laborantin.module').then(m => m.LaborantinModule) },
   { path: 'doctor', loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule) },
-  { path: '', loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule) },
   { path: 'radiologue', loadChildren: () => import('./radiologue/radiologue.module').then(m => m.RadiologueModule) },
+  
+  { path: 'patient', loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule) },
+ 
   { path: '**', redirectTo: '' },
 ];
 
