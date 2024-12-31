@@ -1,1 +1,33 @@
-<p>soin works!</p>
+<div class="soin-page">
+    <!-- Soin Table -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Infirmier</th>
+                    <th>Type de Soin</th>
+                    <th>Détails</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let entry of soinData" (click)="openModal(entry)">
+                    <td>{{ entry.infirmier }}</td>
+                    <td>{{ entry.type }}</td>
+                    <td>{{ entry.details }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" [class.show]="isModalOpen" (click)="onBackgroundClick($event)">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <span class="close-button" (click)="closeModal()">&times;</span>
+            <h3 class="modal-title">Résumé</h3>
+            <div id="modal-summary">
+                {{ modalData.summary }}
+            </div>
+        </div>
+    </div>
+</div>
+

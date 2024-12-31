@@ -4,7 +4,7 @@ import { PatientService } from '../../doctor/patient.service';
  // Assuming this is your service
 
 @Component({
-  selector: 'app-consultation-page',
+  selector: 'app-consultation',
   templateUrl: './consultation.component.html',
   styleUrls: ['./consultation.component.css']
 })

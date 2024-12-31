@@ -9,6 +9,6 @@ import { RouterModule } from '@angular/router';
   templateUrl: './patient-layout.component.html',
   styleUrl: './patient-layout.component.css'
 })
-export class DoctorLayoutComponent {
+export class PatientLayoutComponent {
 
 }
