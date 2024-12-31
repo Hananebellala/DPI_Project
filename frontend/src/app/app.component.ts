@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from './navbar/navbar.component';
-import { HeroComponent } from './hero/hero.component';
-import { MissionComponent } from './mission/mission.component';
-import { ServicesComponent } from './services/services.component';
-import { ContactComponent } from './contact/contact.component';
-import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './welcome-page/navbar/navbar.component';
+import { HeroComponent } from './welcome-page/hero/hero.component';
+import { MissionComponent } from './welcome-page/mission/mission.component';
+import { ServicesComponent } from './welcome-page/services/services.component';
+import { ContactComponent } from './welcome-page/contact/contact.component';
+import { FooterComponent } from './welcome-page/footer/footer.component';
 import { AdminModule } from './admin/admin.module';
 import { RouterModule } from '@angular/router';
 import { LaborantinModule } from './laborantin/laborantin.module';

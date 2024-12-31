@@ -7,12 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Import standalone components directly
-import { NavbarComponent } from './navbar/navbar.component';
-import { HeroComponent } from './hero/hero.component';
-import { MissionComponent } from './mission/mission.component';
-import { ServicesComponent } from './services/services.component';
-import { ContactComponent } from './contact/contact.component';
-import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './welcome-page/navbar/navbar.component';
+import { HeroComponent } from './welcome-page/hero/hero.component';
+import { MissionComponent } from './welcome-page/mission/mission.component';
+import { ServicesComponent } from './welcome-page/services/services.component';
+import { ContactComponent } from './welcome-page/contact/contact.component';
+import { FooterComponent } from './welcome-page/footer/footer.component';
 import { AdminModule } from './admin/admin.module';
 
 import { MatFormFieldModule, matFormFieldAnimations } from '@angular/material/form-field';

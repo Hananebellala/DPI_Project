@@ -22,6 +22,7 @@
   .logo {
     width: 40px; /* Ajuste la taille du logo */
     height: auto;
+    cursor: pointer;
   }
   
   /* Style de base pour la page */

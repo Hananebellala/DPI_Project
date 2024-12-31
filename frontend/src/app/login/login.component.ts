@@ -2,13 +2,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppRoutingModule } from '../app.routes';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule,RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -19,7 +19,13 @@ activeForm: 'login' | 'register' = 'login';
 
 constructor( private fb: FormBuilder,
   private router: Router,
-  private snackBar: MatSnackBar){}
+  private snackBar: MatSnackBar,){}
+
+  navigateToWelcomePage(): void {
+    this.router.navigate(['/']); // Navigates to the Welcome Page
+  }
+
+
 ngOnInit() {
   this.loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MembersComponent } from './members/members.component';
-import { FooterComponent } from '../footer/footer.component';
+import { FooterComponent } from '../welcome-page/footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AddMemberComponent } from './dialogs/add-member/add-member.component';
