@@ -1,1 +1,15 @@
-<p>lab works!</p>
+<div class="Lab-page">
+    <div class="card">
+        <img src="radio.png" alt="Radiology Icon" class="card-icon" />
+      <a routerLink="/radiology" routerLinkActive="active">Radiology</a>
+    </div>
+    <div class="card">
+      
+      <img src="blood.png" alt="Blood Count Test Icon" class="card-icon" />
+      <a routerLink="/blood" routerLinkActive="active">Blood Count Test</a>
+    </div>
+  
+    <!-- This will load the content of either RadiologyComponent or BloodComponent based on the active route -->
+    <router-outlet></router-outlet>
+  </div>
+  
