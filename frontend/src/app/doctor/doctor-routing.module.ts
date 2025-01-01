@@ -10,6 +10,7 @@ import { BloodCountPageComponent } from './blood-count-page/blood-count-page.com
 import { PatientsRecordsDoctorAdminComponent } from './patients-records-doctor-admin/patients-records-doctor-admin.component';
 import { AddPatientDoctorComponent } from './add-patient-doctor/add-patient-doctor.component';
 import { SejourPageComponent } from './sejour-page/sejour-page.component';
+import { AllConsultationComponent } from './all-consultation/all-consultation.component';
 
 const routes: Routes = [
   {
@@ -22,10 +23,12 @@ const routes: Routes = [
       { path: 'consultation', component: ConsultationPageComponent },
       { path: 'lab-results', component: LabPageComponent },
       { path: 'soin', component: SoinPageComponent },
-      { path: 'sejour', component: SejourPageComponent },
+      { path: 'all', component: AllConsultationComponent },
+      
       { path: '', redirectTo: 'sejour', pathMatch: 'full' }, // Default route within the layout
     ],
   },
+  { path: 'sejour', component: SejourPageComponent },
   // Define PatientsRecordsDoctorAdminComponent as an independent route
   { path: '', component: PatientsRecordsDoctorAdminComponent },
   { path: 'Add', component: AddPatientDoctorComponent },

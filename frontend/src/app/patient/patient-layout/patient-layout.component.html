@@ -27,7 +27,7 @@
         <!-- Navbar -->
         <div class="nav-bar">
             
-            <a routerLink="/consultation" routerLinkActive="active">Consultation</a>
+            <a routerLink="all" [class.active]="isActive(['consultation', 'all'])">Consultation</a>
 <a routerLink="/medication" routerLinkActive="active">Medication</a>
 <a routerLink="/lab-results" routerLinkActive="active">Lab Results</a>
 <a routerLink="/soin" routerLinkActive="active">Soin</a>

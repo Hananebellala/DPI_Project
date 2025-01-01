@@ -25,7 +25,7 @@ export class PatientsRecordsDoctorAdminComponent implements OnInit {
   }
 
   navigateToPatientDetails(patient: any): void {
-    this.router.navigate(['Patient'], { state: { patient } });
+    this.router.navigate(['sejour'], { state: { patient } });
   }
 }
 

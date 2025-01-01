@@ -1,12 +1,37 @@
-* {
-    margin: 0;
-    padding: 0;
+/* Import the font from Google Fonts */
+*{
     font-family: 'Source Sans Pro', sans-serif;
 }
+/* General layout */
+.main-container {
+  display: flex;
+  height: 100vh;
+  background-color: white;
+  font-family: 'Source Sans Pro', sans-serif;
+}
 
-.doctor-page {
-    display: flex;
-    height: 100vh;
+.sidebar {
+  width: 180px;
+  background-color: #8ECAE6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  height: 100%;
+  overflow-y: auto;
+  
+}
+
+
+
+.sidebar .logo {
+  margin-bottom: 30px;
+}
+
+.sidebar .logo-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .sidebar {
@@ -35,6 +60,7 @@
     box-sizing: border-box; 
     background-color: #FFFFFA;/* Include padding in width calculations */
 }
+
 
 .sidebar .logo-image {
     width: 70px;
@@ -78,13 +104,22 @@
 }
 
 
-/* Top Bar Styling */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #fffffa; /* Fond blanc */
+  border-bottom: 1px solid black; /* Trait noir en bas */
+}
+
 .top {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     background-color: #FFFFFA;
     border-bottom: 1px solid #E0E0E0;
     width: 100%;
@@ -114,87 +149,81 @@
     margin-right: 10px;
 }
 
-.page-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: #FFFFFA;
+.table-container {
+  padding: 20px;
 }
 
-/* Navbar Styling */
-.nav-bar {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    
-    color: #023047;
-    border-bottom: 1px solid #E0E0E0;
+.header-with-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Place les éléments au début */
+  gap: 20px; /* Ajoute un espace entre le titre et le bouton */
+  margin-top: 5px;
 }
 
-.nav-bar a {
-    text-decoration: none;
-    color: #000;
-    padding: 10px 15px;
-    font-size: 15px;
-    font-weight:500;
-    transition: all 0.3s ease;
+.header-with-button h2 {
+  margin: 0;
+  font-size: 24px;
 }
 
-/* Thin line with rounded edges under active navbar item */
-.nav-bar a.active {
-    position: relative;
-    padding-bottom: 10px; /* To add space for the rectangle */
+.add-button {
+  background-color: #EDF2FB;
+  color: black;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  border: 1px solid #000; /* Bordure noire */
 }
 
-.nav-bar a.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%); 
-    width: 100px; 
-    height: 5px; 
-    background-color: #EDF2FB; 
-    border-radius: 10px; 
+.add-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.table-header,
+.table-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 10px;
+}
+
+.table-header {
+  background-color: #fffffa;
+  font-weight: bold;
+  color: black;
+  border: none;
 }
 
 
 
 
+  
+  /* Table-row hover */
+  .table-row {
+    background-color: #EDF2FB;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 27px;
+    cursor: pointer; /* Make rows clickable */
+  }
+  
+  .table-row:hover {
+    background-color: #add8e6;
+  }
+  
 
-
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .doctor-page {
-        flex-direction: column;
-    }
-
-    .side-bar {
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-evenly;
-    }
-
-    .page-content {
-        flex: 1;
-    }
-
-    .top input {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .top {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .nav-bar {
-        flex-wrap: wrap;
-    }
-
-    .content {
-        padding: 10px;
-    }
+.cell {
+  text-align: center;
+  padding: 12px;
+  color: black;
+  background-color: transparent;
 }

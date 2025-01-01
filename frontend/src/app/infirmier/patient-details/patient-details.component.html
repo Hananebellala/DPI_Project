@@ -1,0 +1,126 @@
+<div class="main-container">
+  <!-- Barre latérale -->
+  <div class="sidebar">
+    <div class="logo">
+      <img src="Vector.png" alt="Logo" class="logo-image" />
+    </div>
+    <div class="menu">
+      <a href="#" class="menu-item">
+        <img src="home.png" alt="Accueil" class="icon-home" />
+        <span class="menu-text">Accueil</span>
+      </a>
+      <a href="#" class="menu-item active">
+        <img src="patients.png" alt="Patients" class="icon-patients" />
+        <span class="menu-text">Patients</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- En-tête -->
+    <div class="header">
+      <div class="search-bar">
+        <img src="search.png" alt="Rechercher" class="search-icon" />
+        <input type="text" placeholder="Rechercher un patient" />
+      </div>
+      <div class="profile">
+        <img src="Profile.png" alt="Dr Hanane" class="profile-pic" />
+        <span>Dr Hanane</span>
+      </div>
+    </div>
+    <!-- Nom du patient et boutons -->
+    <div class="patient-header">
+      <h2 class="patient-name">Marie Dupont</h2>
+      <div class="patient-actions">
+        <button class="btn btn-ajouter" (click)="openDialog()">Ajouter</button>
+      </div>
+    </div>
+
+    <!-- Barre de navigation -->
+    <div class="nav-bar">
+      <div class="nav-items">
+        <span class="nav-item active">Séjour</span>
+      </div>
+      <hr class="nav-line bold">
+    </div>
+    <div class="vertical-line"></div>
+
+    <div class="main-content">
+      <!-- Titre des Informations Générales -->
+      <div class="general-info-section">
+        <h3 class="general-info-title">Informations générales</h3>
+    
+        <!-- Informations Générales -->
+        <div class="general-info">
+          <div class="field">
+            <span class="field-name">Date de naissance</span>
+            <span class="field-value">{{ generalInfo.dateNaissance }}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">Statut</span>
+            <span class="field-value">{{ generalInfo.status }}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">Sexe</span>
+            <span class="field-value">{{ generalInfo.sexe }}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">Adresse</span>
+            <span class="field-value">{{ generalInfo.adresse }}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">Numéro de sécurité sociale</span>
+            <span class="field-value">{{ generalInfo.numSecuriteSociale }}</span>
+          </div>
+        </div>
+        <h3 class="general-info-title">Coordonnées</h3>
+    
+        <!-- Informations Générales -->
+        <div class="general-info">
+          <div class="field">
+            <span class="field-name">Numéro de téléphone</span>
+            <span class="field-value">{{ generalInfo.numTelephone}}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">Personne à contacter</span>
+            <span class="field-value">{{ generalInfo.personneAContacter }}</span>
+          </div>
+          </div>
+      </div>
+      <div class="table-container">
+        <div class="field-names">
+          <span class="field-name field-name-1">Infirmier</span>  
+          <span class="field-name field-name-2">Type de soin</span> 
+          <span class="field-name field-name-3">Résumé</span>
+        </div>
+        <table mat-table [dataSource]="soinData" class="mat-elevation-z8">
+          <!-- Infirmier -->
+          <ng-container matColumnDef="infirmier">
+            <td mat-cell *matCellDef="let element"> {{ element.infirmier }} </td>
+          </ng-container>
+      
+          <!-- Type de soin -->
+          <ng-container matColumnDef="typeSoin">
+            <td mat-cell *matCellDef="let element"> {{ element.typeSoin }} </td>
+          </ng-container>
+      
+          <!-- Résumé -->
+          <ng-container matColumnDef="resume">
+            <td
+              mat-cell
+              class="resume-cell"
+              *matCellDef="let element"
+              (click)="openResumeDialog(element.resume)"
+            >
+              {{ element.resume }}
+            </td>
+          </ng-container>
+      
+          <!-- Rows -->
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>      
+     </div>
+     </div>
+    </div>
+  

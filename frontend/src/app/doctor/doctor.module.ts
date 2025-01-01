@@ -12,6 +12,9 @@ import { BloodCountPageComponent } from './blood-count-page/blood-count-page.com
 import { RadiologyPageComponent } from './radiology-page/radiology-page.component';
 import { PatientsRecordsDoctorAdminComponent } from './patients-records-doctor-admin/patients-records-doctor-admin.component';
 import { AddPatientDoctorComponent } from './add-patient-doctor/add-patient-doctor.component';
+import { AddDiagnosticComponent } from './add-diagnostic/add-diagnostic.component';
+import { AddSejourComponent } from './add-sejour/add-sejour.component';
+import { AllConsultationComponent } from './all-consultation/all-consultation.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { AddPatientDoctorComponent } from './add-patient-doctor/add-patient-doct
     BloodCountPageComponent,
     RadiologyPageComponent,
     PatientsRecordsDoctorAdminComponent,
-    AddPatientDoctorComponent
+    AddPatientDoctorComponent,
+    AddDiagnosticComponent,
+    AddSejourComponent,
+    AllConsultationComponent
   ]
 })
 export class DoctorModule {}

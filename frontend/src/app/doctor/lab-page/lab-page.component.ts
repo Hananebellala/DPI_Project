@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { DoctorRoutingModule } from '../doctor-routing.module';
 
 @Component({
   selector: 'app-lab-page',

@@ -7,13 +7,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';  // Import MatTableModule
 import { FormsModule } from '@angular/forms';  // Import FormsModule for ngModel
-
-
 import { RouterModule } from '@angular/router';
-import { Router } from '@angular/router';
+
 
 @Component({
-  selector: 'sejour-page',
+  selector: 'all-consultation-patient',
   standalone: true,
   imports: [
     CommonModule,       // For *ngFor, etc.
@@ -22,26 +20,21 @@ import { Router } from '@angular/router';
     MatButtonModule,    // For mat-button
     MatFormFieldModule, // For form fields
     MatInputModule,     // For input fields
-    FormsModule,  
-    RouterModule      // For ngModel
+    FormsModule,    
+    RouterModule    // For ngModel
   ],
-  templateUrl: './sejour.component.html',
-  styleUrls: ['./sejour.component.css'],
+  templateUrl: './all-consultation.component.html',
+  styleUrls: ['./all-consultation.component.css'],
 })
-export class SejourPageComponent implements OnInit {
+export class AllConsultationComponent implements OnInit {
+  displayedColumns: string[] = ['date', 'type', 'medecin', 'remarques'];
+  soins = [
+    { date: '2024-01-01', type: 'Consultation', medecin: 'Dr. Hanane', remarques: 'Aucune remarque' },
+    { date: '2024-02-01', type: 'Check-up', medecin: 'Dr. Hanane', remarques: 'Remarque sur la santé' },
+  ];
 
-  // Correction : Généralité des informations comme un objet, pas un tableau
-  generalInfo = {
-    dateNaissance: '11/02/2004',
-    status: 'Actif',
-    sexe: 'Femelle',
-    adresse: 'Algerie, Tipaza, Cherchell',
-    numSecuriteSociale: '0728283',
-    numTelephone: '0547123698',
-    personneAContacter: '0657412398',
-  };
+  constructor(public dialog: MatDialog) {}
 
-  // Correction : Les dossiers sont déjà des objets avec des dates et images, c'est correct.
   dossiers = [
     { date: '10/12/2024', image: 'Dossier.png' },
     { date: '11/12/2024', image: 'Dossier.png' },
@@ -49,15 +42,10 @@ export class SejourPageComponent implements OnInit {
     { date: '12/12/2024', image: 'Dossier.png' },
   ];
 
-  // Constructor
-  constructor(public dialog: MatDialog, private router:Router) {}
+  
+
+
 
   ngOnInit(): void {}
 
-  // Fonction pour ouvrir le dialogue d'ajout de sejours
- 
-
-  goToAll(dossier: any): void {
-    this.router.navigate(['/all'], { queryParams: { date: dossier.date } });
-  }
 }

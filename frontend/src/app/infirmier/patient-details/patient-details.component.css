@@ -1,102 +1,91 @@
 /* Import the font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
 
-
 .table-header {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   padding: 10px;
-  background-color: #FFFFFA;
+  background-color: white;
   font-weight: bold;
   color: black;
   border: none;
 }
-.sidebar {
-  width: 120px;
-  background-color: #8ECAE6;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px;
-  height: 100%;
-  overflow-y: auto;
-}
 
-.sidebar .logo-image {
-  width: 70px;
-  height: auto;
+.sidebar .logo {
   margin-bottom: 30px;
 }
 
-.menu-item {
+.sidebar .logo-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.menu {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 10px 0;
-  text-decoration: none;
-  color: white;
-  font-size: 14px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-  transition: background-color 0.3s ease-in-out;
 }
 
-.menu-item .icon {
-  width: 40px;
-  height: 40px;
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 10px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.menu-item:hover,
+.menu-item.active {
+  background-color: #a3d2e2;
+}
+
+.menu-item .icon-home,
+.menu-item .icon-patients {
   margin-bottom: 5px;
 }
 
-.menu-item.active {
-  background-color: #a3d2e2;
-  color: #FFFFFA;
-}
-
-.menu-item:hover {
-  background-color: #a3d2e2;
-  color: #FFFFFA;
-}
-
 .menu-item .menu-text {
-  text-align: center;
-  font-size: 16px;
+  color: white;
 }
 
-
-/* Top Bar Styling */
-.top {
+.search-bar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  margin-bottom: 50px;
-  background-color: #FFFFFA;
-  border-bottom: 1px solid #E0E0E0;
-  width: 100%;
-  box-sizing: border-box; /* Prevent width issues due to padding */
+  position: relative;
 }
 
-/* Input Field inside Top Bar */
-.top input {
-  width: 50%;
-  padding: 10px;
-  border: 1px solid #000;
-  border-radius: 40px;
-  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25); 
-  margin-right: 20px; /* To align with profile icon */
+.search-bar input {
+  width: 500px;
+  padding: 8px 45px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-left: 20px;
 }
 
-/* Profile section inside the top bar */
-.top .profile {
+.search-bar .search-icon {
+  position: absolute;
+  left: 40px;
+  height: 15px;
+  font-size: 1px;
+  color: #888;
+}
+
+.profile {
   display: flex;
   align-items: center;
 }
 
-.top .profile img {
-  width: 50px;
-  height: 50px;
-  border-radius: 15px;
+.profile .profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 5%;
   margin-right: 10px;
 }
 
@@ -123,11 +112,11 @@ th, td {
 
 /* Alternance des couleurs des lignes */
 tbody tr:nth-child(even) {
-  background-color: #FFFFFA;
+  background-color: #edf2fb;
 }
 
 tbody tr:nth-child(odd) {
-  background-color: #FFFFFA;
+  background-color: white;
 }
 
 .container {
@@ -234,16 +223,35 @@ tbody tr:nth-child(odd) {
 .main-container {
   display: flex;
   height: 100vh;
-  background-color: #FFFFFA;
+  background-color: #fffffa;
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-
+.sidebar {
+    position: fixed; /* Fix the sidebar position */
+    top: 0; /* Start from the top of the viewport */
+    left: 0; /* Align to the left */
+    height: 100vh; /* Make the sidebar take up the full viewport height */
+    width: 120px; /* Maintain the fixed width */
+    background-color: #8ECAE6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    overflow-y: auto; /* Allow vertical scrolling if the content overflows */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better separation */
+    z-index: 1000; /* Ensure it stays on top of the content */
+}
 
 .content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+    margin-left: 120px; /* Offset to account for the fixed sidebar width */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Allow scrolling within the content area */
+    padding: 20px;
+    box-sizing: border-box; 
+    background-color: #FFFFFA;
 }
 
 .header {
@@ -251,7 +259,7 @@ tbody tr:nth-child(odd) {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background-color: #FFFFFA;
+  background-color: #fffffa;
   border-bottom: 1px solid black;
 }
 
@@ -278,15 +286,13 @@ tbody tr:nth-child(odd) {
 /* Style de base pour les boutons */
 .btn {
   color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8.5px;
-      font-size: 13.5px;
-      cursor: pointer;
-      margin-right: 18px;
-      font-weight: bold;
-      height: 50px;
-      width: 150px;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8.5px;
+  font-size: 13.5px;
+  cursor: pointer;
+  margin-right: 18px;
+  font-weight: bold;
 }
 
 .btn-supprimer{
@@ -297,8 +303,8 @@ tbody tr:nth-child(odd) {
 
 .btn-ajouter {
   background-color: #FFCDD2;
-      color: black;
-      margin-right: 35px;
+  color: black;
+  margin-right: 35px;
 
 }
 
@@ -308,11 +314,12 @@ tbody tr:nth-child(odd) {
   padding: 20px;
   gap: 20px;
   flex: 1;
+  background-color: #fffffa;
 }
 
 .general-info {
   width: 300px;
-  background-color: white;
+  background-color: #fffffa;
   padding: 20px;
   font-size: 14px;
 }
@@ -326,7 +333,7 @@ tbody tr:nth-child(odd) {
 }
 
 .dossier {
-  background-color: #FFFFFA;
+  background-color: #fffffa;
   padding: 10px;
   text-align: center;
   display: flex;
@@ -342,7 +349,6 @@ tbody tr:nth-child(odd) {
   width: 100%; /* Image qui occupe toute la largeur du dossier */
   height: auto;
   border-radius: 5px;
-  cursor: pointer;
 }
 
 .dossier .date {
@@ -361,7 +367,7 @@ tbody tr:nth-child(odd) {
 .nav-items {
   display: flex; /* Pour aligner les éléments horizontalement */
   justify-content: flex-start; /* Aligne les éléments à gauche */
-  margin-left: 400px; /* Espace entre les éléments de la nav-bar et le bord gauche */
+  margin-left: 375px; /* Espace entre les éléments de la nav-bar et le bord gauche */
   gap: 85px; /* Espacement entre les éléments */
 }
 
@@ -370,7 +376,7 @@ tbody tr:nth-child(odd) {
   padding: 10px;
   font-weight: bold;
   color: #333;
-  
+  cursor: pointer;
 
 }
 
@@ -381,19 +387,19 @@ tbody tr:nth-child(odd) {
 }
 
 .nav-line {
-  width: 94%; /* Largeur de la ligne */
+  width: 97%; /* Largeur de la ligne */
   border: none; /* Supprime les bordures par défaut */
   border-top: 1px solid #C8C5C5; /* Couleur de la ligne */
-  margin: 0 auto; /* Centre la ligne horizontalement */
+  margin: 0 0; /* Centre la ligne horizontalement */
   display: block; /* Assure que la ligne respecte les marges */
 }
 
 /* Trait vertical */
 .vertical-line {
   position: absolute; /* Permet de positionner l'élément à une distance spécifique */
-  left: 550px; /* Distance par rapport au bord gauche */
+  left: 520px; /* Distance par rapport au bord gauche */
   bottom: 5px; /* Aligne en haut */
-  height: 48.3vh; /* Hauteur de la ligne égale à la hauteur de l'écran */
+  height: 57vh; /* Hauteur de la ligne égale à la hauteur de l'écran */
   width: 1px; /* Largeur de la ligne */
   background-color: #C8C5C5;/* Couleur de la ligne */
   z-index: 1; /* Assure que la ligne est visible */
@@ -412,3 +418,124 @@ tbody tr:nth-child(odd) {
   margin-bottom: 5px;
   color: #444;
 }
+
+.table-container {
+  width: 100%;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+
+.color-alternating-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+.color-alternating-table th,
+.color-alternating-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+.color-alternating-table thead th {
+  background-color: #007BFF;
+  color: white;
+}
+
+.color-alternating-table tbody tr:nth-child(odd) {
+  background-color: #f2f2f2; /* Blanc */
+}
+
+.color-alternating-table tbody tr:nth-child(even) {
+  background-color: #cce5ff; /* Bleu clair */
+}
+.table-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 5px; /* Réduit l'espace intérieur des cellules */
+  text-align: left;
+  min-height: 10px; /* Définit une hauteur minimale pour les cellules */
+  height: 10px; /* Fixe une hauteur uniforme pour les cellules */
+  align-items: center;
+}
+
+.mat-elevation-z8 {
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0px 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.table-container {
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column; /* Permet de positionner les noms des champs séparément du tableau */
+  align-items: center; /* Centre horizontalement les éléments dans la table-container */
+}
+
+.field-names {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin-top: -10px; /* Déplace les noms de champs un peu plus haut */
+  margin-bottom: 15px; /* Augmente l'espace entre les noms de champs et le tableau */
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.field-name-1 {
+  margin-left: -310px; /* If you want specific spacing adjustments */
+}
+
+.field-name-2 {
+  margin-right: -10px; /* Specific spacing adjustment */
+}
+
+.field-name-3 {
+  margin-right: -330px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 3px; /* Réduction de l'espace intérieur pour compacter les cellules */
+  text-align: center; /* Centre le texte dans toutes les cellules */
+  height: 25px; /* Fixe une hauteur uniforme pour chaque ligne */
+  width:20px;
+}
+
+td.resume {
+  width: 10px; /* Fixe la largeur de la colonne "Résumé" à 10px */
+  cursor: pointer;
+}
+
+tr:nth-child(even) td {
+  background-color: #fffffa; /* Bleu clair pour les lignes paires */
+}
+
+tr:nth-child(odd) td {
+  background-color: #EDF2FB; /* Blanc pour les lignes impaires */
+}
+
+.mat-elevation-z8 {
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0px 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+
+
+
+

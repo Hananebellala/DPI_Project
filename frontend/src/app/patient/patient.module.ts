@@ -9,6 +9,7 @@ import { SoinPageComponent } from './soin/soin.component';
 import { PatientLayoutComponent } from './patient-layout/patient-layout.component';
 import { BloodCountPageComponent } from './blood-count/blood-count.component';
 import { RadiologyPageComponent } from './radiology/radiology.component';
+import { AllConsultationComponent } from './all-consultation/all-consultation.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { RadiologyPageComponent } from './radiology/radiology.component';
     PatientLayoutComponent,
     BloodCountPageComponent,
     RadiologyPageComponent,
+    AllConsultationComponent
   ]
 })
 export class PatientModule { }

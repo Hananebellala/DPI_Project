@@ -23,6 +23,8 @@ import { LaborantinModule } from './laborantin/laborantin.module';
 import { RadiologueModule } from './radiologue/radiologue.module';
 import { DoctorModule } from './doctor/doctor.module';
 import { DoctorRoutingModule } from './doctor/doctor-routing.module';
+import { InfirmierModule } from './infirmier/infirmier.module';
+import { InfirmierRoutingModule } from './infirmier/infirmier-routing.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { DoctorRoutingModule } from './doctor/doctor-routing.module';
     LaborantinModule,
     RadiologueModule,
     DoctorModule,
-    DoctorRoutingModule
+    DoctorRoutingModule,
+    InfirmierModule,
+    InfirmierRoutingModule
    
     
     

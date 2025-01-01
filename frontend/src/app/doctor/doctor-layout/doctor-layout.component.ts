@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-doctor-layout',
@@ -10,5 +10,10 @@ import { RouterModule } from '@angular/router';
   styleUrl: './doctor-layout.component.css'
 })
 export class DoctorLayoutComponent {
+  constructor(private router: Router) {}
+
+  isActive(paths: string[]): boolean {
+    return paths.some((path) => this.router.isActive(path, false));
+  }
 
 }
