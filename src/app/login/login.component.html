@@ -1,0 +1,33 @@
+
+<div class="header">
+    <div class="heali-text">Heali</div>
+    <img class="logo" src="Vector.png" alt="Logo" (click)="navigateToWelcomePage()">
+  </div>
+  
+  
+  <div class="login-container">
+    <div class="form-content">
+      <!-- Image à gauche -->
+      <div class="image-section">
+        <img src="login.png" alt="Image" />
+      </div>
+  
+      <!-- Formulaire à droite -->
+      <div class="form-section">
+        <h3>Connectez-vous à votre compte</h3>
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="form-group">
+            <label for="email">E-MAIL</label>
+            <input type="email" id="email" formControlName="email" />
+          </div>
+          <div class="form-group">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" formControlName="password" />
+          </div>
+          <button type="submit">Se connecter</button>
+        </form>
+        <p class="forgot-password">Mot de passe oublié ? <span>Récupérez-le maintenant !</span></p>
+      </div>
+    </div>
+  </div>
+  

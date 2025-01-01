@@ -1,0 +1,515 @@
+/* Import the font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
+
+/* General layout */
+.main-container {
+  display: flex;
+  height: 100vh;
+  background-color: white;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.table-header {
+
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 10px;
+  background-color: white;
+  font-weight: bold;
+  color: black;
+  border: none;
+}
+
+.sidebar .logo {
+  margin-bottom: 30px;
+}
+
+.sidebar .logo-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.menu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 10px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.menu-item:hover,
+.menu-item.active {
+  background-color: #a3d2e2;
+}
+
+.menu-item .icon-home,
+.menu-item .icon-patients {
+  margin-bottom: 5px;
+}
+
+.menu-item .menu-text {
+  color: white;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search-bar input {
+  width: 500px;
+  padding: 8px 45px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-left: 20px;
+}
+
+.search-bar .search-icon {
+  position: absolute;
+  left: 40px;
+  height: 15px;
+  font-size: 1px;
+  color: #888;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.profile .profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 5%;
+  margin-right: 10px;
+}
+
+.main-content {
+  display: flex; /* Flexbox pour disposition horizontale */
+  flex: 1;
+  padding: 20px;
+  gap: 20px; /* Espacement entre les colonnes */
+}
+
+.table-container {
+  flex: 1; /* Le tableau occupe le reste de l'espace */
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #8ECAE6;
+  color: white;
+}
+
+th, td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Alternance des couleurs des lignes */
+tbody tr:nth-child(even) {
+  background-color: #edf2fb;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: white;
+}
+/* Conteneur principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alignement à gauche */
+  margin: 20px;
+}
+
+/* Nom du patient */
+.patient-name {
+  font-size: 24px; /* Taille plus grande */
+  font-weight: bold; /* En gras */
+  margin-bottom: 20px; /* Espacement sous le nom */
+  margin-left: 50px;
+}
+
+/* Section Soins */
+.soins-header {
+  display: flex;
+  justify-content: space-between; /* Bouton à gauche, titre à droite */
+  align-items: center;
+  width: 100%; /* Occupe toute la largeur */
+  margin-bottom: 10px; /* Espacement sous le header */
+}
+
+.soins-header h3 {
+  font-size: 20px; /* Taille du titre */
+  font-weight: bold;
+  color: #333;
+}
+
+.soins-header button {
+  background-color: #001f3f; /* Bleu nuit */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.soins-header button:hover {
+  background-color: #004080; /* Bleu plus clair au survol */
+}
+
+/* Formulaire */
+.add-form {
+  display: none; /* Caché par défaut */
+  flex-direction: column;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%; /* Largeur du formulaire */
+}
+
+.add-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.add-form input,
+.add-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-form button {
+  background-color: #001f3f; /* Bouton de soumission */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-form button:hover {
+  background-color: #004080;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+  gap: 20px;
+}
+
+/* Section Informations Générales */
+
+.general-info h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.general-info .field {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.general-info .field-name {
+  font-weight: bold;
+  color: #333;
+}
+
+.general-info .field-value {
+  color: #555;
+}
+
+.general-info hr {
+  border: none;
+  border-top: 2px solid #001f3f;
+  margin: 10px 0;
+}
+
+/* Tableau des soins */
+.table-container {
+  flex: 1;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #8ECAE6;
+  color: white;
+}
+
+th, td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #edf2fb;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: white;
+}
+
+.main-container {
+  display: flex;
+  height: 100vh;
+  background-color: white;
+}
+
+.sidebar {
+  width: 180px;
+  background-color: #8ECAE6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: white;
+  border-bottom: 1px solid black;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row; /* Disposition horizontale */
+  padding: 20px;
+  gap: 20px;
+}
+
+.table-container {
+  flex: 1;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #8ECAE6;
+  color: white;
+}
+
+th, td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #edf2fb;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: white;
+}
+/* Espacement et alignement pour le nom du patient et les boutons */
+.patient-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.patient-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 20px; /* Espace à gauche du nom */
+  margin-left: 35px;
+}
+
+.patient-actions {
+  display: flex;
+  justify-content: center; /* Centre les boutons horizontalement */
+  gap: 15px; /* Espacement entre les boutons */
+  margin-top: 20px; /* Ajuste l'espacement vertical */
+}
+
+/* Style de base pour les boutons */
+.btn {
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8.5px;
+  font-size: 13.5px;
+  cursor: pointer;
+  margin-right: 50px;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.btn-ajouter {
+  background-color: #EF5350;
+  color: white;
+  margin-right: 0px;
+}
+
+.btn-supprimer {
+  background-color: #FFCDD2;
+  color: black;
+  margin-left: 0px;
+}
+
+/* Barre de navigation */
+.nav-bar {
+  margin-bottom: 20px;
+}
+
+.nav-line {
+  width: 90%;
+  margin: 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+.nav-items {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-item {
+  font-size: 18px;
+  padding: 10px;
+  color: #333;
+  cursor: pointer;
+}
+
+.nav-item.active {
+  border-bottom: 5px solid #001f3f;
+  border-radius: 5px;
+}
+
+/* Contenu principal */
+.main-content {
+  display: flex;
+  gap: 20px;
+}
+
+.general-info {
+  width: 300px;
+  background-color: white;
+  padding: 20px;
+  font-size: 14px;
+}
+
+/* Section Dossiers */
+.dossiers-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colonnes */
+  gap: 45px; /* Espacement entre les éléments */
+  margin-top: 15px;
+  margin-left: 250px;
+}
+
+.dossier {
+  background-color: #fff;
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+  width: 400px; /* Largeur fixe pour l'espace alloué */
+  height: 400px; /* Hauteur fixe pour l'espace alloué */
+  box-sizing: border-box; /* Inclut les bordures et les marges dans les dimensions */
+  border-radius: 10px; /* Optionnel : ajoute des coins arrondis */
+  overflow: hidden; /* Coupe les débordements éventuels de l'image */
+}
+
+.dossier img {
+  width: 400px; /* Largeur de l'image */
+  height: 400px; /* Hauteur de l'image */
+  object-fit: cover; /* Recadre l'image pour remplir l'espace tout en gardant les proportions */
+}
+
+
+
+/* Barre de navigation */
+.nav-bar {
+  display: flex; /* Aligne les éléments sur une même ligne */
+  flex-direction: column; /* Empêche le chevauchement de la ligne de séparation */
+  margin-bottom: 20px;
+}
+
+.nav-items {
+  display: flex; /* Pour aligner les éléments horizontalement */
+  justify-content: flex-start; /* Aligne les éléments à gauche */
+  margin-left: 375px; /* Espace entre les éléments de la nav-bar et le bord gauche */
+  gap: 85px; /* Espacement entre les éléments */
+}
+
+.nav-item {
+  font-size: 17px;
+  padding: 10px;
+  color: #333;
+  cursor: pointer;
+
+}
+
+.nav-item.active {
+  border-bottom: 5px solid #EDF2FB;
+  border-radius: 0px;
+}
+
+.nav-line {
+  width: 94%; /* Largeur de la ligne */
+  border: none; /* Supprime les bordures par défaut */
+  border-top: 1px solid #C8C5C5; /* Couleur de la ligne */
+  margin: 0 auto; /* Centre la ligne horizontalement */
+  display: block; /* Assure que la ligne respecte les marges */
+}
+
+/* Trait vertical */
+.vertical-line {
+  position: absolute; /* Permet de positionner l'élément à une distance spécifique */
+  left: 580px; /* Distance par rapport au bord gauche */
+  bottom: 6px; /* Aligne en haut */
+  height: 71.5vh; /* Hauteur de la ligne égale à la hauteur de l'écran */
+  width: 1px; /* Largeur de la ligne */
+  background-color: #C8C5C5;/* Couleur de la ligne */
+  z-index: 1; /* Assure que la ligne est visible */
+}

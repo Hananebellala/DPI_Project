@@ -1,0 +1,76 @@
+<div class="main-container">
+  <!-- Barre latérale -->
+  <div class="sidebar">
+    <div class="logo">
+      <img src="Vector.png" alt="Logo" class="logo-image" />
+    </div>
+    <div class="menu">
+      <a href="#" class="menu-item">
+        <img src="home.png" alt="Accueil" class="icon-home" />
+        <span class="menu-text">Accueil</span>
+      </a>
+      <a href="#" class="menu-item active">
+        <img src="patients.png" alt="Patients" class="icon-patients" />
+        <span class="menu-text">Patients</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- En-tête -->
+    <div class="header">
+      <div class="search-bar">
+        <img src="search.png" alt="Rechercher" class="search-icon" />
+        <input type="text" placeholder="Rechercher un patient" />
+      </div>
+      <div class="profile">
+        <img src="doctor1.png" alt="Dr Hanane" class="profile-pic" />
+        <span>Dr Hanane</span>
+      </div>
+    </div>
+    <!-- Nom du patient et boutons -->
+    <div class="patient-header">
+      <h2 class="patient-name">Marie Dupont</h2>
+    </div>
+
+    <!-- Barre de navigation -->
+    <div class="nav-bar">
+      <div class="nav-items">
+        <span class="nav-item active">Consultations</span>
+        <span class="nav-item">Médicaments</span>
+        <span class="nav-item">Résultats de laboratoire</span>
+      </div>
+      <hr class="nav-line bold">
+    </div>
+    <div class="vertical-line"></div>
+
+    <div class="main-content">
+      <!-- Informations Générales -->
+      <div class="general-info">
+        <div class="field">
+          <span class="field-name">Date d'arrivée :</span>
+          <span class="field-value">11/02/2024</span>
+        </div>
+        <hr />
+        <div class="field">
+          <span class="field-name">Fin du séjour :</span>
+          <span class="field-value">14/02/2024</span>
+        </div>
+        <hr />
+        <div class="patient-actions">
+          <button class="btn btn-supprimer">Supprimer</button>
+          <button class="btn btn-ajouter" (click)="openDialog()">Ajouter</button>
+        </div>
+      </div>
+
+      <!-- Dossier avec Image -->
+
+<div class="dossiers-container">
+  <div class="dossier">
+    <img src="Diagnostic.png" alt="Dossier 1" />
+  </div>
+  <!-- Ajouter plus de dossiers si nécessaire -->
+</div>
+    </div>
+  </div>
+</div>

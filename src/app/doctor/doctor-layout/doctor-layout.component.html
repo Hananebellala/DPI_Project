@@ -1,0 +1,43 @@
+<div class="doctor-page">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="Logo1.png" alt="Logo" class="logo-image">
+        <a href="#" class="menu-item">
+            <img src="home.png" alt="Home Icon" class="icon">
+            <span class="menu-text">Home</span>
+        </a>
+        <a href="#" class="menu-item active">
+            <img src="patients.png" alt="Patients Icon" class="icon">
+            <span class="menu-text">Patient</span>
+        </a>
+    </div>
+    
+  
+    <!-- Main Content -->
+    <div class="page-content">
+        <!-- Top Bar -->
+        <div class="top">
+            <input type="text" placeholder="Search Patient">
+            <div class="profile">
+                <img src="Profile.png" alt="Profile Picture">
+                <span>Dr Hanane</span>
+            </div>
+        </div>
+  
+        <!-- Navbar -->
+        <div class="nav-bar">
+            
+            <a routerLink="/Patient/consultation" routerLinkActive="active">Consultation</a>
+<a routerLink="/Patient/medication" routerLinkActive="active">Medication</a>
+<a routerLink="/Patient/lab-results" routerLinkActive="active">Lab Results</a>
+<a routerLink="/Patient/soin" routerLinkActive="active">Soin</a>
+
+        </div>
+  
+        <!-- Dynamic Content -->
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+  </div>
+  

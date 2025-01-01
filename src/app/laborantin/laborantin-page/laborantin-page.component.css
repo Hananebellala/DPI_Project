@@ -1,0 +1,216 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.laborantin-page {
+    display: flex;
+    height: 100vh;
+}
+
+
+
+
+.page-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFA;
+}
+
+
+.rest-page {
+    padding: 20px;
+    flex: 1;
+}
+
+.rest-page h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.lab-results {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.blood-count-test, .Biomarkers {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.title2 {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    
+}
+
+.card {
+    width: 100%;
+    background-color: #EAD8B1;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card label {
+    font-size: 14px;
+    font-weight: normal;
+    color: #000;
+}
+
+.card input {
+    padding: 8px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    background-color: #F5EFE3;
+}
+
+#white{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+#red{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+#hemoglobin{
+    display: flex;
+    align-items: center;
+    gap: 64px;
+}
+
+#hematocrits{
+    display: flex;
+    align-items: center;
+    gap: 63px;
+}
+
+#platelets{
+    display: flex;
+    align-items: center;
+    gap: 83px;
+}
+
+#glucose{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+#systolic{
+    display: flex;
+    align-items: center;
+    gap: 93px;
+}
+
+#diastolic{
+    display: flex;
+    align-items: center;
+    gap: 86px;
+}
+
+#cholesterol{
+    display: flex;
+    align-items: center;
+    gap: 68px;
+}
+
+#triglycerides{
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #FFFFFA;
+    cursor: pointer;
+}
+
+.blood-count-test button {
+    background-color: #EF9A9A;
+    width: 100%;
+}
+
+.Biomarkers button {
+    background-color: #EF5350;
+    width: 100%;
+}
+
+
+button:hover {
+    opacity: 0.9; 
+    transform: scale(1.02); 
+    transition: all 0.2s ease-in-out; 
+}
+
+.blood-count-test button:hover {
+    background-color: #FFCDD2;
+}
+
+.Biomarkers button:hover {
+    background-color: #FF8A80; 
+}
+
+
+@media (max-width: 768px) {
+    .laborantin-page {
+        flex-direction: column; 
+    }
+
+    .side-bar {
+        width: 100%;
+        flex-direction: row; 
+        justify-content: space-around;
+    }
+
+    .lab-results {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .blood-count-test, .Biomarkers {
+        width: 100%; 
+    }
+
+    .top input {
+        width: 80%; 
+    }
+}
+
+@media (max-width: 480px) {
+    .top input {
+        width: 100%; 
+    }
+
+    .side-bar img {
+        width: 40px; 
+    }
+
+    .side-bar a {
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 14px; 
+    }
+}
