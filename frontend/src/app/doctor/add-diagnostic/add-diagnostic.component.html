@@ -1,12 +1,73 @@
 <div class="popup-container">
-    <button class="close-button">×</button>
+    <button class="close-button" (click)="onCancel()">×</button>
     <div class="popup-header">
-      <h2>Consultation</h2>
+      <h2 *ngIf="currentStep === 1">Consultation</h2>
+      <h2 *ngIf="currentStep === 2">Tools</h2>
+      <h2 *ngIf="currentStep === 3">Antecedents</h2>
+      <h2 *ngIf="currentStep === 4">Next Consultation Date</h2>
     </div>
+  
     <div class="popup-body">
-      <label class="subtitle">Diagnosis</label>
-      <!-- Zone de saisie pour le diagnostic -->
-      <textarea class="diagnosis-box"></textarea>
-      <button class="skip-button">Skip</button>
+      <!-- Step 1: Diagnostic -->
+      <div *ngIf="currentStep === 1">
+        <label class="subtitle">Diagnosis</label>
+        <textarea
+          class="diagnosis-box"
+          [(ngModel)]="formData.diagnostic"
+          placeholder="Enter diagnosis"
+        ></textarea>
+        <button class="skip-button" *ngIf="isSuivi" (click)="nextStep()">Skip</button>
+      </div>
+  
+      <!-- Step 2: Tools -->
+      <div *ngIf="currentStep === 2">
+        <label class="subtitle">Select Tools Used</label>
+        <div *ngFor="let tool of toolsList">
+          <input
+            type="checkbox"
+            [id]="tool"
+            [(ngModel)]="formData.tools[tool]"
+          />
+          <label [for]="tool">{{ tool }}</label>
+        </div>
+      </div>
+  
+      <!-- Step 3: Antecedents -->
+      <div *ngIf="currentStep === 3">
+        <label class="subtitle">Antecedents</label>
+        <textarea
+          class="diagnosis-box"
+          [(ngModel)]="formData.antecedents"
+          placeholder="Enter antecedents"
+        ></textarea>
+      </div>
+  
+      <!-- Step 4: Next Consultation Date -->
+      <div *ngIf="currentStep === 4">
+        <label class="subtitle">Next Consultation Date</label>
+        <input
+          type="date"
+          class="diagnosis-box"
+          [(ngModel)]="formData.nextDate"
+        />
+      </div>
+    </div>
+  
+    <div class="popup-footer">
+      <button
+        class="skip-button"
+        (click)="nextStep()"
+        *ngIf="currentStep < 4"
+      >
+        Next
+      </button>
+      <button
+        class="skip-button"
+        *ngIf="currentStep === 4"
+        (click)="onFinish()"
+      >
+        Finish
+      </button>
     </div>
   </div>
+  

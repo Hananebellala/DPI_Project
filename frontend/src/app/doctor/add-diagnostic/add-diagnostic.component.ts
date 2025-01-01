@@ -1,33 +1,60 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';  // Import FormsModule for ngModel
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-diagnostic',
   templateUrl: './add-diagnostic.component.html',
   styleUrls: ['./add-diagnostic.component.css'],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  standalone: true,  // Marking the component as standalone
-  imports: [FormsModule],  // Import any modules required by the component
+  imports: [FormsModule, CommonModule],
 })
 export class AddDiagnosticComponent {
+  currentStep: number = 1;
+
+  toolsList: string[] = ['Tool 1', 'Tool 2', 'Tool 3', 'Tool 4'];
+
+  // Updated formData with all required properties
+  formData: {
+    tools: { [key: string]: boolean };
+    diagnostic: string;
+    antecedents: string;
+    nextDate: string;
+  } = {
+    tools: {},
+    diagnostic: '',
+    antecedents: '',
+    nextDate: '',
+  };
+
+  // Add isSuivi as a property
+  isSuivi: boolean = false;
+
   constructor(
     public dialogRef: MatDialogRef<AddDiagnosticComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  onCancel(): void {
+  onCancel() {
+    // Close the dialog
     this.dialogRef.close();
   }
 
-  onSave(): void {
-    this.dialogRef.close(this.data);
+  nextStep() {
+    if (this.currentStep < 4) {
+      this.currentStep++;
+    }
+  }
+
+  previousStep() {
+    if (this.currentStep > 1) {
+      this.currentStep--;
+    }
+  }
+
+  onFinish() {
+    console.log('Final Form Data:', this.formData);
+    // Close the dialog and send the data back
+    this.dialogRef.close(this.formData);
   }
 }

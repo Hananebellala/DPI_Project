@@ -1,102 +1,153 @@
-/* Réinitialisation de base */
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-weight: bold;
+    font-family: Arial, sans-serif;
   }
   
   html, body {
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Désactive les barres de défilement */
-    font-family: Arial, sans-serif;
-    background-color: #eef3fc; /* Fond clair */
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #eef3fc; /* Background color */
   }
   
-  /* Fenêtre popup */
+  /* Popup Container */
   .popup-container {
-    position: relative; /* Nécessaire pour le bouton "X" */
+    position: relative;
     width: 400px;
-    height: 400px;
-    background-color: #f6f9ff; /* Couleur de fond */
-    border-radius: 0px;
+    min-height: 450px;
+    background-color: #f6f9ff; /* Light background */
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 20px;
-    box-sizing: border-box;
   }
   
-  /* Bouton "X" pour fermer */
+  /* Header */
+  .popup-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .popup-header h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Close Button */
   .close-button {
-    position: absolute; /* En haut à droite */
+    position: absolute;
     top: 10px;
     right: 10px;
     background: none;
     border: none;
     font-size: 18px;
     font-weight: bold;
-    color: #000;
+    color: #555;
     cursor: pointer;
-    margin-top: 10px;
   }
   
-  /* Titre principal */
-  .popup-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .popup-header h2 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: bold;
-    color: #000;
-  }
-  
-  /* Corps du popup */
+  /* Body Content */
   .popup-body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    flex-grow: 1;
+    gap: 20px;
   }
   
   .subtitle {
     font-size: 16px;
-    color: #000;
-    margin-bottom: 10px;
+    font-weight: bold;
+    color: #555;
+    
   }
   
-  /* Zone pour le diagnostic */
+  /* Diagnosis Text Area */
   .diagnosis-box {
     width: 100%;
-    height: 200px;
+    height: 120px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #fefefe;
-    box-sizing: border-box;
+    background-color: #fff;
+    padding: 50px;
+    font-size: 14px;
+    resize: none;
   }
   
-  /* Bouton "Skip" */
-  .skip-button {
+  /* Tool Selection */
+  .tool-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .tool-item input[type="checkbox"] {
+    accent-color: #7469B6;
+  }
+  
+  /* Antecedent Text Area */
+  .antecedent-box {
     width: 100%;
-    max-width: 360px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 10px;
+    font-size: 14px;
+    resize: none;
+  }
+  
+  /* Next Consultation Date */
+  .date-picker {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  /* Footer Buttons */
+  .footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .next-button, .finish-button, .skip-button {
+    flex: 1;
     height: 40px;
-    background-color: #fbcaca; /* Couleur du bouton */
+    width: 350px;
     border: none;
     border-radius: 5px;
-    color: #000;
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
-    align-self: center; /* Centre le bouton horizontalement */
-    margin-top: 25px;
+    align-items: center;
   }
+  
+  .next-button {
+    background-color: #7469B6;
+    color: #fff;
+  }
+  
+  .finish-button {
+    background-color: #4CAF50;
+    color: #fff;
+  }
+  
+  .skip-button {
+    background-color: #FBCACA;
+    color: #fff;
+  }
+  
