@@ -1,0 +1,81 @@
+<div class="members-container">
+  <div class="actions">
+    <div class="select-container">
+      <select class="select" (change)="onHospitalChange($event)">
+        <option *ngFor="let hospital of hospitals" [value]="hospital.nom">
+          {{ hospital.nom }}
+        </option>
+      </select>
+    </div>
+
+    <button class="add-hospital" (click)="openAddHospitalDialog()">
+      <span>+</span>
+    </button>
+  </div>
+
+  <div class="table-container">
+    <div class="table-top">
+      <h2>Members</h2>
+      <button class="add-member-btn" mat-raised-button color="primary" (click)="openAddMemberDialog()">+ Add Member</button>
+    </div>
+
+    <table class="members-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let member of paginatedMembers">
+          <td>
+            <img src="avatar.png" alt="Avatar" />
+          </td>
+          <td>{{ member.nomComplet }}</td>
+          <td>
+            {{
+              member.specialite 
+                ? "Médecin " + member.specialite 
+                : member.specialiteInf 
+                  ? "Infirmier " + member.specialiteInf 
+                  : member.service 
+                    ? "Personnel administratif: " + member.service 
+                    : "Radiologue/Laborantin"
+            }}
+          </td>
+          <td>{{ member.email }}</td>
+          <td>
+            <button class="delete-btn" (click)="deleteMember(member.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pages">
+      <button 
+        class="pagination-btn" 
+        [disabled]="currentPage === 1" 
+        (click)="previousPage()">
+        Previous
+      </button>
+    
+      <button 
+        class="pagination-btn" 
+        *ngFor="let page of [].constructor(totalPages); let i = index" 
+        [class.active]="i + 1 === currentPage"
+        (click)="goToPage(i + 1)">
+        {{ i + 1 }}
+      </button>
+    
+      <button 
+        class="pagination-btn" 
+        [disabled]="currentPage === totalPages" 
+        (click)="nextPage()">
+        Next
+      </button>
+    </div>
+  </div>
+</div>
