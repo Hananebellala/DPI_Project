@@ -557,4 +557,138 @@ class SejourViewSet(viewsets.ModelViewSet):
             return Response({'detail': 'Séjour non trouvé'}, status=status.HTTP_404_NOT_FOUND)
             
 #---------------------------------------------------------------------------------------------------------------
-#la creation du consultation est deja faite  il faut que recuperer le id du sejour et type de l outil qu on fait avec lui la consultation 
+# ajouter un soins 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Soin, Sejour, CompteInfirmier
+from .serializers import SoinSerializer
+from django.shortcuts import get_object_or_404
+
+class AjouterSoinView(APIView):
+    def post(self, request, idsejour, *args, **kwargs):
+        # Récupérer l'infirmier par son nom
+        nom_infirmier = request.data.get('nom_infirmier')
+        type_soin = request.data.get('type_soin')
+        resume_soin = request.data.get('resume_soin')
+
+        # Récupérer l'infirmier par son nom
+        infirmier = get_object_or_404(CompteInfirmier, nom=nom_infirmier)
+
+        # Récupérer le séjour par son ID
+        sejour = get_object_or_404(Sejour, id=idsejour)
+
+        # Créer le soin et l'ajouter à la base de données
+        soin = Soin.objects.create(
+            idSejour=sejour,
+            idInfirmier=infirmier,
+            typeSoin=type_soin,
+            resumeSoins=resume_soin
+        )
+
+        # Récupérer la liste des soins mise à jour
+        soins = Soin.objects.filter(idSejour=sejour)
+        soins_liste = []
+        for soin in soins:
+            soins_liste.append({
+                'nom_infirmier': soin.idInfirmier.nom,
+                'type_soin': soin.typeSoin,
+                'resume_soin': soin.resumeSoin, 
+            })
+
+        # Retourner la réponse JSON avec la liste des soins
+        return Response({'soins': soins_liste}, status=status.HTTP_201_CREATED)
+#-----------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------
+# Afficher liste des soins ( recuperer id-sejour par le frontend)
+
+
+class ListeSoinsView(APIView):
+    def get(self, request, idsejour, *args, **kwargs):
+        # Récupérer le séjour par son ID
+        sejour = get_object_or_404(Sejour, id=idsejour)
+
+        # Récupérer les soins associés au séjour
+        soins = Soin.objects.filter(idSejour=sejour)
+
+        # Préparer la liste des soins à retourner
+        soins_liste = []
+        for soin in soins:
+            soins_liste.append({
+                'type_soin': soin.typeSoin,
+                'resume_soin': soin.resumeSoin,
+                'nom_infirmier': soin.idInfirmier.nom,
+            })
+
+        # Retourner la réponse JSON avec la liste des soins
+        return Response({'soins': soins_liste})
+#---------------------------------------------------------------------------------------------
+# Recherche soins par nss 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import DPI, Soin, Sejour, CompteInfirmier
+from django.shortcuts import get_object_or_404
+
+class RechercheSoinsParNSSView(APIView):
+    def get(self, request, nss, *args, **kwargs):
+        # Récupérer le patient par son NSS (Numéro de Sécurité Sociale)
+        dpi = get_object_or_404(DPI, numeroSecuriteSociale=nss)
+
+        # Récupérer les séjours associés à ce patient
+        sejours = Sejour.objects.filter(idDossierPatient=dpi)
+
+        # Récupérer les soins associés aux séjours du patient
+        soins = Soin.objects.filter(idSejour__in=sejours)
+
+        # Préparer les données du patient à afficher
+        patient_data = {
+            'nss': dpi.numeroSecuriteSociale,
+            'nom': dpi.nom,
+            'prenom': dpi.prenom,
+            'date_naissance': dpi.dateNaissance,
+            # Ajoute ici d'autres informations importantes du patient
+        }
+
+        # Préparer la liste des soins associés à ce patient
+        soins_liste = []
+        for soin in soins:
+            soins_liste.append({
+                'nom_infirmier': soin.idInfirmier.nom,
+                'type_soin': soin.typeSoin,
+                'resume_soin': soin.resumeSoin,
+            })
+
+        # Retourner la réponse JSON avec les informations du patient et la liste des soins
+        return Response({
+            'patient': patient_data,
+            'soins': soins_liste
+        })
+#-----------------------------------------------------------------------------------------------------
+# Supprimer soisn et mis a jour la liste des soins 
+
+class SupprimerSoinView(APIView):
+    def delete(self, request, soin_id, *args, **kwargs):
+        # Récupérer le soin par son ID
+        soin = get_object_or_404(Soin, id=soin_id)
+
+        # Récupérer le séjour associé au soin
+        sejour = soin.idSejour
+
+        # Supprimer le soin
+        soin.delete()
+
+        # Récupérer les soins mis à jour pour ce séjour
+        soins_mis_a_jour = Soin.objects.filter(idSejour=sejour)
+
+        # Préparer la nouvelle liste des soins
+        soins_liste = []
+        for soin in soins_mis_a_jour:
+            soins_liste.append({
+                'nom_infirmier': soin.idInfirmier.nom,
+                'type_soin': soin.typeSoin,
+                'resume_soin': soin.resumeSoin,
+            })
+
+        # Retourner la réponse JSON avec la nouvelle liste des soins
+        return Response({'message': 'Soin supprimé avec succès', 'soins': soins_liste}, status=status.HTTP_204_NO_CONTENT)

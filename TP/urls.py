@@ -46,6 +46,18 @@ urlpatterns = [
     path('api/employe/', EmployeeCreateView.as_view(), name='create_employee'), # add new employee   // post 
     path('api/create-patient/', CreatePatientAccountAndDossierAPIView.as_view(), name='create-patient'),#creation du compte +docier du patient recuperer dan le mm formulaire   //post
 
+    # Ajouter un soin
+    path('soins/ajouter/<int:idsejour>/', AjouterSoinView.as_view(), name='ajouter_soin'),
+    
+    # Liste des soins pour un séjour spécifique
+    path('soins/liste/<int:idsejour>/', ListeSoinsView.as_view(), name='liste_soins'),
+    
+    # Rechercher les soins d'un patient par NSS
+    path('soins/recherche/<str:nss>/', RechercheSoinsParNSSView.as_view(), name='recherche_soins_nss'),
+    
+    # Supprimer un soin et mettre à jour la liste des soins
+    path('soins/supprimer/<int:soin_id>/', SupprimerSoinView.as_view(), name='supprimer_soin'),
+
     #path('api/add_employee/', add_employee_api, name='add_employee_api'),
     #path('', auth_views.LoginView.as_view(), name='login'),
     #path('', essaye),
