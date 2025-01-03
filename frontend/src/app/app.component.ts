@@ -11,23 +11,19 @@ import { LaborantinModule } from './laborantin/laborantin.module';
 import { RadiologueModule } from './radiologue/radiologue.module';
 import { DoctorModule } from './doctor/doctor.module';
 import { LoginComponent } from './login/login.component';
+import { WelcomePageModule } from './welcome-page/welcome-page.module';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   
   imports: [ 
-    NavbarComponent,
-    HeroComponent,
-    MissionComponent,
-    ServicesComponent,
-    ContactComponent,
-    FooterComponent,
+    
     AdminModule,
     RouterModule,
     LaborantinModule,
     RadiologueModule,
-    LoginComponent
+    WelcomePageModule
     
     
   ],
