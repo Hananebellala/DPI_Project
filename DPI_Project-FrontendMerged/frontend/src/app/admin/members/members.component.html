@@ -1,0 +1,58 @@
+<div class="members-container">
+  <div class="actions">
+    <div class="select-container">
+      <select class="select">
+        <option>Hospital Name</option>
+      </select>
+    </div>
+
+    <button class="add-hospital"  (click)="openAddHospitalDialog()">
+      <span>+</span>
+    </button>
+  </div>
+
+  <div class="table-container">
+    <div class="table-top">
+      <h2>Members</h2>
+      <button class="add-member-btn" mat-raised-button color="primary" (click)="openAddMemberDialog()">+ Add Member</button>
+
+    </div>
+
+    <table class="members-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Placeholder rows -->
+        <tr>
+          <td> <img src="avatar.png" alt="Avatar" /></td>
+          <td>John Doe</td>
+          <td>Doctor</td>
+          <td>johndoeexample.com</td>
+          <td><button class="delete-btn">Delete</button></td>
+        </tr>
+        <tr>
+          <td><img src="avatar.png" alt="Avatar" /></td>
+          <td>Jane Smith</td>
+          <td>Nurse</td>
+          <td>janesmithexample.com</td>
+          <td><button class="delete-btn">Delete</button></td>
+        </tr>
+        <!-- More rows can be dynamically added -->
+      </tbody>
+    </table>
+
+    <div class="pages">
+      <button class="pagination-btn">1</button>
+      <button class="pagination-btn">2</button>
+      <button class="pagination-btn">3</button>
+      <button class="pagination-btn">Next</button>
+    </div>
+  </div>
+</div>

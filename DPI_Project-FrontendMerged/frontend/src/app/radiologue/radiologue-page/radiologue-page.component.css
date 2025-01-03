@@ -1,0 +1,148 @@
+* {
+    
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.radiologue-page {
+    display: flex;
+}
+
+.laborantin-page {
+    display: flex;
+    height: 100vh;
+}
+
+
+
+.page-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFA;
+}
+
+
+
+.rest-page {
+    padding: 20px;
+    flex: 1;
+}
+
+.rest-page h2 {
+    text-align: left;
+    margin-left: 15px;
+}
+
+.radiology-results {
+    
+    padding-left: 20px;
+    padding-top: 1px;
+}
+textarea {
+    border-radius: 20px;
+    box-shadow: inset 1px 1px 4px 0.5px #000;
+    padding: 10px;
+    
+}
+
+.report {
+    margin-bottom: 20px;
+}
+
+.type-files {
+    margin-bottom: 20px;
+}
+
+.attach {
+    display: flex;
+    align-items: center;
+}
+
+.attach select {
+    padding: 5px;
+    margin-right: 10px;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #EDF2FB;
+    margin-right: 200px;
+}
+
+.upload img{
+    height: 50px;
+    width: 50px;
+    margin-bottom: 20px;
+}
+.upload {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 100px;
+  }
+
+  .upload button{
+    all: unset;
+  }
+
+  .selected-files {
+    margin-top: 10px;
+}
+
+.selected-files-space {
+    display: flex;
+    flex-direction: column; 
+    margin-left: 20px; 
+    width: auto; 
+}
+
+.selected-files-space .file-item {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.selected-files-space .file-item span {
+    margin-left: 5px;
+}
+
+.selected-files-space .file-item .delete-icon {
+    cursor: pointer;
+    margin-left: 5px;
+    color: red;
+}
+
+.upload-container {
+    display: flex; 
+    align-items: flex-start; 
+    flex-direction: row;
+}
+
+.save-button-container button {
+    background-color: #EF5350;
+    color: white;
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    
+}
+
+.save-button-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 455px;
+    padding-top: 20px; 
+}
+

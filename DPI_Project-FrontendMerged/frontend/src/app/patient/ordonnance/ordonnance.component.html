@@ -1,0 +1,18 @@
+<div class="medication-page">
+    <div class="top-medicament">
+      <p>Medicaments</p>
+      
+    </div>
+  
+    
+  
+    <div class="added-medicaments">
+      <div *ngFor="let med of medications" class="medicament-card">
+        <h3>Name:{{ med.name }}</h3>
+        <p><span>Dose:</span> {{ med.dose }}</p>
+        <p><span>frequency:</span> {{ med.frequency }}</p>
+        <p><span>Duration:</span>{{ med.duration }}</p>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,53 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fffefa; 
+   
+  }
+  
+  .logo img {
+    height: 40px; 
+    width: auto; 
+  }
+  
+  .logout button {
+    font-family: 'Source Sans Pro', sans-serif; 
+  font-weight: bold; 
+  font-size: 18px;
+  width: 180px; 
+  height: 50px; 
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease; 
+  background: none;
+  color: black;
+  position: relative;
+  }
+
+  .logout button::after{
+    content: '';
+    display: block;
+    width: 0; 
+    height: 2px;
+    background: black;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    transition: width 0.3s ease; 
+  }
+
+  .logout button:hover{
+    color: #EF5350; 
+  }
+
+  .logout button:hover::after{
+    width: 100%;
+  }
+  
+  .logout button:hover {
+    color: #ff5722; 
+    border-color: #ff5722;
+  }
+  

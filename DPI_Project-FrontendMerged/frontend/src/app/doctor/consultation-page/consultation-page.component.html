@@ -1,0 +1,33 @@
+<div class="main-container">
+    <!-- Sidebar can go here, if applicable -->
+  
+    <div class="content">
+      <!-- Patient header with name -->
+      <div class="patient-header">
+        <h2 class="patient-name">{{ patient?.name || 'Loading...' }}</h2>
+      </div>
+  
+      <!-- Text and photo section -->
+      <div class="text-photo-container">
+        <div class="text">
+          <h2>Diagnostic Récent</h2>
+          <p>{{ patient?.diagnosis || 'Loading diagnosis...' }}</p>
+          <p><strong>Diagnostiqué par :</strong> {{ patient?.doctor || 'Dr. Unknown' }}</p>
+  
+          <h3>Outils Utilisés</h3>
+          <p>{{ patient?.tools || 'Loading tools...' }}</p>
+  
+          <h3>Antécédents Médicaux</h3>
+          <p>{{ patient?.medicalHistory || 'Loading history...' }}</p>
+  
+          <h3>Prochain Rendez-vous</h3>
+          <p>{{ patient?.nextAppointment || 'Loading...' }}</p>
+        </div>
+  
+        <div class="photo">
+          <img src="Medical.png" alt="Patient" class="photo-img" />
+        </div>
+      </div>
+    </div>
+  </div>
+  

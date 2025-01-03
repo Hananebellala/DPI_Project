@@ -1,0 +1,183 @@
+
+.members-container {
+  display: flex;
+  gap: 30px;
+}
+
+.actions {
+  display: flex;
+  
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 10px;
+}
+
+.select-container {
+  position: relative; 
+  width: 300px; 
+}
+
+.select {
+  background-color: #EDF2FB;
+  height: 50px;
+  width: 300px;
+  border-radius: 10px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 20px;
+  padding-left: 20px; 
+  padding-right: 30px; 
+  border: 1px solid black; 
+  appearance: none;
+  outline: none; 
+  position: relative; 
+}
+
+.select-container::after {
+  content: "\25BC"; 
+  position: absolute;
+  top: 50%; 
+  right: 15px; 
+  transform: translateY(-50%); 
+  font-size: 18px;
+  color: black;
+  pointer-events: none; 
+}
+
+
+
+.select-container {
+  position: relative;
+  width: 300px; 
+}
+
+
+td img{
+  height: 50px;
+  width: 50px;
+}
+
+.add-hospital {
+  width: 50px;
+  height: 50px;
+  background-color: #FFCDD2; 
+  border: none; 
+  border-radius: 10px; 
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  font-size: 36px; 
+  font-weight: bold; 
+  color: #fffffa;
+  cursor: pointer; 
+}
+
+.add-hospital:hover {
+  background-color: #EF9A9A; 
+}
+
+.members-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.table-top h2{
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.table-top .add-member-btn{
+
+  background-color: #EF5350;
+  font-family:'Source Sans Pro', sans-serif ;
+  
+  border: none;
+  border-radius: 10px;
+  height: 30px;
+  width: 200px;
+  cursor: pointer; 
+
+}
+
+.table-top .add-member-btn:hover{
+  background-color: #EF9A9A; 
+}
+
+.members-table .delete-btn{
+  background-color: #EF9A9A;
+  font-family:'Source Sans Pro', sans-serif ;
+  color: #fffffa;
+  border: none;
+  border-radius: 10px;
+  height: 30px;
+  width: 200px;
+  cursor: pointer; 
+}
+
+.members-table .delete-btn:hover{
+  background-color: #EF5350; 
+}
+
+.table-container {
+  background-color: #8ECAE6;
+  border-radius: 10px;
+  padding: 20px;
+  overflow: hidden; 
+}
+
+.table-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-right: 30px;
+}
+
+.members-table td:last-child {
+  text-align: right;
+  padding-right: 30px; 
+}
+
+.members-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  border-radius: 10px;
+  overflow: hidden; 
+}
+
+.members-table th,
+.members-table td {
+  padding: 10px;
+  
+}
+
+
+.members-table tbody tr:nth-child(even) {
+  background-color: #EDF2FB; 
+}
+
+
+
+.delete-btn:hover {
+  background-color: #FF9999;
+}
+
+.pages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 5px;
+}
+
+.pagination-btn {
+  background-color: #EDF2FB;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.pagination-btn:hover {
+  background-color: #DCEAFB;
+}

@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+  
+  .medication-page {
+    padding: 20px;
+  }
+  
+  .top-medicament {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .top-medicament p {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .add-btn {
+    background-color: #edf2fb;
+    border: 1px solid black;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+  }
+  
+  .add-btn:hover {
+    background-color: #dbe7f8;
+  }
+  
+  .form-container {
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  form label {
+    font-size: 16px;
+  }
+  
+  form input {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .submit-btn {
+    background-color: #edf2fb;
+    color: black;
+    border: 1px solid black;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: #dbe7f8;
+  }
+  
+  .added-medicaments {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .medicament-card {
+    background-color: #edf4ff;
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid black; /* Add black border */
+    text-align: left;
+    margin-bottom: 20px; /* Add space between cards */
+  }
+  
+  .medicament-card h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+    line-height: 1.5; /* Add space between lines */
+  }
+  
+  .medicament-card p {
+    margin: 10px 0; /* Add space between each paragraph */
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5; /* Add space between lines */
+  }
+  
+  span{
+    font-weight: bold;
+  }

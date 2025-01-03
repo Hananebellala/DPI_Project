@@ -1,0 +1,64 @@
+<div class="add-member-container">
+    <div class="add-member-header">
+      <h2>Add Member</h2>
+      <button mat-icon-button class="close-btn" aria-label="Close" (click)="closeDialog()">
+        <mat-icon>X</mat-icon>
+      </button>
+    </div>
+    <div class="add-member-body">
+      <img src="Add.png" alt="Add Icon" class="add-icon" />
+      <div class="form-container">
+        <div class="custom-form-field">
+          <label for="name">Full Name</label>
+          <input id="name" matInput [(ngModel)]="memberData.name" name="name" required />
+        </div>
+  
+        <div class="custom-form-field">
+          <label for="email">Email</label>
+          <input id="email" matInput type="email" [(ngModel)]="memberData.email" name="email" required />
+        </div>
+  
+        <div class="custom-form-field">
+          <label for="profession">Profession</label>
+          <!-- Test with a normal select field -->
+          <select id="profession" [(ngModel)]="memberData.profession" name="profession" required>
+            <option value="doctor">Chirurgien</option>
+            <option value="doctor">Généraliste</option>
+            <option value="doctor">Pédiatre</option>
+            <option value="doctor">Endocrinologue</option>
+            <option value="doctor">Cardiologue</option>
+            <option value="doctor">Dermatologue</option>
+            <option value="doctor">Neurologue</option>
+            <option value="doctor">ORL</option>
+            <option value="doctor">Obstétricien</option>
+            <option value="doctor">Ostéologue</option>
+            <option value="doctor">Ophtalmologue</option>
+            <option value="doctor">Gastro-entérologue</option>
+            <option value="doctor">Néphrologue</option>
+            <option value="doctor">Anesthésiste</option>
+            <option value="administratif">Administrative</option>
+            <option value="radiologue">Radiologue</option>
+            <option value="laborantin">Laborantin</option>
+            
+          </select>
+        </div>
+
+        <div class="custom-form-field">
+            <label for="hospital">Hospital</label>
+            <mat-select [(ngModel)]="memberData.hospital" name="hospital" required>
+              <mat-option *ngFor="let hospital of hospitals" [value]="hospital">
+                {{ hospital }}
+              </mat-option>
+            </mat-select>
+          </div>
+  
+        <div class="custom-form-field">
+          <label for="password">Password</label>
+          <input id="password" matInput type="password" [(ngModel)]="memberData.password" name="password" required />
+        </div>
+  
+        <button mat-raised-button color="primary" class="confirm-btn" (click)="addMember()">Confirm</button>
+      </div>
+    </div>
+  </div>
+  
