@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { PatientRoutingModule } from './patient-routing.module';
-import { OrdonnanceComponent } from './ordonnance/ordonnance.component';
-import { ConsultationPageComponent } from './consultation/consultation.component';
-import { LabPageComponent } from './lab/lab.component';
-import { SoinPageComponent } from './soin/soin.component';
-import { PatientLayoutComponent } from './patient-layout/patient-layout.component';
-import { BloodCountPageComponent } from './blood-count/blood-count.component';
-import { RadiologyPageComponent } from './radiology/radiology.component';
 import { AllConsultationComponent } from './all-consultation/all-consultation.component';
+import { BloodCountPageComponent } from './blood-count/blood-count.component';
+import { ConsultationComponent } from './consultation/consultation.component';
+import { LabPageComponent } from './lab/lab.component';
+import { OrdonnanceComponent } from './ordonnance/ordonnance.component';
+import { PatientLayoutComponent } from './patient-layout/patient-layout.component';
+import { PatientRoutingModule } from './patient-routing.module';
+import { RadiologyPageComponent } from './radiology/radiology.component';
+import { SoinPageComponent } from './soin/soin.component';
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import { AllConsultationComponent } from './all-consultation/all-consultation.co
     PatientRoutingModule,
 
     OrdonnanceComponent,
-    ConsultationPageComponent,
+    ConsultationComponent,
     LabPageComponent,
     SoinPageComponent,
     PatientLayoutComponent,

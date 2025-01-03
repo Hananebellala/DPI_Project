@@ -8,7 +8,7 @@ import { PatientService } from '../../doctor/patient.service';
   templateUrl: './consultation.component.html',
   styleUrls: ['./consultation.component.css']
 })
-export class ConsultationPageComponent implements OnInit {
+export class ConsultationComponent implements OnInit {
   patient: any;
 
   constructor(private router: Router, private patientService: PatientService) {}

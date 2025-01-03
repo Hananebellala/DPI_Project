@@ -18,12 +18,12 @@
         <input type="text" placeholder="Search Patient">
         <div class="profile">
             <img src="Profile.png" alt="Profile Picture">
-            <span>{{ generalInfo.name }}</span>
+            <span>{{  generalInfo?.name || 'patient' }}</span>
         </div>
      </div>
       <!-- Nom du patient et boutons -->
       <div class="patient-header">
-        <h2 class="patient-name">{{ generalInfo.name }}</h2>
+        <h2 class="patient-name">{{  generalInfo?.name || 'patient' }}</h2>
 
       </div>
 
@@ -45,23 +45,23 @@
           <div class="general-info">
             <div class="field">
               <span class="field-name">Date de naissance</span>
-              <span class="field-value">{{ generalInfo.dateNaissance }}</span>
+              <span class="field-value">{{ generalInfo?.dateNaissance }}</span>
             </div>
             <div class="field">
               <span class="field-name">Statut</span>
-              <span class="field-value">{{ generalInfo.status }}</span>
+              <span class="field-value">{{ generalInfo?.status }}</span>
             </div>
             <div class="field">
               <span class="field-name">Sexe</span>
-              <span class="field-value">{{ generalInfo.sexe }}</span>
+              <span class="field-value">{{ generalInfo?.sexe }}</span>
             </div>
             <div class="field">
               <span class="field-name">Adresse</span>
-              <span class="field-value">{{ generalInfo.adresse }}</span>
+              <span class="field-value">{{ generalInfo?.adresse }}</span>
             </div>
             <div class="field">
               <span class="field-name">Numéro de sécurité sociale</span>
-              <span class="field-value">{{ generalInfo.numSecuriteSociale }}</span>
+              <span class="field-value">{{ generalInfo?.numSecuriteSociale }}</span>
             </div>
           </div>
           <h3 class="general-info-title">Coordonnées</h3>
@@ -70,11 +70,11 @@
           <div class="general-info">
             <div class="field">
               <span class="field-name">Numéro de téléphone</span>
-              <span class="field-value">{{ generalInfo.numTelephone}}</span>
+              <span class="field-value">{{ generalInfo?.numTelephone}}</span>
             </div>
             <div class="field">
               <span class="field-name">Personne à contacter</span>
-              <span class="field-value">{{ generalInfo.personneAContacter }}</span>
+              <span class="field-value">{{ generalInfo?.personneAContacter }}</span>
             </div>
            </div>
         </div>
@@ -82,7 +82,7 @@
         <!-- Dossiers avec Image -->
         <div class="dossiers-container">
             <div class="dossier" *ngFor="let dossier of dossiers" (click)="goToAll(dossier)">
-              <img [src]="dossier.image" [alt]="'Dossier du ' + dossier.date" />
+              <img [src]="dossier.image || 'Dossier.png'" [alt]="'Dossier du ' + dossier.date" />
               <div class="date">{{ dossier.date }}</div>
             </div>
           </div>

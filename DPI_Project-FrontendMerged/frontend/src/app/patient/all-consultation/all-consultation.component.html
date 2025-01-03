@@ -1,23 +1,23 @@
 <div class="main-container">
     <!-- Sidebar -->
-    
-  
+
+
     <!-- Main Content Wrapper -->
     <div class="main-content-wrapper">
       <!-- Top Bar -->
-    
-  
+
+
       <!-- Content Section -->
       <div class="content">
         <!-- Patient Header -->
         <div class="patient-header">
-          <h2 class="patient-name">Marie Dupont</h2>
-         
+          <h2 class="patient-name">Patient</h2>
+
         </div>
-  
+
         <!-- Navigation Line -->
         <div class="nav-line"></div>
-  
+
         <!-- Main Content -->
         <div class="main-content">
           <!-- General Information -->
@@ -33,10 +33,10 @@
             </div>
             <hr />
           </div>
-  
+
           <!-- Vertical Line -->
           <div class="vertical-line"></div>
-  
+
           <!-- Dossiers -->
           <div class="dossiers-container">
             <div class="dossier" [routerLink]="['/consultation']">
@@ -48,8 +48,13 @@
               <div class="date">10/12/2024</div>
             </div>
           </div>
+
+          <div class="consultation" *ngFor="let consultation of consultations" [routerLink]="['/profile', consultation.email, consultation.sejourId]">
+            <img src="Dossier.png" alt="Dossier 1" />
+            <div class="date">{{ consultation.date }}</div>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
-  

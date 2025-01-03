@@ -6,6 +6,12 @@ import { PatientLayoutComponent } from './patient/patient-layout/patient-layout.
 import { SejourPageComponent } from './patient/sejour/sejour.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page/welcome-page.component';
 
+import { AllConsultationComponent } from './patient/all-consultation/all-consultation.component';
+import { OrdonnanceComponent } from './patient/ordonnance/ordonnance.component';
+
+// import { LabResultsComponent } from './lab-page/lab-page.component';  // Example component
+// import { SoinComponent } from './soin-page/soin-page.component';  // Example component
+
 
 export const routes: Routes = [
   { path: '', component: WelcomePageComponent },
@@ -19,7 +25,34 @@ export const routes: Routes = [
   { path: 'patient', loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule) },
 
   { path: 'profile/:email', component: SejourPageComponent },
-  { path: 'profile/:email/:sejourId', component: PatientLayoutComponent },
+
+ { path: 'profile/:email/:sejourId',
+  component: PatientLayoutComponent,
+  children: [
+    {
+      path: '',
+      component: AllConsultationComponent ,
+    },
+    {
+      path: 'medicament',
+      component: OrdonnanceComponent ,
+    }
+  ]
+  },
+
+
+  // { path: 'profile/:email/:idSejour', component: PatientLayoutComponent },
+  // { path: 'profile/:email/:idSejour/consultations', component: AllConsultationComponent },
+
+
+
+
+  // { path: 'profile/:email/:idSejour/medication', component: MedicationComponent },
+  // { path: 'profile/:email/:idSejour/lab-results', component: LabResultsComponent },
+  // { path: 'profile/:email/:idSejour/soin', component: SoinComponent },
+  // { path: '', redirectTo: '/consultation', pathMatch: 'full' },
+
+
 
 
 

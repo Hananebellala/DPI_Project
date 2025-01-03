@@ -16,7 +16,9 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 export class PatientLayoutComponent implements OnInit {
   email: string = '';
   sejourId: string = '';
-  sejourDetails: any;  // To store the selected Sejour details
+  sejourDetails: any;
+  consultations: any[] = [];
+
 
   constructor(
     private router: Router,
@@ -45,10 +47,15 @@ export class PatientLayoutComponent implements OnInit {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
       // Fetch the specific Sejour details from the backend
-      this.http.get(`http://127.0.0.1:8000/profile/${email}/${sejourId}`, { headers })
+      this.http.get(`http://127.0.0.1:8000/profile/${this.email}/${sejourId}`, { headers })
         .subscribe(
           (response: any) => {
-            this.sejourDetails = response;  // Assuming the response contains Sejour details
+            console.log('SejoursDetails response :', response);
+
+            this.sejourDetails = response;
+            this.consultations = response.consultations;
+            console.log('this.consultations :', this.consultations);
+
           },
           (error) => {
             console.error('Error fetching Sejour details:', error);
@@ -58,6 +65,12 @@ export class PatientLayoutComponent implements OnInit {
     }
   }
 
+  goToAll(dossier: any): void {
+    console.log('Navigating to Consultation details :', dossier);
+
+    const idConsultation = dossier.idConsultation;
+    this.router.navigate([`/profile/${this.email}/${this.sejourId}/${idConsultation}`]);
+  }
 
   isActive(paths: string[]): boolean {
     return paths.some((path) => this.router.isActive(path, false));
