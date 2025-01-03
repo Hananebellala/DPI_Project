@@ -38,9 +38,15 @@ th {
     padding: 12px 15px;
 }
 
+table td {
+  color: black !important;
+  background: white !important;
+}
+
 /* Table Rows */
 td {
     padding: 12px 15px;
+
 }
 
 tbody {

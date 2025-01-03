@@ -9,8 +9,13 @@ import { WelcomePageComponent } from './welcome-page/welcome-page/welcome-page.c
 import { AllConsultationComponent } from './patient/all-consultation/all-consultation.component';
 import { OrdonnanceComponent } from './patient/ordonnance/ordonnance.component';
 
-// import { LabResultsComponent } from './lab-page/lab-page.component';  // Example component
-// import { SoinComponent } from './soin-page/soin-page.component';  // Example component
+import { LabPageComponent } from './patient/lab/lab.component'; // Example component
+import { SoinPageComponent } from './patient/soin/soin.component'; // Example component
+
+import { RadiologyPageComponent } from './patient/radiology/radiology.component';
+
+import { BloodCountPageComponent } from './patient/blood-count/blood-count.component'; // Example component
+
 
 
 export const routes: Routes = [
@@ -36,7 +41,21 @@ export const routes: Routes = [
     {
       path: 'medicament',
       component: OrdonnanceComponent ,
-    }
+    },
+
+    {
+      path: 'labs',
+      component: LabPageComponent ,children: [
+        { path: 'radiology', component: RadiologyPageComponent }, // Radiology route
+        { path: 'blood', component: BloodCountPageComponent }, // Blood route
+      ]
+    },
+
+    {
+      path: 'soins',
+      component: SoinPageComponent ,
+    },
+
   ]
   },
 

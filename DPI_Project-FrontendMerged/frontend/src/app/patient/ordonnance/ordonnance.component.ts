@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { MedicamentService } from '../../services/medicament.service';
 
 
@@ -8,7 +9,7 @@ import { MedicamentService } from '../../services/medicament.service';
   selector: 'ordonnance-page',
   templateUrl: './ordonnance.component.html',
   styleUrls: ['./ordonnance.component.css'],
-  imports: [CommonModule], // Add CommonModule here
+  imports: [CommonModule, RouterModule], // Add CommonModule here
   providers: [MedicamentService], // Add service if needed
 })
 
