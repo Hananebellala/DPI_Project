@@ -27,7 +27,7 @@ export class OrdonnanceComponent implements OnInit {
     this.medicamentService.getMedications(email, idSejour).subscribe(
       (data) => {
         this.medications = [data];
-        console.log("the medications : " , this.medications)
+        console.log(this.medications)
       },
       (error) => {
         console.error('Erreur lors de la récupération des médicaments:', error);

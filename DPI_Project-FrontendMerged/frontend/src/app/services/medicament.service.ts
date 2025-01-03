@@ -25,7 +25,8 @@ export class MedicamentService {
             console.error('SejourId is required');
             throw new Error('SejourId is required');
           }
-          const url = `http://127.0.0.1:8000/profile/${encodeURIComponent(email)}/${encodeURIComponent(idSejour)}`;
+          const url = `http://127.0.0.1:8000/profile/${encodeURIComponent(email)}/${encodeURIComponent(idSejour)}/medicament`;
+
           console.log('Fetching Medicaments from URL:', url);
           // Return the observable so it can be subscribed to in the component
           return this.http.get(url, { headers });
