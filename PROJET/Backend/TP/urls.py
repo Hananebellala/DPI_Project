@@ -8,6 +8,7 @@ from django.conf.urls.static import static
 
 # Create a router
 router = DefaultRouter()
+
 router.register(r'hopital', HopitalViewSet, basename="hopital")
 router.register(r'compteadmin', CompteAdministrateurViewSet, basename="compteadmin")
 router.register(r'compteinfirmier', CompteInfirmierViewSet, basename="compteinfirmier")
@@ -31,7 +32,7 @@ router.register(r'posologie', PosologieViewSet, basename="posologie")
 router.register(r'facture', FactureViewSet, basename="facture")
 router.register(r'lignefacture', LigneFactureViewSet, basename="lignefacture")
 router.register(r'effetsecondaire', EffetSecondaireViewSet, basename="effetsecondaire")
-router.register(r'rad', BilanRadiologiqueViewSet, basename="rad")
+#router.register(r'rad', BilanRadiologiqueViewSet, basename="rad")
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -50,12 +51,14 @@ urlpatterns = [
     path('api/medecin-traitant/<str:nss>/', MedecinTraitantAPIView.as_view(), name='medecin-traitant'),
     path('generate-qr/<str:numero_securite_sociale>/', GenerateQRCodeView.as_view(), name='generate_qr'),  # creation du QR code unique basse sur le num de securite sociale 
     path('api/recherche-patient/', RecherchePatientView.as_view(), name='recherche_patient'), # recherche d un patient par nss (mm par QR apres la requette) + get recuperer consulter le dpi 
-    path('api/employes/', ListeEmployesView.as_view(), name='liste-employes'), #recuperation de la liste des employees  //get 
+    #path('api/employes/', ListeEmployesView.as_view(), name='liste-employes'), #recuperation de la liste des employees  //get 
     path('api/hopital/', AjouterHopitalView.as_view(), name='ajouter-hopital'), # add new hopital  // post
-    path('api/employe/', EmployeeCreateView.as_view(), name='create_employee'), # add new employee   // post 
+    path('posologie/sejour/<int:id_sejour>/', PosologieBySejourView.as_view(), name='posologie-by-sejour'), # recuperer la liste des medecament par sejour
+   # path('api/employe/', EmployeeCreateView.as_view(), name='create_employee'), # add new employee   // post 
     path('api/create-patient/', CreatePatientAccountAndDossierAPIView.as_view(), name='create-patient'),#creation du compte +docier du patient recuperer dan le mm formulaire   //post
     path('', include(router.urls)),
     path('', include('DPI.urls')), 
+
 ]
 
 if settings.DEBUG:

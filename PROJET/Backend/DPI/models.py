@@ -180,6 +180,7 @@ class ConsultationMedicale(models.Model):
     dateConsultation = models.DateField(default=datetime.date.today)
     outilsConsultation = models.CharField(default="Stéthoscope", max_length=50, choices=OUTILS)
     resume = models.CharField(max_length=500)
+    dateProchaineConsultation = models.DateField(null=True, blank=True)
     class Meta:
         db_table = 'dpi_consultationmedicale'
 
@@ -193,7 +194,7 @@ class Antecedent(models.Model):
     ]
     typeAntecedent = models.CharField(default="Médical personnel", max_length=50, choices=TYPE)
     description = models.CharField(max_length=500)
-    idConsultation = models.ForeignKey(ConsultationMedicale,on_delete=models.CASCADE)
+    #idConsultation = models.ForeignKey(ConsultationMedicale,on_delete=models.CASCADE)
     def clean(self):
         if not(self.idConsultation.premiere):
             raise ValidationError("Un antécédent ne peut pas être ajouté qu'à une première consultation")
@@ -297,9 +298,11 @@ class Medicament(models.Model):
         db_table = 'dpi_medicament'
 
 class Posologie(models.Model):
-    idOrdonnance = models.ForeignKey(Ordonnance, on_delete=models.CASCADE)
+    #idSejour = models.ForeignKey(Sejour, on_delete=models.CASCADE)
+    idSejour = models.ForeignKey(Sejour, on_delete=models.CASCADE, null=True, blank=True)
     nomMedicament = models.ForeignKey(Medicament, on_delete=models.CASCADE)
     dose = models.FloatField(default=1)
+    Frequency=models.IntegerField(default=10)
     dureePrise = models.IntegerField(default=10)
 
 class Facture(models.Model):
@@ -319,6 +322,3 @@ class EffetSecondaire(models.Model):
     descriptionEffetSecondaire = models.TextField(default='')
     class Meta:
         db_table = 'dpi_effetsecondaire'
-
-
-        

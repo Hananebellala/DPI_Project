@@ -1,3 +1,4 @@
+<!--
 <div class="medication-page">
     <div class="top-medicament">
       <p>Medicaments</p>
@@ -15,4 +16,21 @@
       </div>
     </div>
   </div>
-  
+-->
+
+<div class="medication-page">
+  <div class="top-medicament">
+    <p>Medicaments</p>
+    <button class="add-btn" (click)="openFormDialog()">+</button>
+
+  </div>
+
+  <div class="added-medicaments">
+    <div *ngFor="let med of medications" class="medicament-card">
+      <h3>Name: {{ med.name }}</h3>
+      <p><span>Dose:</span> {{ med.dose }}</p>
+      <p><span>Frequency:</span> {{ med.frequency }}</p>
+      <p><span>Duration:</span> {{ med.duration }}</p>
+    </div>
+  </div>
+</div>

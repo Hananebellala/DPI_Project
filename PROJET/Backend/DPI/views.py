@@ -187,82 +187,14 @@ def essaye(request):
 
 # views.py
 
-"""
-@csrf_exempt
-def add_employee_api(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)  # Charger les données JSON envoyées dans la requête
-            first_name = data.get('first_name')
-            last_name = data.get('last_name')
-            email = data.get('email')
-            profession = data.get('profession')
-            hospital_name = data.get('hospital')
-            password = data.get('password')
 
-            # Vérification des champs obligatoires
-            if not all([first_name, last_name, email, profession, hospital_name, password]):
-                return JsonResponse({'error': 'Tous les champs sont requis.'}, status=400)
-
-            # Récupérer l'hôpital
-            try:
-                hospital = Hopital.objects.get(nom=hospital_name)
-            except Hopital.DoesNotExist:
-                return JsonResponse({'error': 'Hôpital introuvable.'}, status=404)
-
-            # Créer l'utilisateur Django
-            user = User.objects.create_user(
-                username=email,
-                email=email,
-                password=password,
-                first_name=first_name,
-                last_name=last_name
-            )
-
-            # Créer le compte en fonction de la profession
-            if profession == 'medecin':
-                CompteMedecin.objects.create(
-                    user=user,
-                    nom=last_name,
-                    prenom=first_name,
-                    email=email,
-                    idHopital=hospital
-                )
-            elif profession == 'infirmier':
-                CompteInfirmier.objects.create(
-                    user=user,
-                    nom=last_name,
-                    prenom=first_name,
-                    email=email,
-                    idHopital=hospital
-                )
-            elif profession == 'pharmacien':
-                ComptePharmacien.objects.create(
-                    user=user,
-                    nom=last_name,
-                    prenom=first_name,
-                    email=email,
-                    idHopital=hospital
-                )
-            else:
-                return JsonResponse({'error': 'Profession non valide.'}, status=400)
-
-            return JsonResponse({'success': 'Employé ajouté avec succès.'}, status=201)
-
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Format JSON invalide.'}, status=400)
-
-    return JsonResponse({'error': 'Méthode non autorisée.'}, status=405)
-"""
 
 
 # views.py la partie de add emplyee -------------------------------------------------------------------
 
 
 def traiter_insertion_employe(email, nom, prenom, motDePasse, profession, hopital):
-    """
-    Insère un employé dans la table appropriée selon la profession et la spécialité.
-    """
+    
     # Vérifier la validité de l'email
     try:
         validate_email(email)  # Vérifie si l'email est valide
@@ -569,6 +501,7 @@ class MedecinTraitantAPIView(APIView):
             # Vérifier si le médecin existe
             if medecin_traitant:
                 data = {
+                    "id":medecin_traitant.id,
                     "nom": medecin_traitant.nom,
                     "prenom": medecin_traitant.prenom,
                     "email": medecin_traitant.email,
@@ -640,6 +573,7 @@ class SejourViewSet(viewsets.ModelViewSet):
 
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.hashers import check_password
+
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
         email = request.data.get('email')
@@ -722,14 +656,7 @@ class LoginView(APIView):
         # Generate the URL for the patient profile, for example:
         return f"/profile/{user.email}/"
   
-"""""
-logic : 
-1- front send post request to front after clicking on login 
-2- back send response containing the url to be redirected to 
-3- front send get request to redirect to the page 
-4- back send response ( the page)
 
-"""
 
 from datetime import datetime
 
@@ -813,6 +740,7 @@ class ProfileView(APIView):
 # - un seul diagnostic 
 # - une seule ordonnace ( modifiable )
 # - des examens 
+
 class SejourDetailView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -1035,3 +963,11 @@ class LabDetailView(APIView):
 
         except Exception as e:
             return Response({"error": f"An error occurred: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
+class PosologieBySejourView(APIView):
+    def get(self, request, id_sejour, format=None):
+        posologies = Posologie.objects.filter(idSejour=id_sejour)
+        serializer = PosologieSerializer(posologies, many=True)
+        return Response(serializer.data)

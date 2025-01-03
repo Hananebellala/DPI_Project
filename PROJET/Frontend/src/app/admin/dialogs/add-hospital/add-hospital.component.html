@@ -1,3 +1,4 @@
+<!--
 <div class="add-hospital-container">
     <div class="add-hospital-header">
       <h2>Add New Hospital</h2>
@@ -15,4 +16,21 @@
       </div>
     </div>
   </div>
-  
+-->
+<div class="add-hospital-container">
+  <div class="add-hospital-header">
+    <h2>Add New Hospital</h2>
+  </div>
+  <div class="add-hospital-body">
+    <div class="form-container">
+      <div class="custom-form-field">
+        <mat-form-field appearance="fill">
+          <mat-label>Hospital Name</mat-label>
+          <input matInput [(ngModel)]="hospitalData.nom" name="hospital" required />
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button color="primary" class="confirm-btn" (click)="addHospital()">Add</button>
+    </div>
+  </div>
+</div>
