@@ -146,12 +146,6 @@ class Sejour(models.Model):
     class Meta:
         db_table = 'dpi_sejour'
 
-class Diagnostic(models.Model):
-    idSejour = models.ForeignKey(Sejour, on_delete=models.CASCADE)
-    descriptionMaladie = models.TextField(default='')
-    class Meta:
-        db_table = 'dpi_diagnostic'
-
 class Soin(models.Model):
     SOIN_CHOIX = [
         ('Soin d\'hygiène et de confort', 'Soin d\'hygiène et de confort'),
@@ -184,6 +178,17 @@ class ConsultationMedicale(models.Model):
     class Meta:
         db_table = 'dpi_consultationmedicale'
 
+
+
+class Diagnostic(models.Model):
+    idSejour = models.ForeignKey(Sejour, on_delete=models.CASCADE)
+    descriptionMaladie = models.TextField(default='')
+    idConsultation = models.ForeignKey(ConsultationMedicale, on_delete=models.CASCADE,null=True, blank=True)  # Ajout de la clé étrangère ConsultationMedicale
+
+    class Meta:
+        db_table = 'dpi_diagnostic'
+
+
 class Antecedent(models.Model):
     TYPE = [
         ('Médical personnel','Médical personnel'),
@@ -194,6 +199,8 @@ class Antecedent(models.Model):
     ]
     typeAntecedent = models.CharField(default="Médical personnel", max_length=50, choices=TYPE)
     description = models.CharField(max_length=500)
+    idConsultation = models.ForeignKey(ConsultationMedicale, on_delete=models.CASCADE,null=True, blank=True)  # Ajout de la clé étrangère ConsultationMedicale
+
     #idConsultation = models.ForeignKey(ConsultationMedicale,on_delete=models.CASCADE)
     def clean(self):
         if not(self.idConsultation.premiere):
