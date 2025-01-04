@@ -46,8 +46,8 @@ export const routes: Routes = [
     {
       path: 'labs',
       component: LabPageComponent ,children: [
-        { path: 'radiology', component: RadiologyPageComponent }, // Radiology route
-        { path: 'blood', component: BloodCountPageComponent }, // Blood route
+        { path: 'Radio', component: RadiologyPageComponent }, // Radiology route
+        { path: 'BloodCountTest', component: BloodCountPageComponent }, // Blood route
       ]
     },
 

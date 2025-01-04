@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router'; // Import RouterModule
+import { ActivatedRoute, Router, RouterModule } from '@angular/router'; // Import RouterModule
 import { LabsService } from '../../services/labs.service';
+
 
 
 
@@ -14,10 +15,16 @@ import { LabsService } from '../../services/labs.service';
   providers: [LabsService], // Add service if needed
 })
 
+
+
 export class LabPageComponent implements OnInit  {
   labs: any[] = [];
+  currentView: string = '';
 
-    constructor(private LabsService: LabsService) {}
+    constructor(private LabsService: LabsService
+      , private route: ActivatedRoute, // To get route parameters
+          private router: Router, // Inject Router here
+    ) {}
 
     ngOnInit(): void {
       // Récupérer l'email et l'idSejour depuis l'URL
@@ -45,6 +52,30 @@ export class LabPageComponent implements OnInit  {
     // Fonction pour obtenir l'idSejour depuis l'URL
     getIdSejourFromRoute(): number {
       return parseInt(window.location.pathname.split('/')[3], 10);
+    }
+
+    goToBloodCount() {
+
+
+      const email = this.getEmailFromRoute();
+      const idSejour = this.getIdSejourFromRoute();
+
+      console.log('Navigating to Blood Count Test...');
+      console.log('url : ', `/profile/${email}/${idSejour}/labs/BloodCountTest`);
+
+      this.router.navigate([`/profile/${email}/${idSejour}/labs/BloodCountTest`]);
+
+    }
+
+    goToRadiology() {
+      this.currentView = 'Radiology';
+      const email = this.getEmailFromRoute();
+      const idSejour = this.getIdSejourFromRoute();
+
+      console.log('Navigating to Radiology...');
+      console.log('url: ', `/profile/${email}/${idSejour}/labs/Radio`);
+
+      this.router.navigate([`/profile/${email}/${idSejour}/labs/Radio`]);
     }
 
 }

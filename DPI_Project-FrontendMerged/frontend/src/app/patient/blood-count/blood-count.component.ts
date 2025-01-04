@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { BloodCountService } from '../../services/blood-count.service';
 
 
@@ -15,23 +15,34 @@ import { BloodCountService } from '../../services/blood-count.service';
 
 
 export class BloodCountPageComponent implements OnInit {
-   bloodCount: any[] = []; // Pour stocker les médicaments récupérés
+   bloodCount: any[] = [];
 
-    constructor(private BloodCountService: BloodCountService) {}
+   labDetails: any = {};
+  loading: boolean = true;
+  error: string = '';
+
+
+    constructor(private BloodCountService: BloodCountService , private route: ActivatedRoute) {}
 
     ngOnInit(): void {
       // Récupérer l'email et l'idSejour depuis l'URL
+      console.log('BloodCountPageComponent ngOnInit triggered');
       const email = this.getEmailFromRoute();
       const idSejour = this.getIdSejourFromRoute();
+      console.log('Email:', email, 'ID Sejour:', idSejour);
 
-      // Appeler le service pour obtenir les médicaments
+      console.log('Blood count data???' );
+
       this.BloodCountService.getBloodCount(email, idSejour).subscribe(
         (data) => {
-          this.bloodCount = [data];
-          console.log(this.bloodCount)
+          console.log('Blood count data received:', data);
+          this.labDetails = data;
+          this.loading = false;
         },
         (error) => {
-          console.error('Erreur lors de la récupération des blood count :', error);
+          console.error('Error fetching blood count data:', error);
+          this.error = 'An error occurred while fetching the data.';
+          this.loading = false;
         }
       );
     }

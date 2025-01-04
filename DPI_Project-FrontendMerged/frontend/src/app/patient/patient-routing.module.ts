@@ -18,8 +18,8 @@ const routes: Routes = [
     component: PatientLayoutComponent, // Parent component with layout
     children: [
       { path: 'medication', component: OrdonnanceComponent },
-      { path: 'radiology', component: RadiologyPageComponent },
-      { path: 'blood', component: BloodCountPageComponent },
+      { path: 'Radio', component: RadiologyPageComponent },
+      { path: 'BloodCountTest', component: BloodCountPageComponent },
       { path: 'consultation', component: ConsultationComponent },
       { path: 'lab-results', component: LabPageComponent },
       { path: 'soin', component: SoinPageComponent },
