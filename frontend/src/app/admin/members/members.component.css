@@ -1,3 +1,6 @@
+* {
+  font-family: 'Source Sans Pro', sans-serif; 
+}
 
 .members-container {
   display: flex;
@@ -20,7 +23,7 @@
 .select {
   background-color: #EDF2FB;
   height: 50px;
-  width: 300px;
+  width: 550px;
   border-radius: 10px;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 20px;
@@ -47,7 +50,7 @@
 
 .select-container {
   position: relative;
-  width: 300px; 
+  width: 550px; 
 }
 
 

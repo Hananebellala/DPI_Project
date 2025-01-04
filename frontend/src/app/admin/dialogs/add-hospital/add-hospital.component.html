@@ -1,18 +1,15 @@
 <div class="add-hospital-container">
-    <div class="add-hospital-header">
-      <h2>Add New Hospital</h2>
-    </div>
-    <div class="add-hospital-body">
-      
-      <div class="form-container">
-        <div class="custom-form-field">
-          <input id="name" matInput [(ngModel)]="hospitalData.hospital" name="hospital" required />
-        </div>
-  
-        
-  
-        <button mat-raised-button color="primary" class="confirm-btn" (click)="addMember()">Add</button>
+  <div class="add-hospital-header">
+    <h2>Add New Hospital</h2>
+  </div>
+  <form (submit)="addHopital($event)" enctype="multipart/form-data">
+  <div class="add-hospital-body">
+    <div class="form-container">
+      <div class="custom-form-field"> 
+        <input id="name" #hopital name="hospital" required />
       </div>
+      <button mat-raised-button color="primary" class="confirm-btn">Add</button>
     </div>
   </div>
-  
+</form>
+</div>

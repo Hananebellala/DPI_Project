@@ -1,12 +1,14 @@
 <div class="members-container">
   <div class="actions">
     <div class="select-container">
-      <select class="select">
-        <option>Hospital Name</option>
+      <select class="select" (change)="onHospitalChange($event)" [value]="selectedHospital">
+        <option *ngFor="let hospital of hospitals" [value]="hospital.nom">
+          {{ hospital.nom }}
+        </option>
       </select>
     </div>
 
-    <button class="add-hospital"  (click)="openAddHospitalDialog()">
+    <button class="add-hospital" (click)="openAddHospitalDialog()">
       <span>+</span>
     </button>
   </div>
@@ -15,7 +17,6 @@
     <div class="table-top">
       <h2>Members</h2>
       <button class="add-member-btn" mat-raised-button color="primary" (click)="openAddMemberDialog()">+ Add Member</button>
-
     </div>
 
     <table class="members-table">
@@ -29,30 +30,53 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Placeholder rows -->
-        <tr>
-          <td> <img src="avatar.png" alt="Avatar" /></td>
-          <td>John Doe</td>
-          <td>Doctor</td>
-          <td>johndoeexample.com</td>
-          <td><button class="delete-btn">Delete</button></td>
+        <tr *ngFor="let member of paginatedMembers">
+          <td>
+            <img src="avatar.png" alt="Avatar" />
+          </td>
+          <td>{{ member.nomComplet }}</td>
+          <td>
+            {{
+              member.specialite
+                ? "MÃ©decin " + member.specialite 
+                : member.specialiteInf
+                  ? "Infirmier " + member.specialiteInf 
+                  : member.service 
+                    ? "Personnel administratif: " + member.service 
+                    : 'Laborantin/Radiologue'
+                      
+            }}
+          </td>
+          <td>{{ member.email }}</td>
+          <td>
+            <button class="delete-btn" (click)="deleteMember(member.email, member.idHopital)">Delete</button>
+          </td>
         </tr>
-        <tr>
-          <td><img src="avatar.png" alt="Avatar" /></td>
-          <td>Jane Smith</td>
-          <td>Nurse</td>
-          <td>janesmithexample.com</td>
-          <td><button class="delete-btn">Delete</button></td>
-        </tr>
-        <!-- More rows can be dynamically added -->
       </tbody>
     </table>
 
     <div class="pages">
-      <button class="pagination-btn">1</button>
-      <button class="pagination-btn">2</button>
-      <button class="pagination-btn">3</button>
-      <button class="pagination-btn">Next</button>
+      <button 
+        class="pagination-btn" 
+        [disabled]="currentPage === 1" 
+        (click)="previousPage()">
+        Previous
+      </button>
+    
+      <button 
+        class="pagination-btn" 
+        *ngFor="let page of [].constructor(totalPages); let i = index" 
+        [class.active]="i + 1 === currentPage"
+        (click)="goToPage(i + 1)">
+        {{ i + 1 }}
+      </button>
+    
+      <button 
+        class="pagination-btn" 
+        [disabled]="currentPage === totalPages" 
+        (click)="nextPage()">
+        Next
+      </button>
     </div>
   </div>
 </div>

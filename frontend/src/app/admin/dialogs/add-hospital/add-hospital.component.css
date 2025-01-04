@@ -65,6 +65,15 @@
     width: 100%;
   }
   
+  ::ng-deep .mat-dialog-container {
+    border-radius: 40px !important;
+    overflow: hidden !important;
+  }
+  
+  ::ng-deep .cdk-overlay-pane {
+    border-radius: 40px !important;
+    overflow: hidden !important;
+  }
   .custom-form-field label {
     display: block;
     margin-bottom: 5px;

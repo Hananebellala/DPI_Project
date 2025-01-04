@@ -1,64 +1,82 @@
 <div class="add-member-container">
-    <div class="add-member-header">
-      <h2>Add Member</h2>
-      <button mat-icon-button class="close-btn" aria-label="Close" (click)="closeDialog()">
-        <mat-icon>X</mat-icon>
-      </button>
-    </div>
-    <div class="add-member-body">
-      <img src="Add.png" alt="Add Icon" class="add-icon" />
-      <div class="form-container">
-        <div class="custom-form-field">
-          <label for="name">Full Name</label>
-          <input id="name" matInput [(ngModel)]="memberData.name" name="name" required />
-        </div>
-  
-        <div class="custom-form-field">
-          <label for="email">Email</label>
-          <input id="email" matInput type="email" [(ngModel)]="memberData.email" name="email" required />
-        </div>
-  
-        <div class="custom-form-field">
-          <label for="profession">Profession</label>
-          <!-- Test with a normal select field -->
-          <select id="profession" [(ngModel)]="memberData.profession" name="profession" required>
-            <option value="doctor">Chirurgien</option>
-            <option value="doctor">Généraliste</option>
-            <option value="doctor">Pédiatre</option>
-            <option value="doctor">Endocrinologue</option>
-            <option value="doctor">Cardiologue</option>
-            <option value="doctor">Dermatologue</option>
-            <option value="doctor">Neurologue</option>
-            <option value="doctor">ORL</option>
-            <option value="doctor">Obstétricien</option>
-            <option value="doctor">Ostéologue</option>
-            <option value="doctor">Ophtalmologue</option>
-            <option value="doctor">Gastro-entérologue</option>
-            <option value="doctor">Néphrologue</option>
-            <option value="doctor">Anesthésiste</option>
-            <option value="administratif">Administrative</option>
-            <option value="radiologue">Radiologue</option>
-            <option value="laborantin">Laborantin</option>
-            
-          </select>
-        </div>
-
-        <div class="custom-form-field">
-            <label for="hospital">Hospital</label>
-            <mat-select [(ngModel)]="memberData.hospital" name="hospital" required>
-              <mat-option *ngFor="let hospital of hospitals" [value]="hospital">
-                {{ hospital }}
-              </mat-option>
-            </mat-select>
-          </div>
-  
-        <div class="custom-form-field">
-          <label for="password">Password</label>
-          <input id="password" matInput type="password" [(ngModel)]="memberData.password" name="password" required />
-        </div>
-  
-        <button mat-raised-button color="primary" class="confirm-btn" (click)="addMember()">Confirm</button>
+  <div class="add-member-header">
+    <h2>Add Member</h2>
+    <button mat-icon-button class="close-btn" aria-label="Close" (click)="closeDialog()">
+      <mat-icon>X</mat-icon>
+    </button>
+  </div>
+  <form (submit)="addMember($event)" enctype="multipart/form-data">
+  <div class="add-member-body">
+    <img src="Add.png" alt="Add Icon" class="add-icon" />
+    <div class="form-container">
+      <div class="custom-form-field">
+        <label for="name">Full Name</label>
+        <input id="name" #nom name="name" required />
       </div>
+
+      <div class="custom-form-field">
+        <label for="email">Email</label>
+        <input id="email" #email name="email" required />
+      </div>
+
+      <div class="custom-form-field">
+        <label for="profession">Profession</label>
+        <select id="profession" #profession name="profession" required>
+          <option value="Chirurgien">Médecin Chirurgien</option>
+          <option value="Généraliste">Médecin Généraliste</option>
+          <option value="Pédiatre"> Médecin Pédiatre</option>
+          <option value="Endocrinologue">Médecin Endocrinologue</option>
+          <option value="Cardiologue">Médecin Cardiologue</option>
+          <option value="Dermatologue">Médecin Dermatologue</option>
+          <option value="Neurologue">Médecin Neurologue</option>
+          <option value="ORL">Médecin ORL</option>
+          <option value="Obstétricien">Médecin Obstétricien</option>
+          <option value="Ostéologue">Médecin Ostéologue</option>
+          <option value="Ophtalmologue">Médecin Ophtalmologue</option>
+          <option value="Gastro-entérologue">Médecin Gastro-entérologue</option>
+          <option value="Néphrologue">Médecin Néphrologue</option>
+          <option value="Anesthésiste">Médecin Anesthésiste</option>
+          <option value="Urgences">Personnel administratif: Urgences</option>
+          <option value="Réanimation">Personnel administratif: Réanimation</option>
+          <option value="Cardiologie">Personnel administratif: Cardiologie</option>
+          <option value="Endocrinologie">Personnel administratif: Endocrinologie</option>
+          <option value="Dermatologie">Personnel administratif: Dermatologie</option>
+          <option value="Neurologie">Personnel administratif: Neurologie</option>
+          <option value="Obstétrique">Personnel administratif: Obstétrique</option>
+          <option value="Ostéologie">Personnel administratif: Ostéologie</option>
+          <option value="Ophtalmologie">Personnel administratif: Ophtalmologie</option>
+          <option value="ORL">Personnel administratif: ORL</option>
+          <option value="Gastro-entérologie">Personnel administratif: Gastro-entérologie</option>
+          <option value="Néphrologie">Personnel administratif: Néphrologie</option>
+          <option value="Orthopédie">Personnel administratif: Orthopédie</option>
+          <option value="Anesthésiologie">Personnel administratif: Anesthésiologie</option>
+          <option value="de bloc opératoire">Infirmier de bloc opératoire</option>
+          <option value="anesthésiste">Infirmier anesthésiste</option>
+          <option value="puériculteur">Infirmier puériculteur</option>
+          <option value="en pratique avancée">Infirmier en pratique avancée</option>
+          <option value="hygiéniste">Infirmier hygiéniste</option>
+          <option value="coordinateur">Infirmier coordinateur</option>
+          <option value="radiologue">Radiologue</option>
+          <option value="laborantin">Laborantin</option>
+        </select>
+      </div>
+
+      <div class="custom-form-field">
+        <label for="hospital">Hospital</label>
+        <select #hopital name="hospital" required>
+          <option *ngFor="let hospital of hospitals" [value]="hospital.nom">
+            {{ hospital.nom }}
+          </option>
+        </select>
+      </div>
+
+      <div class="custom-form-field">
+        <label for="password">Password</label>
+        <input id="password" type="password" #passwd name="password" required />
+      </div>
+
+      <button mat-raised-button color="primary" class="confirm-btn">Confirm</button>
     </div>
   </div>
-  
+</form>
+</div>

@@ -1,19 +1,21 @@
 <div class="radiologue-page">
     
     <div class="page-content">
+        
 
         <div class="rest-page">
+            <form (submit)="saveRadiologyFiles($event)" enctype="multipart/form-data">
             <h2>Radiology Results</h2>
             <div class="radiology-results">
                 <div class="report">
                     <h3>Report</h3>
-                    <textarea name="" id="" cols="120" rows="10"></textarea>
+                    <textarea #reportInput required name="" id="" cols="120" rows="10"></textarea>
                 </div>
                 <h3>Attach Radio</h3>
                 <div class="upload-container">
                     <div class="type-files">
                         <div class="attach">
-                            <select id="radio-type" name="radio-type">
+                            <select required id="radio-type" #radioTypeInput name="radio-type">
                                 <option value="IRM">IRM</option>
                                 <option value="Radiographie">Radiographie</option>
                                 <option value="Echographies">Echographies</option>
@@ -21,7 +23,8 @@
     
                             <div class="upload" (click)="onUploadClick()">
                                 <img src="upload.png" alt="upload">
-                                <button>Upload Files</button>
+                                <button #fileInput (change)="onFileSelected($event)" 
+                                accept="image/*,application/pdf">Upload Files</button>
                             </div>
                         </div>
                     </div>
@@ -44,6 +47,7 @@
                     <button>Save</button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 </div>
