@@ -1,64 +1,64 @@
 /* Style de la popup */
 .popup-container {
-    position: relative;
-    width: 100%;
-    margin: 0 ;
-    padding: 20px;
-    width: 500px;
-    background-color: #EDF2FB;
-    border-radius: 10px;
-  }
-  
-  /* Bouton de fermeture */
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  
-  /* En-tête */
-  .popup-header h2 {
-    text-align: center;
-    margin-bottom: 30px;
-  
-  }
-  
-  /* Style des champs de saisie et labels */
-  .input-container {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  
-  .input-container label {
-    margin-right: 10px;
-    font-weight: bold;
-    width: 150px;
-  }
-  
-  .input-container input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  /* Style du bouton Suivant */
-  .next-button {
-    width: 100%;
-    background-color: #FFCDD2;
-    color: black;
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+  position: relative;
+  width: 100%;
+  margin: 0 ;
+  padding: 20px;
+  width: 500px;
+  background-color: #EDF2FB;
+  border-radius: 10px;
+}
+
+/* Bouton de fermeture */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* En-tête */
+.popup-header h2 {
+  text-align: center;
+  margin-bottom: 30px;
+
+}
+
+/* Style des champs de saisie et labels */
+.input-container {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.input-container label {
+  margin-right: 10px;
+  font-weight: bold;
+  width: 150px;
+}
+
+.input-container input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style du bouton Suivant */
+.next-button {
+  width: 100%;
+  background-color: #FFCDD2;
+  color: black;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}

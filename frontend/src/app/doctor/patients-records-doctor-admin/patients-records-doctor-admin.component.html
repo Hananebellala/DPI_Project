@@ -1,55 +1,108 @@
+<!--
 <div class="main-container">
-    <!-- Barre latérale -->
     <div class="sidebar">
-        <img src="Logo1.png" alt="Logo" class="logo-image">
-        <a href="#" class="menu-item active">
-            <img src="home.png" alt="Home Icon" class="icon">
-            <span class="menu-text">Home</span>
-        </a>
-        <a href="#" class="menu-item">
-            <img src="patients.png" alt="Patients Icon" class="icon">
-            <span class="menu-text">Patient</span>
-        </a>
+      <img src="Logo1.png" alt="Logo" class="logo-image" />
+      <a href="#" class="menu-item active">
+        <img src="home.png" alt="Home Icon" class="icon" />
+        <span class="menu-text">Home</span>
+      </a>
+      <a href="#" class="menu-item">
+        <img src="patients.png" alt="Patients Icon" class="icon" />
+        <span class="menu-text">Patient</span>
+      </a>
     </div>
-    
-    <!-- Contenu principal -->
+  
     <div class="content">
-        <!-- En-tête -->
-        <div class="top">
-            <input type="text" placeholder="Search Patient" />
-            <div class="profile">
-                <img src="Profile.png" alt="Profile Picture" />
-                <span>Dr Hanane</span>
-            </div>
+      <div class="top">
+        <input type="text" placeholder="Search Patient" />
+        <div class="profile">
+          <img src="Profile.png" alt="Profile Picture" />
+          <span>Dr </span>
         </div>
-    
-        <!-- Tableau -->
-        <div class="table-container">
-            <div class="header-with-button">
-                <h2>Dossiers des patients</h2>
-                <!-- Add Button as a Router Link -->
-                <button class="add-button" routerLink="/Add" title="Add Patient">
-                    <img src="plus.png" alt="Ajouter" />
-                </button>
-            </div>
-            <div class="table">
-                <div class="table-header">
-                    <div class="cell">NSS</div>
-                    <div class="cell">Nom du Patient</div>
-                    <div class="cell">Âge</div>
-                    <div class="cell">Date</div>
-                    <div class="cell">Numéro</div>
-                    <div class="cell">Statut</div>
-                </div>
-                <div class="table-row" *ngFor="let patient of patients" (click)="navigateToPatientDetails(patient)">
-                    <div class="cell">{{ patient.nss }}</div>
-                    <div class="cell">{{ patient.name }}</div>
-                    <div class="cell">{{ patient.age }}</div>
-                    <div class="cell">{{ patient.date }}</div>
-                    <div class="cell">{{ patient.numtel }}</div>
-                    <div class="cell">{{ patient.status }}</div>
-                </div>
-            </div>
+      </div>
+  
+      <div class="table-container">
+        <div class="header-with-button">
+          <h2>Dossiers des patients</h2>
+          <button class="add-button" routerLink="/Add" title="Add Patient">
+            <img src="plus.png" alt="Ajouter" />
+          </button>
         </div>
+        <div class="table">
+          <div class="table-header">
+            <div class="cell">NSS</div>
+            <div class="cell">Nom du Patient</div>
+            <div class="cell">Âge</div>
+            <div class="cell">Date</div>
+            <div class="cell">Numéro</div>
+            <div class="cell">Statut</div>
+          </div>
+          <div class="table-row" *ngFor="let patient of patients" (click)="navigateToPatientDetails(patient)">
+            <div class="cell">{{patient.numeroSecuriteSociale }}</div>
+            <div class="cell">{{ patient?.nom  || 'N/A'}} </div>
+            <div class="cell">{{ patient.age  || 'N/A'}}</div>
+            <div class="cell">{{ patient.age }}</div>
+            <div class="cell">{{ patient.telephone || 'N/A'}}</div>
+            <div class="cell">Actif</div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+-->
+<div class="main-container">
+    <div class="sidebar">
+      <img src="Logo1.png" alt="Logo" class="logo-image" />
+      <a href="#" class="menu-item active">
+        <img src="home.png" alt="Home Icon" class="icon" />
+        <span class="menu-text">Home</span>
+      </a>
+      <a href="#" class="menu-item">
+        <img src="patients.png" alt="Patients Icon" class="icon" />
+        <span class="menu-text">Patient</span>
+      </a>
+    </div>
+  
+    <div class="content">
+      <div class="top">
+        <input 
+          type="text" 
+          placeholder="Search Patient" 
+          [(ngModel)]="searchQuery" 
+          (input)="onSearch()" 
+        />
+        <div class="profile">
+          <img src="Profile.png" alt="Profile Picture" />
+          <span>Dr </span>
+        </div>
+      </div>
+  
+      <div class="table-container">
+        <div class="header-with-button">
+          <h2>Dossiers des patients</h2>
+          <button class="add-button" routerLink="/Add" title="Add Patient">
+            <img src="plus.png" alt="Ajouter" />
+          </button>
+        </div>
+        <div class="table">
+          <div class="table-header">
+            <div class="cell">NSS</div>
+            <div class="cell">Nom du Patient</div>
+            <div class="cell">Âge</div>
+            <div class="cell">Date</div>
+            <div class="cell">Numéro</div>
+            <div class="cell">Statut</div>
+          </div>
+          <div class="table-row" *ngFor="let patient of filteredPatients" (click)="navigateToPatientDetails(patient)">
+            <div class="cell">{{patient.numeroSecuriteSociale }}</div>
+            <div class="cell">{{ patient?.nom || 'N/A' }} </div>
+            <div class="cell">{{ patient.age || 'N/A' }}</div>
+            <div class="cell">{{ patient.age }}</div>
+            <div class="cell">{{ patient.telephone || 'N/A' }}</div>
+            <div class="cell">Actif</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

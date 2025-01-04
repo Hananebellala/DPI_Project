@@ -1,73 +1,100 @@
 <div class="popup-container">
-    <button class="close-button" (click)="onCancel()">×</button>
-    <div class="popup-header">
-      <h2 *ngIf="currentStep === 1">Consultation</h2>
-      <h2 *ngIf="currentStep === 2">Tools</h2>
-      <h2 *ngIf="currentStep === 3">Antecedents</h2>
-      <h2 *ngIf="currentStep === 4">Next Consultation Date</h2>
+  <button class="close-button" (click)="onCancel()">×</button>
+  <div class="popup-header">
+    <h2 *ngIf="currentStep === 1">Consultation</h2>
+    <h2 *ngIf="currentStep === 2">Tools</h2>
+    <h2 *ngIf="currentStep === 3">Antecedents</h2>
+    <h2 *ngIf="currentStep === 4">Next Consultation Date</h2>
+  </div>
+
+  <div class="popup-body">
+    <!-- Step 1: Diagnostic -->
+    <div *ngIf="currentStep === 1">
+      <label class="subtitle">Diagnosis</label>
+      <textarea
+        class="diagnosis-box"
+        [(ngModel)]="formData.diagnostic"
+        placeholder="Enter diagnosis"
+      ></textarea>
+      <button class="skip-button" *ngIf="isSuivi" (click)="nextStep()">Skip</button>
     </div>
-  
-    <div class="popup-body">
-      <!-- Step 1: Diagnostic -->
-      <div *ngIf="currentStep === 1">
-        <label class="subtitle">Diagnosis</label>
-        <textarea
-          class="diagnosis-box"
-          [(ngModel)]="formData.diagnostic"
-          placeholder="Enter diagnosis"
-        ></textarea>
-        <button class="skip-button" *ngIf="isSuivi" (click)="nextStep()">Skip</button>
-      </div>
-  
-      <!-- Step 2: Tools -->
-      <div *ngIf="currentStep === 2">
-        <label class="subtitle">Select Tools Used</label>
-        <div *ngFor="let tool of toolsList">
-          <input
-            type="checkbox"
-            [id]="tool"
-            [(ngModel)]="formData.tools[tool]"
-          />
-          <label [for]="tool">{{ tool }}</label>
-        </div>
-      </div>
-  
-      <!-- Step 3: Antecedents -->
-      <div *ngIf="currentStep === 3">
-        <label class="subtitle">Antecedents</label>
-        <textarea
-          class="diagnosis-box"
-          [(ngModel)]="formData.antecedents"
-          placeholder="Enter antecedents"
-        ></textarea>
-      </div>
-  
-      <!-- Step 4: Next Consultation Date -->
-      <div *ngIf="currentStep === 4">
-        <label class="subtitle">Next Consultation Date</label>
+
+    <!-- Step 2: Tools -->
+    <div *ngIf="currentStep === 2">
+      <label class="subtitle">Select Tools Used in Consultation</label>
+      <div *ngFor="let tool of toolsList">
         <input
-          type="date"
-          class="diagnosis-box"
-          [(ngModel)]="formData.nextDate"
+          type="checkbox"
+          [id]="tool"
+          [(ngModel)]="formData.tools[tool]"
+        />
+        <label [for]="tool">{{ tool }}</label>
+      </div>
+    </div>
+
+    <!-- Step 3: Antecedents -->
+    <div *ngIf="currentStep === 3">
+      <label class="subtitle">Antecedents</label>
+      <!-- Sélection du type d'antécédent -->
+      <label class="subtitle">Type of Antecedent</label>
+      <select
+        [(ngModel)]="formData.antecedentType"
+        class="diagnosis-box"
+        required
+      >
+        <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+      </select>
+
+      <textarea
+        class="diagnosis-box"
+        [(ngModel)]="formData.antecedents"
+        placeholder="Enter antecedents"
+      ></textarea>
+    </div>
+
+    <!-- Step 4: Next Consultation Date -->
+    <div *ngIf="currentStep === 4">
+      <label class="subtitle">Next Consultation Date</label>
+      <input
+        type="date"
+        class="diagnosis-box"
+        [(ngModel)]="formData.nextDate"
+      />
+      
+      <!-- Résumé de la consultation -->
+      <label class="subtitle">Consultation Summary</label>
+      <textarea
+        class="diagnosis-box"
+        [(ngModel)]="formData.resumeConsultation"
+        placeholder="Enter a summary of the consultation"
+      ></textarea>
+
+      <!-- Case à cocher pour la première consultation -->
+      <div>
+        <label for="isFirstConsultation">First consultation:</label>
+        <input
+          type="checkbox"
+          id="isFirstConsultation"
+          [(ngModel)]="formData.isFirstConsultation"
         />
       </div>
     </div>
-  
-    <div class="popup-footer">
-      <button
-        class="skip-button"
-        (click)="nextStep()"
-        *ngIf="currentStep < 4"
-      >
-        Next
-      </button>
-      <button
-        class="skip-button"
-        *ngIf="currentStep === 4"
-        (click)="onFinish()"
-      >
-        Finish
-      </button>
-    </div>
   </div>
-  
+
+  <div class="popup-footer">
+    <button
+      class="skip-button"
+      (click)="nextStep()"
+      *ngIf="currentStep < 4"
+    >
+      Next
+    </button>
+    <button
+      class="skip-button"
+      *ngIf="currentStep === 4"
+      (click)="onFinish()"
+    >
+      Finish
+    </button>
+  </div>
+</div>

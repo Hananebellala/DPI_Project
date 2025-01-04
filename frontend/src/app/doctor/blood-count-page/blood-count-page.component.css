@@ -130,14 +130,6 @@ button:hover {
     transition: all 0.2s ease-in-out;
 }
 
-
-.graph-container {
-    margin-top: 20px;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
 @media (max-width: 768px) {
     .cards {
         flex-direction: column;

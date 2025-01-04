@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { ActivatedRoute } from '@angular/router';  // Importer ActivatedRoute
 
 @Component({
   selector: 'app-soin-page',
@@ -23,8 +24,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule
   ]
 })
-export class SoinPageComponent {
-  // Mock data (replace with database fetch later)
+export class SoinPageComponent implements OnInit {
+  // Mock data (remplacer par des données de la base de données plus tard)
   soinData = [
     {
       date: "8/12/2024",
@@ -42,24 +43,47 @@ export class SoinPageComponent {
     }
   ];
 
-  // Modal state and data
+  // Modal state et données
   isModalOpen = false;
   modalData: any = { summary: '' };
 
-  // Open modal
+  // Variables pour stocker les informations du patient
+  nom: string='';
+  numSecuriteSociale: string='';
+  idSejour: string='';
+  debutSejour: string='';
+  finSejour: string='';
+
+  // Injecter ActivatedRoute pour récupérer les queryParams
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    // Récupérer les queryParams lors de l'initialisation
+    this.route.queryParams.subscribe(params => {
+      this.nom = params['nom'];
+      this.numSecuriteSociale = params['numSecuriteSociale'];
+      this.idSejour = params['idSejour'];
+      this.debutSejour = params['debutSejour'];
+      this.finSejour = params['finSejour'];
+      
+      console.log('Patient Info in SoinPage:', this.nom, this.numSecuriteSociale, this.idSejour, this.debutSejour, this.finSejour);
+    });
+  }
+
+  // Ouvrir modal
   openModal(entry: any) {
-    console.log('Modal entry:', entry); // Debug log
+    console.log('Modal entry:', entry); // Log pour déboguer
     this.modalData = entry;
     this.isModalOpen = true;
   }
 
-  // Close modal
+  // Fermer modal
   closeModal() {
     this.isModalOpen = false;
   }
 
+  // Fermer modal si on clique sur l'arrière-plan
   onBackgroundClick(event: MouseEvent) {
-    // If clicked outside modal-content, close the modal
     this.closeModal();
   }
 }

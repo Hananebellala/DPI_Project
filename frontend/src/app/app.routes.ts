@@ -7,9 +7,9 @@ import { WelcomePageComponent } from './welcome-page/welcome-page/welcome-page.c
 export const routes: Routes = [
   { path: 'welcome', component: WelcomePageComponent }, 
   { path: 'login', component: LoginComponent },
-  { path: '', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path: 'lab', loadChildren: () => import('./laborantin/laborantin.module').then(m => m.LaborantinModule) },
-  { path: 'doctor', loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule) },
+  { path: '', loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule) },
   { path: 'radiologue', loadChildren: () => import('./radiologue/radiologue.module').then(m => m.RadiologueModule) },
   { path: 'infirmier', loadChildren: () => import('./infirmier/infirmier.module').then(m => m.InfirmierModule) },
   

@@ -25,11 +25,10 @@ const routes: Routes = [
       { path: 'soin', component: SoinPageComponent },
       { path: 'all', component: AllConsultationComponent },
       
-      { path: '', redirectTo: 'sejour', pathMatch: 'full' }, // Default route within the layout
+    //  { path: '', redirectTo: 'sejour', pathMatch: 'full' }, // Default route within the layout
     ],
   },
   { path: 'sejour', component: SejourPageComponent },
-  // Define PatientsRecordsDoctorAdminComponent as an independent route
   { path: '', component: PatientsRecordsDoctorAdminComponent },
   { path: 'Add', component: AddPatientDoctorComponent },
 ];

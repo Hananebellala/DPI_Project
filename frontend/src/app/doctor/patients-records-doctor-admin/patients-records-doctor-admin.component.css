@@ -1,229 +1,229 @@
 /* Import the font from Google Fonts */
 *{
-    font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 /* General layout */
 .main-container {
-  display: flex;
-  height: 100vh;
-  background-color: white;
-  font-family: 'Source Sans Pro', sans-serif;
+display: flex;
+height: 100vh;
+background-color: white;
+font-family: 'Source Sans Pro', sans-serif;
 }
 
 .sidebar {
-  width: 180px;
-  background-color: #8ECAE6;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px;
-  height: 100%;
-  overflow-y: auto;
-  
+width: 180px;
+background-color: #8ECAE6;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 15px;
+height: 100%;
+overflow-y: auto;
+
 }
 
 
 
 .sidebar .logo {
-  margin-bottom: 30px;
+margin-bottom: 30px;
 }
 
 .sidebar .logo-image {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
+width: 100%;
+height: auto;
+object-fit: contain;
 }
 
 .sidebar {
-    position: fixed; /* Fix the sidebar position */
-    top: 0; /* Start from the top of the viewport */
-    left: 0; /* Align to the left */
-    height: 100vh; /* Make the sidebar take up the full viewport height */
-    width: 120px; /* Maintain the fixed width */
-    background-color: #8ECAE6;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    overflow-y: auto; /* Allow vertical scrolling if the content overflows */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better separation */
-    z-index: 1000; /* Ensure it stays on top of the content */
+  position: fixed; /* Fix the sidebar position */
+  top: 0; /* Start from the top of the viewport */
+  left: 0; /* Align to the left */
+  height: 100vh; /* Make the sidebar take up the full viewport height */
+  width: 120px; /* Maintain the fixed width */
+  background-color: #8ECAE6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  overflow-y: auto; /* Allow vertical scrolling if the content overflows */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better separation */
+  z-index: 1000; /* Ensure it stays on top of the content */
 }
 
 .content {
-    margin-left: 120px; /* Offset to account for the fixed sidebar width */
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto; /* Allow scrolling within the content area */
-    padding: 20px;
-    box-sizing: border-box; 
-    background-color: #FFFFFA;/* Include padding in width calculations */
+  margin-left: 120px; /* Offset to account for the fixed sidebar width */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Allow scrolling within the content area */
+  padding: 20px;
+  box-sizing: border-box; 
+  background-color: #FFFFFA;/* Include padding in width calculations */
 }
 
 
 .sidebar .logo-image {
-    width: 70px;
-    height: auto;
-    margin-bottom: 30px;
+  width: 70px;
+  height: auto;
+  margin-bottom: 30px;
 }
 
 .menu-item {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
-    text-decoration: none;
-    color: white;
-    font-size: 14px;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    transition: background-color 0.3s ease-in-out;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .menu-item .icon {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 5px;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
 }
 
 .menu-item.active {
-    background-color: #a3d2e2;
-    color: #FFFFFA;
+  background-color: #a3d2e2;
+  color: #FFFFFA;
 }
 
 .menu-item:hover {
-    background-color: #a3d2e2;
-    color: #FFFFFA;
+  background-color: #a3d2e2;
+  color: #FFFFFA;
 }
 
 .menu-item .menu-text {
-    text-align: center;
-    font-size: 16px;
+  text-align: center;
+  font-size: 16px;
 }
 
 
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  background-color: #fffffa; /* Fond blanc */
-  border-bottom: 1px solid black; /* Trait noir en bas */
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 15px;
+background-color: #fffffa; /* Fond blanc */
+border-bottom: 1px solid black; /* Trait noir en bas */
 }
 
 .top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: #FFFFFA;
-    border-bottom: 1px solid #E0E0E0;
-    width: 100%;
-    box-sizing: border-box; /* Prevent width issues due to padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #FFFFFA;
+  border-bottom: 1px solid #E0E0E0;
+  width: 100%;
+  box-sizing: border-box; /* Prevent width issues due to padding */
 }
 
 /* Input Field inside Top Bar */
 .top input {
-    width: 50%;
-    padding: 10px;
-    border: 1px solid #000;
-    border-radius: 40px;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25); 
-    margin-right: 20px; /* To align with profile icon */
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 40px;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25); 
+  margin-right: 20px; /* To align with profile icon */
 }
 
 /* Profile section inside the top bar */
 .top .profile {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .top .profile img {
-    width: 50px;
-    height: 50px;
-    border-radius: 15px;
-    margin-right: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  margin-right: 10px;
 }
 
 .table-container {
-  padding: 20px;
+padding: 20px;
 }
 
 .header-with-button {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* Place les éléments au début */
-  gap: 20px; /* Ajoute un espace entre le titre et le bouton */
-  margin-top: 5px;
+display: flex;
+align-items: center;
+justify-content: flex-start; /* Place les éléments au début */
+gap: 20px; /* Ajoute un espace entre le titre et le bouton */
+margin-top: 5px;
 }
 
 .header-with-button h2 {
-  margin: 0;
-  font-size: 24px;
+margin: 0;
+font-size: 24px;
 }
 
 .add-button {
-  background-color: #EDF2FB;
-  color: black;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  cursor: pointer;
-  border: 1px solid #000; /* Bordure noire */
+background-color: #EDF2FB;
+color: black;
+border-radius: 50%;
+width: 30px;
+height: 30px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 20px;
+cursor: pointer;
+border: 1px solid #000; /* Bordure noire */
 }
 
 .add-button img {
-  width: 20px;
-  height: 20px;
+width: 20px;
+height: 20px;
 }
 
 .table {
-  margin-top: 20px;
+margin-top: 20px;
 }
 
 .table-header,
 .table-row {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  padding: 10px;
+display: grid;
+grid-template-columns: repeat(6, 1fr);
+padding: 10px;
 }
 
 .table-header {
-  background-color: #fffffa;
-  font-weight: bold;
-  color: black;
-  border: none;
+background-color: #fffffa;
+font-weight: bold;
+color: black;
+border: none;
 }
 
 
 
 
-  
-  /* Table-row hover */
-  .table-row {
-    background-color: #EDF2FB;
-    border: 1px solid black;
-    border-radius: 10px;
-    margin-bottom: 27px;
-    cursor: pointer; /* Make rows clickable */
-  }
-  
-  .table-row:hover {
-    background-color: #add8e6;
-  }
-  
+
+/* Table-row hover */
+.table-row {
+  background-color: #EDF2FB;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 27px;
+  cursor: pointer; /* Make rows clickable */
+}
+
+.table-row:hover {
+  background-color: #add8e6;
+}
+
 
 .cell {
-  text-align: center;
-  padding: 12px;
-  color: black;
-  background-color: transparent;
+text-align: center;
+padding: 12px;
+color: black;
+background-color: transparent;
 }
