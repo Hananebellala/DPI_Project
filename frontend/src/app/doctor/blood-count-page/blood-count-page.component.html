@@ -34,13 +34,7 @@
           <button (click)="visualizeGraph('blood')">Visualize Graph</button>
         </div>
   
-        <div *ngIf="showGraph" class="graph-container">
-          <canvas id="chartCanvas" baseChart
-            [data]="chartData"
-            [options]="chartOptions"
-            chartType="bar">
-          </canvas>
-        </div>
+        
       </div>
   
       <div class="Biomarkers">
@@ -71,13 +65,7 @@
           <button (click)="visualizeGraph('vital')">Visualize Graph</button>
         </div>
   
-        <div *ngIf="showGraph" class="graph-container">
-          <canvas id="chartCanvas" baseChart
-            [data]="chartData"
-            [options]="chartOptions"
-            chartType="bar">
-          </canvas>
-        </div>
+       
       </div>
     </div>
   </div>

@@ -36,6 +36,7 @@ import { AllConsultationComponent } from './all-consultation/all-consultation.co
     AddDiagnosticComponent,
     AddSejourComponent,
     AllConsultationComponent,
+    
   ]
 })
 export class DoctorModule {}

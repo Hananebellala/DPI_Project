@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './blood-count-page.component.html',
   styleUrls: ['./blood-count-page.component.css'],
   standalone: true,  // Add this line if you're using Angular standalone components
-  imports: [CommonModule]  // Import CommonModule to use *ngIf and other directives
+  imports: [CommonModule]  
 })
 export class BloodCountPageComponent implements OnInit {
   bloodCountData = [
