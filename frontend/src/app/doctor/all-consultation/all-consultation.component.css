@@ -1,152 +1,152 @@
 /* Container principal */
 .main-container {
-    display: flex;
-    height: 100vh;
-    background-color: #fffffa;
-    font-family: 'Source Sans Pro', sans-serif;
-  }
-  
+  display: flex;
+  height: 100vh;
+  background-color: #fffffa;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+
+
 
   
+  /* Content area */
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 20px;
+    width: 100%;
+  }
   
+  /* Header with patient name and actions */
+  .patient-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-left: 20px;
+  }
   
-    
-    /* Content area */
-    .content {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin: 20px;
-      width: 100%;
-    }
-    
-    /* Header with patient name and actions */
-    .patient-header {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      margin-bottom: 20px;
-      margin-left: 20px;
-    }
-    
-    .patient-name {
-      font-size: 24px;
-      font-weight: bold;
-    }
-    
-    .patient-actions {
-      display: flex;
-      gap: 15px;
-    }
-    
-    /* Style de base pour les boutons */
-  .btn {
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8.5px;
-      font-size: 13.5px;
-      cursor: pointer;
-      margin-right: 18px;
-      font-weight: bold;
-      height: 50px;
-      width: 150px;
-    }
-    
-    .btn-supprimer{
-      background-color: #EF5350;
-      color: white;
-      margin-right: 18px;
-    }
-    
-    .btn-ajouter {
-      background-color: #FFCDD2;
-      color: black;
-      margin-right: 35px;
-    
-    }
-    
-    /* Horizontal line after navigation */
-    .nav-line {
-      width: 100%;
-      border-top: 1px solid #C8C5C5;
-      margin-bottom: 10px;
-    }
-    
-    /* Main content section */
-    .main-content {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      gap: 20px;
-      background-color: #fffffa;
-    }
-    
-    /* General Information Section */
-    .general-info {
-      width: 300px;
-      padding: 20px;
-      font-size: 14px;
-    }
-    
-    .general-info .field {
-      display: flex;
-      justify-content: space-between;
-      margin: 5px 0;
-    }
-    
-    .general-info .field-name {
-      font-weight: bold;
-      color: #333;
-    }
-    
-    .general-info .field-value {
-      color: #555;
-    }
-    
-    .general-info hr {
-      border: none;
-      border-top: 2px solid #001f3f;
-      margin: 10px 0;
-    }
-    
-    /* Vertical line between content */
-    .vertical-line {
-      width: 1px;
-      background-color: #C8C5C5;
-      height: 70vh; /* Adjusts the height of the line */
-      margin-left: 20px;
-    }
-    
-    /* Dossier section */
-    .dossiers-container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      flex: 1;
-    }
-    
-    .dossier {
-      background-color: #fffffa;
-      padding: 10px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 150px;
-      cursor: pointer;
-    }
-    
-    .dossier img {
-      width: 100%;
-      height: auto;
-      border-radius: 5px;
-    }
-    
-    .dossier .date {
-      margin-top: 10px;
-      color: #555;
-      font-size: 14px;
-      font-weight: bold;
-    }
-    
+  .patient-name {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .patient-actions {
+    display: flex;
+    gap: 15px;
+  }
+  
+  /* Style de base pour les boutons */
+.btn {
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8.5px;
+    font-size: 13.5px;
+    cursor: pointer;
+    margin-right: 18px;
+    font-weight: bold;
+    height: 50px;
+    width: 150px;
+  }
+  
+  .btn-supprimer{
+    background-color: #EF5350;
+    color: white;
+    margin-right: 18px;
+  }
+  
+  .btn-ajouter {
+    background-color: #FFCDD2;
+    color: black;
+    margin-right: 35px;
+  
+  }
+  
+  /* Horizontal line after navigation */
+  .nav-line {
+    width: 100%;
+    border-top: 1px solid #C8C5C5;
+    margin-bottom: 10px;
+  }
+  
+  /* Main content section */
+  .main-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+    background-color: #fffffa;
+  }
+  
+  /* General Information Section */
+  .general-info {
+    width: 300px;
+    padding: 20px;
+    font-size: 14px;
+  }
+  
+  .general-info .field {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+  }
+  
+  .general-info .field-name {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .general-info .field-value {
+    color: #555;
+  }
+  
+  .general-info hr {
+    border: none;
+    border-top: 2px solid #001f3f;
+    margin: 10px 0;
+  }
+  
+  /* Vertical line between content */
+  .vertical-line {
+    width: 1px;
+    background-color: #C8C5C5;
+    height: 70vh; /* Adjusts the height of the line */
+    margin-left: 20px;
+  }
+  
+  /* Dossier section */
+  .dossiers-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    flex: 1;
+  }
+  
+  .dossier {
+    background-color: #fffffa;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 150px;
+    cursor: pointer;
+  }
+  
+  .dossier img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .dossier .date {
+    margin-top: 10px;
+    color: #555;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  

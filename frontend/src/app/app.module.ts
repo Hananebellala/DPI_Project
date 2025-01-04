@@ -14,6 +14,7 @@ import { ServicesComponent } from './welcome-page/services/services.component';
 import { ContactComponent } from './welcome-page/contact/contact.component';
 import { FooterComponent } from './welcome-page/footer/footer.component';
 import { AdminModule } from './admin/admin.module';
+import { provideHttpClient, withFetch } from '@angular/common/http';  // Importer withFetch
 
 import { MatFormFieldModule, matFormFieldAnimations } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -53,7 +54,7 @@ import { InfirmierRoutingModule } from './infirmier/infirmier-routing.module';
     
     
   ],
-  providers: [],
+  providers: [ provideHttpClient(withFetch()) ],
   bootstrap: [AppComponent],
   exports: [RouterModule]
 })
