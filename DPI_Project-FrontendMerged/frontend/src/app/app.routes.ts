@@ -16,6 +16,8 @@ import { RadiologyPageComponent } from './patient/radiology/radiology.component'
 
 import { BloodCountPageComponent } from './patient/blood-count/blood-count.component'; // Example component
 
+import { ConsultationComponent } from './patient/consultation/consultation.component'; // Example component
+
 
 
 export const routes: Routes = [
@@ -30,6 +32,8 @@ export const routes: Routes = [
   { path: 'patient', loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule) },
 
   { path: 'profile/:email', component: SejourPageComponent },
+
+
 
  { path: 'profile/:email/:sejourId',
   component: PatientLayoutComponent,
@@ -55,9 +59,12 @@ export const routes: Routes = [
       path: 'soins',
       component: SoinPageComponent ,
     },
-
+    { path: ':consultation_id', component: ConsultationComponent },
   ]
+
+
   },
+
 
 
   // { path: 'profile/:email/:idSejour', component: PatientLayoutComponent },

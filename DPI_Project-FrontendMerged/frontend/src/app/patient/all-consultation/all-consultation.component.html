@@ -37,7 +37,7 @@
           <!-- Vertical Line -->
           <div class="vertical-line"></div>
 
-          <!-- Dossiers -->
+          <!-- Dossiers
           <div class="dossiers-container">
             <div class="dossier" [routerLink]="['/consultation']">
               <img src="Dossier.png" alt="Dossier 1" />
@@ -47,12 +47,16 @@
               <img src="Dossier.png" alt="Dossier 2" />
               <div class="date">10/12/2024</div>
             </div>
+          </div> -->
+
+
+          <div class="dossiers-container">
+            <div class="dossier" *ngFor="let dossier of dossiers" (click)="viewConsultationDetails(dossier)">
+              <img [src]="dossier.image || 'Dossier.png'" [alt]="'Dossier du ' + dossier.date" />
+              <div class="date">{{ dossier.date }}</div>
+            </div>
           </div>
 
-          <div class="consultation" *ngFor="let consultation of consultations" [routerLink]="['/profile', consultation.email, consultation.sejourId]">
-            <img src="Dossier.png" alt="Dossier 1" />
-            <div class="date">{{ consultation.date }}</div>
-          </div>
 
         </div>
       </div>

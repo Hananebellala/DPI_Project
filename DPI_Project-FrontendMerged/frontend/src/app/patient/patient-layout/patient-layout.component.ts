@@ -55,7 +55,7 @@ export class PatientLayoutComponent implements OnInit {
 
             this.sejourDetails = response;
             this.consultations = response.consultations;
-            console.log('this.consultations :', this.consultations);
+            console.log('this.consultations from patient-layout :', this.consultations);
 
           },
           (error) => {
@@ -69,8 +69,8 @@ export class PatientLayoutComponent implements OnInit {
   goToAll(dossier: any): void {
     console.log('Navigating to Consultation details :', dossier);
 
-    const idConsultation = dossier.idConsultation;
-    this.router.navigate([`/profile/${this.email}/${this.sejourId}/${idConsultation}`]);
+    const consultation_id = dossier.id;
+    this.router.navigate([`/profile/${this.email}/${this.sejourId}/${consultation_id}`]);
   }
 
   isActive(paths: string[]): boolean {

@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
 import { MatTableModule } from '@angular/material/table'; // Import MatTableModule
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ConsultationService } from '../../services/consultation.service'; // Import the service
 
 
@@ -31,21 +31,30 @@ import { ConsultationService } from '../../services/consultation.service'; // Im
 export class AllConsultationComponent implements OnInit {
   consultations: any[] = [];  // Array to store consultations data
   email: string = '';  // Patient's email (can be dynamic)
-  sejourId: string = '';  // ID of the Sejour (can be dynamic)
+  sejourId: string = '';
+  dossiers: any[] = [];
+
 
   constructor(
     private consultationService: ConsultationService,  // Inject the service
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router, // Inject Router here
+
   ) {}
 
   ngOnInit(): void {
     // Get the email and sejourId from the route parameter
     this.email = this.route.snapshot.paramMap.get('email') || '';
-    this.sejourId = this.route.snapshot.paramMap.get('idSejour') || '';
+    this.sejourId = this.route.snapshot.paramMap.get('sejourId') || '';
 
-    console.log('SejourId from component:', this.sejourId);
+    console.log('SejourId from component all consultation:', this.sejourId);
 
+    if (!this.sejourId) {
+      console.error('sejourId is required but not provided ALL');
+      this.snackBar.open('SejourId is missing', 'Close', { duration: 3000 });
+      return;
+    }
 
     // Fetch the Sejour details for the specific SejourId
     this.fetchConsultations(this.email, this.sejourId);
@@ -56,8 +65,12 @@ export class AllConsultationComponent implements OnInit {
       .subscribe(
         (response: any) => {
           console.log("the repsonse is " , response);  // Log the response to check the structure
-          if (response && response.consultations) {
-            this.consultations = response;
+          if (response) {
+            console.log('response in all consulations:', response );
+
+            this.dossiers = response.consultations;
+            console.log('dossiers contains :', this.dossiers  );
+
           }
         },
         (error) => {
@@ -66,4 +79,27 @@ export class AllConsultationComponent implements OnInit {
         }
       );
   }
+
+  // viewConsultationDetails(email : string , idSejour: string, consultation_id: string): void {
+  //   this.router.navigate([`/consultation/details/${idSejour}/${consultation_id}`]);
+  // }
+
+
+  viewConsultationDetails(dossier: any): void {
+  console.log('Navigating to Consulattion details with dossier:', dossier);
+  const consultation_id = dossier?.id;
+  console.log("consultation_id is : " , consultation_id )
+  if (!consultation_id) {
+    console.error('consultation_id is undefined or null', dossier);
+    return;
+  }
+
+  console.log('email:', this.email, 'sejourId:', this.sejourId, 'consultation_id:', consultation_id);
+
+  this.router.navigate([`/profile/${this.email}/${this.sejourId}/${consultation_id}`]);
+}
+
+
+
+
 }
