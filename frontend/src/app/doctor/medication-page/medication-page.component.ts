@@ -64,10 +64,10 @@ export class MedicationPageComponent    implements OnInit{
     const dialogRef = this.dialog.open(MedicationFormDialogComponent, {
       width: '405px',
       data: {
-        name: '',
+        nomMedicament: '',
         dose: null,
-        frequency: null,
-        duration: null
+        Frequency: null,
+        dureePrise: null
       }
     });
 
