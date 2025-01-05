@@ -213,6 +213,8 @@ tbody tr:nth-child(odd) {
   color: #333;
 }
 
+
+
 .general-info .field {
   display: flex;
   justify-content: space-between;
@@ -312,7 +314,7 @@ tbody tr:nth-child(odd) {
 
 .general-info {
   width: 300px;
-  background-color: white;
+  background-color: #FFFFFA;
   padding: 20px;
   font-size: 14px;
 }
@@ -393,7 +395,7 @@ tbody tr:nth-child(odd) {
   position: absolute; /* Permet de positionner l'élément à une distance spécifique */
   left: 550px; /* Distance par rapport au bord gauche */
   bottom: 5px; /* Aligne en haut */
-  height: 48.3vh; /* Hauteur de la ligne égale à la hauteur de l'écran */
+  height: 73vh; /* Hauteur de la ligne égale à la hauteur de l'écran */
   width: 1px; /* Largeur de la ligne */
   background-color: #C8C5C5;/* Couleur de la ligne */
   z-index: 1; /* Assure que la ligne est visible */

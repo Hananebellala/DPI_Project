@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -7,35 +6,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-/*
-
-@Component({
-  selector: 'app-add-sejour',
-  templateUrl: './add-sejour.component.html',
-  styleUrls: ['./add-sejour.component.css'],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  standalone: true,  // Marking the component as standalone
-  imports: [FormsModule],  // Import any modules required by the component
-})
-export class AddSejourComponent {
-  title = 'tp';
-  public dateValue: Date = new Date(2022, 4, 18);
-  public minDate: Date = new Date(2022, 4, 7);
-  public maxDate: Date = new Date(2022, 4, 23);
-  constructor(
-    public dialogRef: MatDialogRef<AddSejourComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
-
-  onCancel(): void {
-    this.dialogRef.close();
-  }
-
-  onSave(): void {
-    this.dialogRef.close(this.data);
-  }
-}
-*/
 
 
 
@@ -59,7 +29,7 @@ export class AddSejourComponent {
   dateDebutSejour: string = ''; // Date d'arrivée
   dateFinSejour: string = ''; // Date de fin
   motifAdmission: string = 'Suivi médical'; // Exemple de motif (peut être modifié par l'utilisateur)
-  idMedecin: number | null = null; // ID du médecin traitant
+  idMedecin: string = ' '; // ID du médecin traitant
   apiUrlCreateSejour = 'http://localhost:8000/api/creer-sejour/'; // URL pour créer un séjour
   apiUrlMedecinTraitant = 'http://localhost:8000/api/medecin-traitant/'; // URL pour récupérer le médecin traitant
 
@@ -70,14 +40,14 @@ export class AddSejourComponent {
   ) {}
 
   ngOnInit(): void {
-    //alert(`Numéro de sécurité sociale: ${this.data.numSecuriteSociale}`);
+    
     // Récupérer l'ID du médecin traitant à partir de l'API
     this.http
       .get<any>(`http://localhost:8000/api/medecin-traitant/${this.data.numSecuriteSociale}/`)
       .subscribe(
         (response) => {
-          this.idMedecin = response.id; // Assurez-vous que la clé correspond à la réponse de l'API
-         //alert(`Numéro de sécurité sociale: ${this.idMedecin}`);
+          this.idMedecin = response.email; // Assurez-vous que la clé correspond à la réponse de l'API
+         
         },
         (error) => {
           console.error('Erreur lors de la récupération du médecin traitant:', error);
@@ -85,34 +55,7 @@ export class AddSejourComponent {
       );
   }
 
-  /*onSave(): void {
-    if (this.dateDebutSejour && this.dateFinSejour && this.idMedecin) {
-      const payload = {
-        idDossierPatient: this?.data.numSecuriteSociale ||'c', // Numéro de sécurité sociale
-        idCompteMedecin: this?.idMedecin || 'c', // ID du médecin traitant
-        dateDebutSejour: this?.dateDebutSejour || 'c',
-        dateFinSejour: this?.dateFinSejour ||'c',
-        motifAdmission: this?.motifAdmission || 'c',
-
-        
-      };
-
-      // Envoyer la requête POST
-      this.http.post(`http://localhost:8000/api/creer-sejour/`, payload).subscribe(
-        
-        (response) => {
-          alert(`Numéro de sécurité sociale: ${ this.data.numSecuriteSociale}`);
-          console.log('Séjour créé avec succès:', response);
-          this.dialogRef.close(response); // Fermer le dialog et retourner les données
-        },
-        (error) => {
-          console.error('Erreur lors de la création du séjour:', error);
-        }
-      );
-    } else {
-      console.error('Veuillez remplir tous les champs.');
-    }
-  }*/
+ 
   
     onSave(): void {
       if (this.dateDebutSejour && this.dateFinSejour && this.idMedecin) {
@@ -164,4 +107,3 @@ export class AddSejourComponent {
     this.dialogRef.close();
   }
 }
-

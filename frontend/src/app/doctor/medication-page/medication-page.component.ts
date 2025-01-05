@@ -1,5 +1,3 @@
-
-
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatDialog,MatDialogModule } from '@angular/material/dialog';
@@ -105,10 +103,12 @@ export class MedicationPageComponent    implements OnInit{
     this.http.post('http://127.0.0.1:8000/posologie/', payload)
       .subscribe(
         response => {
+          alert('bla bla .');
           console.log('Medication added successfully:', response);
           this.fetchMedications(idsejour); // Mettre à jour la liste après ajout
         },
         error => {
+          alert('bla bla .');
           console.error('Error adding medication:', error);
           alert('Error adding the medication.');
         }
@@ -120,10 +120,12 @@ export class MedicationPageComponent    implements OnInit{
     this.http.get<any[]>(`http://127.0.0.1:8000/posologie/sejour/${idsejour}/`)
       .subscribe(
         data => {
+          alert('get medications.');
           this.medications = data;
           console.log(`Medications fetched for sejour=${idsejour}:`, this.medications);
         },
         error => {
+          alert('Failed to fetch medications.');
           console.error('Error fetching medications:', error);
           alert('Failed to fetch medications.');
         }

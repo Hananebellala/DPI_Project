@@ -95,7 +95,7 @@
           </div>
           <div class="table-row" *ngFor="let patient of filteredPatients" (click)="navigateToPatientDetails(patient)">
             <div class="cell">{{patient.numeroSecuriteSociale }}</div>
-            <div class="cell">{{ patient?.nom || 'N/A' }} </div>
+            <div class="cell">{{ patient?.nomComplet || 'N/A' }} </div>
             <div class="cell">{{ patient.age || 'N/A' }}</div>
             <div class="cell">{{ patient.age }}</div>
             <div class="cell">{{ patient.telephone || 'N/A' }}</div>

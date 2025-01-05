@@ -1,96 +1,95 @@
 <div class="main-container">
-    <!-- Barre latérale -->
-    <div class="sidebar">
-        <img src="Logo1.png" alt="Logo" class="logo-image">
-        <a href="#" class="menu-item">
-            <img src="home.png" alt="Home Icon" class="icon">
-            <span class="menu-text">Home</span>
-        </a>
-        <a href="#" class="menu-item active">
-            <img src="patients.png" alt="Patients Icon" class="icon">
-            <span class="menu-text">Patient</span>
-        </a>
-    </div>
-  
-    <div class="content">
-      <!-- En-tête -->
-      <div class="top">
-        <input type="text" placeholder="Search Patient">
-        <div class="profile">
-            <img src="Profile.png" alt="Profile Picture">
-            <span>Dr Hanane</span>
-        </div>
-     </div>
-      <!-- Nom du patient et boutons -->
-      <div class="patient-header">
-        <h2 class="patient-name">Marie Dupont</h2>
-        
+  <!-- Barre latérale -->
+  <div class="sidebar">
+      <img src="Logo1.png" alt="Logo" class="logo-image">
+      <a href="#" class="menu-item">
+          <img src="home.png" alt="Home Icon" class="icon">
+          <span class="menu-text">Home</span>
+      </a>
+      <a href="#" class="menu-item active">
+          <img src="patients.png" alt="Patients Icon" class="icon">
+          <span class="menu-text">Patient</span>
+      </a>
+  </div>
+
+  <div class="content">
+    <!-- En-tête -->
+    <div class="top">
+      <input type="text" placeholder="Search Patient">
+      <div class="profile">
+          <img src="Profile.png" alt="Profile Picture">
+          <span>{{  generalInfo?.name || 'patient' }}</span>
       </div>
-  
-      <!-- Barre de navigation -->
-      <div class="nav-bar">
-        <div class="nav-items">
-          <span class="nav-item active">Séjour</span>
-        </div>
-        <hr class="nav-line bold">
-      </div>
-      <div class="vertical-line"></div>
-  
-      <div class="main-content">
-        <!-- Titre des Informations Générales -->
-        <div class="general-info-section">
-          <h3 class="general-info-title">Informations générales</h3>
-      
-          <!-- Informations Générales -->
-          <div class="general-info">
-            <div class="field">
-              <span class="field-name">Date de naissance</span>
-              <span class="field-value">{{ generalInfo.dateNaissance }}</span>
-            </div>
-            <div class="field">
-              <span class="field-name">Statut</span>
-              <span class="field-value">{{ generalInfo.status }}</span>
-            </div>
-            <div class="field">
-              <span class="field-name">Sexe</span>
-              <span class="field-value">{{ generalInfo.sexe }}</span>
-            </div>
-            <div class="field">
-              <span class="field-name">Adresse</span>
-              <span class="field-value">{{ generalInfo.adresse }}</span>
-            </div>
-            <div class="field">
-              <span class="field-name">Numéro de sécurité sociale</span>
-              <span class="field-value">{{ generalInfo.numSecuriteSociale }}</span>
-            </div>
-          </div>
-          <h3 class="general-info-title">Coordonnées</h3>
-      
-          <!-- Informations Générales -->
-          <div class="general-info">
-            <div class="field">
-              <span class="field-name">Numéro de téléphone</span>
-              <span class="field-value">{{ generalInfo.numTelephone}}</span>
-            </div>
-            <div class="field">
-              <span class="field-name">Personne à contacter</span>
-              <span class="field-value">{{ generalInfo.personneAContacter }}</span>
-            </div>
-           </div>
-        </div>
-      
-        <!-- Dossiers avec Image -->
-        <div class="dossiers-container">
-            <div class="dossier" *ngFor="let dossier of dossiers" (click)="goToAll(dossier)">
-              <img [src]="dossier.image" [alt]="'Dossier du ' + dossier.date" />
-              <div class="date">{{ dossier.date }}</div>
-            </div>
-          </div>
-          
-      
+   </div>
+    <!-- Nom du patient et boutons -->
+    <div class="patient-header">
+      <h2 class="patient-name">{{  generalInfo?.name || 'patient' }}</h2>
+
     </div>
+
+    <!-- Barre de navigation -->
+    <div class="nav-bar">
+      <div class="nav-items">
+        <span class="nav-item active">Séjour</span>
+      </div>
+      <hr class="nav-line bold">
+    </div>
+    <div class="vertical-line"></div>
+
+    <div class="main-content">
+      <!-- Titre des Informations Générales -->
+      <div class="general-info-section">
+        <h3 class="general-info-title">Informations générales</h3>
+
+        <!-- Informations Générales -->
+        <div class="general-info">
+          <div class="field">
+            <span class="field-name">Date de naissance</span>
+            <span class="field-value">{{ generalInfo?.dateNaissance }}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">Statut</span>
+            <span class="field-value">{{ generalInfo?.status }}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">Sexe</span>
+            <span class="field-value">{{ generalInfo?.sexe }}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">Adresse</span>
+            <span class="field-value">{{ generalInfo?.adresse }}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">Numéro de sécurité sociale</span>
+            <span class="field-value">{{ generalInfo?.numSecuriteSociale }}</span>
+          </div>
+        </div>
+        <h3 class="general-info-title">Coordonnées</h3>
+
+        <!-- Informations Générales -->
+        <div class="general-info">
+          <div class="field">
+            <span class="field-name">Numéro de téléphone</span>
+            <span class="field-value">{{ generalInfo?.numTelephone}}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">Personne à contacter</span>
+            <span class="field-value">{{ generalInfo?.personneAContacter }}</span>
+          </div>
+         </div>
+      </div>
+
+      <!-- Dossiers avec Image -->
+      <div class="dossiers-container">
+          <div class="dossier" *ngFor="let dossier of dossiers" (click)="goToAll(dossier)">
+            <img [src]="dossier.image || 'Dossier.png'" [alt]="'Dossier du ' + dossier.date" />
+            <div class="date">{{ dossier.date }}</div>
+          </div>
+        </div>
+
 
   </div>
 
 </div>
-  
+
+</div>

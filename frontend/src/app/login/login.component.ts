@@ -2,9 +2,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AppRoutingModule } from '../app.routes';
+import { Router, RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +18,13 @@ export class LoginComponent {
 loginForm:any;
 registerForm:any;
 activeForm: 'login' | 'register' = 'login';
+subscribed: boolean = false;
 
 constructor( private fb: FormBuilder,
   private router: Router,
-  private snackBar: MatSnackBar,){}
+  private snackBar: MatSnackBar,
+  private http: HttpClient, // Add HttpClient
+){}
 
   navigateToWelcomePage(): void {
     this.router.navigate(['/']); // Navigates to the Welcome Page
@@ -43,14 +48,44 @@ toggleForm(form: 'login' | 'register') {
   this.activeForm = form;
 }
 
+private subscription: Subscription = new Subscription();
+
 login() {
   if (this.loginForm.valid) {
-    console.log("Login info==>", this.loginForm.value);
-    this.router.navigate(['/tp/dashboard']);
+    const loginData = this.loginForm.value;
+
+    // Send POST request to the Django login endpoint
+
+    this.http.post('http://127.0.0.1:8000/login/', loginData).subscribe(
+      (response: any) => {
+        console.log("Login success:", response);
+
+        // Store the access token (assuming it's part of the response)
+        localStorage.setItem('authToken', response.access_token);
+
+        // Navigate based on user role from the response
+        switch (response.role) {
+          case 'patient': // For patients
+
+            this.router.navigate([response.profile_url]);
+            break;
+
+          default:
+            this.snackBar.open('Unknown role!', 'Close', { duration: 3000 });
+        }
+      },
+      (error) => {
+        console.error("Login failed:", error);
+        console.log("Error details:", error); // Log full error details for debugging
+        this.snackBar.open(error?.error?.detail || 'Login failed!', 'Close', { duration: 3000 });
+      }
+    );
   } else {
     this.snackBar.open('Invalid email or password!', 'Close', { duration: 3000 });
   }
 }
+
+
 register() {
   if (this.registerForm.valid) {
     console.log("Register info==>>", this.registerForm.value);

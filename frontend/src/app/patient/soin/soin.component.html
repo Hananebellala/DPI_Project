@@ -9,13 +9,18 @@
                     <th>Détails</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr *ngFor="let entry of soinData" (click)="openModal(entry)">
-                    <td>{{ entry.infirmier }}</td>
-                    <td>{{ entry.type }}</td>
-                    <td>{{ entry.details }}</td>
-                </tr>
+            <tbody *ngIf="soins.length > 0; else loading">
+              <tr *ngFor="let soin of soins" (click)="openModal(soin)">
+                <td>{{ soin.infirmier }}</td>
+                <td>{{ soin.type }}</td>
+                <td>{{ soin.details }}</td>
+              </tr>
             </tbody>
+            <ng-template #loading>
+              <tr>
+                <td colspan="3">Loading data...</td>
+              </tr>
+            </ng-template>
         </table>
     </div>
 
@@ -25,9 +30,11 @@
             <span class="close-button" (click)="closeModal()">&times;</span>
             <h3 class="modal-title">Résumé</h3>
             <div id="modal-summary">
-                {{ modalData.summary }}
+                {{ modalData.details }}
             </div>
         </div>
     </div>
-</div>
 
+    <router-outlet></router-outlet>
+
+</div>

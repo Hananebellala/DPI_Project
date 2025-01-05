@@ -164,7 +164,7 @@ export class SejourPageComponent implements OnInit {
           this.generalInfo = {
             dateNaissance: patient?.dateDeNaissance || 'N/A',
             status: 'Actif',
-            nom: patient?.nom || 'Inconnu',
+            nom: patient?.nomComplet || 'Inconnu',
             sexe: patient?.email || 'Inconnu', // Valeur par défaut "Inconnu"
             adresse: patient?.adresse || 'N/A',
             numSecuriteSociale: patient?.numeroSecuriteSociale || 'N/A',
