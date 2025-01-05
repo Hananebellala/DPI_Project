@@ -160,3 +160,8 @@ REST_FRAMEWORK = {
 
 MEDIA_URL = ''
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Files/')
+
+SIMPLE_JWT = {
+    'USER_ID_FIELD': 'email',  # Utiliser 'email' comme identifiant principal
+    'USER_ID_CLAIM': 'user_id',  # Le nom du champ dans le payload du token JWT
+}

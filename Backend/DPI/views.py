@@ -804,6 +804,7 @@ class LoginView(APIView):
             return Response({"error": "Email and password are required"}, status=status.HTTP_400_BAD_REQUEST)
 
         user = None
+        profile_url = None
         try:
             # Search for the user in the relevant tables
             if CompteMedecin.objects.filter(email=email).exists():
@@ -1197,3 +1198,37 @@ class PosologieBySejourView(APIView):
         posologies = Posologie.objects.filter(idSejour=id_sejour)
         serializer = PosologieSerializer(posologies, many=True)
         return Response(serializer.data)
+    
+
+# views.py
+
+from django.http import JsonResponse
+from openpyxl import Workbook
+import os
+from django.views.decorators.csrf import csrf_exempt
+
+# Create a directory for storing the Excel file if it doesn't exist
+excel_file_path = 'contact_data.xlsx'
+if not os.path.exists(excel_file_path):
+    wb = Workbook()
+    ws = wb.active
+    ws.append(["Email", "Object", "Message"])  # Header row
+    wb.save(excel_file_path)
+
+@csrf_exempt
+def save_contact_form(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        object_ = request.POST.get("object")
+        message = request.POST.get("message")
+
+        # Open the Excel file and append the new data
+        wb = Workbook()
+        ws = wb.active
+        ws.append([email, object_, message])  # Add data as a new row
+        wb.save(excel_file_path)
+
+        return JsonResponse({"message": "Data saved successfully"}, status=200)
+    else:
+        return JsonResponse({"message": "Invalid request"}, status=400)
+

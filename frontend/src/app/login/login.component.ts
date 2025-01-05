@@ -65,11 +65,34 @@ login() {
 
         // Navigate based on user role from the response
         switch (response.role) {
-          case 'patient': // For patients
-
-            this.router.navigate([response.profile_url]);
+          case 'patient':
+            this.router.navigate([response.profile_url]); // Rediriger vers le profil du patient
             break;
-
+        
+          case 'doctor':
+            this.router.navigate(['/doctor-dashboard']); // Rediriger vers un tableau de bord des médecins
+            break;
+        
+          case 'pharmacist':
+              this.router.navigate(['/doctor-dashboard']); // Rediriger vers un tableau de bord des médecins
+              break;
+        
+          case 'radiologist':
+                this.router.navigate(['/doctor-dashboard']); // Rediriger vers un tableau de bord des médecins
+                break;
+        
+           case 'nurse':
+                  this.router.navigate(['/doctor-dashboard']); // Rediriger vers un tableau de bord des médecins
+                  break;
+            case 'lab technician':
+                    this.router.navigate(['/doctor-dashboard']); // Rediriger vers un tableau de bord des médecins
+                    break;
+        
+            case 'admin':
+                      this.router.navigate(['/doctor-dashboard']); // Rediriger vers un tableau de bord des médecins
+                      break;
+        
+          // Ajoutez d'autres cas ici pour gérer d'autres rôles
           default:
             this.snackBar.open('Unknown role!', 'Close', { duration: 3000 });
         }

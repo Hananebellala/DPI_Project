@@ -33,12 +33,13 @@
   }
   
   .contactForm .text p {
-    font-size: 18px; 
+    font-size: 16px; 
     font-weight: normal; 
     color: black;
     text-align: center;
     margin-bottom: 15px;
     font-family: 'Source Sans Pro', sans-serif;
+    width: 800px;
   }
   
   .inputs {
