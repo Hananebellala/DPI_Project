@@ -64,6 +64,7 @@ class CompteMedecin(CompteEmployeeHopital):
         ('Néphrologue','Néphrologue'),
         ('Anesthésiste',"Anesthésiste"),
     ]
+    email = models.CharField(max_length=50, unique=True, primary_key=True, default=None)
     specialite = models.CharField(default="Généraliste", max_length=30, choices=SPEC_CHOIX)
     class Meta:
         db_table = 'dpi_comptemedecin'
@@ -125,7 +126,7 @@ class DPI(models.Model):
     adresse = models.TextField(default='')
     telephone = models.DecimalField(max_digits = 10, decimal_places = 0)
     mutuelle = models.CharField(max_length = 30)
-    emailMedecinTraitant = models.ForeignKey(CompteMedecin, on_delete=models.DO_NOTHING, to_field='email')
+    idMedecinTraitant = models.TextField(default='')
     personneAcontacter = models.CharField(max_length = 50, default=None)
     
     class Meta:

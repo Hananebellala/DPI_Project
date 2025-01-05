@@ -22,6 +22,7 @@ urlpatterns = [
     path('profile/<str:email>/<int:idSejour>/medicament/', MedicamentDetailView.as_view(), name='medicament-detail'),
     path('profile/<str:email>/<int:idSejour>/labs/', LabsView.as_view(), name='labs_list'),
     path('profile/<str:email>/<int:idSejour>/labs/<str:lab_type>/', LabDetailView.as_view(), name='lab_detail'),
+    
 ]
 
 if settings.DEBUG:

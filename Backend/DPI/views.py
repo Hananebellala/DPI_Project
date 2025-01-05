@@ -575,6 +575,7 @@ class ListeEmployesView(APIView):
 #--------------------------------------------------------------------------------------------
 # la vue qui concerne la creation du compte patient+ du docier dpi 
 
+# la vue qui concerne la creation du compte patient+ du docier dpi 
 class CreatePatientAccountAndDossierAPIView(APIView):
     def post(self, request):
         # Extraire les données du formulaire JSON
@@ -601,7 +602,7 @@ class CreatePatientAccountAndDossierAPIView(APIView):
                 "adresse": data.get("adresse"),
                 "telephone": data.get("num_telephone"),
                 "mutuelle": data.get("mutuelle"),
-                "idMedecinTraitant": medecin_traitant.id,
+                "idMedecinTraitant": medecin_traitant.email,
                 "personneAcontacter": data.get("personne_a_contacter")
             }
             dpi_serializer = DPISerializer(data=dpi_data)
@@ -613,8 +614,7 @@ class CreatePatientAccountAndDossierAPIView(APIView):
                 patient_data = {
                     "user": user.id,
                     "email": data.get("email"),
-                    "nom": data.get("nom"),
-                    "prenom": data.get("prenom"),
+                    "nomComplet":data.get("nomComplet"),
                     "motDePasse": data.get("mot_de_passe"),
                     "dossierPatient": dpi.numeroSecuriteSociale
                 }
@@ -710,24 +710,32 @@ class MedecinTraitantAPIView(APIView):
             # Rechercher le DPI correspondant au NSS
             dpi = DPI.objects.get(numeroSecuriteSociale=nss)
             
-            # Récupérer le médecin traitant associé
-            medecin_traitant = dpi.idMedecinTraitant
+            # Récupérer l'email du médecin traitant associé
+            medecin_traitant_email = dpi.idMedecinTraitant
             
-            # Vérifier si le médecin existe
-            if medecin_traitant:
-                data = {
-                    "nom": medecin_traitant.nom,
-                    "prenom": medecin_traitant.prenom,
-                    "email": medecin_traitant.email,
-                    "specialite": medecin_traitant.specialite,
-                }
-                return Response(data, status=status.HTTP_200_OK)
+            # Vérifier si un email de médecin est fourni
+            if medecin_traitant_email:
+                try:
+                    # Rechercher le médecin avec l'email dans le modèle Medecin
+                    medecin_traitant = CompteMedecin.objects.get(email=medecin_traitant_email)
+                    
+                    # Préparer les données du médecin traitant
+                    data = {
+                        "nomComplet":medecin_traitant.nomComplet,
+                        "email": medecin_traitant.email,
+                        "specialite": medecin_traitant.specialite,
+                    }
+                    return Response(data, status=status.HTTP_200_OK)
+                except CompteMedecin.DoesNotExist:
+                    # Si le médecin n'existe pas dans la base de données
+                    return Response({"detail": "Médecin traitant introuvable."}, status=status.HTTP_404_NOT_FOUND)
+            
             else:
                 return Response({"detail": "Aucun médecin traitant associé."}, status=status.HTTP_404_NOT_FOUND)
         
         except DPI.DoesNotExist:
+            # Si le DPI pour le NSS n'existe pas
             return Response({"detail": "Dossier patient introuvable pour ce NSS."}, status=status.HTTP_404_NOT_FOUND)
-
 #-----------------------------------------------------------------------------------------------
 # la creation du sejour  // remarque l equipe de frontend est responsable  de envoyer le nss et id doctor dans le passage se la page de recherche patient -recherche dpi  et la creation du sejour 
 class CreerSejourView(APIView):
@@ -1182,3 +1190,10 @@ class LabDetailView(APIView):
 
         except Exception as e:
             return Response({"error": f"An error occurred: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+
+class PosologieBySejourView(APIView):
+    def get(self, request, id_sejour, format=None):
+        posologies = Posologie.objects.filter(idSejour=id_sejour)
+        serializer = PosologieSerializer(posologies, many=True)
+        return Response(serializer.data)

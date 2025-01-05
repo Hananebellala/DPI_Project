@@ -58,6 +58,7 @@ urlpatterns = [
     path('api/hopital/', AjouterHopitalView.as_view(), name='ajouter-hopital'), # add new hopital  // post
     path('api/employe/', EmployeeCreateView.as_view(), name='create_employee'), # add new employee   // post 
     path('api/create-patient/', CreatePatientAccountAndDossierAPIView.as_view(), name='create-patient'),#creation du compte +docier du patient recuperer dan le mm formulaire   //post
+    path('posologie/sejour/<int:id_sejour>/', PosologieBySejourView.as_view(), name='posologie-by-sejour'), # recuperer la liste des medecament par sejour
     path('', include(router.urls)),
     path('', include('DPI.urls')), 
 ]
