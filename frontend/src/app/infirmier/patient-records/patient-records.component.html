@@ -16,7 +16,17 @@
     <div class="content">
         <!-- En-tête -->
         <div class="top">
-            <input type="text" placeholder="Search Patient" />
+            <button (click)="scanQrCode()" class="qr-button">
+                <img src="qr-icon.png" alt="Scan QR">
+              </button>
+              <div id="qr-scanner" *ngIf="isScanning" class="qr-scanner">
+                <zxing-scanner
+                  [formats]="formats"
+                  (scanSuccess)="handleQrCodeResult($event)"
+                  [torch]="true"
+                ></zxing-scanner>
+                <button mat-button color="warn" (click)="closeQrScanner()">Close Scanner</button>
+              </div>
             <div class="profile">
                 <img src="Profile.png" alt="Profile Picture" />
                 <span>Dr Hanane</span>

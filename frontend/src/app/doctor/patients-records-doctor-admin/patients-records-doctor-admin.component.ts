@@ -69,12 +69,15 @@ export class PatientsRecordsDoctorAdminComponent implements OnInit {
 }
 */
 
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; // Importez HttpClient
 import { DatePipe } from '@angular/common';
   import { MatDialog } from '@angular/material/dialog';
+  import { BarcodeFormat } from '@zxing/library';
+
   import { MatDialogModule } from '@angular/material/dialog';
   import { MatButtonModule } from '@angular/material/button';
   import { MatFormFieldModule } from '@angular/material/form-field';
@@ -97,19 +100,47 @@ import { DatePipe } from '@angular/common';
     MatInputModule, // For input fields
     FormsModule,
     RouterModule,
-    DatePipe // For ngModel
+    DatePipe, // For ngModel
+    ZXingScannerModule,
   ],
   styleUrls: ['./patients-records-doctor-admin.component.css'],
+  
 })
 export class PatientsRecordsDoctorAdminComponent implements OnInit {
   patients: any[] = [];
   filteredPatients: any[] = []; // Liste filtrée des patients
   searchQuery: string = ''; // Chaîne de recherche pour le numéro de sécurité sociale
+  isScanning: boolean = false;
+  formats: BarcodeFormat[] = [BarcodeFormat.QR_CODE];
+
 
   private apiUrlPatients = 'http://127.0.0.1:8000/comptepatient/'; // L'URL pour récupérer les patients
   private apiUrlDossier = 'http://127.0.0.1:8000/dpi/'; // L'URL pour récupérer le dossier patient
 
   constructor(private router: Router, private http: HttpClient) {}
+
+  scanQrCode(): void {
+    this.isScanning = true; // Open scanner
+  }
+
+  closeQrScanner(): void {
+    this.isScanning = false; // Close scanner
+  }
+
+  handleQrCodeResult(patientId: string): void {
+    this.isScanning = false; // Close scanner on success
+
+    // Fetch patient details
+    this.http.get<any>(`http://127.0.0.1:8000/dpi/${patientId}/`).subscribe(
+      (patient) => {
+        console.log('Patient Details:', patient);
+        this.navigateToPatientDetails(patient);
+      },
+      (error) => {
+        console.error('Error fetching patient details:', error);
+      }
+    );
+  }
 
   ngOnInit(): void {
     // Effectuer la requête GET pour récupérer les patients

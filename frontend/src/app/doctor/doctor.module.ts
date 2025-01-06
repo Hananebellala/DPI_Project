@@ -15,6 +15,7 @@ import { AddPatientDoctorComponent } from './add-patient-doctor/add-patient-doct
 import { AddDiagnosticComponent } from './add-diagnostic/add-diagnostic.component';
 import { AddSejourComponent } from './add-sejour/add-sejour.component';
 import { AllConsultationComponent } from './all-consultation/all-consultation.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AllConsultationComponent } from './all-consultation/all-consultation.co
     AddDiagnosticComponent,
     AddSejourComponent,
     AllConsultationComponent,
+    ZXingScannerModule,
     
   ]
 })

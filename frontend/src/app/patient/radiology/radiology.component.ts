@@ -63,7 +63,7 @@ export class RadiologyPageComponent {
         const email = this.getEmailFromRoute();
         const idSejour = this.getIdSejourFromRoute();
         console.log('Email:', email, 'ID Sejour:', idSejour);
-
+        
 
         this.RadioService.getRadio(email, idSejour).subscribe(
           (data) => {

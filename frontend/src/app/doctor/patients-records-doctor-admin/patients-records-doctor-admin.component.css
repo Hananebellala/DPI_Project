@@ -126,6 +126,59 @@ border-bottom: 1px solid black; /* Trait noir en bas */
   box-sizing: border-box; /* Prevent width issues due to padding */
 }
 
+.qr-button img {
+  width: 24px;
+  height: 24px;
+}
+
+
+/* QR Scanner Container */
+#qr-scanner {
+  position: relative;
+  width: 100%;
+  max-width: 500px; 
+  margin: 20px auto; /* Center the scanner on the page */
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background for contrast */
+  border: 2px solid #7469b6; /* Border color matching the theme */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center;
+}
+
+/* QR Scanner Component */
+zxing-scanner {
+  width: 100%; /* Full width of the container */
+  height: 300px; /* Fixed height for the scanner */
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px; /* Rounded corners for the scanner */
+  background-color: #000; /* Black background for the scanner */
+  overflow: hidden; /* Clip overflow content */
+}
+
+/* Close Scanner Button */
+button[mat-button] {
+  margin-top: 15px;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #e53935; /* Warn color (red) */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button[mat-button]:hover {
+  background-color: #c62828; /* Darker red on hover */
+}
+
+button[mat-button]:active {
+  background-color: #b71c1c; /* Even darker red on click */
+}
+
+
 /* Input Field inside Top Bar */
 .top input {
   width: 50%;
