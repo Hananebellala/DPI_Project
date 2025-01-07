@@ -16,6 +16,8 @@ import { AddDiagnosticComponent } from './add-diagnostic/add-diagnostic.componen
 import { AddSejourComponent } from './add-sejour/add-sejour.component';
 import { AllConsultationComponent } from './all-consultation/all-consultation.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { Chart } from 'chart.js';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     AddSejourComponent,
     AllConsultationComponent,
     ZXingScannerModule,
+    CanvasJSAngularChartsModule
     
   ]
 })
