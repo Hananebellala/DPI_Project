@@ -1,12 +1,12 @@
+ 
 <div class="radio-page">
-    <!-- Top Navigation -->
+   
     <div class="top">
         <a href="/lab-results" class="previous">Lab Results</a>
         <img src="next.png" alt="next">
         <a class="current">Blood Count Test</a>
     </div>
 
-    <!-- Radiology Table -->
     <div class="table-container">
         <table>
             <thead>
@@ -20,21 +20,18 @@
                 <tr *ngFor="let entry of radiologyData" (click)="openModal(entry)">
                     <td>{{ entry.date }}</td>
                     <td>{{ entry.type }}</td>
-                    <td>{{ entry.madeBy }}</td>
+                    <td>{{ modalData.by }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- Modal -->
     <div class="modal" [class.show]="isModalOpen" (click)="onBackgroundClick($event)">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <span class="close-button" (click)="closeModal()">&times;</span>
     <div id="modal-images">
-      <!-- Display images in a 2x2 grid -->
-      <div class="image-row">
-        <img *ngFor="let img of modalData.images.slice(0, 2)" [src]="img" alt="Image" (click)="viewImage(img)" />
-      </div>
+      
+      
       <div class="image-row">
         <img *ngFor="let img of modalData.images.slice(2)" [src]="img" alt="Image" (click)="viewImage(img)" />
       </div>
@@ -48,3 +45,7 @@
 
       
 </div>
+
+
+
+
