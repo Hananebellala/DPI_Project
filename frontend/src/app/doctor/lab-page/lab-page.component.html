@@ -1,12 +1,30 @@
 <div class="Lab-page">
     <div class="card">
         <img src="radio.png" alt="Radiology Icon" class="card-icon" />
-      <a routerLink="/Patient/radiology" routerLinkActive="active">Radiology</a>
+      <a [routerLink]="['/Patient/radiology']" 
+      [queryParams]="{
+        nom: nom, 
+        numSecuriteSociale: numSecuriteSociale, 
+        idSejour: idSejour,
+        debutSejour: debutSejour,
+        finSejour: finSejour
+      }" routerLinkActive="active">
+      Radiology
+   </a>
     </div>
     <div class="card">
       
       <img src="blood.png" alt="Blood Count Test Icon" class="card-icon" />
-      <a routerLink="/Patient/blood" routerLinkActive="active">Blood Count Test</a>
+      <a [routerLink]="['/Patient/blood']" 
+      [queryParams]="{
+        nom: nom, 
+        numSecuriteSociale: numSecuriteSociale, 
+        idSejour: idSejour,
+        debutSejour: debutSejour,
+        finSejour: finSejour
+      }" routerLinkActive="active">
+      Blood Count Test
+   </a>
     </div>
   
     
