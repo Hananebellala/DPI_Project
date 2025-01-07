@@ -24,6 +24,8 @@ const routes: Routes = [
       { path: 'lab-results', component: LabPageComponent },
       { path: 'soin', component: SoinPageComponent },
       { path: 'all', component: AllConsultationComponent },
+      { path: '', component: AllConsultationComponent },
+
       
     //  { path: '', redirectTo: 'sejour', pathMatch: 'full' }, // Default route within the layout
     ],
