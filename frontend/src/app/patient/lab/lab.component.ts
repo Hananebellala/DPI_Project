@@ -75,7 +75,7 @@ export class LabPageComponent implements OnInit  {
       console.log('Navigating to Radiology...');
       console.log('url: ', `/profile/${email}/${idSejour}/labs/Radiology`);
 
-      this.router.navigate([`/profile/${email}/${idSejour}/labs/Radiology`]);
+      this.router.navigate(['/patient/lab']);
     }
 
 }

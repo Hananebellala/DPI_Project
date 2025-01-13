@@ -60,6 +60,7 @@ urlpatterns = [
     path('api/create-patient/', CreatePatientAccountAndDossierAPIView.as_view(), name='create-patient'),#creation du compte +docier du patient recuperer dan le mm formulaire   //post
     path('posologie/sejour/<int:id_sejour>/', PosologieBySejourView.as_view(), name='posologie-by-sejour'), # recuperer la liste des medecament par sejour
     path('save_contact/', save_contact_form, name='save_contact'),
+    path('dpi/', get_patient_by_email, name='get_patient_by_email'),
     path('', include(router.urls)),
     path('', include('DPI.urls')), 
 ]

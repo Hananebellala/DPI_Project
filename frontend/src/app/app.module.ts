@@ -15,7 +15,7 @@ import { ContactComponent } from './welcome-page/contact/contact.component';
 import { FooterComponent } from './welcome-page/footer/footer.component';
 import { AdminModule } from './admin/admin.module';
 
-import { provideHttpClient, withFetch } from '@angular/common/http';  // Importer withFetch
+import { HttpClient, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';  // Importer withFetch
 
 import { MatFormFieldModule, matFormFieldAnimations } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -50,6 +50,7 @@ import { InfirmierRoutingModule } from './infirmier/infirmier-routing.module';
     DoctorRoutingModule,
     InfirmierModule,
     InfirmierRoutingModule,
+    HttpClientModule
     
    
     

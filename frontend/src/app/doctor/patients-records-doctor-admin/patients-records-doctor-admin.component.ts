@@ -112,6 +112,13 @@ export class PatientsRecordsDoctorAdminComponent implements OnInit {
   searchQuery: string = ''; // Chaîne de recherche pour le numéro de sécurité sociale
   isScanning: boolean = false;
   formats: BarcodeFormat[] = [BarcodeFormat.QR_CODE];
+  isProfileDropdownVisible = false;
+
+  profile = {
+    name: '',
+    password: '',
+    profilePicture: '',
+  };
 
 
   private apiUrlPatients = 'http://127.0.0.1:8000/comptepatient/'; // L'URL pour récupérer les patients
@@ -143,6 +150,13 @@ export class PatientsRecordsDoctorAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+    /*const doctorData = localStorage.getItem('doctorData'); // Or replace with your authentication service
+  if (doctorData) {
+    const parsedData = JSON.parse(doctorData);
+    this.profile.name = parsedData.name;
+  }*/
     // Effectuer la requête GET pour récupérer les patients
     this.http.get<any[]>(this.apiUrlPatients).subscribe((patients) => {
       this.patients = patients;
@@ -196,8 +210,59 @@ export class PatientsRecordsDoctorAdminComponent implements OnInit {
     );
   }
 
+  toggleProfileDropdown() {
+    this.isProfileDropdownVisible = !this.isProfileDropdownVisible;
+  }
+
+  onProfilePictureChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+  
+      // Create FormData to send to the server
+      const formData = new FormData();
+      formData.append('profilePicture', file);
+  
+      // Send the form data to the server (replace with your endpoint)
+      this.http.post('http://127.0.0.1:8000/uploadProfilePicture', formData).subscribe(
+        (response) => {
+          console.log('Profile picture uploaded successfully:', response);
+          this.profile.profilePicture = URL.createObjectURL(file); // Update the local profile picture
+        },
+        (error) => {
+          console.error('Error uploading profile picture:', error);
+        }
+      );
+    }
+  }
+  
+
+  saveProfile(): void {
+    const updatedProfile = {
+      name: this.profile.name,
+      password: this.profile.password,
+      profilePicture: this.profile.profilePicture,
+    };
+  
+    // Save the profile data to your backend
+    this.http
+      .put<any>(`http://127.0.0.1:8000/updateProfile`, updatedProfile)
+      .subscribe(
+        (response) => {
+          console.log('Profile saved successfully', response);
+          this.isProfileDropdownVisible = false; // Hide the dropdown after saving
+        },
+        (error) => {
+          console.error('Error saving profile:', error);
+        }
+      );
+  }
+  
+
   navigateToPatientDetails(patient: any): void {
     // Naviguer vers la page de détails du patient avec les informations de l'état
-    this.router.navigate(['sejour'], { state: { patient } });
+    console.log('Navigating with patient:', patient);
+    this.router.navigate(['/doctor/sejour'], { state: { patient } });
+    
   }
 }

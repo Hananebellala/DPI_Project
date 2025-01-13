@@ -72,7 +72,7 @@ export class DoctorLayoutComponent implements OnInit {
 
   goToAll(dossier: any): void {
     console.log("Navigating with:", dossier); // Vérifier les données envoyées
-    this.router.navigate(['Patient'], {
+    this.router.navigate(['/doctor/Patient'], {
       queryParams: {
         nom: this.nom ,
         numSecuriteSociale: this.numSecuriteSociale ,
@@ -93,6 +93,10 @@ export class DoctorLayoutComponent implements OnInit {
       this.debutSejour = params['debutSejour'] || 'nn';
       this.finSejour = params['finSejour'] || 'nn';
     });
+  }
+
+  goHome() {
+    this.router.navigate(['/doctor/']);
   }
   
 }

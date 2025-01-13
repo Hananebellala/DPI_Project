@@ -1,104 +1,4 @@
-/*
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatDialog } from '@angular/material/dialog';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';  // Import MatTableModule
-import { FormsModule } from '@angular/forms';  // Import FormsModule for ngModel
-import { AddDiagnosticComponent } from '../add-diagnostic/add-diagnostic.component'; // Import AddSejourComponent
-import { AddSejourComponent } from '../add-sejour/add-sejour.component';
-
-import { RouterModule } from '@angular/router';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-
-import { HttpClient } from '@angular/common/http';  // Importer HttpClient pour les requêtes HTTP
-
-@Component({
-  selector: 'sejour-page',
-  standalone: true,
-  imports: [
-    CommonModule,       // For *ngFor, etc.
-    MatTableModule,     // To use mat-table
-    MatDialogModule,    // For dialogs
-    MatButtonModule,    // For mat-button
-    MatFormFieldModule, // For form fields
-    MatInputModule,     // For input fields
-    FormsModule,  
-    RouterModule      // For ngModel
-  ],
-  templateUrl: './sejour-page.component.html',
-  styleUrls: ['./sejour-page.component.css'],
-})
-export class SejourPageComponent implements OnInit {
-
-  // Initialisation des données à afficher
-  generalInfo: any = {
-    nom:'',
-    dateNaissance: '11/02/2004',
-    status: 'Actif',
-    sexe: 'Homme',  // Laisser "Homme" jusqu'à ce que le sexe soit ajouté
-    adresse: 'Algerie, Tipaza, Cherchell',
-    numSecuriteSociale: '0728283',
-    numTelephone: '0547123698',
-    personneAContacter: '0657412398',
-  };
-
-  dossiers = [
-    { date: '10/12/2024', image: 'Dossier.png' },
-    { date: '11/12/2024', image: 'Dossier.png' },
-    { date: '12/12/2024', image: 'Dossier.png' },
-    { date: '12/12/2024', image: 'Dossier.png' },
-  ];
-
-  // Récupérer l'objet patient depuis l'état de la navigation
-  constructor(public dialog: MatDialog, private router: Router, private route: ActivatedRoute,private http: HttpClient) {}
-
-  ngOnInit(): void {
-    // Récupérer les informations du patient passées dans l'état de la navigation
-    const patient = history.state?.patient;  // Accédez à l'état passé avec la navigation
-    if (patient) {
-      // Mettre à jour `generalInfo` avec les informations du patient
-      this.generalInfo = {
-        dateNaissance: patient?.dateDeNaissance|| 'N/A',
-        //status: patient?.status || 'N/A',
-        status: 'Actif',
-        nom: patient?.nom|| 'Homme',
-        sexe: patient?.email|| 'Homme',  // Valeur par défaut "Homme"
-        adresse: patient?.adresse || 'N/A',
-        numSecuriteSociale: patient?.numeroSecuriteSociale || 'N/A',
-        numTelephone: patient?.telephone || 'N/A',
-        personneAContacter: patient?.personneAcontacter || 'N/A',
-
-        
-      };
-      
-    }
-  }
-
-
- 
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AddSejourComponent, {
-      width: '540px',
-      data: {},
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.dossiers.push(result); // Ajouter un soin à la table (mais sejours n'est pas défini ici)
-      }
-    });
-  }
-
-  goToAll(dossier: any): void {
-    this.router.navigate(['Patient/all'], { queryParams: { date: dossier.date } });
-  }
-  }*/import { Component, OnInit } from '@angular/core';
   import { CommonModule } from '@angular/common';
   import { MatDialog } from '@angular/material/dialog';
   import { MatDialogModule } from '@angular/material/dialog';
@@ -146,7 +46,7 @@ export class SejourPageComponent implements OnInit {
     dossiers: any[] = [];  // Initialiser la liste vide des dossiers
 
     // API URL pour récupérer les séjours
-    private apiUrlSejours = 'http://127.0.0.1:8000/sejour/'; // Assurez-vous que l'URL de l'API est correcte
+    private apiUrlSejours = 'http://127.0.0.1:8000/sejour/'; 
 
     constructor(
       public dialog: MatDialog,
@@ -223,7 +123,7 @@ export class SejourPageComponent implements OnInit {
         };
     
         // Ajouter des données de navigation à l'état
-        this.router.navigate(['Patient'], {
+        this.router.navigate(['doctor/Patient/all'], {
           queryParams: queryParams,
           state: { ...queryParams }, // Passer les paramètres comme état
         });
@@ -232,5 +132,11 @@ export class SejourPageComponent implements OnInit {
       goToAll(dossier: any): void {
         // Naviguer à `Patient/all` avec les paramètres
         this.sendParamsToAllRoutes(dossier);
-      }    }
+      }   
+
+      goHome() {
+        this.router.navigate(['/doctor/']);
+      }
+    
+    }
   

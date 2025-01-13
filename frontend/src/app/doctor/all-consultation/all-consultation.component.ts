@@ -276,6 +276,8 @@ export class AllConsultationComponent implements OnInit {
       }
     
       ngOnInit(): void {
+
+        this.fetchConsultations();
         this.route.queryParams.subscribe((params) => {
           this.nom = params['nom'] || 'Non spécifié';
           this.numSecuriteSociale = params['numSecuriteSociale'] || 'Non spécifié';
@@ -312,6 +314,29 @@ export class AllConsultationComponent implements OnInit {
               );
           }
         });
+      }
+
+      fetchConsultations(): void {
+        if (this.idSejour) {
+          this.http.get<any[]>(`http://127.0.0.1:8000/consultationmedicale/`).subscribe(
+            (consultations) => {
+              this.dossiers = consultations
+                .filter((consultation) => consultation.idSejour === this.idSejour)
+                .map((consultation) => ({
+                  id: consultation.id,
+                  date: consultation.date || 'Date inconnue',
+                  image: 'Dossier.png', // Placeholder image or replace with API value
+                }));
+    
+              if (!this.dossiers.length) {
+                console.warn('Aucun dossier trouvé pour cet idSejour.');
+              }
+            },
+            (error) => {
+              console.error('Erreur lors de la récupération des consultations:', error);
+            }
+          );
+        }
       }
 
 

@@ -83,6 +83,7 @@
     color: #000;
 }
 
+
 /* Aligning labels and values */
 .form-group {
     display: flex;
@@ -106,6 +107,7 @@
     text-align: center;
     font-weight: normal;
 }
+
 
 .actions {
     display: flex;

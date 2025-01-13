@@ -189,11 +189,7 @@ button[mat-button]:active {
   margin-right: 20px; /* To align with profile icon */
 }
 
-/* Profile section inside the top bar */
-.top .profile {
-  display: flex;
-  align-items: center;
-}
+
 
 .top .profile img {
   width: 50px;
@@ -201,6 +197,62 @@ button[mat-button]:active {
   border-radius: 15px;
   margin-right: 10px;
 }
+
+
+.profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+
+
+.profile-dropdown {
+  position: absolute;
+  top: 60px; /* Adjust based on the profile div height */
+  right: 0;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+
+.profile-dropdown label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.profile-dropdown input {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.save-button {
+  background-color: #8ecae6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+  background-color: #66b2c2;
+}
+
 
 .table-container {
 padding: 20px;

@@ -828,6 +828,8 @@ class LoginView(APIView):
            # Debugging: Log the retrieved user
             print(f"User found: {user}")
             print(f"password is found: {user.motDePasse}")
+            
+
 
            
 
@@ -856,9 +858,10 @@ class LoginView(APIView):
                 role = 'pharmacist'
             elif isinstance(user, ComptePatient):
                 role = 'patient'
-                profile_url = self.get_patient_profile_url(user)
+                profile_url = user.get_profile_url()
                 
-
+                
+            print(f"Patient profile URL: {profile_url}")
             # Generate access token
             refresh = RefreshToken.for_user(user)
             access_token = str(refresh.access_token)
@@ -1231,4 +1234,33 @@ def save_contact_form(request):
         return JsonResponse({"message": "Data saved successfully"}, status=200)
     else:
         return JsonResponse({"message": "Invalid request"}, status=400)
+    
 
+# views.py
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import ComptePatient, DPI
+
+@csrf_exempt
+def get_patient_by_email(request):
+    email = request.GET.get('email')
+    if email:
+        try:
+            # Fetch patient account by email
+            patient_account = ComptePatient.objects.get(email=email)
+            # Fetch the related DPI record
+            patient_dpi = patient_account.dossierPatient
+            
+            # Prepare data
+            data = {
+                "nomComplet": patient_account.nomComplet,
+                "dateDeNaissance": patient_dpi.dateDeNaissance,
+                "adresse": patient_dpi.adresse,
+                "telephone": str(patient_dpi.telephone),
+                "numeroSecuriteSociale": patient_dpi.numeroSecuriteSociale,
+                "personneAcontacter": patient_dpi.personneAcontacter,
+            }
+            return JsonResponse(data, safe=False)
+        except ComptePatient.DoesNotExist:
+            return JsonResponse({"error": "Patient not found"}, status=404)
+    return JsonResponse({"error": "Email is required"}, status=400)

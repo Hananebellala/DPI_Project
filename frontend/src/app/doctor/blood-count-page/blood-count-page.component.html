@@ -10,27 +10,14 @@
     <div class="blood-count-test">
       <p class="title2">Complete Blood Count</p>
       <div class="card">
-        <div class="form-group" id="white">
-          <div class="label"><label>White Blood Cells:</label></div>
-          <span class="value">---</span>
-        </div>
-        <div class="form-group" id="red">
-          <div class="label"><label>Red Blood Cells:</label></div>
-          <span class="value">---</span>
-        </div>
-        <div class="form-group" id="hemoglobin">
-          <div class="label"><label>Hemoglobin:</label></div>
-          <span class="value">---</span>
-        </div>
-        <div class="form-group" id="hematocrits">
-          <div class="label"><label>Hematocrits:</label></div>
-          <span class="value">---</span>
-        </div>
-        <div class="form-group" id="platelets">
-          <div class="label"><label>Platelets:</label></div>
-          <span class="value">---</span>
+        <div *ngFor="let data of bloodCountData">
+          <div class="form-group" id="white">
+            <div class="label"><label>{{ data.name }}</label></div>
+            <span class="value">{{ data.resultat }} - {{ data.unite }}</span>
+          </div>
         </div>
       </div>
+      
       <div class="actions">
         <button (click)="visualizeGraph('blood')">Visualize Graph</button>
       </div>
@@ -40,27 +27,14 @@
     <div class="Biomarkers">
       <p class="title2">Biomarkers Monitoring</p>
       <div class="card">
-        <div class="form-group" id="glucose">
-          <div class="label"><label>Blood Glucose:</label></div>
-          <span class="value">---</span>
-        </div>
-        <div class="form-group" id="systolic">
-          <div class="label"><label>Systolic:</label></div>
-          <span class="value">---</span>
-        </div>
-        <div class="form-group" id="diastolic">
-          <div class="label"><label>Diastolic:</label></div>
-          <span class="value">---</span>
-        </div>
-        <div class="form-group" id="cholesterol">
-          <div class="label"><label>Cholesterol:</label></div>
-          <span class="value">---</span>
-        </div>
-        <div class="form-group" id="triglycerides">
-          <div class="label"><label>Triglycerides:</label></div>
-          <span class="value">---</span>
+        <div *ngFor="let data of vitalSignsData">
+          <div class="form-group" id="white">
+            <div class="label"><label>{{ data.name }}</label></div>
+            <span class="value">{{ data.resultat }} - {{ data.unite }}</span>
+          </div>
         </div>
       </div>
+      
       <div class="actions">
         <button (click)="visualizeGraph('vital')">Visualize Graph</button>
       </div>

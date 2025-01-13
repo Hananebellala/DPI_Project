@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css'],
-  standalone: true
+  standalone: true,
+  imports: [HttpClientModule],
 })
 export class ContactComponent {
   constructor(private http: HttpClient, private cookieService: CookieService) {}

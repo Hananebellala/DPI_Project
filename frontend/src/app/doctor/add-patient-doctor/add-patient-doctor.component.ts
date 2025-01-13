@@ -57,7 +57,7 @@ export class AddPatientDoctorComponent {
         response => {
           console.log('Patient added successfully:', response);
           alert('Le patient a été ajouté avec succès.');
-          this.router.navigate(['/']); // Redirect to the main page or patient list
+          this.router.navigate(['/doctor/']); // Redirect to the main page or patient list
         },
         error => {
           console.error('Error adding patient:', error);
@@ -68,7 +68,7 @@ export class AddPatientDoctorComponent {
 
   discardChanges() {
     console.log('Changes discarded');
-    this.router.navigate(['/']);
+    this.router.navigate(['/doctor/']);
   }
 }
 /*

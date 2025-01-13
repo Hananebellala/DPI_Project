@@ -37,6 +37,11 @@ class ComptePersonne(models.Model):
     class Meta:
        abstract = True
 
+    def get_profile_url(self):
+        # Generate profile URL based on email
+        # This ensures the URL structure is consistent for all users
+        return f"/profile/{self.email.lower()}/"
+
 class CompteAdministrateur(ComptePersonne):
     pass
 class Meta:
@@ -68,6 +73,11 @@ class CompteMedecin(CompteEmployeeHopital):
     specialite = models.CharField(default="Généraliste", max_length=30, choices=SPEC_CHOIX)
     class Meta:
         db_table = 'dpi_comptemedecin'
+    
+    def get_profile_url(self):
+        # Generate profile URL based on email
+        # This ensures the URL structure is consistent for all users
+        return f"/profile/{self.email.lower()}/"
 
 class CompteInfirmier(CompteEmployeeHopital):
     SPEC_CHOIX = [

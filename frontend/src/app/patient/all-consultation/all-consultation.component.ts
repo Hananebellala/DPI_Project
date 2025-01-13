@@ -1,105 +1,95 @@
+import { Component, OnInit, Optional, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
-import { MatTableModule } from '@angular/material/table'; // Import MatTableModule
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ConsultationService } from '../../services/consultation.service'; // Import the service
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
-  selector: 'all-consultation-patient',
+  selector: 'all-consultation',
   standalone: true,
   imports: [
-    CommonModule,       // For *ngFor, etc.
-    MatTableModule,     // To use mat-table
-    MatDialogModule,    // For dialogs
-    MatButtonModule,    // For mat-button
-    MatFormFieldModule, // For form fields
-    MatInputModule,     // For input fields
+    CommonModule,
+    MatTableModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
     FormsModule,
-    RouterModule    // For ngModel
+    RouterModule
   ],
   templateUrl: './all-consultation.component.html',
   styleUrls: ['./all-consultation.component.css'],
 })
 export class AllConsultationComponent implements OnInit {
-  consultations: any[] = [];  // Array to store consultations data
-  email: string = '';  // Patient's email (can be dynamic)
-  sejourId: string = '';
+  displayedColumns: string[] = ['date', 'type', 'medecin', 'remarques'];
+  soins = [
+    { date: '2024-01-01', type: 'Consultation', medecin: 'Dr. Hanane', remarques: 'Aucune remarque' },
+    { date: '2024-02-01', type: 'Check-up', medecin: 'Dr. Hanane', remarques: 'Remarque sur la santé' },
+  ];
   dossiers: any[] = [];
-
+  
+  // Patient and stay details
+  nom: string = '';
+  numSecuriteSociale: string = '';
+  idSejour: string = '';
+  debutSejour: string = '';
+  finSejour: string = '';
 
   constructor(
-    private consultationService: ConsultationService,  // Inject the service
+    public dialog: MatDialog,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    private router: Router, // Inject Router here
-
+    private router: Router,
+    private http: HttpClient,
+    @Optional() public dialogRef?: MatDialogRef<AllConsultationComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data?: {
+      nom: string;
+      numSecuriteSociale: string;
+      idSejour: string;
+      debutSejour: string;
+      finSejour: string;
+    }
   ) {}
 
   ngOnInit(): void {
-    // Get the email and sejourId from the route parameter
-    this.email = this.route.snapshot.paramMap.get('email') || '';
-    this.sejourId = this.route.snapshot.paramMap.get('sejourId') || '';
-
-    console.log('SejourId from component all consultation:', this.sejourId);
-
-    if (!this.sejourId) {
-      console.error('sejourId is required but not provided ALL');
-      this.snackBar.open('SejourId is missing', 'Close', { duration: 3000 });
-      return;
-    }
-
-    // Fetch the Sejour details for the specific SejourId
-    this.fetchConsultations(this.email, this.sejourId);
+    this.initializeState();
+    this.fetchConsultations();
   }
 
-  fetchConsultations(email: string, sejourId: string): void {
-    this.consultationService.fetchConsultations(email, sejourId)
-      .subscribe(
-        (response: any) => {
-          console.log("the repsonse is " , response);  // Log the response to check the structure
-          if (response) {
-            console.log('response in all consulations:', response );
+  // Initialize component state from route params
+  initializeState(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.nom = params['nom'] || this.data?.nom || 'Non spécifié';
+      this.numSecuriteSociale = params['numSecuriteSociale'] || this.data?.numSecuriteSociale || 'Non spécifié';
+      this.idSejour = params['idSejour'] || this.data?.idSejour || '';
+      this.debutSejour = params['debutSejour'] || this.data?.debutSejour || '';
+      this.finSejour = params['finSejour'] || this.data?.finSejour || '';
+    });
+  }
 
-            this.dossiers = response.consultations;
-            console.log('dossiers contains :', this.dossiers  );
-
+  // Fetch consultations and filter by idSejour
+  fetchConsultations(): void {
+    if (this.idSejour) {
+      this.http.get<any[]>(`http://127.0.0.1:8000/consultationmedicale/`).subscribe(
+        (consultations) => {
+          this.dossiers = consultations.filter((consultation) => consultation.idSejour === this.idSejour);
+          if (!this.dossiers.length) {
+            console.warn('Aucun dossier trouvé pour cet idSejour.');
           }
         },
         (error) => {
-          console.error('Error fetching consultations:', error);
-          this.snackBar.open('Failed to load consultations', 'Close', { duration: 3000 });
+          console.error('Erreur lors de la récupération des consultations:', error);
         }
       );
+    }
   }
 
-  // viewConsultationDetails(email : string , idSejour: string, consultation_id: string): void {
-  //   this.router.navigate([`/consultation/details/${idSejour}/${consultation_id}`]);
-  // }
-
-
-  viewConsultationDetails(dossier: any): void {
-  console.log('Navigating to Consulattion details with dossier:', dossier);
-  const consultation_id = dossier?.id;
-  console.log("consultation_id is : " , consultation_id )
-  if (!consultation_id) {
-    console.error('consultation_id is undefined or null', dossier);
-    return;
-  }
-
-  console.log('email:', this.email, 'sejourId:', this.sejourId, 'consultation_id:', consultation_id);
-
-  this.router.navigate([`/profile/${this.email}/${this.sejourId}/${consultation_id}`]);
-}
-
-
-
-
+  // Open the Add Diagnostic dialog
+  
 }

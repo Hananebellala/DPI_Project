@@ -6,11 +6,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule,CommonModule,RouterModule],
+  imports: [ReactiveFormsModule,CommonModule,RouterModule,HttpClientModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -59,6 +59,8 @@ login() {
     this.http.post('http://127.0.0.1:8000/login/', loginData).subscribe(
       (response: any) => {
         console.log("Login success:", response);
+        localStorage.setItem('authToken', response.access_token);
+        localStorage.setItem('userEmail', loginData.email);
 
         // Store the access token (assuming it's part of the response)
         localStorage.setItem('authToken', response.access_token);
@@ -66,11 +68,17 @@ login() {
         // Navigate based on user role from the response
         switch (response.role) {
           case 'patient':
-            this.router.navigate([response.profile_url]); // Rediriger vers le profil du patient
+            this.router.navigate(['/patient']).then(success => {
+              if (success) {
+                console.log('Navigation to /patient successful');
+              } else {
+                console.error('Navigation failed');
+              }
+            });
             break;
         
           case 'doctor':
-            this.router.navigate(['/doctor-dashboard']); // Rediriger vers un tableau de bord des médecins
+            this.router.navigate(['/doctor']); // Rediriger vers un tableau de bord des médecins
             break;
         
           case 'pharmacist':
@@ -78,7 +86,7 @@ login() {
               break;
         
           case 'radiologist':
-                this.router.navigate(['/doctor-dashboard']); // Rediriger vers un tableau de bord des médecins
+                this.router.navigate(['/radiologue']); // Rediriger vers un tableau de bord des médecins
                 break;
         
            case 'nurse':

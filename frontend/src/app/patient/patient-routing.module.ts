@@ -8,14 +8,14 @@ import { BloodCountPageComponent } from './blood-count/blood-count.component';
 import { ConsultationPageComponent } from './consultation/consultation.component';
 import { LabPageComponent } from './lab/lab.component';
 import { SoinPageComponent } from './soin/soin.component';
-import { SejourPageComponent } from './sejour/sejour.component';
+import { SejourComponent } from './sejour/sejour.component';
 import { OrdonnanceComponent } from './ordonnance/ordonnance.component';
 import { AllConsultationComponent } from './all-consultation/all-consultation.component';
 
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'Patient',
     component: PatientLayoutComponent, // Parent component with layout
     children: [
       { path: 'medication', component: OrdonnanceComponent },
@@ -29,7 +29,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'sejour', pathMatch: 'full' }, // Default route within the layout
     ],
   },
-  { path: 'sejour', component: SejourPageComponent },
+  { path: '', component: SejourComponent },
   // Define PatientsRecordsDoctorAdminComponent as an independent route
  
 ];

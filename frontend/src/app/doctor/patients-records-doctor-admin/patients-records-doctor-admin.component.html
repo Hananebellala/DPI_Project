@@ -83,16 +83,39 @@
           ></zxing-scanner>
           <button mat-button color="warn" (click)="closeQrScanner()">Close Scanner</button>
         </div>
-        <div class="profile">
+        <div class="profile" (click)="toggleProfileDropdown()">
           <img src="Profile.png" alt="Profile Picture" />
-          <span>Dr </span>
+          <span>{{ profile.name || 'Dr. Unknown' }}</span>
+          <div *ngIf="isProfileDropdownVisible" class="profile-dropdown">
+            <label for="name">Name:</label>
+            <input
+              id="name"
+              type="text"
+              [(ngModel)]="profile.name"
+              placeholder="Enter new name"
+            />
+            <label for="password">Password:</label>
+            <input
+              id="password"
+              type="password"
+              [(ngModel)]="profile.password"
+              placeholder="Enter new password"
+            />
+            <label for="profile-pic">Profile Picture:</label>
+            <input
+              id="profile-pic"
+              type="file"
+              (change)="onProfilePictureChange($event)"
+            />
+            <button class="save-button" (click)="saveProfile()">Save</button>
+          </div>
         </div>
       </div>
   
       <div class="table-container">
         <div class="header-with-button">
           <h2>Dossiers des patients</h2>
-          <button class="add-button" routerLink="/Add" title="Add Patient">
+          <button class="add-button" routerLink="/doctor/Add" title="Add Patient">
             <img src="plus.png" alt="Ajouter" />
           </button>
         </div>

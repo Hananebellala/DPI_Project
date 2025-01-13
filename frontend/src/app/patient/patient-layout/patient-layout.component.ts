@@ -34,37 +34,10 @@ export class PatientLayoutComponent implements OnInit {
     this.sejourId = this.route.snapshot.paramMap.get('sejourId') || '';
 
     // Fetch the Sejour details for the specific SejourId
-    this.getSejourDetails(this.email, this.sejourId);
+    
   }
 
-  getSejourDetails(email: string, sejourId: string) {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const token = localStorage.getItem('authToken');
-      if (!token) {
-        this.snackBar.open('Authentication required', 'Close', { duration: 3000 });
-        return;
-      }
-
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-      // Fetch the specific Sejour details from the backend
-      this.http.get(`http://127.0.0.1:8000/profile/${this.email}/${sejourId}`, { headers })
-        .subscribe(
-          (response: any) => {
-            console.log('SejoursDetails response :', response);
-
-            this.sejourDetails = response;
-            this.consultations = response.consultations;
-            console.log('this.consultations from patient-layout :', this.consultations);
-
-          },
-          (error) => {
-            console.error('Error fetching Sejour details:', error);
-            this.snackBar.open('Failed to load Sejour details', 'Close', { duration: 3000 });
-          }
-        );
-    }
-  }
+  
 
   goToAll(dossier: any): void {
     console.log('Navigating to Consultation details :', dossier);
@@ -75,5 +48,9 @@ export class PatientLayoutComponent implements OnInit {
 
   isActive(paths: string[]): boolean {
     return paths.some((path) => this.router.isActive(path, false));
+  }
+
+  goHome(){
+    this.router.navigate(['/patient/']);
   }
 }

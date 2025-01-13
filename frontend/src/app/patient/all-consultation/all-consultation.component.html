@@ -10,13 +10,10 @@
     <!-- Content Section -->
     <div class="content">
       <!-- Patient Header -->
-      <div class="patient-header">
-        <h2 class="patient-name">Patient</h2>
-
-      </div>
-
+      
+      
       <!-- Navigation Line -->
-      <div class="nav-line"></div>
+      
 
       <!-- Main Content -->
       <div class="main-content">
@@ -24,12 +21,12 @@
         <div class="general-info">
           <div class="field">
             <span class="field-name">Date d'arrivée :</span>
-            <span class="field-value">11/02/2024</span>
+            <span class="field-value">{{debutSejour}}</span>
           </div>
           <hr />
           <div class="field">
             <span class="field-name">Fin du séjour :</span>
-            <span class="field-value">14/02/2024</span>
+            <span class="field-value">{{finSejour}}</span>
           </div>
           <hr />
         </div>
@@ -51,10 +48,20 @@
 
 
         <div class="dossiers-container">
-          <div class="dossier" *ngFor="let dossier of dossiers" (click)="viewConsultationDetails(dossier)">
-            <img [src]="dossier.image || 'Dossier.png'" [alt]="'Dossier du ' + dossier.date" />
-            <div class="date">{{ dossier.date }}</div>
+          <div class="dossier" 
+          *ngFor="let dossier of dossiers"
+          [routerLink]="['/doctor/Patient/consultation'] "
+          [queryParams]="{
+            nom: nom, 
+             numSecuriteSociale: numSecuriteSociale, 
+             idSejour: idSejour,
+             debutSejour: debutSejour,
+             finSejour: finSejour,
+            idConsultation: dossier.id }">
+           <img src="Dossier.png" alt=" dossier.date" />
+            <div class="date">{{dossier.date }}</div>
           </div>
+         
         </div>
 
 
