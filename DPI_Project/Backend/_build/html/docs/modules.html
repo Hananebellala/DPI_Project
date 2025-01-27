@@ -1,0 +1,715 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Backend &mdash; Gestionnaire du dossier patient informatisé 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Gestionnaire du dossier patient informatisé
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Backend</a></li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Gestionnaire du dossier patient informatisé</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Backend</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/docs/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="backend">
+<h1>Backend<a class="headerlink" href="#backend" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DPI.html">DPI package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="DPI.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DPI.migrations.html">DPI.migrations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.migrations.html#module-DPI.migrations.0001_initial">DPI.migrations.0001_initial module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.migrations.html#module-DPI.migrations">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.views.html">DPI.views package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.views.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.views.html#module-DPI.views.accounts">DPI.views.accounts module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.views.html#module-DPI.views.consultation">DPI.views.consultation module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.views.html#module-DPI.views.contact">DPI.views.contact module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.views.html#module-DPI.views.facture">DPI.views.facture module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.views.html#module-DPI.views.hopital">DPI.views.hopital module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.views.html#module-DPI.views.laboratoire">DPI.views.laboratoire module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.views.html#module-DPI.views.login">DPI.views.login module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.views.html#module-DPI.views.medications">DPI.views.medications module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.views.html#module-DPI.views.patients">DPI.views.patients module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.views.html#module-DPI.views.sejour">DPI.views.sejour module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.views.html#module-DPI.views.services">DPI.views.services module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.views.html#module-DPI.views">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="DPI.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DPI.html#module-DPI.admin">DPI.admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DPI.html#module-DPI.apps">DPI.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.apps.DpiConfig"><code class="docutils literal notranslate"><span class="pre">DpiConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.apps.DpiConfig.name"><code class="docutils literal notranslate"><span class="pre">DpiConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="DPI.html#module-DPI.forms">DPI.forms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.forms.AdminLoginForm"><code class="docutils literal notranslate"><span class="pre">AdminLoginForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.forms.AdminLoginForm.Meta"><code class="docutils literal notranslate"><span class="pre">AdminLoginForm.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.forms.AdminLoginForm.base_fields"><code class="docutils literal notranslate"><span class="pre">AdminLoginForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.forms.AdminLoginForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">AdminLoginForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.forms.AdminLoginForm.media"><code class="docutils literal notranslate"><span class="pre">AdminLoginForm.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.forms.AdminSignUpForm"><code class="docutils literal notranslate"><span class="pre">AdminSignUpForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.forms.AdminSignUpForm.Meta"><code class="docutils literal notranslate"><span class="pre">AdminSignUpForm.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.forms.AdminSignUpForm.base_fields"><code class="docutils literal notranslate"><span class="pre">AdminSignUpForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.forms.AdminSignUpForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">AdminSignUpForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.forms.AdminSignUpForm.media"><code class="docutils literal notranslate"><span class="pre">AdminSignUpForm.media</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="DPI.html#module-DPI.models">DPI.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.Antecedent"><code class="docutils literal notranslate"><span class="pre">Antecedent</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Antecedent.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Antecedent.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Antecedent.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Antecedent.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Antecedent.TYPE"><code class="docutils literal notranslate"><span class="pre">Antecedent.TYPE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Antecedent.clean"><code class="docutils literal notranslate"><span class="pre">Antecedent.clean()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Antecedent.description"><code class="docutils literal notranslate"><span class="pre">Antecedent.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Antecedent.get_typeAntecedent_display"><code class="docutils literal notranslate"><span class="pre">Antecedent.get_typeAntecedent_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Antecedent.id"><code class="docutils literal notranslate"><span class="pre">Antecedent.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Antecedent.idConsultation"><code class="docutils literal notranslate"><span class="pre">Antecedent.idConsultation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Antecedent.idConsultation_id"><code class="docutils literal notranslate"><span class="pre">Antecedent.idConsultation_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Antecedent.objects"><code class="docutils literal notranslate"><span class="pre">Antecedent.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Antecedent.typeAntecedent"><code class="docutils literal notranslate"><span class="pre">Antecedent.typeAntecedent</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.BilanBiologique"><code class="docutils literal notranslate"><span class="pre">BilanBiologique</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanBiologique.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">BilanBiologique.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanBiologique.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">BilanBiologique.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanBiologique.dateExamen"><code class="docutils literal notranslate"><span class="pre">BilanBiologique.dateExamen</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanBiologique.get_next_by_dateExamen"><code class="docutils literal notranslate"><span class="pre">BilanBiologique.get_next_by_dateExamen()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanBiologique.get_previous_by_dateExamen"><code class="docutils literal notranslate"><span class="pre">BilanBiologique.get_previous_by_dateExamen()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanBiologique.id"><code class="docutils literal notranslate"><span class="pre">BilanBiologique.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanBiologique.idSejour"><code class="docutils literal notranslate"><span class="pre">BilanBiologique.idSejour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanBiologique.idSejour_id"><code class="docutils literal notranslate"><span class="pre">BilanBiologique.idSejour_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanBiologique.ligneanalyse_set"><code class="docutils literal notranslate"><span class="pre">BilanBiologique.ligneanalyse_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanBiologique.lignesignevital_set"><code class="docutils literal notranslate"><span class="pre">BilanBiologique.lignesignevital_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanBiologique.objects"><code class="docutils literal notranslate"><span class="pre">BilanBiologique.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanBiologique.resultatGlobal"><code class="docutils literal notranslate"><span class="pre">BilanBiologique.resultatGlobal</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique.TYPE"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique.TYPE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique.dateExamen"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique.dateExamen</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique.file"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique.file</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique.get_next_by_dateExamen"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique.get_next_by_dateExamen()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique.get_previous_by_dateExamen"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique.get_previous_by_dateExamen()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique.get_type_display"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique.get_type_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique.id"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique.idSejour"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique.idSejour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique.idSejour_id"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique.idSejour_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique.objects"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique.rapport"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique.rapport</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.BilanRadiologique.type"><code class="docutils literal notranslate"><span class="pre">BilanRadiologique.type</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.CompteAdministrateur"><code class="docutils literal notranslate"><span class="pre">CompteAdministrateur</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteAdministrateur.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">CompteAdministrateur.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteAdministrateur.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">CompteAdministrateur.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteAdministrateur.email"><code class="docutils literal notranslate"><span class="pre">CompteAdministrateur.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteAdministrateur.motDePasse"><code class="docutils literal notranslate"><span class="pre">CompteAdministrateur.motDePasse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteAdministrateur.nomComplet"><code class="docutils literal notranslate"><span class="pre">CompteAdministrateur.nomComplet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteAdministrateur.objects"><code class="docutils literal notranslate"><span class="pre">CompteAdministrateur.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteAdministrateur.user"><code class="docutils literal notranslate"><span class="pre">CompteAdministrateur.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteAdministrateur.user_id"><code class="docutils literal notranslate"><span class="pre">CompteAdministrateur.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.CompteEmployeeHopital"><code class="docutils literal notranslate"><span class="pre">CompteEmployeeHopital</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteEmployeeHopital.Meta"><code class="docutils literal notranslate"><span class="pre">CompteEmployeeHopital.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteEmployeeHopital.email"><code class="docutils literal notranslate"><span class="pre">CompteEmployeeHopital.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteEmployeeHopital.idHopital"><code class="docutils literal notranslate"><span class="pre">CompteEmployeeHopital.idHopital</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteEmployeeHopital.idHopital_id"><code class="docutils literal notranslate"><span class="pre">CompteEmployeeHopital.idHopital_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteEmployeeHopital.motDePasse"><code class="docutils literal notranslate"><span class="pre">CompteEmployeeHopital.motDePasse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteEmployeeHopital.nomComplet"><code class="docutils literal notranslate"><span class="pre">CompteEmployeeHopital.nomComplet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteEmployeeHopital.user"><code class="docutils literal notranslate"><span class="pre">CompteEmployeeHopital.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteEmployeeHopital.user_id"><code class="docutils literal notranslate"><span class="pre">CompteEmployeeHopital.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier.SPEC_CHOIX"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier.SPEC_CHOIX</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier.email"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier.get_specialiteInf_display"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier.get_specialiteInf_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier.idHopital"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier.idHopital</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier.idHopital_id"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier.idHopital_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier.motDePasse"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier.motDePasse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier.nomComplet"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier.nomComplet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier.objects"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier.soin_set"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier.soin_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier.specialiteInf"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier.specialiteInf</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier.user"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteInfirmier.user_id"><code class="docutils literal notranslate"><span class="pre">CompteInfirmier.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.CompteLaborantin"><code class="docutils literal notranslate"><span class="pre">CompteLaborantin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteLaborantin.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">CompteLaborantin.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteLaborantin.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">CompteLaborantin.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteLaborantin.email"><code class="docutils literal notranslate"><span class="pre">CompteLaborantin.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteLaborantin.idHopital"><code class="docutils literal notranslate"><span class="pre">CompteLaborantin.idHopital</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteLaborantin.idHopital_id"><code class="docutils literal notranslate"><span class="pre">CompteLaborantin.idHopital_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteLaborantin.motDePasse"><code class="docutils literal notranslate"><span class="pre">CompteLaborantin.motDePasse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteLaborantin.nomComplet"><code class="docutils literal notranslate"><span class="pre">CompteLaborantin.nomComplet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteLaborantin.objects"><code class="docutils literal notranslate"><span class="pre">CompteLaborantin.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteLaborantin.user"><code class="docutils literal notranslate"><span class="pre">CompteLaborantin.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteLaborantin.user_id"><code class="docutils literal notranslate"><span class="pre">CompteLaborantin.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin"><code class="docutils literal notranslate"><span class="pre">CompteMedecin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.SPEC_CHOIX"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.SPEC_CHOIX</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.email"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.get_profile_url"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.get_profile_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.get_specialite_display"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.get_specialite_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.idHopital"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.idHopital</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.idHopital_id"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.idHopital_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.motDePasse"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.motDePasse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.nomComplet"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.nomComplet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.objects"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.sejour_set"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.sejour_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.specialite"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.specialite</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.user"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteMedecin.user_id"><code class="docutils literal notranslate"><span class="pre">CompteMedecin.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.ComptePatient"><code class="docutils literal notranslate"><span class="pre">ComptePatient</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePatient.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">ComptePatient.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePatient.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">ComptePatient.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePatient.dossierPatient"><code class="docutils literal notranslate"><span class="pre">ComptePatient.dossierPatient</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePatient.dossierPatient_id"><code class="docutils literal notranslate"><span class="pre">ComptePatient.dossierPatient_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePatient.email"><code class="docutils literal notranslate"><span class="pre">ComptePatient.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePatient.motDePasse"><code class="docutils literal notranslate"><span class="pre">ComptePatient.motDePasse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePatient.nomComplet"><code class="docutils literal notranslate"><span class="pre">ComptePatient.nomComplet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePatient.objects"><code class="docutils literal notranslate"><span class="pre">ComptePatient.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePatient.user"><code class="docutils literal notranslate"><span class="pre">ComptePatient.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePatient.user_id"><code class="docutils literal notranslate"><span class="pre">ComptePatient.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonne"><code class="docutils literal notranslate"><span class="pre">ComptePersonne</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonne.Meta"><code class="docutils literal notranslate"><span class="pre">ComptePersonne.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonne.email"><code class="docutils literal notranslate"><span class="pre">ComptePersonne.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonne.get_profile_url"><code class="docutils literal notranslate"><span class="pre">ComptePersonne.get_profile_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonne.motDePasse"><code class="docutils literal notranslate"><span class="pre">ComptePersonne.motDePasse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonne.nomComplet"><code class="docutils literal notranslate"><span class="pre">ComptePersonne.nomComplet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonne.user"><code class="docutils literal notranslate"><span class="pre">ComptePersonne.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonne.user_id"><code class="docutils literal notranslate"><span class="pre">ComptePersonne.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonnelAdministratif"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratif</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonnelAdministratif.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratif.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonnelAdministratif.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratif.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonnelAdministratif.SERVICE_CHOIX"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratif.SERVICE_CHOIX</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonnelAdministratif.email"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratif.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonnelAdministratif.get_service_display"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratif.get_service_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonnelAdministratif.idHopital"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratif.idHopital</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonnelAdministratif.idHopital_id"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratif.idHopital_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonnelAdministratif.motDePasse"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratif.motDePasse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonnelAdministratif.nomComplet"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratif.nomComplet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonnelAdministratif.objects"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratif.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonnelAdministratif.service"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratif.service</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonnelAdministratif.user"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratif.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePersonnelAdministratif.user_id"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratif.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.ComptePharmacien"><code class="docutils literal notranslate"><span class="pre">ComptePharmacien</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePharmacien.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">ComptePharmacien.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePharmacien.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">ComptePharmacien.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePharmacien.email"><code class="docutils literal notranslate"><span class="pre">ComptePharmacien.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePharmacien.idHopital"><code class="docutils literal notranslate"><span class="pre">ComptePharmacien.idHopital</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePharmacien.idHopital_id"><code class="docutils literal notranslate"><span class="pre">ComptePharmacien.idHopital_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePharmacien.motDePasse"><code class="docutils literal notranslate"><span class="pre">ComptePharmacien.motDePasse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePharmacien.nomComplet"><code class="docutils literal notranslate"><span class="pre">ComptePharmacien.nomComplet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePharmacien.objects"><code class="docutils literal notranslate"><span class="pre">ComptePharmacien.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePharmacien.user"><code class="docutils literal notranslate"><span class="pre">ComptePharmacien.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ComptePharmacien.user_id"><code class="docutils literal notranslate"><span class="pre">ComptePharmacien.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.CompteRadiologue"><code class="docutils literal notranslate"><span class="pre">CompteRadiologue</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteRadiologue.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">CompteRadiologue.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteRadiologue.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">CompteRadiologue.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteRadiologue.email"><code class="docutils literal notranslate"><span class="pre">CompteRadiologue.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteRadiologue.idHopital"><code class="docutils literal notranslate"><span class="pre">CompteRadiologue.idHopital</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteRadiologue.idHopital_id"><code class="docutils literal notranslate"><span class="pre">CompteRadiologue.idHopital_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteRadiologue.motDePasse"><code class="docutils literal notranslate"><span class="pre">CompteRadiologue.motDePasse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteRadiologue.nomComplet"><code class="docutils literal notranslate"><span class="pre">CompteRadiologue.nomComplet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteRadiologue.objects"><code class="docutils literal notranslate"><span class="pre">CompteRadiologue.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteRadiologue.user"><code class="docutils literal notranslate"><span class="pre">CompteRadiologue.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.CompteRadiologue.user_id"><code class="docutils literal notranslate"><span class="pre">CompteRadiologue.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.OUTILS"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.OUTILS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.antecedent_set"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.antecedent_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.dateConsultation"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.dateConsultation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.dateProchaineConsultation"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.dateProchaineConsultation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.diagnostic_set"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.diagnostic_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.get_next_by_dateConsultation"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.get_next_by_dateConsultation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.get_outilsConsultation_display"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.get_outilsConsultation_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.get_previous_by_dateConsultation"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.get_previous_by_dateConsultation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.id"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.idSejour"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.idSejour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.idSejour_id"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.idSejour_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.objects"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.outilsConsultation"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.outilsConsultation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.premiere"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.premiere</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ConsultationMedicale.resume"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicale.resume</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.DPI"><code class="docutils literal notranslate"><span class="pre">DPI</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.DPI.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">DPI.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.DPI.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">DPI.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.DPI.adresse"><code class="docutils literal notranslate"><span class="pre">DPI.adresse</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.DPI.comptepatient_set"><code class="docutils literal notranslate"><span class="pre">DPI.comptepatient_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.DPI.dateDeNaissance"><code class="docutils literal notranslate"><span class="pre">DPI.dateDeNaissance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.DPI.get_next_by_dateDeNaissance"><code class="docutils literal notranslate"><span class="pre">DPI.get_next_by_dateDeNaissance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.DPI.get_previous_by_dateDeNaissance"><code class="docutils literal notranslate"><span class="pre">DPI.get_previous_by_dateDeNaissance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.DPI.idMedecinTraitant"><code class="docutils literal notranslate"><span class="pre">DPI.idMedecinTraitant</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.DPI.mutuelle"><code class="docutils literal notranslate"><span class="pre">DPI.mutuelle</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.DPI.numeroSecuriteSociale"><code class="docutils literal notranslate"><span class="pre">DPI.numeroSecuriteSociale</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.DPI.objects"><code class="docutils literal notranslate"><span class="pre">DPI.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.DPI.personneAcontacter"><code class="docutils literal notranslate"><span class="pre">DPI.personneAcontacter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.DPI.sejour_set"><code class="docutils literal notranslate"><span class="pre">DPI.sejour_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.DPI.telephone"><code class="docutils literal notranslate"><span class="pre">DPI.telephone</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.Diagnostic"><code class="docutils literal notranslate"><span class="pre">Diagnostic</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Diagnostic.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Diagnostic.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Diagnostic.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Diagnostic.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Diagnostic.descriptionMaladie"><code class="docutils literal notranslate"><span class="pre">Diagnostic.descriptionMaladie</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Diagnostic.id"><code class="docutils literal notranslate"><span class="pre">Diagnostic.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Diagnostic.idConsultation"><code class="docutils literal notranslate"><span class="pre">Diagnostic.idConsultation</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Diagnostic.idConsultation_id"><code class="docutils literal notranslate"><span class="pre">Diagnostic.idConsultation_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Diagnostic.idSejour"><code class="docutils literal notranslate"><span class="pre">Diagnostic.idSejour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Diagnostic.idSejour_id"><code class="docutils literal notranslate"><span class="pre">Diagnostic.idSejour_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Diagnostic.objects"><code class="docutils literal notranslate"><span class="pre">Diagnostic.objects</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.EffetSecondaire"><code class="docutils literal notranslate"><span class="pre">EffetSecondaire</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.EffetSecondaire.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">EffetSecondaire.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.EffetSecondaire.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">EffetSecondaire.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.EffetSecondaire.descriptionEffetSecondaire"><code class="docutils literal notranslate"><span class="pre">EffetSecondaire.descriptionEffetSecondaire</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.EffetSecondaire.id"><code class="docutils literal notranslate"><span class="pre">EffetSecondaire.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.EffetSecondaire.nomMedicament"><code class="docutils literal notranslate"><span class="pre">EffetSecondaire.nomMedicament</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.EffetSecondaire.nomMedicament_id"><code class="docutils literal notranslate"><span class="pre">EffetSecondaire.nomMedicament_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.EffetSecondaire.objects"><code class="docutils literal notranslate"><span class="pre">EffetSecondaire.objects</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.ExamenComplementaire"><code class="docutils literal notranslate"><span class="pre">ExamenComplementaire</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ExamenComplementaire.Meta"><code class="docutils literal notranslate"><span class="pre">ExamenComplementaire.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ExamenComplementaire.dateExamen"><code class="docutils literal notranslate"><span class="pre">ExamenComplementaire.dateExamen</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ExamenComplementaire.get_next_by_dateExamen"><code class="docutils literal notranslate"><span class="pre">ExamenComplementaire.get_next_by_dateExamen()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ExamenComplementaire.get_previous_by_dateExamen"><code class="docutils literal notranslate"><span class="pre">ExamenComplementaire.get_previous_by_dateExamen()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ExamenComplementaire.idSejour"><code class="docutils literal notranslate"><span class="pre">ExamenComplementaire.idSejour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.ExamenComplementaire.idSejour_id"><code class="docutils literal notranslate"><span class="pre">ExamenComplementaire.idSejour_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.Facture"><code class="docutils literal notranslate"><span class="pre">Facture</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Facture.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Facture.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Facture.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Facture.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Facture.dateFacture"><code class="docutils literal notranslate"><span class="pre">Facture.dateFacture</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Facture.get_next_by_dateFacture"><code class="docutils literal notranslate"><span class="pre">Facture.get_next_by_dateFacture()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Facture.get_previous_by_dateFacture"><code class="docutils literal notranslate"><span class="pre">Facture.get_previous_by_dateFacture()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Facture.id"><code class="docutils literal notranslate"><span class="pre">Facture.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Facture.idSejour"><code class="docutils literal notranslate"><span class="pre">Facture.idSejour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Facture.idSejour_id"><code class="docutils literal notranslate"><span class="pre">Facture.idSejour_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Facture.lignefacture_set"><code class="docutils literal notranslate"><span class="pre">Facture.lignefacture_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Facture.montant"><code class="docutils literal notranslate"><span class="pre">Facture.montant</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Facture.objects"><code class="docutils literal notranslate"><span class="pre">Facture.objects</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.Hopital"><code class="docutils literal notranslate"><span class="pre">Hopital</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Hopital.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Hopital.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Hopital.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Hopital.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Hopital.compteinfirmier_set"><code class="docutils literal notranslate"><span class="pre">Hopital.compteinfirmier_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Hopital.comptelaborantin_set"><code class="docutils literal notranslate"><span class="pre">Hopital.comptelaborantin_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Hopital.comptemedecin_set"><code class="docutils literal notranslate"><span class="pre">Hopital.comptemedecin_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Hopital.comptepersonneladministratif_set"><code class="docutils literal notranslate"><span class="pre">Hopital.comptepersonneladministratif_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Hopital.comptepharmacien_set"><code class="docutils literal notranslate"><span class="pre">Hopital.comptepharmacien_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Hopital.compteradiologue_set"><code class="docutils literal notranslate"><span class="pre">Hopital.compteradiologue_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Hopital.nom"><code class="docutils literal notranslate"><span class="pre">Hopital.nom</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Hopital.objects"><code class="docutils literal notranslate"><span class="pre">Hopital.objects</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.LigneAnalyse"><code class="docutils literal notranslate"><span class="pre">LigneAnalyse</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneAnalyse.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">LigneAnalyse.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneAnalyse.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">LigneAnalyse.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneAnalyse.TYPE"><code class="docutils literal notranslate"><span class="pre">LigneAnalyse.TYPE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneAnalyse.get_type_display"><code class="docutils literal notranslate"><span class="pre">LigneAnalyse.get_type_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneAnalyse.get_unite_display"><code class="docutils literal notranslate"><span class="pre">LigneAnalyse.get_unite_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneAnalyse.id"><code class="docutils literal notranslate"><span class="pre">LigneAnalyse.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneAnalyse.idBilanBiologique"><code class="docutils literal notranslate"><span class="pre">LigneAnalyse.idBilanBiologique</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneAnalyse.idBilanBiologique_id"><code class="docutils literal notranslate"><span class="pre">LigneAnalyse.idBilanBiologique_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneAnalyse.objects"><code class="docutils literal notranslate"><span class="pre">LigneAnalyse.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneAnalyse.resultat"><code class="docutils literal notranslate"><span class="pre">LigneAnalyse.resultat</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneAnalyse.type"><code class="docutils literal notranslate"><span class="pre">LigneAnalyse.type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneAnalyse.unite"><code class="docutils literal notranslate"><span class="pre">LigneAnalyse.unite</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.LigneBilanBiologique"><code class="docutils literal notranslate"><span class="pre">LigneBilanBiologique</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneBilanBiologique.Meta"><code class="docutils literal notranslate"><span class="pre">LigneBilanBiologique.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneBilanBiologique.UNIT"><code class="docutils literal notranslate"><span class="pre">LigneBilanBiologique.UNIT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneBilanBiologique.get_unite_display"><code class="docutils literal notranslate"><span class="pre">LigneBilanBiologique.get_unite_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneBilanBiologique.idBilanBiologique"><code class="docutils literal notranslate"><span class="pre">LigneBilanBiologique.idBilanBiologique</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneBilanBiologique.idBilanBiologique_id"><code class="docutils literal notranslate"><span class="pre">LigneBilanBiologique.idBilanBiologique_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneBilanBiologique.resultat"><code class="docutils literal notranslate"><span class="pre">LigneBilanBiologique.resultat</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneBilanBiologique.unite"><code class="docutils literal notranslate"><span class="pre">LigneBilanBiologique.unite</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.LigneFacture"><code class="docutils literal notranslate"><span class="pre">LigneFacture</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneFacture.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">LigneFacture.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneFacture.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">LigneFacture.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneFacture.fraisSoin"><code class="docutils literal notranslate"><span class="pre">LigneFacture.fraisSoin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneFacture.id"><code class="docutils literal notranslate"><span class="pre">LigneFacture.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneFacture.idFacture"><code class="docutils literal notranslate"><span class="pre">LigneFacture.idFacture</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneFacture.idFacture_id"><code class="docutils literal notranslate"><span class="pre">LigneFacture.idFacture_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneFacture.idSoin"><code class="docutils literal notranslate"><span class="pre">LigneFacture.idSoin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneFacture.idSoin_id"><code class="docutils literal notranslate"><span class="pre">LigneFacture.idSoin_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneFacture.objects"><code class="docutils literal notranslate"><span class="pre">LigneFacture.objects</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.LigneSigneVital"><code class="docutils literal notranslate"><span class="pre">LigneSigneVital</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneSigneVital.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">LigneSigneVital.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneSigneVital.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">LigneSigneVital.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneSigneVital.TYPE"><code class="docutils literal notranslate"><span class="pre">LigneSigneVital.TYPE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneSigneVital.get_type_display"><code class="docutils literal notranslate"><span class="pre">LigneSigneVital.get_type_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneSigneVital.get_unite_display"><code class="docutils literal notranslate"><span class="pre">LigneSigneVital.get_unite_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneSigneVital.id"><code class="docutils literal notranslate"><span class="pre">LigneSigneVital.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneSigneVital.idBilanBiologique"><code class="docutils literal notranslate"><span class="pre">LigneSigneVital.idBilanBiologique</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneSigneVital.idBilanBiologique_id"><code class="docutils literal notranslate"><span class="pre">LigneSigneVital.idBilanBiologique_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneSigneVital.objects"><code class="docutils literal notranslate"><span class="pre">LigneSigneVital.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneSigneVital.resultat"><code class="docutils literal notranslate"><span class="pre">LigneSigneVital.resultat</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneSigneVital.type"><code class="docutils literal notranslate"><span class="pre">LigneSigneVital.type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.LigneSigneVital.unite"><code class="docutils literal notranslate"><span class="pre">LigneSigneVital.unite</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.Medicament"><code class="docutils literal notranslate"><span class="pre">Medicament</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Medicament.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Medicament.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Medicament.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Medicament.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Medicament.TYPE_MED"><code class="docutils literal notranslate"><span class="pre">Medicament.TYPE_MED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Medicament.effetsecondaire_set"><code class="docutils literal notranslate"><span class="pre">Medicament.effetsecondaire_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Medicament.forme"><code class="docutils literal notranslate"><span class="pre">Medicament.forme</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Medicament.get_forme_display"><code class="docutils literal notranslate"><span class="pre">Medicament.get_forme_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Medicament.nomMedicament"><code class="docutils literal notranslate"><span class="pre">Medicament.nomMedicament</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Medicament.objects"><code class="docutils literal notranslate"><span class="pre">Medicament.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Medicament.posologie_set"><code class="docutils literal notranslate"><span class="pre">Medicament.posologie_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Medicament.quantiteStock"><code class="docutils literal notranslate"><span class="pre">Medicament.quantiteStock</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.Meta"><code class="docutils literal notranslate"><span class="pre">Meta</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Meta.db_table"><code class="docutils literal notranslate"><span class="pre">Meta.db_table</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.Ordonnance"><code class="docutils literal notranslate"><span class="pre">Ordonnance</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Ordonnance.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Ordonnance.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Ordonnance.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Ordonnance.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Ordonnance.dateOrdonnance"><code class="docutils literal notranslate"><span class="pre">Ordonnance.dateOrdonnance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Ordonnance.get_next_by_dateOrdonnance"><code class="docutils literal notranslate"><span class="pre">Ordonnance.get_next_by_dateOrdonnance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Ordonnance.get_previous_by_dateOrdonnance"><code class="docutils literal notranslate"><span class="pre">Ordonnance.get_previous_by_dateOrdonnance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Ordonnance.id"><code class="docutils literal notranslate"><span class="pre">Ordonnance.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Ordonnance.idSejour"><code class="docutils literal notranslate"><span class="pre">Ordonnance.idSejour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Ordonnance.idSejour_id"><code class="docutils literal notranslate"><span class="pre">Ordonnance.idSejour_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Ordonnance.objects"><code class="docutils literal notranslate"><span class="pre">Ordonnance.objects</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.PieceJointe"><code class="docutils literal notranslate"><span class="pre">PieceJointe</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.PieceJointe.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">PieceJointe.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.PieceJointe.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">PieceJointe.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.PieceJointe.file"><code class="docutils literal notranslate"><span class="pre">PieceJointe.file</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.PieceJointe.id"><code class="docutils literal notranslate"><span class="pre">PieceJointe.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.PieceJointe.objects"><code class="docutils literal notranslate"><span class="pre">PieceJointe.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.PieceJointe.url"><code class="docutils literal notranslate"><span class="pre">PieceJointe.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.Posologie"><code class="docutils literal notranslate"><span class="pre">Posologie</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Posologie.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Posologie.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Posologie.Frequency"><code class="docutils literal notranslate"><span class="pre">Posologie.Frequency</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Posologie.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Posologie.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Posologie.dose"><code class="docutils literal notranslate"><span class="pre">Posologie.dose</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Posologie.dureePrise"><code class="docutils literal notranslate"><span class="pre">Posologie.dureePrise</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Posologie.id"><code class="docutils literal notranslate"><span class="pre">Posologie.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Posologie.idSejour"><code class="docutils literal notranslate"><span class="pre">Posologie.idSejour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Posologie.idSejour_id"><code class="docutils literal notranslate"><span class="pre">Posologie.idSejour_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Posologie.nomMedicament"><code class="docutils literal notranslate"><span class="pre">Posologie.nomMedicament</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Posologie.nomMedicament_id"><code class="docutils literal notranslate"><span class="pre">Posologie.nomMedicament_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Posologie.objects"><code class="docutils literal notranslate"><span class="pre">Posologie.objects</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.Sejour"><code class="docutils literal notranslate"><span class="pre">Sejour</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Sejour.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Sejour.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.bilanbiologique_set"><code class="docutils literal notranslate"><span class="pre">Sejour.bilanbiologique_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.bilanradiologique_set"><code class="docutils literal notranslate"><span class="pre">Sejour.bilanradiologique_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.consultationmedicale_set"><code class="docutils literal notranslate"><span class="pre">Sejour.consultationmedicale_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.dateDebutSejour"><code class="docutils literal notranslate"><span class="pre">Sejour.dateDebutSejour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.dateFinSejour"><code class="docutils literal notranslate"><span class="pre">Sejour.dateFinSejour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.diagnostic_set"><code class="docutils literal notranslate"><span class="pre">Sejour.diagnostic_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.facture_set"><code class="docutils literal notranslate"><span class="pre">Sejour.facture_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.get_next_by_dateDebutSejour"><code class="docutils literal notranslate"><span class="pre">Sejour.get_next_by_dateDebutSejour()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.get_next_by_dateFinSejour"><code class="docutils literal notranslate"><span class="pre">Sejour.get_next_by_dateFinSejour()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.get_previous_by_dateDebutSejour"><code class="docutils literal notranslate"><span class="pre">Sejour.get_previous_by_dateDebutSejour()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.get_previous_by_dateFinSejour"><code class="docutils literal notranslate"><span class="pre">Sejour.get_previous_by_dateFinSejour()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.id"><code class="docutils literal notranslate"><span class="pre">Sejour.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.idCompteMedecin"><code class="docutils literal notranslate"><span class="pre">Sejour.idCompteMedecin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.idCompteMedecin_id"><code class="docutils literal notranslate"><span class="pre">Sejour.idCompteMedecin_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.idDossierPatient"><code class="docutils literal notranslate"><span class="pre">Sejour.idDossierPatient</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.idDossierPatient_id"><code class="docutils literal notranslate"><span class="pre">Sejour.idDossierPatient_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.motifAdmission"><code class="docutils literal notranslate"><span class="pre">Sejour.motifAdmission</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.objects"><code class="docutils literal notranslate"><span class="pre">Sejour.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.ordonnance_set"><code class="docutils literal notranslate"><span class="pre">Sejour.ordonnance_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.posologie_set"><code class="docutils literal notranslate"><span class="pre">Sejour.posologie_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Sejour.soin_set"><code class="docutils literal notranslate"><span class="pre">Sejour.soin_set</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.Soin"><code class="docutils literal notranslate"><span class="pre">Soin</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Soin.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Soin.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Soin.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Soin.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Soin.SOIN_CHOIX"><code class="docutils literal notranslate"><span class="pre">Soin.SOIN_CHOIX</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Soin.get_typeSoin_display"><code class="docutils literal notranslate"><span class="pre">Soin.get_typeSoin_display()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Soin.id"><code class="docutils literal notranslate"><span class="pre">Soin.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Soin.idInfirmier"><code class="docutils literal notranslate"><span class="pre">Soin.idInfirmier</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Soin.idInfirmier_id"><code class="docutils literal notranslate"><span class="pre">Soin.idInfirmier_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Soin.idSejour"><code class="docutils literal notranslate"><span class="pre">Soin.idSejour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Soin.idSejour_id"><code class="docutils literal notranslate"><span class="pre">Soin.idSejour_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Soin.lignefacture_set"><code class="docutils literal notranslate"><span class="pre">Soin.lignefacture_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Soin.objects"><code class="docutils literal notranslate"><span class="pre">Soin.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Soin.resumeSoin"><code class="docutils literal notranslate"><span class="pre">Soin.resumeSoin</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.models.Soin.typeSoin"><code class="docutils literal notranslate"><span class="pre">Soin.typeSoin</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.is_NSS"><code class="docutils literal notranslate"><span class="pre">is_NSS()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.is_email"><code class="docutils literal notranslate"><span class="pre">is_email()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.models.is_phonenumber"><code class="docutils literal notranslate"><span class="pre">is_phonenumber()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="DPI.html#module-DPI.serializers">DPI.serializers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.AntecedentSerializer"><code class="docutils literal notranslate"><span class="pre">AntecedentSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.AntecedentSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">AntecedentSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.BRSerializer"><code class="docutils literal notranslate"><span class="pre">BRSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.BRSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">BRSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.BilanBiologiqueSerializer"><code class="docutils literal notranslate"><span class="pre">BilanBiologiqueSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.BilanBiologiqueSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">BilanBiologiqueSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.CompteAdministrateurSerializer"><code class="docutils literal notranslate"><span class="pre">CompteAdministrateurSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.CompteAdministrateurSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">CompteAdministrateurSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.CompteInfirmierSerializer"><code class="docutils literal notranslate"><span class="pre">CompteInfirmierSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.CompteInfirmierSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">CompteInfirmierSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.CompteLaborantinSerializer"><code class="docutils literal notranslate"><span class="pre">CompteLaborantinSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.CompteLaborantinSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">CompteLaborantinSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.CompteMedecinSerializer"><code class="docutils literal notranslate"><span class="pre">CompteMedecinSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.CompteMedecinSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">CompteMedecinSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.ComptePatientSerializer"><code class="docutils literal notranslate"><span class="pre">ComptePatientSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.ComptePatientSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">ComptePatientSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.ComptePersonnelAdministratifSerializer"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratifSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.ComptePersonnelAdministratifSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">ComptePersonnelAdministratifSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.ComptePharmacienSerializer"><code class="docutils literal notranslate"><span class="pre">ComptePharmacienSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.ComptePharmacienSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">ComptePharmacienSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.CompteRadiologueSerializer"><code class="docutils literal notranslate"><span class="pre">CompteRadiologueSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.CompteRadiologueSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">CompteRadiologueSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.ConsultationMedicaleSerializer"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicaleSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.ConsultationMedicaleSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">ConsultationMedicaleSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.DPISerializer"><code class="docutils literal notranslate"><span class="pre">DPISerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.DPISerializer.Meta"><code class="docutils literal notranslate"><span class="pre">DPISerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.DiagnosticSerializer"><code class="docutils literal notranslate"><span class="pre">DiagnosticSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.DiagnosticSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">DiagnosticSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.EffetSecondaireSerializer"><code class="docutils literal notranslate"><span class="pre">EffetSecondaireSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.EffetSecondaireSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">EffetSecondaireSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.EmailCheckSerializer"><code class="docutils literal notranslate"><span class="pre">EmailCheckSerializer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.EmployeeSerializer"><code class="docutils literal notranslate"><span class="pre">EmployeeSerializer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.FactureSerializer"><code class="docutils literal notranslate"><span class="pre">FactureSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.FactureSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">FactureSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.HopitalSerializer"><code class="docutils literal notranslate"><span class="pre">HopitalSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.HopitalSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">HopitalSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.LigneAnalyseSerializer"><code class="docutils literal notranslate"><span class="pre">LigneAnalyseSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.LigneAnalyseSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">LigneAnalyseSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.LigneFactureSerializer"><code class="docutils literal notranslate"><span class="pre">LigneFactureSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.LigneFactureSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">LigneFactureSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.LigneSigneVitalSerializer"><code class="docutils literal notranslate"><span class="pre">LigneSigneVitalSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.LigneSigneVitalSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">LigneSigneVitalSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.MedicamentSerializer"><code class="docutils literal notranslate"><span class="pre">MedicamentSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.MedicamentSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">MedicamentSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.OrdonnanceSerializer"><code class="docutils literal notranslate"><span class="pre">OrdonnanceSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.OrdonnanceSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">OrdonnanceSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.PosologieSerializer"><code class="docutils literal notranslate"><span class="pre">PosologieSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.PosologieSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">PosologieSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.SejourSerializer"><code class="docutils literal notranslate"><span class="pre">SejourSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.SejourSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">SejourSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="DPI.html#DPI.serializers.SoinSerializer"><code class="docutils literal notranslate"><span class="pre">SoinSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="DPI.html#DPI.serializers.SoinSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">SoinSerializer.Meta</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="DPI.html#module-DPI.tests">DPI.tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DPI.html#module-DPI.urls">DPI.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DPI.html#module-DPI">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TP.html">TP package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="TP.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TP.html#module-TP.asgi">TP.asgi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TP.html#module-TP.settings">TP.settings module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="TP.html#TP.settings.INSTALLED_APPS"><code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="TP.html#module-TP.urls">TP.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TP.html#module-TP.wsgi">TP.wsgi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TP.html#module-TP">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="conf.html">conf module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manage.html">manage module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manage.html#manage.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TpIglTeam5Groupe6.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
