@@ -1,0 +1,67 @@
+<div class="laborantin-page">
+   
+
+    <div class="page-content">
+      
+        <div class="rest-page">
+        <form (submit)="saveLigneAnalyse($event)" enctype="multipart/form-data">
+            <h1>Lab Results</h1>
+            <div class="lab-results">
+                <div class="blood-count-test">
+                    <p class="title2">Complete Blood Count</p>
+                    <div class="card">
+                        <div class="form-group" id="white">
+                            <label for="wbc">White Blood Cells (u/mL)</label>
+                            <input id="wbc" #globulesBlanches type="text" placeholder="Enter value">
+                        </div>
+                        <div class="form-group" id="red">
+                            <label for="rbc">Red Blood Cells: (u/mL)</label>
+                            <input id="rbc" #globulesRouges type="text" placeholder="Enter value">
+                        </div>
+                        <div class="form-group" id="hemoglobin">
+                            <label for="hemoglobin">Hemoglobin: (g/L)</label>
+                            <input type="text" #hemoglobine placeholder="Enter value">
+                        </div>
+                        <div class="form-group" id="hematocrits">
+                            <label for="hematocrits">Hematocrits: (%)</label>
+                            <input  type="text" #hematocrites placeholder="Enter value">
+                        </div>
+                        <div class="form-group" id="platelets">
+                            <label for="platelets" >Platelets: (u/mL)</label>
+                            <input type="text" #thrombocytes placeholder="Enter value">
+                        </div>
+                    </div>
+                    <button>Cancel</button>
+                </div>
+
+                <div class="Biomarkers">
+                    <p class="title2">Biomarkers Monitoring</p>
+                    <div class="card">
+                        <div class="form-group" id="glucose">
+                            <label for="blood-glucose">Blood Glucose: (g/L)</label>
+                            <input id="blood-glucose" #glycemie type="text" placeholder="Enter value">
+                        </div>
+                        <div class="form-group" id="systolic">
+                            <label for="systolic">Systolic: (mmHg)</label>
+                            <input type="text" #tasystolique placeholder="Enter value">
+                        </div>
+                        <div class="form-group" id="diastolic">
+                            <label for="diastolic">Diastolic: (mmHg)</label>
+                            <input type="text" #tadiastolique placeholder="Enter value">
+                        </div>
+                        <div class="form-group" id="cholesterol">
+                            <label for="cholesterol">Cholesterol: (mmol/mL)</label>
+                            <input type="text" #cholesterol placeholder="Enter value">
+                        </div>
+                        <div class="form-group" id="triglycerides">
+                            <label for="triglycerides">Triglycerides: (g/L)</label>
+                            <input  type="text" #triglycerides placeholder="Enter value">
+                        </div>
+                    </div>
+                    <button>Submit</button>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>

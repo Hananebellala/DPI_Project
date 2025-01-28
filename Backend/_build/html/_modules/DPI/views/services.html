@@ -1,0 +1,157 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DPI.views.services &mdash; Gestionnaire du dossier patient informatisé 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=29a6c3e3"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Gestionnaire du dossier patient informatisé
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Gestionnaire du dossier patient informatisé</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">DPI.views.services</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for DPI.views.services</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">..serializers</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">viewsets</span>
+
+<div class="viewcode-block" id="SoinViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.services.SoinViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">SoinViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A ViewSet for viewing and editing `Soin` instances.</span>
+
+<span class="sd">    This class provides a set of views (list, retrieve, create, update, delete)</span>
+<span class="sd">    for the `Soin` model using the `SoinSerializer` serializer.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        queryset (QuerySet): A QuerySet that defines the set of `Soin` </span>
+<span class="sd">                              objects to retrieve from the database.</span>
+<span class="sd">        serializer_class (class): The serializer class used to serialize and </span>
+<span class="sd">                                  deserialize `Soin` objects.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        list(request): Returns a list of all `Soin` objects.</span>
+<span class="sd">        retrieve(request, pk): Retrieves a single `Soin` object by primary key.</span>
+<span class="sd">        create(request): Creates a new `Soin` object.</span>
+<span class="sd">        update(request, pk): Updates an existing `Soin` object by primary key.</span>
+<span class="sd">        destroy(request, pk): Deletes a single `Soin` object by primary key.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Soin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">SoinSerializer</span></div>
+
+
+
+<div class="viewcode-block" id="DiagnosticViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.services.DiagnosticViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">DiagnosticViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A ViewSet for viewing and editing `Diagnostic` instances.</span>
+
+<span class="sd">    This class provides a set of views (list, retrieve, create, update, delete)</span>
+<span class="sd">    for the `Diagnostic` model using the `DiagnosticSerializer` serializer.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        queryset (QuerySet): A QuerySet that defines the set of `Diagnostic` </span>
+<span class="sd">                              objects to retrieve from the database.</span>
+<span class="sd">        serializer_class (class): The serializer class used to serialize and </span>
+<span class="sd">                                  deserialize `Diagnostic` objects.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        list(request): Returns a list of all `Diagnostic` objects.</span>
+<span class="sd">        retrieve(request, pk): Retrieves a single `Diagnostic` object by primary key.</span>
+<span class="sd">        create(request): Creates a new `Diagnostic` object.</span>
+<span class="sd">        update(request, pk): Updates an existing `Diagnostic` object by primary key.</span>
+<span class="sd">        destroy(request, pk): Deletes a single `Diagnostic` object by primary key.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Diagnostic</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">DiagnosticSerializer</span></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TpIglTeam5Groupe6.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,735 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DPI.serializers &mdash; Gestionnaire du dossier patient informatisé 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=29a6c3e3"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Gestionnaire du dossier patient informatisé
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Gestionnaire du dossier patient informatisé</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">DPI.serializers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for DPI.serializers</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">serializers</span> 
+<span class="kn">from</span> <span class="nn">DPI.models</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="HopitalSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.HopitalSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">HopitalSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the Hopital model.</span>
+
+<span class="sd">    This serializer handles the serialization and deserialization of the </span>
+<span class="sd">    Hopital model&#39;s data. It includes all fields of the model and provides</span>
+<span class="sd">    functionality to create new Hopital instances.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="HopitalSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.HopitalSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for HopitalSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include</span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Hopital</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+        
+    
+<div class="viewcode-block" id="CompteAdministrateurSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.CompteAdministrateurSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteAdministrateurSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the CompteAdministrateur model.</span>
+
+<span class="sd">    This serializer handles the serialization and deserialization of the </span>
+<span class="sd">    CompteAdministrateur model&#39;s data. It includes all fields of the model and provides</span>
+<span class="sd">    functionality to create new CompteAdministrateur instances.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CompteAdministrateurSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.CompteAdministrateurSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for CompteAdministrateurSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include</span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">CompteAdministrateur</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+        
+ 
+<div class="viewcode-block" id="CompteMedecinSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.CompteMedecinSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteMedecinSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the CompteMedecin model.</span>
+
+<span class="sd">    This serializer is responsible for converting the CompteMedecin model&#39;s data </span>
+<span class="sd">    to and from Python data types. It ensures that all necessary fields of the </span>
+<span class="sd">    CompteMedecin model are included in the serialized output.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CompteMedecinSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.CompteMedecinSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for CompteMedecinSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include</span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">CompteMedecin</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CompteInfirmierSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.CompteInfirmierSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteInfirmierSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the CompteInfirmier model.</span>
+
+<span class="sd">    This serializer handles the conversion of CompteInfirmier model data </span>
+<span class="sd">    to and from JSON format. It ensures the inclusion of all relevant fields.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CompteInfirmierSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.CompteInfirmierSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for CompteInfirmierSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include</span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">CompteInfirmier</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ComptePersonnelAdministratifSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.ComptePersonnelAdministratifSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">ComptePersonnelAdministratifSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the ComptePersonnelAdministratif model.</span>
+
+<span class="sd">    This serializer manages the serialization and deserialization process </span>
+<span class="sd">    for the ComptePersonnelAdministratif model. It includes all necessary fields.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ComptePersonnelAdministratifSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.ComptePersonnelAdministratifSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for ComptePersonnelAdministratifSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include</span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">ComptePersonnelAdministratif</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CompteLaborantinSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.CompteLaborantinSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteLaborantinSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the CompteLaborantin model.</span>
+
+<span class="sd">    This serializer is responsible for converting the CompteLaborantin model </span>
+<span class="sd">    data into a JSON format and back. It ensures that all fields from the model </span>
+<span class="sd">    are properly serialized.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CompteLaborantinSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.CompteLaborantinSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for CompteLaborantinSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include</span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">CompteLaborantin</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CompteRadiologueSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.CompteRadiologueSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteRadiologueSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the CompteRadiologue model.</span>
+
+<span class="sd">    This serializer manages the serialization and deserialization of the </span>
+<span class="sd">    CompteRadiologue model&#39;s data. It includes all fields from the model </span>
+<span class="sd">    to ensure proper data handling.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CompteRadiologueSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.CompteRadiologueSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for CompteRadiologueSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include</span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">CompteRadiologue</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+        
+
+<div class="viewcode-block" id="ComptePatientSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.ComptePatientSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">ComptePatientSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the ComptePatient model.</span>
+
+<span class="sd">    This serializer manages the conversion of the ComptePatient model&#39;s data </span>
+<span class="sd">    to and from JSON. It includes all fields and supports creating new </span>
+<span class="sd">    ComptePatient instances.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ComptePatientSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.ComptePatientSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for ComptePatientSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">ComptePatient</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+        
+
+<div class="viewcode-block" id="DPISerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.DPISerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">DPISerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the DPI model.</span>
+
+<span class="sd">    This serializer handles the serialization and deserialization of the </span>
+<span class="sd">    DPI (Dossier Patient Informatisé) model&#39;s data. All fields are included.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="DPISerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.DPISerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for DPISerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">DPI</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+        
+
+<div class="viewcode-block" id="OrdonnanceSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.OrdonnanceSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">OrdonnanceSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the Ordonnance model.</span>
+
+<span class="sd">    This serializer is responsible for the serialization and deserialization </span>
+<span class="sd">    of Ordonnance data, ensuring that all fields are included in the process.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="OrdonnanceSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.OrdonnanceSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for OrdonnanceSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Ordonnance</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SoinSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.SoinSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">SoinSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the Soin model.</span>
+
+<span class="sd">    This serializer handles the conversion of Soin model data into a serialized </span>
+<span class="sd">    format and supports deserialization for creating new Soin instances.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="SoinSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.SoinSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for SoinSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Soin</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ConsultationMedicaleSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.ConsultationMedicaleSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">ConsultationMedicaleSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the ConsultationMedicale model.</span>
+
+<span class="sd">    This serializer is responsible for managing the serialization and </span>
+<span class="sd">    deserialization of ConsultationMedicale data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ConsultationMedicaleSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.ConsultationMedicaleSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for ConsultationMedicaleSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">ConsultationMedicale</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="AntecedentSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.AntecedentSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">AntecedentSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the Antecedent model.</span>
+
+<span class="sd">    This serializer handles the serialization and deserialization of </span>
+<span class="sd">    Antecedent model data. All fields of the model are included.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="AntecedentSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.AntecedentSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for AntecedentSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Antecedent</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+  
+
+<div class="viewcode-block" id="MedicamentSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.MedicamentSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">MedicamentSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the Medicament model.</span>
+
+<span class="sd">    This serializer is responsible for converting Medicament data to and </span>
+<span class="sd">    from serialized format, including all fields in the process.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="MedicamentSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.MedicamentSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for MedicamentSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Medicament</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+    
+
+<div class="viewcode-block" id="SejourSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.SejourSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">SejourSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the Sejour model.</span>
+
+<span class="sd">    This serializer handles the serialization and deserialization of </span>
+<span class="sd">    Sejour model data, supporting all fields of the model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="SejourSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.SejourSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for SejourSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Sejour</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DiagnosticSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.DiagnosticSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">DiagnosticSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the Diagnostic model.</span>
+
+<span class="sd">    This serializer is responsible for the conversion of Diagnostic data </span>
+<span class="sd">    to and from serialized format, including all model fields.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="DiagnosticSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.DiagnosticSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for DiagnosticSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Diagnostic</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="BRSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.BRSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">BRSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the BilanRadiologique model.</span>
+
+<span class="sd">    This serializer handles the serialization and deserialization of </span>
+<span class="sd">    BilanRadiologique data, focusing on the specified fields.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="BRSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.BRSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for BRSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">BilanRadiologique</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;rapport&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;idSejour&#39;</span><span class="p">,</span> <span class="s1">&#39;file&#39;</span><span class="p">]</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="BilanBiologiqueSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.BilanBiologiqueSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">BilanBiologiqueSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the BilanBiologique model.</span>
+
+<span class="sd">    This serializer ensures the proper handling of BilanBiologique data, </span>
+<span class="sd">    including all fields during the serialization process.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="BilanBiologiqueSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.BilanBiologiqueSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for BilanBiologiqueSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">BilanBiologique</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+   
+
+<div class="viewcode-block" id="LigneSigneVitalSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.LigneSigneVitalSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">LigneSigneVitalSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>   
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the LigneSigneVital model.</span>
+
+<span class="sd">    This serializer manages the serialization and deserialization of </span>
+<span class="sd">    LigneSigneVital data. All fields of the model are included.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="LigneSigneVitalSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.LigneSigneVitalSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for LigneSigneVitalSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">LigneSigneVital</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="LigneAnalyseSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.LigneAnalyseSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">LigneAnalyseSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>   
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the LigneAnalyse model.</span>
+
+<span class="sd">    This serializer is responsible for serializing and deserializing </span>
+<span class="sd">    LigneAnalyse data. All fields of the model are included.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="LigneAnalyseSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.LigneAnalyseSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for LigneAnalyseSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">LigneAnalyse</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="PosologieSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.PosologieSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">PosologieSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the Posologie model.</span>
+
+<span class="sd">    This serializer handles the serialization and deserialization of </span>
+<span class="sd">    Posologie data, including all fields of the model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="PosologieSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.PosologieSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for PosologieSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Posologie</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="FactureSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.FactureSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">FactureSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>        
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the Facture model.</span>
+
+<span class="sd">    This serializer manages the serialization and deserialization of </span>
+<span class="sd">    Facture data, including all fields of the model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="FactureSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.FactureSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for FactureSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Facture</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="LigneFactureSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.LigneFactureSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">LigneFactureSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the LigneFacture model.</span>
+
+<span class="sd">    This serializer is responsible for the serialization and deserialization </span>
+<span class="sd">    of LigneFacture data. All fields of the model are included.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="LigneFactureSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.LigneFactureSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for LigneFactureSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">LigneFacture</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="EffetSecondaireSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.EffetSecondaireSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">EffetSecondaireSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the EffetSecondaire model.</span>
+
+<span class="sd">    This serializer manages the serialization and deserialization of </span>
+<span class="sd">    EffetSecondaire data. All fields of the model are included.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="EffetSecondaireSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.EffetSecondaireSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for EffetSecondaireSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">EffetSecondaire</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+        
+
+<div class="viewcode-block" id="ComptePharmacienSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.ComptePharmacienSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">ComptePharmacienSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for the ComptePharmacien model.</span>
+
+<span class="sd">    This serializer manages the serialization and deserialization of </span>
+<span class="sd">    ComptePharmacien data. All fields of the model are included.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ComptePharmacienSerializer.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.ComptePharmacienSerializer.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for ComptePharmacienSerializer.</span>
+
+<span class="sd">        Specifies the model to be serialized and the fields to include </span>
+<span class="sd">        in the serialized output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">ComptePharmacien</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="EmployeeSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.EmployeeSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">EmployeeSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">Serializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for Employee data.</span>
+
+<span class="sd">    This serializer handles the serialization and deserialization of basic </span>
+<span class="sd">    employee data, including fields for email, name, and job details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">EmailField</span><span class="p">()</span>
+    <span class="n">nom</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">prenom</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">motDePasse</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+    <span class="n">profession</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">hopital</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="EmailCheckSerializer">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.serializers.EmailCheckSerializer">[docs]</a>
+<span class="k">class</span> <span class="nc">EmailCheckSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">Serializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Serializer for email validation.</span>
+
+<span class="sd">    This serializer validates and processes an email field.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">EmailField</span><span class="p">()</span></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TpIglTeam5Groupe6.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

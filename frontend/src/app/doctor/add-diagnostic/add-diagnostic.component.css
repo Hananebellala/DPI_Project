@@ -1,0 +1,160 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eef3fc; /* Background color */
+}
+
+/* Popup Container */
+.popup-container {
+  position: relative;
+  width: 400px;
+  min-height: 450px;
+  background-color: #f6f9ff; /* Light background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; /* Center content horizontally */
+}
+
+/* Header */
+.popup-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.popup-header h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+}
+
+/* Body Content */
+.popup-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center; /* Center body content */
+}
+
+.subtitle {
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+  text-align: center; /* Center align subtitles */
+}
+
+/* Diagnosis Text Area */
+.diagnosis-box {
+  width: 100%;
+  height: 120px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 10px; /* Reduced padding */
+  font-size: 14px;
+  resize: none;
+}
+
+/* Tool Selection */
+.tool-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Antecedent Text Area */
+.antecedent-box {
+  width: 100%;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 10px;
+  font-size: 14px;
+  resize: none;
+}
+
+/* Next Consultation Date */
+.date-picker {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+/* Reduce size of select element */
+select.diagnosis-box {
+  width: 180px;  /* Reduced width */
+  height: 30px;  /* Reduced height */
+  font-size: 14px; /* Smaller font */
+  padding: 5px;  /* Padding to match design */
+  border: 1px solid #ccc; /* Border style */
+  border-radius: 5px;  /* Rounded corners */
+}
+
+/* Footer Buttons */
+.footer-buttons {
+  display: flex;
+  justify-content: center; /* Center buttons */
+  gap: 10px;
+}
+
+.next-button, .finish-button, .skip-button {
+  flex: 1;
+  height: 40px;
+  width: 350px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  align-items: center;
+}
+
+.next-button {
+  background-color: #7469B6;
+  color: #fff;
+}
+
+.finish-button {
+  background-color: #4CAF50;
+  color: #fff;
+}
+
+.skip-button {
+  background-color: #FBCACA;
+  color: #fff;
+}

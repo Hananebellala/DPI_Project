@@ -1,0 +1,101 @@
+<div class="main-container">
+  <!-- Barre latérale -->
+  <div class="sidebar">
+    <img src="Logo1.png" alt="Logo" class="logo-image">
+    <a (click)="goHome()" class="menu-item">
+      <img src="home.png" alt="Home Icon" class="icon">
+      <span class="menu-text">Home</span>
+    </a>
+    <a (click)="goHome()" class="menu-item active">
+      <img src="patients.png" alt="Patients Icon" class="icon">
+      <span class="menu-text">Patient</span>
+    </a>
+  </div>
+
+  <div class="content">
+    <!--  
+    <div class="top">
+      <input type="text" placeholder="Search Patient">
+      <div class="profile">
+        <img src="Profile.png" alt="Profile Picture">
+        <span>Dr Hanane</span>
+      </div>
+    </div>-->
+    <!-- Nom du patient et boutons -->
+    <div class="patient-header">
+      <h2 class="patient-name">{{ generalInfo.nom }}</h2>
+      <div class="patient-actions">
+        <button class="btn btn-ajouter" (click)="openDialog()">Ajouter</button>
+      </div>
+    </div>
+
+    <!-- Barre de navigation -->
+    <div class="nav-bar">
+      <div class="nav-items">
+        <span class="nav-item active">Séjour</span>
+      </div>
+      <hr class="nav-line bold">
+    </div>
+    <div class="vertical-line"></div>
+
+    <div class="main-content">
+      <!-- Titre des Informations Générales -->
+      <div class="general-info-section">
+        <h3 class="general-info-title">Informations générales</h3>
+    
+        <!-- Informations Générales -->
+        <div class="general-info">
+          <div class="field">
+            <span class="field-name">Date de naissance</span>
+            <span class="field-value">{{ generalInfo.dateNaissance }}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">Statut</span>
+            <span class="field-value">{{ generalInfo.status }}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">email</span>
+            <span class="field-value">{{ generalInfo.sexe }}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">Adresse</span>
+            <span class="field-value">{{ generalInfo.adresse }}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">Numéro de sécurité sociale</span>
+            <span class="field-value">{{ generalInfo.numSecuriteSociale }}</span>
+          </div>
+        </div>
+
+        <h3 class="general-info-title">Coordonnées</h3>
+    
+        <!-- Informations Générales -->
+        <div class="general-info">
+          <div class="field">
+            <span class="field-name">Numéro de téléphone</span>
+            <span class="field-value">{{ generalInfo.numTelephone }}</span>
+          </div>
+          <div class="field">
+            <span class="field-name">Personne à contacter</span>
+            <span class="field-value">{{ generalInfo.personneAContacter }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dossiers avec Image -->
+      <div class="dossiers-container">
+        <!-- Affichage des séjours filtrés -->
+        <div *ngIf="dossiers.length === 0" class="no-sejours">
+          <p></p>
+        </div>
+        <div class="dossier" *ngFor="let dossier of dossiers" (click)="goToAll(dossier)">
+          <img [src]="'Dossier.png '" [alt]="'Dossier pour ' + dossier.dateDebutSejour" />
+          <div class="date">{{ dossier.dateDebutSejour }} </div>
+          
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

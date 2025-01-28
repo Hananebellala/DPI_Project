@@ -1,0 +1,95 @@
+/* General layout */
+.main-container {
+  display: flex;
+  height: 100vh;
+  background-color: #FFFFFA;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* Patient header styling */
+.patient-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.patient-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 35px;
+}
+
+/* Text and photo section */
+.text-photo-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.text {
+  flex: 1;
+}
+
+.text h2,
+.text h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.text p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.text p strong {
+  font-weight: bold;
+}
+
+.photo {
+  width: 400px;
+  height: 400px;
+}
+
+.photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Button styles */
+.patient-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn {
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8.5px;
+  font-size: 13.5px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.btn-ajouter {
+  background-color: #EF5350;
+}
+
+.btn-supprimer {
+  background-color: #FFCDD2;
+  color: black;
+}

@@ -1,0 +1,105 @@
+/* Styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Pour centrer le contenu sur toute la hauteur de la page */
+  }
+  
+  /* Container principal */
+  .container {
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Titre centré */
+  .title {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 23px;
+    margin-bottom: 10px; /* Réduit l'espace entre le titre et le premier champ */
+    font-weight: bold;
+  }
+  
+  /* Contenu divisé en deux colonnes */
+  .content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    height: calc(100% - 60px); /* Laisser de la place pour le titre et le bouton */
+  }
+  
+  /* Côté gauche (image) */
+  .left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Pour éviter que l'image dépasse du conteneur */
+  }
+  
+  .image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover; /* Pour couvrir l'espace sans déformer l'image */
+    border-radius: 10px;
+  }
+  
+  /* Côté droit (formulaire) */
+  .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    height: 100%;
+  }
+  
+  .right label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: -2px;
+  }
+  
+  .right input, .right textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    background-color: #EDF2FB;
+  }
+  
+  /* Textarea */
+  .right textarea {
+    resize: vertical; /* Permet de redimensionner la hauteur du textarea */
+    height: 100px; /* Hauteur initiale du textarea */
+  }
+  
+  /* Bouton suivant */
+  .next-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #EF5350;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }

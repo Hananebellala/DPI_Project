@@ -1,0 +1,71 @@
+<div class="main-container">
+  <!-- Sidebar -->
+
+
+  <!-- Main Content Wrapper -->
+  <div class="main-content-wrapper">
+    <!-- Top Bar -->
+
+
+    <!-- Content Section -->
+    <div class="content">
+      <!-- Patient Header -->
+      
+      
+      <!-- Navigation Line -->
+      
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- General Information -->
+        <div class="general-info">
+          <div class="field">
+            <span class="field-name">Date d'arrivée :</span>
+            <span class="field-value">{{debutSejour}}</span>
+          </div>
+          <hr />
+          <div class="field">
+            <span class="field-name">Fin du séjour :</span>
+            <span class="field-value">{{finSejour}}</span>
+          </div>
+          <hr />
+        </div>
+
+        <!-- Vertical Line -->
+        <div class="vertical-line"></div>
+
+        <!-- Dossiers
+        <div class="dossiers-container">
+          <div class="dossier" [routerLink]="['/consultation']">
+            <img src="Dossier.png" alt="Dossier 1" />
+            <div class="date">10/12/2024</div>
+          </div>
+          <div class="dossier" [routerLink]="['/consultation']">
+            <img src="Dossier.png" alt="Dossier 2" />
+            <div class="date">10/12/2024</div>
+          </div>
+        </div> -->
+
+
+        <div class="dossiers-container">
+          <div class="dossier" 
+          *ngFor="let dossier of dossiers"
+          [routerLink]="['/doctor/Patient/consultation'] "
+          [queryParams]="{
+            nom: nom, 
+             numSecuriteSociale: numSecuriteSociale, 
+             idSejour: idSejour,
+             debutSejour: debutSejour,
+             finSejour: finSejour,
+            idConsultation: dossier.id }">
+           <img src="Dossier.png" alt=" dossier.date" />
+            <div class="date">{{dossier.date }}</div>
+          </div>
+         
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

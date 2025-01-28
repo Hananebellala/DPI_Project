@@ -1,0 +1,866 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DPI.views.accounts &mdash; Gestionnaire du dossier patient informatisé 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=29a6c3e3"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Gestionnaire du dossier patient informatisé
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Gestionnaire du dossier patient informatisé</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">DPI.views.accounts</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for DPI.views.accounts</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+
+<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">..serializers</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">rest_framework.response</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">rest_framework.views</span> <span class="kn">import</span> <span class="n">APIView</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">status</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ValidationError</span>
+<span class="kn">from</span> <span class="nn">django.core.validators</span> <span class="kn">import</span> <span class="n">validate_email</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">viewsets</span>
+<span class="kn">from</span> <span class="nn">rest_framework.decorators</span> <span class="kn">import</span> <span class="n">api_view</span>
+<span class="kn">from</span> <span class="nn">django.views.decorators.http</span> <span class="kn">import</span> <span class="n">require_GET</span><span class="p">,</span><span class="n">require_http_methods</span>
+<span class="kn">from</span> <span class="nn">django.views.decorators.csrf</span> <span class="kn">import</span> <span class="n">csrf_exempt</span><span class="p">,</span><span class="n">csrf_protect</span>
+<span class="kn">from</span> <span class="nn">django.middleware.csrf</span> <span class="kn">import</span> <span class="n">get_token</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">JsonResponse</span>
+
+<div class="viewcode-block" id="CompteAdministrateurViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.CompteAdministrateurViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteAdministrateurViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A viewset for viewing and editing `CompteAdministrateur` instances.</span>
+
+<span class="sd">    This viewset provides the standard actions for managing `CompteAdministrateur` records:</span>
+<span class="sd">    - List all `CompteAdministrateur` accounts.</span>
+<span class="sd">    - Retrieve details of a specific `CompteAdministrateur` account.</span>
+<span class="sd">    - Create new `CompteAdministrateur` accounts.</span>
+<span class="sd">    - Update existing `CompteAdministrateur` accounts.</span>
+<span class="sd">    - Delete `CompteAdministrateur` accounts.</span>
+
+<span class="sd">    It uses the `CompteAdministrateurSerializer` to serialize data and the `CompteAdministrateur` model</span>
+<span class="sd">    as the data source.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        queryset (QuerySet): A set of all `CompteAdministrateur` instances (`CompteAdministrateur.objects.all()`).</span>
+<span class="sd">        serializer_class (Serializer): The serializer class to be used for the `CompteAdministrateur` model</span>
+<span class="sd">                                       (`CompteAdministrateurSerializer`).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - GET request: Returns a list or detail of `CompteAdministrateur` records.</span>
+<span class="sd">            - POST request: Creates a new `CompteAdministrateur` record.</span>
+<span class="sd">            - PUT/PATCH request: Updates an existing `CompteAdministrateur` record.</span>
+<span class="sd">            - DELETE request: Deletes a `CompteAdministrateur` record.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">CompteAdministrateur</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">CompteAdministrateurSerializer</span></div>
+
+
+<div class="viewcode-block" id="CompteMedecinViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.CompteMedecinViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteMedecinViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A viewset for viewing and editing `CompteMedecin` instances.</span>
+
+<span class="sd">    This viewset provides the standard actions for managing `CompteMedecin` records:</span>
+<span class="sd">    - List all `CompteMedecin` accounts.</span>
+<span class="sd">    - Retrieve details of a specific `CompteMedecin` account.</span>
+<span class="sd">    - Create new `CompteMedecin` accounts.</span>
+<span class="sd">    - Update existing `CompteMedecin` accounts.</span>
+<span class="sd">    - Delete `CompteMedecin` accounts.</span>
+
+<span class="sd">    It uses the `CompteMedecinSerializer` to serialize data and the `CompteMedecin` model</span>
+<span class="sd">    as the data source.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        queryset (QuerySet): A set of all `CompteMedecin` instances (`CompteMedecin.objects.all()`).</span>
+<span class="sd">        serializer_class (Serializer): The serializer class to be used for the `CompteMedecin` model</span>
+<span class="sd">                                    (`CompteMedecinSerializer`).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - GET request: Returns a list or detail of `CompteMedecin` records.</span>
+<span class="sd">            - POST request: Creates a new `CompteMedecin` record.</span>
+<span class="sd">            - PUT/PATCH request: Updates an existing `CompteMedecin` record.</span>
+<span class="sd">            - DELETE request: Deletes a `CompteMedecin` record.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">CompteMedecin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">CompteMedecinSerializer</span></div>
+
+
+<span class="nd">@api_view</span><span class="p">([</span><span class="s1">&#39;DELETE&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deletes a `CompteMedecin` instance based on the provided email address.</span>
+
+<span class="sd">    This view handles the deletion of a specific `CompteMedecin` account identified by the email provided in the request.</span>
+<span class="sd">    - If the account exists, it is deleted and a success message is returned.</span>
+<span class="sd">    - If the account does not exist, a 404 error is returned.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): The HTTP request object containing the email of the `CompteMedecin` to be deleted.</span>
+<span class="sd">        email (str): The email address of the `CompteMedecin` account to be deleted.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - On success: A message confirming the deletion of the account with HTTP 204 status (No Content).</span>
+<span class="sd">            - On failure: A JSON response with an error message and HTTP 404 status (Not Found) if the account is not found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="n">CompteMedecin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span>
+        <span class="n">member</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Member deleted successfully&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_204_NO_CONTENT</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">CompteMedecin</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Member not found&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CompteInfirmierViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.CompteInfirmierViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteInfirmierViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A viewset for viewing and editing `CompteInfirmier` instances.</span>
+
+<span class="sd">    This viewset provides the standard actions for managing `CompteInfirmier` records:</span>
+<span class="sd">    - List all `CompteInfirmier` accounts.</span>
+<span class="sd">    - Retrieve details of a specific `CompteInfirmier` account.</span>
+<span class="sd">    - Create new `CompteInfirmier` accounts.</span>
+<span class="sd">    - Update existing `CompteInfirmier` accounts.</span>
+<span class="sd">    - Delete `CompteInfirmier` accounts.</span>
+
+<span class="sd">    It uses the `CompteInfirmierSerializer` to serialize data and the `CompteInfirmier` model</span>
+<span class="sd">    as the data source.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        queryset (QuerySet): A set of all `CompteInfirmier` instances (`CompteInfirmier.objects.all()`).</span>
+<span class="sd">        serializer_class (Serializer): The serializer class to be used for the `CompteInfirmier` model</span>
+<span class="sd">                                    (`CompteInfirmierSerializer`).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - GET request: Returns a list or detail of `CompteInfirmier` records.</span>
+<span class="sd">            - POST request: Creates a new `CompteInfirmier` record.</span>
+<span class="sd">            - PUT/PATCH request: Updates an existing `CompteInfirmier` record.</span>
+<span class="sd">            - DELETE request: Deletes a `CompteInfirmier` record.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">CompteInfirmier</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">CompteInfirmierSerializer</span></div>
+
+
+<span class="nd">@api_view</span><span class="p">([</span><span class="s1">&#39;DELETE&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deletes a `CompteInfirmier` instance based on the provided email address.</span>
+
+<span class="sd">    This view handles the deletion of a specific `CompteInfirmier` account identified by the email provided in the request.</span>
+<span class="sd">    - If the account exists, it is deleted and a success message is returned.</span>
+<span class="sd">    - If the account does not exist, a 404 error is returned.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): The HTTP request object containing the email of the `CompteInfirmier` to be deleted.</span>
+<span class="sd">        email (str): The email address of the `CompteInfirmier` account to be deleted.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - On success: A message confirming the deletion of the account with HTTP 204 status (No Content).</span>
+<span class="sd">            - On failure: A JSON response with an error message and HTTP 404 status (Not Found) if the account is not found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="n">CompteInfirmier</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span>
+        <span class="n">member</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Member deleted successfully&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_204_NO_CONTENT</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">CompteInfirmier</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Member not found&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ComptePersonnelAdministratifViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.ComptePersonnelAdministratifViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">ComptePersonnelAdministratifViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A viewset for viewing and editing `ComptePersonnelAdministratif` instances.</span>
+
+<span class="sd">    This viewset provides the standard actions for managing `ComptePersonnelAdministratif` records:</span>
+<span class="sd">    - List all `ComptePersonnelAdministratif` accounts.</span>
+<span class="sd">    - Retrieve details of a specific `ComptePersonnelAdministratif` account.</span>
+<span class="sd">    - Create new `ComptePersonnelAdministratif` accounts.</span>
+<span class="sd">    - Update existing `ComptePersonnelAdministratif` accounts.</span>
+<span class="sd">    - Delete `ComptePersonnelAdministratif` accounts.</span>
+
+<span class="sd">    It uses the `ComptePersonnelAdministratifSerializer` to serialize data and the `ComptePersonnelAdministratif` model</span>
+<span class="sd">    as the data source.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        queryset (QuerySet): A set of all `ComptePersonnelAdministratif` instances (`ComptePersonnelAdministratif.objects.all()`).</span>
+<span class="sd">        serializer_class (Serializer): The serializer class to be used for the `ComptePersonnelAdministratif` model</span>
+<span class="sd">                                    (`ComptePersonnelAdministratifSerializer`).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - GET request: Returns a list or detail of `ComptePersonnelAdministratif` records.</span>
+<span class="sd">            - POST request: Creates a new `ComptePersonnelAdministratif` record.</span>
+<span class="sd">            - PUT/PATCH request: Updates an existing `ComptePersonnelAdministratif` record.</span>
+<span class="sd">            - DELETE request: Deletes a `ComptePersonnelAdministratif` record.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">ComptePersonnelAdministratif</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">ComptePersonnelAdministratifSerializer</span></div>
+
+
+<span class="nd">@api_view</span><span class="p">([</span><span class="s1">&#39;DELETE&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deletes a `ComptePersonnelAdministratif` instance based on the provided email address.</span>
+
+<span class="sd">    This view handles the deletion of a specific `ComptePersonnelAdministratif` account identified by the email provided in the request.</span>
+<span class="sd">    - If the account exists, it is deleted and a success message is returned.</span>
+<span class="sd">    - If the account does not exist, a 404 error is returned.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): The HTTP request object containing the email of the `ComptePersonnelAdministratif` to be deleted.</span>
+<span class="sd">        email (str): The email address of the `ComptePersonnelAdministratif` account to be deleted.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - On success: A message confirming the deletion of the account with HTTP 204 status (No Content).</span>
+<span class="sd">            - On failure: A JSON response with an error message and HTTP 404 status (Not Found) if the account is not found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="n">ComptePersonnelAdministratif</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span>
+        <span class="n">member</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Member deleted successfully&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_204_NO_CONTENT</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ComptePersonnelAdministratif</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Member not found&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CompteRadiologueViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.CompteRadiologueViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteRadiologueViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A viewset for viewing and editing `CompteRadiologue` instances.</span>
+
+<span class="sd">    This viewset provides the standard actions for managing `CompteRadiologue` records:</span>
+<span class="sd">    - List all `CompteRadiologue` accounts.</span>
+<span class="sd">    - Retrieve details of a specific `CompteRadiologue` account.</span>
+<span class="sd">    - Create new `CompteRadiologue` accounts.</span>
+<span class="sd">    - Update existing `CompteRadiologue` accounts.</span>
+<span class="sd">    - Delete `CompteRadiologue` accounts.</span>
+
+<span class="sd">    It uses the `CompteRadiologueSerializer` to serialize data and the `CompteRadiologue` model</span>
+<span class="sd">    as the data source.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        queryset (QuerySet): A set of all `CompteRadiologue` instances (`CompteRadiologue.objects.all()`).</span>
+<span class="sd">        serializer_class (Serializer): The serializer class to be used for the `CompteRadiologue` model</span>
+<span class="sd">                                    (`CompteRadiologueSerializer`).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - GET request: Returns a list or detail of `CompteRadiologue` records.</span>
+<span class="sd">            - POST request: Creates a new `CompteRadiologue` record.</span>
+<span class="sd">            - PUT/PATCH request: Updates an existing `CompteRadiologue` record.</span>
+<span class="sd">            - DELETE request: Deletes a `CompteRadiologue` record.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">CompteRadiologue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">CompteRadiologueSerializer</span></div>
+
+
+<span class="nd">@api_view</span><span class="p">([</span><span class="s1">&#39;DELETE&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deletes a `CompteRadiologue` instance based on the provided email address.</span>
+
+<span class="sd">    This view handles the deletion of a specific `CompteRadiologue` account identified by the email provided in the request.</span>
+<span class="sd">    - If the account exists, it is deleted and a success message is returned.</span>
+<span class="sd">    - If the account does not exist, a 404 error is returned.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): The HTTP request object containing the email of the `CompteRadiologue` to be deleted.</span>
+<span class="sd">        email (str): The email address of the `CompteRadiologue` account to be deleted.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - On success: A message confirming the deletion of the account with HTTP 204 status (No Content).</span>
+<span class="sd">            - On failure: A JSON response with an error message and HTTP 404 status (Not Found) if the account is not found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="n">CompteRadiologue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span>
+        <span class="n">member</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Member deleted successfully&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_204_NO_CONTENT</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">CompteRadiologue</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Member not found&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CompteLaborantinViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.CompteLaborantinViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteLaborantinViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A viewset for viewing and editing `CompteLaborantin` instances.</span>
+
+<span class="sd">    This viewset provides the standard actions for managing `CompteLaborantin` records:</span>
+<span class="sd">    - List all `CompteLaborantin` accounts.</span>
+<span class="sd">    - Retrieve details of a specific `CompteLaborantin` account.</span>
+<span class="sd">    - Create new `CompteLaborantin` accounts.</span>
+<span class="sd">    - Update existing `CompteLaborantin` accounts.</span>
+<span class="sd">    - Delete `CompteLaborantin` accounts.</span>
+
+<span class="sd">    It uses the `CompteLaborantinSerializer` to serialize data and the `CompteLaborantin` model</span>
+<span class="sd">    as the data source.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        queryset (QuerySet): A set of all `CompteLaborantin` instances (`CompteLaborantin.objects.all()`).</span>
+<span class="sd">        serializer_class (Serializer): The serializer class to be used for the `CompteLaborantin` model</span>
+<span class="sd">                                    (`CompteLaborantinSerializer`).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - GET request: Returns a list or detail of `CompteLaborantin` records.</span>
+<span class="sd">            - POST request: Creates a new `CompteLaborantin` record.</span>
+<span class="sd">            - PUT/PATCH request: Updates an existing `CompteLaborantin` record.</span>
+<span class="sd">            - DELETE request: Deletes a `CompteLaborantin` record.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">CompteLaborantin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">CompteLaborantinSerializer</span></div>
+
+
+<span class="nd">@api_view</span><span class="p">([</span><span class="s1">&#39;DELETE&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deletes a `CompteLaborantin` instance based on the provided email address.</span>
+
+<span class="sd">    This view handles the deletion of a specific `CompteLaborantin` account identified by the email provided in the request.</span>
+<span class="sd">    - If the account exists, it is deleted and a success message is returned.</span>
+<span class="sd">    - If the account does not exist, a 404 error is returned.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): The HTTP request object containing the email of the `CompteLaborantin` to be deleted.</span>
+<span class="sd">        email (str): The email address of the `CompteLaborantin` account to be deleted.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - On success: A message confirming the deletion of the account with HTTP 204 status (No Content).</span>
+<span class="sd">            - On failure: A JSON response with an error message and HTTP 404 status (Not Found) if the account is not found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="n">CompteLaborantin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span>
+        <span class="n">member</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Member deleted successfully&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_204_NO_CONTENT</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">CompteLaborantin</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Member not found&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ComptePatientViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.ComptePatientViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">ComptePatientViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A viewset for viewing and editing `ComptePatient` instances.</span>
+
+<span class="sd">    This viewset provides the standard actions for managing `ComptePatient` records:</span>
+<span class="sd">    - List all `ComptePatient` accounts.</span>
+<span class="sd">    - Retrieve details of a specific `ComptePatient` account.</span>
+<span class="sd">    - Create new `ComptePatient` accounts.</span>
+<span class="sd">    - Update existing `ComptePatient` accounts.</span>
+<span class="sd">    - Delete `ComptePatient` accounts.</span>
+
+<span class="sd">    It uses the `ComptePatientSerializer` to serialize data and the `ComptePatient` model</span>
+<span class="sd">    as the data source.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        queryset (QuerySet): A set of all `ComptePatient` instances (`ComptePatient.objects.all()`).</span>
+<span class="sd">        serializer_class (Serializer): The serializer class to be used for the `ComptePatient` model</span>
+<span class="sd">                                        (`ComptePatientSerializer`).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - GET request: Returns a list or detail of `ComptePatient` records.</span>
+<span class="sd">            - POST request: Creates a new `ComptePatient` record.</span>
+<span class="sd">            - PUT/PATCH request: Updates an existing `ComptePatient` record.</span>
+<span class="sd">            - DELETE request: Deletes a `ComptePatient` record.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">ComptePatient</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">ComptePatientSerializer</span></div>
+
+
+
+<div class="viewcode-block" id="check_mail">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.check_mail">[docs]</a>
+<span class="nd">@require_GET</span>  <span class="c1"># Ensures that only GET requests are allowed</span>
+<span class="k">def</span> <span class="nf">check_mail</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks if an email exists in any of the account models.</span>
+
+<span class="sd">    This view handles GET requests to verify whether a given email exists in any of the following account types:</span>
+<span class="sd">    - `CompteMedecin`</span>
+<span class="sd">    - `CompteInfirmier`</span>
+<span class="sd">    - `CompteAdministrateur`</span>
+<span class="sd">    - `ComptePersonnelAdministratif`</span>
+<span class="sd">    - `CompteLaborantin`</span>
+<span class="sd">    - `CompteRadiologue`</span>
+
+<span class="sd">    The email is passed as a query parameter in the request. If the email is not provided, the function returns an error message.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (HttpRequest): The HTTP request object, which contains the email query parameter to be checked.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        JsonResponse:</span>
+<span class="sd">            - On success: A JSON response with a key `exists` indicating whether the email exists in any account models.</span>
+<span class="sd">            - On failure (e.g. missing email): A JSON response with an error message indicating that the email is required.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        GET /check_mail?email=test@example.com</span>
+<span class="sd">        Response: {&quot;exists&quot;: true}  # If email exists in any model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">email</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Email is required&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+
+    <span class="c1"># Check if email exists in the database (pseudo code)</span>
+    <span class="n">email_exists</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">CompteMedecin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">or</span>
+        <span class="n">CompteInfirmier</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">or</span>
+        <span class="n">CompteAdministrateur</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">or</span>
+        <span class="n">ComptePersonnelAdministratif</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">or</span>
+        <span class="n">CompteLaborantin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">or</span>
+        <span class="n">CompteRadiologue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;exists&#39;</span><span class="p">:</span> <span class="n">email_exists</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="delete">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.delete">[docs]</a>
+<span class="nd">@csrf_exempt</span>
+<span class="nd">@require_http_methods</span><span class="p">([</span><span class="s2">&quot;DELETE&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deletes a member from the database based on the provided email address.</span>
+
+<span class="sd">    This view handles DELETE requests to remove a user account from one of several account models. The email is passed</span>
+<span class="sd">    in the URL to identify the user. If the user is found, the member is deleted from the corresponding model,</span>
+<span class="sd">    and a success message is returned. If no user is found with the provided email, an error message is returned.</span>
+
+<span class="sd">    The function checks the following account models:</span>
+<span class="sd">    - `CompteMedecin`</span>
+<span class="sd">    - `CompteInfirmier`</span>
+<span class="sd">    - `CompteAdministrateur`</span>
+<span class="sd">    - `ComptePersonnelAdministratif`</span>
+<span class="sd">    - `CompteLaborantin`</span>
+<span class="sd">    - `CompteRadiologue`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (HttpRequest): The HTTP request object, which contains the `DELETE` method and email in the URL.</span>
+<span class="sd">        email (str): The email address of the member to be deleted.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        JsonResponse:</span>
+<span class="sd">            - On success: A JSON response confirming the deletion of the member with HTTP 200 status.</span>
+<span class="sd">            - On failure: A JSON response with an error message if no member with the provided email is found, with HTTP 404 status.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        DELETE /delete/test@example.com</span>
+<span class="sd">        Response: {&quot;message&quot;: &quot;Member with email test@example.com deleted successfully&quot;}</span>
+
+<span class="sd">        DELETE /delete/nonexistent@example.com</span>
+<span class="sd">        Response: {&quot;error&quot;: &quot;No member found with the provided email&quot;}, 404</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">email</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Email is required&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+    
+    <span class="n">deleted</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="c1"># Loop over each model and try to delete the member</span>
+    <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="n">CompteMedecin</span><span class="p">,</span>
+        <span class="n">CompteInfirmier</span><span class="p">,</span>
+        <span class="n">CompteAdministrateur</span><span class="p">,</span>
+        <span class="n">ComptePersonnelAdministratif</span><span class="p">,</span>
+        <span class="n">CompteLaborantin</span><span class="p">,</span>
+        <span class="n">CompteRadiologue</span><span class="p">,</span>
+    <span class="p">]:</span>
+        <span class="c1"># Attempt to delete member from model</span>
+        <span class="n">deleted_count</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">deleted_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">deleted</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="n">deleted</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Member with email </span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s1"> deleted successfully&#39;</span><span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;No member found with the provided email&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">404</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="provide_csrf_token">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.provide_csrf_token">[docs]</a>
+<span class="k">def</span> <span class="nf">provide_csrf_token</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;csrfToken&#39;</span><span class="p">:</span> <span class="n">get_token</span><span class="p">(</span><span class="n">request</span><span class="p">)})</span></div>
+
+
+<div class="viewcode-block" id="get_all_staff">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.get_all_staff">[docs]</a>
+<span class="nd">@csrf_protect</span>
+<span class="k">def</span> <span class="nf">get_all_staff</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves all staff members from a specified hospital.</span>
+
+<span class="sd">    This view handles GET requests to fetch the staff members from a particular hospital. The hospital name is </span>
+<span class="sd">    provided as a query parameter in the request. If the hospital is found, the function retrieves all staff </span>
+<span class="sd">    categories related to that hospital and returns them in a structured JSON response. The function handles the </span>
+<span class="sd">    following categories of staff:</span>
+<span class="sd">    - `medecins` (doctors)</span>
+<span class="sd">    - `infirmiers` (nurses)</span>
+<span class="sd">    - `radiologues` (radiologists)</span>
+<span class="sd">    - `laborantins` (lab technicians)</span>
+<span class="sd">    - `personnel_admin` (administrative staff)</span>
+
+<span class="sd">    Each category includes details such as name, email, and for some categories, specialty or service.</span>
+
+<span class="sd">    If the hospital name is not provided or if the hospital does not exist, appropriate error messages are returned.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (HttpRequest): The HTTP GET request object, which should contain a query parameter `hospitalName`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        JsonResponse:</span>
+<span class="sd">            - On success: A JSON response with the list of staff members grouped by category.</span>
+<span class="sd">            - On failure:</span>
+<span class="sd">                - If the hospital is not found: A JSON response with an error message and HTTP 404 status.</span>
+<span class="sd">                - If no hospital name is provided: A JSON response with an error message and HTTP 400 status.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        GET /get_all_staff?hospitalName=SomeHospital</span>
+<span class="sd">        Response: </span>
+<span class="sd">        {</span>
+<span class="sd">            &quot;medecins&quot;: [{&quot;nomComplet&quot;: &quot;Dr. John Doe&quot;, &quot;email&quot;: &quot;john@example.com&quot;, &quot;specialite&quot;: &quot;Cardiology&quot;}],</span>
+<span class="sd">            &quot;infirmiers&quot;: [{&quot;nomComplet&quot;: &quot;Jane Smith&quot;, &quot;email&quot;: &quot;jane@example.com&quot;, &quot;specialiteInf&quot;: &quot;Emergency&quot;}],</span>
+<span class="sd">            &quot;radiologues&quot;: [{&quot;nomComplet&quot;: &quot;Dr. Sarah Lee&quot;, &quot;email&quot;: &quot;sarah@example.com&quot;}],</span>
+<span class="sd">            &quot;laborantins&quot;: [{&quot;nomComplet&quot;: &quot;Chris Johnson&quot;, &quot;email&quot;: &quot;chris@example.com&quot;}],</span>
+<span class="sd">            &quot;personnel_admin&quot;: [{&quot;nomComplet&quot;: &quot;Linda Green&quot;, &quot;email&quot;: &quot;linda@example.com&quot;, &quot;service&quot;: &quot;HR&quot;}]</span>
+<span class="sd">        }</span>
+
+<span class="sd">        GET /get_all_staff</span>
+<span class="sd">        Response: {&quot;error&quot;: &quot;No hospital name provided&quot;}, 400</span>
+
+<span class="sd">        GET /get_all_staff?hospitalName=NonExistentHospital</span>
+<span class="sd">        Response: {&quot;error&quot;: &quot;Hospital not found&quot;}, 404</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Retrieve the hospital name from the request parameters</span>
+    <span class="n">hospital_name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hospitalName&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">hospital_name</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Get the hospital instance</span>
+            <span class="n">hospital</span> <span class="o">=</span> <span class="n">Hopital</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">nom</span><span class="o">=</span><span class="n">hospital_name</span><span class="p">)</span>
+            
+            <span class="c1"># Retrieve all staff categories related to the hospital</span>
+            <span class="n">medecins</span> <span class="o">=</span> <span class="n">CompteMedecin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">idHopital_id</span><span class="o">=</span><span class="n">hospital</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;nomComplet&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;specialite&#39;</span><span class="p">)</span>
+            <span class="n">infirmiers</span> <span class="o">=</span> <span class="n">CompteInfirmier</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">idHopital_id</span><span class="o">=</span><span class="n">hospital</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;nomComplet&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;specialiteInf&#39;</span><span class="p">)</span>
+            <span class="n">radiologues</span> <span class="o">=</span> <span class="n">CompteRadiologue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">idHopital_id</span><span class="o">=</span><span class="n">hospital</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;nomComplet&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">)</span>
+            <span class="n">laborantins</span> <span class="o">=</span> <span class="n">CompteLaborantin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">idHopital_id</span><span class="o">=</span><span class="n">hospital</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;nomComplet&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">)</span>
+            <span class="n">personnel_admin</span> <span class="o">=</span> <span class="n">ComptePersonnelAdministratif</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">idHopital_id</span><span class="o">=</span><span class="n">hospital</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;nomComplet&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;service&#39;</span><span class="p">)</span>
+            
+            <span class="c1"># Combine all the staff data into one response</span>
+            <span class="n">all_staff</span> <span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;medecins&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">medecins</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
+                <span class="s1">&#39;infirmiers&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">infirmiers</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
+                <span class="s1">&#39;radiologues&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">radiologues</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
+                <span class="s1">&#39;laborantins&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">laborantins</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
+                <span class="s1">&#39;personnel_admin&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">personnel_admin</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">all_staff</span><span class="p">)</span>
+        
+        <span class="k">except</span> <span class="n">Hopital</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Hospital not found&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">404</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;No hospital name provided&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span></div>
+
+
+<span class="c1">#----------TRAITEMENT DES DONNEES LUES POUR DES FINS D&#39;INSERTION D&#39;UN COMPTE EMPLOYE----------</span>
+<div class="viewcode-block" id="traiter_insertion_employe">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.traiter_insertion_employe">[docs]</a>
+<span class="k">def</span> <span class="nf">traiter_insertion_employe</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">nom</span><span class="p">,</span> <span class="n">prenom</span><span class="p">,</span> <span class="n">motDePasse</span><span class="p">,</span> <span class="n">profession</span><span class="p">,</span> <span class="n">hopital</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate the required fields provided for inserting an employee.</span>
+
+<span class="sd">    Validates the input data and inserts the employee into the database. Supports the following professions:</span>
+<span class="sd">    - Médecin with a specialty.</span>
+<span class="sd">    - Infirmier with a specialty.</span>
+<span class="sd">    - Personnel Administratif with a service.</span>
+<span class="sd">    - Radiologue, Laborantin, Pharmacien.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        email (str): The email address of the employee (primary key for the account).</span>
+<span class="sd">        nom (str): The last name of the employee.</span>
+<span class="sd">        prenom (str): The first name of the employee.</span>
+<span class="sd">        motDePasse (str): The password for the employee&#39;s account.</span>
+<span class="sd">        profession (str): The profession or post the employee occupies.</span>
+<span class="sd">        hopital (str): The name of the hospital where the employee works (primary key for the hospital).</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If any input is invalid (e.g. email, password, profession, or hospital).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Vérifier la validité de l&#39;email</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">validate_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>  <span class="c1"># Vérifie si l&#39;email est valide</span>
+    <span class="k">except</span> <span class="n">ValidationError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;L&#39;email n&#39;est pas valide.&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Vérifier si l&#39;email existe déjà</span>
+    <span class="k">if</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L&#39;email </span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2"> est déjà utilisé.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Vérification de la longueur du mot de passe</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">motDePasse</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Le mot de passe doit comporter au moins 8 caractères.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Vérifiez si l&#39;hôpital existe</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">hopital_instance</span> <span class="o">=</span> <span class="n">Hopital</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">nom</span><span class="o">=</span><span class="n">hopital</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">Hopital</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L&#39;hôpital </span><span class="si">{</span><span class="n">hopital</span><span class="si">}</span><span class="s2"> n&#39;existe pas.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Traitement pour les médecins</span>
+    <span class="k">if</span> <span class="n">profession</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Médecin-&#39;</span><span class="p">):</span>
+        <span class="n">specialite</span> <span class="o">=</span> <span class="n">profession</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Médecin-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">specialite</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">CompteMedecin</span><span class="o">.</span><span class="n">SPEC_CHOIX</span><span class="p">):</span>
+            <span class="n">CompteMedecin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span>
+                <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">,</span>
+                <span class="n">prenom</span><span class="o">=</span><span class="n">prenom</span><span class="p">,</span>
+                <span class="n">motDePasse</span><span class="o">=</span><span class="n">motDePasse</span><span class="p">,</span>
+                <span class="n">specialite</span><span class="o">=</span><span class="n">specialite</span><span class="p">,</span>
+                <span class="n">idHopital</span><span class="o">=</span><span class="n">hopital_instance</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;La spécialité </span><span class="si">{</span><span class="n">specialite</span><span class="si">}</span><span class="s2"> n&#39;est pas valide pour un médecin.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Traitement pour les infirmiers</span>
+    <span class="k">elif</span> <span class="n">profession</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Infirmier-&#39;</span><span class="p">):</span>
+        <span class="n">specialite</span> <span class="o">=</span> <span class="n">profession</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Infirmier-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">specialite</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">CompteInfirmier</span><span class="o">.</span><span class="n">SPEC_CHOIX</span><span class="p">):</span>
+            <span class="n">CompteInfirmier</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span>
+                <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">,</span>
+                <span class="n">prenom</span><span class="o">=</span><span class="n">prenom</span><span class="p">,</span>
+                <span class="n">motDePasse</span><span class="o">=</span><span class="n">motDePasse</span><span class="p">,</span>
+                <span class="n">specialite</span><span class="o">=</span><span class="n">specialite</span><span class="p">,</span>
+                <span class="n">idHopital</span><span class="o">=</span><span class="n">hopital_instance</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;La spécialité </span><span class="si">{</span><span class="n">specialite</span><span class="si">}</span><span class="s2"> n&#39;est pas valide pour un infirmier.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Traitement pour le personnel administratif</span>
+    <span class="k">elif</span> <span class="n">profession</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Administratif-&#39;</span><span class="p">):</span>
+        <span class="n">service</span> <span class="o">=</span> <span class="n">profession</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Administratif-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">service</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">ComptePersonnelAdministratif</span><span class="o">.</span><span class="n">SERVICE_CHOIX</span><span class="p">):</span>
+            <span class="n">ComptePersonnelAdministratif</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span>
+                <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">,</span>
+                <span class="n">prenom</span><span class="o">=</span><span class="n">prenom</span><span class="p">,</span>
+                <span class="n">motDePasse</span><span class="o">=</span><span class="n">motDePasse</span><span class="p">,</span>
+                <span class="n">service</span><span class="o">=</span><span class="n">service</span><span class="p">,</span>
+                <span class="n">idHopital</span><span class="o">=</span><span class="n">hopital_instance</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Le service </span><span class="si">{</span><span class="n">service</span><span class="si">}</span><span class="s2"> n&#39;est pas valide pour un personnel administratif.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Autres professions : Radiologue, Laborantin, Pharmacien</span>
+    <span class="k">elif</span> <span class="n">profession</span> <span class="o">==</span> <span class="s1">&#39;Radiologue&#39;</span><span class="p">:</span>
+        <span class="n">CompteRadiologue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span>
+            <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">,</span>
+            <span class="n">prenom</span><span class="o">=</span><span class="n">prenom</span><span class="p">,</span>
+            <span class="n">motDePasse</span><span class="o">=</span><span class="n">motDePasse</span><span class="p">,</span>
+            <span class="n">idHopital</span><span class="o">=</span><span class="n">hopital_instance</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">profession</span> <span class="o">==</span> <span class="s1">&#39;Laborantin&#39;</span><span class="p">:</span>
+        <span class="n">CompteLaborantin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span>
+            <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">,</span>
+            <span class="n">prenom</span><span class="o">=</span><span class="n">prenom</span><span class="p">,</span>
+            <span class="n">motDePasse</span><span class="o">=</span><span class="n">motDePasse</span><span class="p">,</span>
+            <span class="n">idHopital</span><span class="o">=</span><span class="n">hopital_instance</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">profession</span> <span class="o">==</span> <span class="s1">&#39;Pharmacien&#39;</span><span class="p">:</span>
+        <span class="n">ComptePharmacien</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span>
+            <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">,</span>
+            <span class="n">prenom</span><span class="o">=</span><span class="n">prenom</span><span class="p">,</span>
+            <span class="n">motDePasse</span><span class="o">=</span><span class="n">motDePasse</span><span class="p">,</span>
+            <span class="n">idHopital</span><span class="o">=</span><span class="n">hopital_instance</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;La profession </span><span class="si">{</span><span class="n">profession</span><span class="si">}</span><span class="s2"> n&#39;est pas valide.&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L&#39;employé </span><span class="si">{</span><span class="n">nom</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">prenom</span><span class="si">}</span><span class="s2"> a été ajouté avec succès dans la table correspondant à la profession </span><span class="si">{</span><span class="n">profession</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span></div>
+
+
+<span class="c1">#----------CREATION D&#39;UN ENREGISTREMENT DANS LA TABLE POUR UN NOUVEL EMPLOYE----------</span>
+<div class="viewcode-block" id="EmployeeCreateView">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.EmployeeCreateView">[docs]</a>
+<span class="k">class</span> <span class="nc">EmployeeCreateView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API view to handle the creation of an employee record.</span>
+
+<span class="sd">    This view accepts a POST request with employee details, validates the input data,</span>
+<span class="sd">    and inserts the employee into the appropriate table based on their profession.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): The HTTP request containing the employee data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - On success: A JSON response with a success message and HTTP 201 status.</span>
+<span class="sd">            - On failure: A JSON response with error details and HTTP 400 status.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="EmployeeCreateView.post">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.EmployeeCreateView.post">[docs]</a>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Sérialisation et validation des données</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="n">EmployeeSerializer</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Appel de la fonction d&#39;insertion</span>
+                <span class="n">traiter_insertion_employe</span><span class="p">(</span>
+                    <span class="n">email</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">validated_data</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">],</span>
+                    <span class="n">nom</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">validated_data</span><span class="p">[</span><span class="s1">&#39;nom&#39;</span><span class="p">],</span>
+                    <span class="n">prenom</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">validated_data</span><span class="p">[</span><span class="s1">&#39;prenom&#39;</span><span class="p">],</span>
+                    <span class="n">motDePasse</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">validated_data</span><span class="p">[</span><span class="s1">&#39;motDePasse&#39;</span><span class="p">],</span>
+                    <span class="n">profession</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">validated_data</span><span class="p">[</span><span class="s1">&#39;profession&#39;</span><span class="p">],</span>
+                    <span class="n">hopital</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">validated_data</span><span class="p">[</span><span class="s1">&#39;hopital&#39;</span><span class="p">]</span>
+                <span class="p">)</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Employé ajouté avec succès!&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_201_CREATED</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">errors</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="c1">#----------AFFICHAGE DE LA LISTE DES EMPLOYES PAR PROFESSION----------</span>
+<div class="viewcode-block" id="ListeEmployesView">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.ListeEmployesView">[docs]</a>
+<span class="k">class</span> <span class="nc">ListeEmployesView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API view to retrieve and display a list of employees grouped by their professions.</span>
+
+<span class="sd">    This view handles GET requests to return serialized data for all employees, </span>
+<span class="sd">    categorized by profession.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): The HTTP request object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - On success: A JSON response containing employees categorized by profession with HTTP 200 status.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ListeEmployesView.get">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.accounts.ListeEmployesView.get">[docs]</a>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Récupérer tous les employés</span>
+        <span class="n">medecins</span> <span class="o">=</span> <span class="n">CompteMedecin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">infirmiers</span> <span class="o">=</span> <span class="n">CompteInfirmier</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">administratifs</span> <span class="o">=</span> <span class="n">ComptePersonnelAdministratif</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">radiologues</span> <span class="o">=</span> <span class="n">CompteRadiologue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">laborantins</span> <span class="o">=</span> <span class="n">CompteLaborantin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">pharmaciens</span> <span class="o">=</span> <span class="n">ComptePharmacien</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+        <span class="c1"># Sérialiser les employés</span>
+        <span class="n">medecins_serializer</span> <span class="o">=</span> <span class="n">CompteMedecinSerializer</span><span class="p">(</span><span class="n">medecins</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">infirmiers_serializer</span> <span class="o">=</span> <span class="n">CompteInfirmierSerializer</span><span class="p">(</span><span class="n">infirmiers</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">administratifs_serializer</span> <span class="o">=</span> <span class="n">ComptePersonnelAdministratifSerializer</span><span class="p">(</span><span class="n">administratifs</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">radiologues_serializer</span> <span class="o">=</span> <span class="n">CompteRadiologueSerializer</span><span class="p">(</span><span class="n">radiologues</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">laborantins_serializer</span> <span class="o">=</span> <span class="n">CompteLaborantinSerializer</span><span class="p">(</span><span class="n">laborantins</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">pharmaciens_serializer</span> <span class="o">=</span> <span class="n">ComptePharmacienSerializer</span><span class="p">(</span><span class="n">pharmaciens</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;medecins&#39;</span><span class="p">:</span> <span class="n">medecins_serializer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+            <span class="s1">&#39;infirmiers&#39;</span><span class="p">:</span> <span class="n">infirmiers_serializer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+            <span class="s1">&#39;administratifs&#39;</span><span class="p">:</span> <span class="n">administratifs_serializer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+            <span class="s1">&#39;radiologues&#39;</span><span class="p">:</span> <span class="n">radiologues_serializer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+            <span class="s1">&#39;laborantins&#39;</span><span class="p">:</span> <span class="n">laborantins_serializer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+            <span class="s1">&#39;pharmaciens&#39;</span><span class="p">:</span> <span class="n">pharmaciens_serializer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TpIglTeam5Groupe6.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

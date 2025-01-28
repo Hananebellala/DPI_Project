@@ -1,0 +1,156 @@
+/* General styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+/* Blood page structure */
+.blood-page {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFA;
+    min-height: 100vh;
+}
+
+/* Top navigation */
+.top {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    padding: 20px;
+}
+
+.top a.previous {
+    font-size: 20px;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.top a.current {
+    font-size: 20px;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.top img {
+    width: 30px;
+    height: 30px;
+}
+
+/* Cards container */
+.cards {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px;
+}
+
+.blood-count-test, .Biomarkers {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.title2 {
+    font-size: 18px;
+    font-weight: normal;
+    text-align: center;
+}
+
+/* Card styling */
+.card {
+    width: 100%;
+    background-color: #EAD8B1;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card label {
+    font-size: 14px;
+    font-weight: normal;
+    color: #000;
+}
+
+
+/* Aligning labels and values */
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 10px; /* Keeps consistent spacing */
+}
+
+.form-group .label {
+    flex: 1; 
+   
+}
+
+.card .value {
+    padding: 8px;
+    background-color: #EAD8B1;
+    
+    border-radius: 5px;
+    display: inline-block;
+    min-width: 150px;
+    text-align: center;
+    font-weight: normal;
+}
+
+
+.actions {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #FFFFFA;
+    cursor: pointer;
+    background-color: #EF5350;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+    transition: all 0.2s ease-in-out;
+}
+
+
+
+  .graph-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  canvas {
+    width: 100% !important;
+    height: 400px !important;
+  }
+  
+@media (max-width: 768px) {
+    .cards {
+        flex-direction: column;
+    }
+
+    .blood-count-test, .Biomarkers {
+        width: 100%;
+    }
+}

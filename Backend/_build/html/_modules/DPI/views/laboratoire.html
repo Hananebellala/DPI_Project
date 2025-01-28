@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DPI.views.laboratoire &mdash; Gestionnaire du dossier patient informatisé 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=29a6c3e3"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Gestionnaire du dossier patient informatisé
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Gestionnaire du dossier patient informatisé</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">DPI.views.laboratoire</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for DPI.views.laboratoire</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">..serializers</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">rest_framework.response</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">rest_framework.views</span> <span class="kn">import</span> <span class="n">APIView</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">status</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">viewsets</span>
+<span class="kn">from</span> <span class="nn">rest_framework.permissions</span> <span class="kn">import</span> <span class="n">IsAuthenticated</span>
+
+
+<div class="viewcode-block" id="BilanRadiologiqueViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.laboratoire.BilanRadiologiqueViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">BilanRadiologiqueViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A viewset for managing radiological reports (BilanRadiologique).</span>
+<span class="sd">    </span>
+<span class="sd">    This viewset provides the standard actions to perform CRUD (Create, Read, Update, Delete) operations</span>
+<span class="sd">    on the `BilanRadiologique` model, which represents radiological assessment reports.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        queryset: A queryset for retrieving all `BilanRadiologique` objects from the database.</span>
+<span class="sd">        serializer_class: The serializer class used to convert `BilanRadiologique` objects into JSON format and vice versa.</span>
+<span class="sd">    </span>
+<span class="sd">    Methods:</span>
+<span class="sd">        create: Handles the creation of a new `BilanRadiologique` instance.</span>
+<span class="sd">            Validates the incoming data, performs the creation, and returns the result.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">BilanRadiologique</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">BRSerializer</span>
+
+<div class="viewcode-block" id="BilanRadiologiqueViewSet.create">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.laboratoire.BilanRadiologiqueViewSet.create">[docs]</a>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles the creation of a new `BilanRadiologique` instance.</span>
+<span class="sd">        </span>
+<span class="sd">        This method customizes the default `create` method by adding extra logic to validate the</span>
+<span class="sd">        incoming data and respond with either success or failure based on the validation.</span>
+<span class="sd">        </span>
+<span class="sd">        Arguments:</span>
+<span class="sd">            request: The HTTP request containing data for creating a new instance.</span>
+<span class="sd">            *args: Additional arguments passed to the parent class method.</span>
+<span class="sd">            **kwargs: Additional keyword arguments passed to the parent class method.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Response: A response indicating the success or failure of the creation request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_serializer</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">perform_create</span><span class="p">(</span><span class="n">serializer</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_201_CREATED</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">errors</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">)</span></div>
+</div>
+
+    
+<div class="viewcode-block" id="BilanBiologiqueViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.laboratoire.BilanBiologiqueViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">BilanBiologiqueViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A viewset for managing biological reports (BilanBiologique).</span>
+<span class="sd">    </span>
+<span class="sd">    This viewset provides the standard actions to perform CRUD (Create, Read, Update, Delete) operations</span>
+<span class="sd">    on the `BilanBiologique` model, which represents biological assessments.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        queryset: A queryset for retrieving all `BilanBiologique` objects from the database.</span>
+<span class="sd">        serializer_class: The serializer class used to convert `BilanBiologique` objects into JSON format and vice versa.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">BilanBiologique</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">BilanBiologiqueSerializer</span></div>
+
+
+
+<div class="viewcode-block" id="LigneSigneVitalViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.laboratoire.LigneSigneVitalViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">LigneSigneVitalViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A viewset for managing vital sign lines (LigneSigneVital).</span>
+<span class="sd">    </span>
+<span class="sd">    This viewset provides the standard actions to perform CRUD (Create, Read, Update, Delete) operations</span>
+<span class="sd">    on the `LigneSigneVital` model, which represents individual records of vital signs in a patient assessment.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        queryset: A queryset for retrieving all `LigneSigneVital` objects from the database.</span>
+<span class="sd">        serializer_class: The serializer class used to convert `LigneSigneVital` objects into JSON format and vice versa.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">LigneSigneVital</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">LigneSigneVitalSerializer</span></div>
+
+
+
+<div class="viewcode-block" id="LigneAnalyseViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.laboratoire.LigneAnalyseViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">LigneAnalyseViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A viewset for managing analysis lines (LigneAnalyse).</span>
+<span class="sd">    </span>
+<span class="sd">    This viewset provides the standard actions to perform CRUD (Create, Read, Update, Delete) operations</span>
+<span class="sd">    on the `LigneAnalyse` model, which represents individual analysis results in a medical report.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        queryset: A queryset for retrieving all `LigneAnalyse` objects from the database.</span>
+<span class="sd">        serializer_class: The serializer class used to convert `LigneAnalyse` objects into JSON format and vice versa.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">LigneAnalyse</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">LigneAnalyseSerializer</span></div>
+
+
+
+<div class="viewcode-block" id="LabsView">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.laboratoire.LabsView">[docs]</a>
+<span class="k">class</span> <span class="nc">LabsView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API View for retrieving the list of laboratory types associated with a specific patient&#39;s hospital stay.</span>
+
+<span class="sd">    This endpoint provides the types of labs available for a given `Sejour` (hospital stay) identified by its `idSejour`.</span>
+<span class="sd">    The endpoint constructs URLs for different lab types and returns them in the response.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        permission_classes (list): Ensures that the API is accessible only to authenticated users.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        get(request, email, idSejour, *args, **kwargs):</span>
+<span class="sd">            Handles GET requests to retrieve lab types.</span>
+
+<span class="sd">    Example usage:</span>
+<span class="sd">        GET /profile/&lt;email&gt;/&lt;idSejour&gt;/labs/</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">IsAuthenticated</span><span class="p">]</span>
+
+<div class="viewcode-block" id="LabsView.get">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.laboratoire.LabsView.get">[docs]</a>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">idSejour</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles the GET request to fetch lab types for a specific patient&#39;s hospital stay.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            request (HttpRequest): The HTTP request object.</span>
+<span class="sd">            email (str): The email address of the patient.</span>
+<span class="sd">            idSejour (int): The ID of the hospital stay (`Sejour`).</span>
+<span class="sd">            *args: Additional positional arguments.</span>
+<span class="sd">            **kwargs: Additional keyword arguments.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Response: A JSON response containing lab types or an error message.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Sejour.DoesNotExist: If the specified `Sejour` is not found.</span>
+<span class="sd">            DPI.DoesNotExist: If the `DPI` (medical record) is not found for the patient.</span>
+<span class="sd">            ComptePatient.DoesNotExist: If the patient&#39;s account is not found.</span>
+<span class="sd">            Exception: For any other unexpected errors.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;id du sejour : &quot;</span><span class="p">,</span> <span class="n">idSejour</span><span class="p">)</span>
+            <span class="c1"># Fetch the Sejour for the patient using idSejour</span>
+            <span class="n">sejour</span> <span class="o">=</span> <span class="n">Sejour</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">idSejour</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;id du dossier &quot;</span> <span class="p">,</span> <span class="n">sejour</span><span class="o">.</span><span class="n">idDossierPatient</span><span class="p">)</span>
+            <span class="n">dpi</span> <span class="o">=</span> <span class="n">DPI</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">numeroSecuriteSociale</span><span class="o">=</span><span class="s1">&#39;11111&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">dpi</span><span class="p">:</span>
+              <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DPI not found!&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+              <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DPI found:&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="p">)</span>       
+            <span class="n">patient</span> <span class="o">=</span> <span class="n">ComptePatient</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dossierPatient</span> <span class="o">=</span> <span class="n">dpi</span><span class="o">.</span><span class="n">numeroSecuriteSociale</span><span class="p">)</span>
+
+
+            <span class="c1"># You can use any logic here to get the different types of labs</span>
+            <span class="c1"># Here I&#39;m returning a simple list of lab types</span>
+            <span class="n">lab_types</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;vitalSigns&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/profile/</span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">/labs/VitalSigns/&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">patient</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">idSejour</span><span class="p">)},</span>
+                <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;BloodCountTest&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/profile/</span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">/labs/BloodCountTest/&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">patient</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">idSejour</span><span class="p">)},</span>
+                <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Radio&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/profile/</span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">/labs/Radio/&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">patient</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">idSejour</span><span class="p">)}</span>
+            <span class="p">]</span>
+
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;lab_types&quot;</span><span class="p">:</span> <span class="n">lab_types</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">Sejour</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Sejour not found&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">DPI</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;DPI not found for this patient&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">ComptePatient</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;ComptePatient not found&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;An error occurred: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_500_INTERNAL_SERVER_ERROR</span><span class="p">)</span></div>
+</div>
+
+        
+
+<div class="viewcode-block" id="LabDetailView">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.laboratoire.LabDetailView">[docs]</a>
+<span class="k">class</span> <span class="nc">LabDetailView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API View to retrieve detailed information for a specific lab type </span>
+<span class="sd">    associated with a patient&#39;s hospital stay (`Sejour`).</span>
+
+<span class="sd">    This endpoint fetches detailed data for a specific lab type such as `VitalSigns`, </span>
+<span class="sd">    `BloodCountTest`, or `Radio`, based on the provided `lab_type`.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        permission_classes (list): Ensures that the API is accessible only to authenticated users.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        get(request, email, idSejour, lab_type, *args, **kwargs):</span>
+<span class="sd">            Handles GET requests to retrieve lab details.</span>
+
+<span class="sd">    Example usage:</span>
+<span class="sd">        GET /profile/&lt;email&gt;/&lt;idSejour&gt;/labs/&lt;lab_type&gt;/</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">IsAuthenticated</span><span class="p">]</span>
+
+<div class="viewcode-block" id="LabDetailView.get">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.laboratoire.LabDetailView.get">[docs]</a>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">idSejour</span><span class="p">,</span> <span class="n">lab_type</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles the GET request to fetch detailed information about a specific lab type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            request (HttpRequest): The HTTP request object.</span>
+<span class="sd">            email (str): The email address of the patient.</span>
+<span class="sd">            idSejour (int): The ID of the hospital stay (`Sejour`).</span>
+<span class="sd">            lab_type (str): The type of lab data to retrieve (e.g., `VitalSigns`, `BloodCountTest`, `Radio`).</span>
+<span class="sd">            *args: Additional positional arguments.</span>
+<span class="sd">            **kwargs: Additional keyword arguments.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Response: A JSON response containing lab details or an error message.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Sejour.DoesNotExist: If the specified `Sejour` is not found.</span>
+<span class="sd">            Exception: For any other unexpected errors.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Retrieve the sejour (hospitalization) for the patient</span>
+            <span class="n">sejour</span> <span class="o">=</span> <span class="n">Sejour</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">idSejour</span><span class="p">)</span>
+
+            <span class="c1"># Retrieve the lab details based on the lab type</span>
+            <span class="k">if</span> <span class="n">lab_type</span> <span class="o">==</span> <span class="s2">&quot;VitalSigns&quot;</span><span class="p">:</span>
+                <span class="n">soins</span> <span class="o">=</span> <span class="n">Soin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">idSejour</span><span class="o">=</span><span class="n">idSejour</span><span class="p">)</span> 
+                <span class="n">soins_list</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">soin</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">soin</span><span class="o">.</span><span class="n">typeSoin</span><span class="p">,</span> 
+                        <span class="s2">&quot;resume&quot;</span><span class="p">:</span> <span class="n">soin</span><span class="o">.</span><span class="n">resumeSoin</span><span class="p">,</span>
+                        <span class="s2">&quot;infermier&quot;</span><span class="p">:</span> <span class="n">soin</span><span class="o">.</span><span class="n">idInfirmier</span><span class="o">.</span><span class="n">nom</span><span class="p">,</span>
+                    <span class="p">}</span>
+                    <span class="k">for</span> <span class="n">soin</span> <span class="ow">in</span> <span class="n">soins</span>
+                <span class="p">]</span>
+                <span class="n">lab_details</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="n">soins_list</span>
+                <span class="p">}</span>
+
+            <span class="k">elif</span> <span class="n">lab_type</span> <span class="o">==</span> <span class="s2">&quot;BloodCountTest&quot;</span><span class="p">:</span>
+                <span class="c1"># Fetch the biological test and its analyses</span>
+                <span class="n">bilan</span> <span class="o">=</span> <span class="n">BilanBiologique</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">idSejour</span><span class="o">=</span><span class="n">idSejour</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">bilan</span><span class="p">:</span>
+                    <span class="n">analyses</span> <span class="o">=</span> <span class="n">LigneAnalyse</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">idBilanBiologique</span><span class="o">=</span><span class="n">bilan</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+                    <span class="n">analyses_list</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="p">{</span>
+                            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">analysis</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">analysis</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+                            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">analysis</span><span class="o">.</span><span class="n">resultat</span><span class="p">,</span>
+                            <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="n">analysis</span><span class="o">.</span><span class="n">unite</span>
+                        <span class="p">}</span>
+                        <span class="k">for</span> <span class="n">analysis</span> <span class="ow">in</span> <span class="n">analyses</span>
+                    <span class="p">]</span>
+                    
+                    <span class="n">signevitals</span> <span class="o">=</span> <span class="n">LigneSigneVital</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">idBilanBiologique</span><span class="o">=</span><span class="n">bilan</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+                    <span class="n">signevitals_list</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="p">{</span>
+                            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">signevitals</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">signevitals</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+                            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">signevitals</span><span class="o">.</span><span class="n">resultat</span><span class="p">,</span>
+                            <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="n">signevitals</span><span class="o">.</span><span class="n">unite</span>
+                        <span class="p">}</span>
+                        <span class="k">for</span> <span class="n">signevitals</span> <span class="ow">in</span> <span class="n">signevitals</span>
+                    <span class="p">]</span>
+
+                    <span class="n">lab_details</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Blood Count Lab&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;dateExam&quot;</span><span class="p">:</span> <span class="n">bilan</span><span class="o">.</span><span class="n">dateExamen</span><span class="p">,</span>
+                        <span class="s2">&quot;globalResult&quot;</span><span class="p">:</span> <span class="n">bilan</span><span class="o">.</span><span class="n">resultatGlobal</span><span class="p">,</span>
+                        <span class="s2">&quot;test 1&quot;</span><span class="p">:</span> <span class="n">analyses_list</span><span class="p">,</span>
+                        <span class="s2">&quot;test 2&quot;</span><span class="p">:</span> <span class="n">signevitals_list</span>
+                    <span class="p">}</span>
+
+                    
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Bilan Biologique not found&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+                
+            <span class="k">elif</span> <span class="n">lab_type</span> <span class="o">==</span> <span class="s2">&quot;Radio&quot;</span><span class="p">:</span>
+                
+                <span class="n">bilanbiologiques</span> <span class="o">=</span> <span class="n">BilanRadiologique</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">idSejour</span><span class="o">=</span><span class="n">idSejour</span><span class="p">)</span> 
+                <span class="n">radio_list</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">bilanbiologiques</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">bilanbiologiques</span><span class="o">.</span><span class="n">dateExamen</span><span class="p">,</span> 
+                        <span class="s2">&quot;resume&quot;</span><span class="p">:</span> <span class="n">bilanbiologiques</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
+                        <span class="s2">&quot;infermier&quot;</span><span class="p">:</span> <span class="n">bilanbiologiques</span><span class="o">.</span><span class="n">rapport</span><span class="p">,</span>
+                    <span class="p">}</span>
+                    <span class="k">for</span> <span class="n">bilanbiologiques</span> <span class="ow">in</span> <span class="n">bilanbiologiques</span>
+                <span class="p">]</span>
+                <span class="n">lab_details</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Radio Lab&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="n">radio_list</span> 
+                <span class="p">}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Lab type not found&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">lab_details</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">Sejour</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Sejour not found&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;An error occurred: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_500_INTERNAL_SERVER_ERROR</span><span class="p">)</span></div>
+</div>
+
+        
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TpIglTeam5Groupe6.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

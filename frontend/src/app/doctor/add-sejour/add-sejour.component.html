@@ -1,0 +1,21 @@
+<div class="popup-container">
+  <button class="close-button" (click)="onCancel()">×</button>
+  <div class="popup-header">
+    <h2>Ajouter Séjour</h2>
+  </div>
+  <div class="popup-body">
+    <div class="input-container">
+      <label class="subtitle" for="arrival-date">Date d'arrivée</label>
+      <input type="date" id="arrival-date" [(ngModel)]="dateDebutSejour" required />
+    </div>
+    <div class="input-container">
+      <label class="subtitle" for="end-date">Date de fin</label>
+      <input type="date" id="end-date" [(ngModel)]="dateFinSejour" required />
+    </div>
+    <div class="input-container">
+      <label class="subtitle" for="motif">Motif d'admission</label>
+      <input type="text" id="motif" [(ngModel)]="motifAdmission" />
+    </div>
+    <button class="next-button" (click)="onSave()">Enregistrer</button>
+  </div>
+</div>
