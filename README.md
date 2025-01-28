@@ -183,3 +183,38 @@ folders:
 ---
 
 ## Installation
+
+1. **Téléchargez le dépôt**  
+   Clonez ou téléchargez le dépôt sur votre machine locale.
+
+2. **Lancez le backend**  
+   - Ouvrez un terminal et accédez au dossier `Backend` :  
+     ```bash
+     cd chemin/vers/Backend
+     ```
+   - Lancez le serveur backend :  
+     ```bash
+     python manage.py runserver
+     ```
+
+3. **Lancez le frontend**  
+   - Ouvrez un autre terminal et accédez au dossier `Frontend` :  
+     ```bash
+     cd chemin/vers/Frontend
+     ```
+   - Démarrez le serveur Angular :  
+     ```bash
+     ng serve
+     ```
+
+4. **Ajoutez des utilisateurs (Docteurs, Infirmiers, Radiologues, et Laborantins)**  
+   - Ouvrez votre navigateur et rendez-vous sur :  
+     [http://localhost:4200/admin](http://localhost:4200/admin)  
+   - Connectez-vous avec votre compte administrateur et ajoutez les utilisateurs nécessaires.
+
+5. **Accédez à l'application**  
+   - Visitez la page d'accueil en naviguant vers :  
+     [http://localhost:4200/](http://localhost:4200/)  
+   - Connectez-vous avec le compte que vous avez créé.
+
+
