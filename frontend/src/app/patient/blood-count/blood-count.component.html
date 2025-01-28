@@ -1,0 +1,40 @@
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error">{{ error }}</div>
+
+<div *ngIf="!loading && labDetails">
+  <div class="blood-page">
+    <div class="top">
+        <a href="/lab-results" class="previous">Lab Results</a>
+        <img src="next.png" alt="next">
+        <a class="current">{{ labDetails.name }}</a>
+    </div>
+
+    <div class="cards">
+        <div class="blood-count-test">
+            <p class="title2">Complete Blood Count</p>
+            <div class="card">
+                <div class="form-group" *ngFor="let test of labDetails['test 1']">
+                    <div class="label"><label>{{ test.type }}:</label></div>
+                    <span class="value">{{ test.result }} {{ test.unit }}</span>
+                </div>
+            </div>
+            <div class="actions">
+                <button>Visualize Graph</button>
+            </div>
+        </div>
+
+        <div class="Biomarkers">
+            <p class="title2">Biomarkers Monitoring</p>
+            <div class="card">
+                <div class="form-group" *ngFor="let biomarker of labDetails['test 2']">
+                    <div class="label"><label>{{ biomarker.type }}:</label></div>
+                    <span class="value">{{ biomarker.result }} {{ biomarker.unit }}</span>
+                </div>
+            </div>
+            <div class="actions">
+                <button>Visualize Graph</button>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

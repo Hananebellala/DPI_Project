@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DPI.views.medications &mdash; Gestionnaire du dossier patient informatisé 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=29a6c3e3"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Gestionnaire du dossier patient informatisé
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Gestionnaire du dossier patient informatisé</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">DPI.views.medications</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for DPI.views.medications</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">..serializers</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">rest_framework.response</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">rest_framework.views</span> <span class="kn">import</span> <span class="n">APIView</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">status</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">viewsets</span>
+<span class="kn">from</span> <span class="nn">rest_framework.permissions</span> <span class="kn">import</span> <span class="n">IsAuthenticated</span>
+
+
+<div class="viewcode-block" id="MedicamentViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.medications.MedicamentViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">MedicamentViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A viewset for viewing, creating, updating, and deleting Medicament instances.</span>
+
+<span class="sd">    This viewset provides standard actions such as `list`, `retrieve`, `create`, </span>
+<span class="sd">    `update`, and `destroy` for the `Medicament` model. It uses Django&#39;s ORM </span>
+<span class="sd">    to fetch data and a serializer to validate and serialize the data.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        queryset (QuerySet): The set of `Medicament` objects to work with. </span>
+<span class="sd">            In this case, it fetches all instances of the `Medicament` model </span>
+<span class="sd">            from the database.</span>
+<span class="sd">        serializer_class (Serializer): Specifies the serializer used to </span>
+<span class="sd">            validate, serialize, and deserialize data for `Medicament` instances.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Medicament</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">MedicamentSerializer</span></div>
+
+
+<div class="viewcode-block" id="MedicamentDetailView">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.medications.MedicamentDetailView">[docs]</a>
+<span class="k">class</span> <span class="nc">MedicamentDetailView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API view for retrieving details about prescribed medications (posologies) for a specific patient&#39;s stay.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        permission_classes (list): Ensures only authenticated users can access this endpoint.</span>
+<span class="sd">                                   Uses the `IsAuthenticated` permission class.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        get(request, email, idSejour, *args, **kwargs):</span>
+<span class="sd">            Handles GET requests to retrieve medication details for a specific stay (sejour).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">IsAuthenticated</span><span class="p">]</span>
+
+<div class="viewcode-block" id="MedicamentDetailView.get">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.medications.MedicamentDetailView.get">[docs]</a>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">idSejour</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve details of the medications (posologies) prescribed during a patient&#39;s stay.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            request (HttpRequest): The HTTP request object.</span>
+<span class="sd">            email (str): The email of the user (for potential validation or context, though not directly used here).</span>
+<span class="sd">            idSejour (int): The ID of the related sejour (hospital stay).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Response: A JSON response containing medication details if found, or an error message otherwise.</span>
+
+<span class="sd">        Responses:</span>
+<span class="sd">            - 200 OK: Returns the posologies (medication) details in JSON format.</span>
+<span class="sd">            - 404 Not Found: If posologies, ordonnance, or diagnostic is not found for the given sejour.</span>
+<span class="sd">            - 500 Internal Server Error: General error in processing the request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">diagnostic</span> <span class="o">=</span> <span class="n">Diagnostic</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">idSejour</span><span class="o">=</span><span class="n">idSejour</span><span class="p">)</span>
+            <span class="n">ordonnance</span> <span class="o">=</span> <span class="n">Ordonnance</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">idDiagnostic</span><span class="o">=</span><span class="n">diagnostic</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="n">posologies</span> <span class="o">=</span> <span class="n">Posologie</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">idOrdonnance</span><span class="o">=</span><span class="n">ordonnance</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+
+            <span class="n">posologies_data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">posologies</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> 
+                <span class="s2">&quot;nom-medicament&quot;</span><span class="p">:</span> <span class="n">posologies</span><span class="o">.</span><span class="n">nomMedicament</span><span class="o">.</span><span class="n">nomMedicament</span><span class="p">,</span>
+                <span class="s2">&quot;forme-medicament&quot;</span><span class="p">:</span> <span class="n">posologies</span><span class="o">.</span><span class="n">nomMedicament</span><span class="o">.</span><span class="n">forme</span><span class="p">,</span>
+                <span class="s2">&quot;quantite-medicament&quot;</span><span class="p">:</span> <span class="n">posologies</span><span class="o">.</span><span class="n">nomMedicament</span><span class="o">.</span><span class="n">quantiteStock</span><span class="p">,</span>
+                <span class="s2">&quot;dose&quot;</span><span class="p">:</span> <span class="n">posologies</span><span class="o">.</span><span class="n">dose</span><span class="p">,</span>
+                <span class="s2">&quot;dureePrise&quot;</span><span class="p">:</span> <span class="n">posologies</span><span class="o">.</span><span class="n">dureePrise</span><span class="p">,</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">posologies_data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">Posologie</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Posologie not found&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;An error occurred: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_500_INTERNAL_SERVER_ERROR</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="PosologieBySejourView">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.medications.PosologieBySejourView">[docs]</a>
+<span class="k">class</span> <span class="nc">PosologieBySejourView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API View to retrieve a list of `Posologie` (prescriptions or dosages) associated with a specific hospital stay (`Sejour`).</span>
+
+<span class="sd">    This endpoint fetches all `Posologie` records linked to the provided `id_sejour` </span>
+<span class="sd">    and serializes them into JSON format for the response.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        get(request, id_sejour, format=None):</span>
+<span class="sd">            Handles GET requests to retrieve the list of `Posologie` records.</span>
+
+<span class="sd">    Example usage:</span>
+<span class="sd">        GET /sejour/&lt;id_sejour&gt;/posologies/</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="PosologieBySejourView.get">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.medications.PosologieBySejourView.get">[docs]</a>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">id_sejour</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handles the GET request to fetch the list of `Posologie` associated with a specific `Sejour`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            request (HttpRequest): The HTTP request object.</span>
+<span class="sd">            id_sejour (int): The ID of the hospital stay (`Sejour`) for which posologies are being retrieved.</span>
+<span class="sd">            format (str, optional): The format of the response (default is `None`).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Response: A JSON response containing the serialized `Posologie` data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">posologies</span> <span class="o">=</span> <span class="n">Posologie</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">idSejour</span><span class="o">=</span><span class="n">id_sejour</span><span class="p">)</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="n">PosologieSerializer</span><span class="p">(</span><span class="n">posologies</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">)</span></div>
+</div>
+
+    
+
+<div class="viewcode-block" id="OrdonnanceViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.medications.OrdonnanceViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">OrdonnanceViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A viewset for managing Ordonnance instances.</span>
+
+<span class="sd">    This viewset provides standard CRUD (Create, Read, Update, Delete) operations</span>
+<span class="sd">    for the `Ordonnance` model. It supports actions such as:</span>
+<span class="sd">    - Listing all Ordonnance instances</span>
+<span class="sd">    - Retrieving a single Ordonnance instance</span>
+<span class="sd">    - Creating a new Ordonnance instance</span>
+<span class="sd">    - Updating an existing Ordonnance instance</span>
+<span class="sd">    - Deleting an Ordonnance instance</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        queryset (QuerySet): The set of `Ordonnance` objects retrieved from </span>
+<span class="sd">            the database. By default, it fetches all instances.</span>
+<span class="sd">        serializer_class (Serializer): Specifies the serializer used for </span>
+<span class="sd">            validating, serializing, and deserializing `Ordonnance` data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Ordonnance</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">OrdonnanceSerializer</span></div>
+
+
+<div class="viewcode-block" id="PosologieViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.medications.PosologieViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">PosologieViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A viewset for managing dosages (Posologie).</span>
+<span class="sd">    </span>
+<span class="sd">    This viewset provides the standard actions to perform CRUD (Create, Read, Update, Delete) operations</span>
+<span class="sd">    on the `Posologie` model, which represents dosage instructions in the system.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        queryset: A queryset for retrieving all `Posologie` objects from the database.</span>
+<span class="sd">        serializer_class: The serializer class used to convert `Posologie` objects into JSON format and vice versa.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Posologie</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">PosologieSerializer</span></div>
+
+
+
+<div class="viewcode-block" id="EffetSecondaireViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.medications.EffetSecondaireViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">EffetSecondaireViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A ViewSet for viewing and editing secondary effect instances.</span>
+
+<span class="sd">    This class provides a set of views (list, retrieve, create, update, delete)</span>
+<span class="sd">    for the `EffetSecondaire` model using the `EffetSecondaireSerializer` serializer.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        queryset (QuerySet): A QuerySet that defines the set of `EffetSecondaire` </span>
+<span class="sd">                              objects to retrieve from the database.</span>
+<span class="sd">        serializer_class (class): The serializer class used to serialize and </span>
+<span class="sd">                                  deserialize `EffetSecondaire` objects.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        list(request): Returns a list of all `EffetSecondaire` objects.</span>
+<span class="sd">        retrieve(request, pk): Retrieves a single `EffetSecondaire` object by primary key.</span>
+<span class="sd">        create(request): Creates a new `EffetSecondaire` object.</span>
+<span class="sd">        update(request, pk): Updates an existing `EffetSecondaire` object by primary key.</span>
+<span class="sd">        destroy(request, pk): Deletes a single `EffetSecondaire` object by primary key.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">EffetSecondaire</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">EffetSecondaireSerializer</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TpIglTeam5Groupe6.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

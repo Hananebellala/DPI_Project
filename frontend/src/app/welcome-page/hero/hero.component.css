@@ -1,0 +1,83 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .decoration, .decoration2 {
+    width: 20%; 
+    height: auto; 
+    margin: 10px 0;
+  }
+  
+  
+  .regroup {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .content-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1000px;
+    margin-bottom: 40px; 
+  }
+  
+  .title {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #EF5350; 
+    font-weight: bold;
+    font-size: 40px; 
+    margin-bottom: 10px;
+  }
+  
+  .yapping p {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: black; 
+    font-weight: normal;
+    font-size: 20px; 
+  }
+  
+  .illustration {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  .illustration img {
+    width: 70%; 
+    
+  }
+  
+  .decoration2 {
+    width: 20%; 
+    margin: 20px 0;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .regroup {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .decoration, .decoration2 {
+      width: 50%; /* Make the decorations larger on smaller screens */
+    }
+  
+    .illustration img {
+      width: 90%; /* Increase illustration size on smaller screens */
+    }
+  
+    .content-text {
+      text-align: center;
+      max-width: 100%; /* Allow full width on smaller screens */
+    }
+  }
+  

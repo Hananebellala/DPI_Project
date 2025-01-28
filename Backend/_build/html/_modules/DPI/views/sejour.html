@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DPI.views.sejour &mdash; Gestionnaire du dossier patient informatisé 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=29a6c3e3"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Gestionnaire du dossier patient informatisé
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Gestionnaire du dossier patient informatisé</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">DPI.views.sejour</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for DPI.views.sejour</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">..serializers</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">rest_framework.response</span> <span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">rest_framework.views</span> <span class="kn">import</span> <span class="n">APIView</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">status</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">viewsets</span>
+<span class="kn">from</span> <span class="nn">rest_framework.decorators</span> <span class="kn">import</span> <span class="n">action</span>
+<span class="kn">from</span> <span class="nn">rest_framework.permissions</span> <span class="kn">import</span> <span class="n">IsAuthenticated</span>
+
+
+<span class="c1">#----------CREATION D&#39;UN SEJOUR POUR UN PATIENT ARRIVE A L&#39;HOPITAL----------</span>
+<div class="viewcode-block" id="CreerSejourView">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.sejour.CreerSejourView">[docs]</a>
+<span class="k">class</span> <span class="nc">CreerSejourView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API view for creating a hospital stay (séjour) for a patient upon arrival at the hospital.</span>
+
+<span class="sd">    This view processes a POST request to create a new stay record for a patient. The information</span>
+<span class="sd">    needed includes the patient&#39;s social security number (NSS), the attending doctor&#39;s ID, and</span>
+<span class="sd">    the dates of the stay along with the admission reason.</span>
+
+<span class="sd">    The following steps are performed:</span>
+<span class="sd">    1. Retrieve the patient (DPI) using the provided NSS.</span>
+<span class="sd">    2. Retrieve the attending doctor (CompteMedecin) using the provided doctor ID.</span>
+<span class="sd">    3. Create a new hospital stay (séjour) record with the provided details:</span>
+<span class="sd">        - Patient’s medical file (DPI)</span>
+<span class="sd">        - Attending doctor</span>
+<span class="sd">        - Start and end dates of the stay</span>
+<span class="sd">        - Admission reason (optional)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): The HTTP request object containing the data for the new hospital stay.</span>
+<span class="sd">        *args (tuple): Variable-length argument list (not used in this specific implementation).</span>
+<span class="sd">        **kwargs (dict): Arbitrary keyword arguments (not used in this specific implementation).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - On success: A JSON response containing the details of the newly created stay (séjour).</span>
+<span class="sd">            - On failure:</span>
+<span class="sd">                - If the patient&#39;s NSS is not provided or invalid: HTTP 400 status with an error message.</span>
+<span class="sd">                - If the attending doctor ID is not provided or invalid: HTTP 400 status with an error message.</span>
+<span class="sd">                - If the patient or doctor is not found: HTTP 404 status with an error message.</span>
+<span class="sd">                - If the data fails validation: HTTP 400 status with validation errors.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CreerSejourView.post">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.sejour.CreerSejourView.post">[docs]</a>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Récupérer le NSS du patient depuis les paramètres ou le contexte</span>
+        <span class="n">nss_patient</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nss_patient&#39;</span><span class="p">)</span>  <span class="c1"># Par exemple, passé en paramètre</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nss_patient</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;NSS du patient requis&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">)</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Récupérer le DPI (Patient)</span>
+            <span class="n">patient</span> <span class="o">=</span> <span class="n">DPI</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">numeroSecuriteSociale</span><span class="o">=</span><span class="n">nss_patient</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">DPI</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Patient introuvable&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+        
+        <span class="c1"># Récupérer le médecin (par exemple, via son ID ou son email fourni dans les données)</span>
+        <span class="n">id_medecin</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id_medecin&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">id_medecin</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;ID du médecin requis&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">)</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">medecin</span> <span class="o">=</span> <span class="n">CompteMedecin</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">id_medecin</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">CompteMedecin</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Médecin introuvable&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+        
+        <span class="c1"># Création du séjour</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;idDossierPatient&quot;</span><span class="p">:</span> <span class="n">patient</span><span class="o">.</span><span class="n">numeroSecuriteSociale</span><span class="p">,</span>
+            <span class="s2">&quot;idCompteMedecin&quot;</span><span class="p">:</span> <span class="n">medecin</span><span class="o">.</span><span class="n">pk</span><span class="p">,</span>
+            <span class="s2">&quot;dateDebutSejour&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dateDebutSejour&#39;</span><span class="p">),</span>
+            <span class="s2">&quot;dateFinSejour&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dateFinSejour&#39;</span><span class="p">),</span>
+            <span class="s2">&quot;motifAdmission&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;motifAdmission&#39;</span><span class="p">,</span> <span class="s2">&quot;Non spécifié&quot;</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="n">SejourSerializer</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">serializer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_201_CREATED</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">errors</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">)</span></div>
+</div>
+
+
+<span class="c1">#----------SUPPRESSION D&#39;UN SEJOUR----------</span>
+<div class="viewcode-block" id="SejourViewSet">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.sejour.SejourViewSet">[docs]</a>
+<span class="k">class</span> <span class="nc">SejourViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ViewSet for managing hospital stays (séjours). This viewset provides the standard actions for</span>
+<span class="sd">    listing, retrieving, creating, updating, and deleting hospital stays.</span>
+
+<span class="sd">    It uses the `SejourSerializer` to serialize the `Sejour` model data.</span>
+
+<span class="sd">    Actions available:</span>
+<span class="sd">    - List all hospital stays.</span>
+<span class="sd">    - Retrieve details of a specific hospital stay.</span>
+<span class="sd">    - Create a new hospital stay.</span>
+<span class="sd">    - Update an existing hospital stay.</span>
+<span class="sd">    - Delete a hospital stay.</span>
+
+<span class="sd">    Additionally, this viewset includes a custom action to delete a specific hospital stay by its ID.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Sejour</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">SejourSerializer</span>
+
+    <span class="c1"># Action pour supprimer un séjour</span>
+<div class="viewcode-block" id="SejourViewSet.supprimer_sejour">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.sejour.SejourViewSet.supprimer_sejour">[docs]</a>
+    <span class="nd">@action</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;delete&#39;</span><span class="p">])</span>
+    <span class="k">def</span> <span class="nf">supprimer_sejour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sejour</span> <span class="o">=</span> <span class="n">Sejour</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+            <span class="n">sejour</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_204_NO_CONTENT</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">Sejour</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;detail&#39;</span><span class="p">:</span> <span class="s1">&#39;Séjour non trouvé&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span></div>
+</div>
+
+        
+<div class="viewcode-block" id="SejourDetailView">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.sejour.SejourDetailView">[docs]</a>
+<span class="k">class</span> <span class="nc">SejourDetailView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handles requests for retrieving detailed information about a specific sejour (hospital stay).</span>
+
+<span class="sd">    This API view provides:</span>
+<span class="sd">    - Diagnostic information for the specified sejour.</span>
+<span class="sd">    - A list of all consultations associated with the sejour.</span>
+
+<span class="sd">    Permissions:</span>
+<span class="sd">        - Requires the user to be authenticated (`IsAuthenticated`).</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        - `get(request, idSejour, *args, **kwargs)`: Retrieves the diagnostic and consultation details for a given sejour.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (Request): The HTTP request object.</span>
+<span class="sd">        idSejour (int): The unique identifier of the sejour.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Response:</span>
+<span class="sd">            - On success: A JSON object containing the diagnostic details and consultation history of the sejour.</span>
+<span class="sd">            - On failure: A JSON object with an error message and appropriate HTTP status code.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">IsAuthenticated</span><span class="p">]</span>
+
+<div class="viewcode-block" id="SejourDetailView.get">
+<a class="viewcode-back" href="../../../docs/DPI.views.html#DPI.views.sejour.SejourDetailView.get">[docs]</a>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">idSejour</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves diagnostic and consultation details for a specific sejour.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            request (Request): The HTTP request object.</span>
+<span class="sd">            idSejour (int): The unique identifier of the sejour.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Response:</span>
+<span class="sd">                - On success: A JSON object with the following structure:</span>
+<span class="sd">                    {</span>
+<span class="sd">                        &quot;sejour_id&quot;: &lt;idSejour&gt;,</span>
+<span class="sd">                        &quot;diagnostic_data&quot;: {</span>
+<span class="sd">                            &quot;id&quot;: &lt;diagnostic_id&gt;,</span>
+<span class="sd">                            &quot;description&quot;: &lt;diagnostic_description&gt;,</span>
+<span class="sd">                            ...</span>
+<span class="sd">                        },</span>
+<span class="sd">                        &quot;consultations&quot;: [</span>
+<span class="sd">                            {</span>
+<span class="sd">                                &quot;id&quot;: &lt;consultation_id&gt;,</span>
+<span class="sd">                                &quot;date&quot;: &lt;consultation_date&gt;,</span>
+<span class="sd">                                &quot;outilsConsulation&quot;: &lt;consultation_tools&gt;,</span>
+<span class="sd">                                ...</span>
+<span class="sd">                            },</span>
+<span class="sd">                            ...</span>
+<span class="sd">                        ]</span>
+<span class="sd">                    }</span>
+<span class="sd">                - On failure: A JSON object with an error message and an appropriate HTTP status code.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Retrieve the sejour using the idSejour</span>
+            
+            <span class="n">diagnostic</span> <span class="o">=</span> <span class="n">Diagnostic</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">idSejour</span><span class="o">=</span><span class="n">idSejour</span><span class="p">)</span>
+            
+            <span class="c1"># Fetch all consultations for the sejour</span>
+            <span class="n">consultations</span> <span class="o">=</span> <span class="n">ConsultationMedicale</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">idSejour</span><span class="o">=</span><span class="n">idSejour</span><span class="p">)</span>
+            <span class="n">diagnostic_data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">diagnostic</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">diagnostic</span><span class="o">.</span><span class="n">descriptionMaladie</span><span class="p">,</span>  <span class="c1"># Replace with actual fields of Diagnostic</span>
+                <span class="c1"># Add other fields from the Diagnostic model here</span>
+            <span class="p">}</span>
+
+            <span class="c1"># Prepare consultation data</span>
+            <span class="n">consultation_data</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">consultation</span> <span class="ow">in</span> <span class="n">consultations</span><span class="p">:</span>
+                <span class="n">consultation_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s2">&quot;id&quot;</span>  <span class="p">:</span><span class="n">consultation</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                    <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="n">consultation</span><span class="o">.</span><span class="n">dateConsultation</span><span class="p">,</span>
+                    <span class="s2">&quot;outilsConsulation&quot;</span> <span class="p">:</span> <span class="n">consultation</span><span class="o">.</span><span class="n">OutilsConsultation</span><span class="p">,</span>
+                   
+                <span class="p">})</span>
+
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span>
+                <span class="s2">&quot;sejour_id&quot;</span><span class="p">:</span> <span class="n">idSejour</span><span class="p">,</span>
+                <span class="s2">&quot;diagnostic_data&quot;</span><span class="p">:</span><span class="n">diagnostic_data</span><span class="p">,</span>
+                <span class="s2">&quot;consultations&quot;</span><span class="p">:</span> <span class="n">consultation_data</span>
+            <span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">Sejour</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Sejour not found&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;An error occurred: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_500_INTERNAL_SERVER_ERROR</span><span class="p">)</span></div>
+</div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TpIglTeam5Groupe6.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

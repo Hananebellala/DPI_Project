@@ -1,0 +1,45 @@
+<div class="main-container">
+  <div class="content">
+    <!-- Patient header with name -->
+    <div class="patient-header">
+      <h2 class="patient-name">Patient</h2>
+    </div>
+
+    <div class="text-photo-container">
+      <div class="text">
+        <!-- <h2>Diagnostic Récent</h2>
+        <p>{{ consultationDetail?.patient?.diagnosis || 'Loading diagnosis...' }}</p> -->
+        <!-- <p><strong>Diagnostiqué par :</strong> {{ consultationDetails?.patient?.doctor || 'Dr. Unknown' }}</p> -->
+
+        <h3>Date Consultation</h3>
+        <p>{{ consultationDetail?.date || 'Loading tools...' }}</p>
+
+        <h3>Premiere Consultation ?</h3>
+        <p>{{ consultationDetail?.premiere || 'Loading tools...' }}</p>
+
+        <h3>Outils Utilisés</h3>
+        <p>{{ consultationDetail?.outil || 'Loading tools...' }}</p>
+
+        <h3>Resume</h3>
+        <p>{{ consultationDetail?.resume || 'Loading tools...' }}</p>
+
+        <!-- <h3>Antécédents Médicaux</h3>
+        <p>{{ consultationDetails?.patient?.medicalHistory || 'Loading history...' }}</p> -->
+
+        <!-- <h3>Prochain Rendez-vous</h3>
+        <p>{{ consultationDetails?.patient?.nextAppointment || 'Loading...' }}</p> -->
+      </div>
+
+      <div class="photo">
+        <img src="Medical.png" alt="Patient" class="photo-img" />
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="content">
+    <router-outlet></router-outlet>
+
+</div>
+</div>

@@ -1,0 +1,97 @@
+.services {
+    background-color: #8ECAE6;
+    border-top-left-radius: 20px; /* Curved top */
+    border-top-right-radius: 20px; /* Curved top */
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.title h1 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 48px; /* Make the title bigger */
+    color: #FFFFFA; /* Title color */
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.Container {
+    display: flex;
+    justify-content: space-around; 
+    align-items: flex-end;
+    margin-top: 100px;
+}
+
+.card1, .card2, .card3 {
+    background-color: #EDF2FB;
+    border-radius: 40px;
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 20px;
+    box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.25); /* Default shadow for card 1 */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.cardText p {
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: black;
+    font-size: 16px;
+}
+
+.card1 {
+    box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.25);  /* Shadow for card 1 */
+}
+
+.card2 {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); /* Shadow for card 2 */
+}
+
+.card3 {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25); /* Shadow for card 3 */
+}
+
+/* Hover effects */
+.card1:hover, .card2:hover, .card3:hover {
+    transform: scale(1.05); /* Slightly increase size */
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.35); /* Increase shadow for emphasis */
+    cursor: pointer; /* Change the cursor to a pointer */
+}
+
+.card1:hover {
+    box-shadow: -4px 8px 8px rgba(0, 0, 0, 0.35);  /* Shadow for card 1 on hover */
+}
+
+.card2:hover {
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.35); /* Shadow for card 2 on hover */
+}
+
+.card3:hover {
+    box-shadow: 4px 8px 8px rgba(0, 0, 0, 0.35); /* Shadow for card 3 on hover */
+}
+
+.card1 img, .card2 img, .card3 img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+/* Adjusting the middle card's position */
+.card2 {
+    margin-bottom: 40px; /* Elevate the middle card */
+}
+
+@media screen and (max-width: 768px) {
+    .Container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card1, .card2, .card3 {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+}

@@ -1,0 +1,148 @@
+/* Style pour le header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Aligner à gauche */
+    position: absolute; /* Positionner en haut de la page */
+    top: 20px;
+    left: 20px;
+    z-index: 10; /* Pour s'assurer que ça se trouve au-dessus des autres éléments */
+    
+  }
+  
+  /* Style pour le texte "Heali" */
+  .heali-text {
+    font-weight: bold;
+    font-size: 40px;
+    color: #000; /* Noir */
+    margin-right: 10px; /* Espace entre le texte et le logo */
+  }
+  
+  /* Style pour le logo */
+  .logo {
+    width: 40px; /* Ajuste la taille du logo */
+    height: auto;
+    cursor: pointer;
+  }
+  
+  /* Style de base pour la page */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%; /* Assurez-vous que la page utilise toute la largeur */
+    background-color: #8ECAE6; /* Fond bleu */
+    overflow: hidden; /* Pour empêcher les barres de défilement si nécessaire */
+  }
+  
+  /* Container principal de la page */
+  .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Utilise toute la hauteur de la fenêtre */
+    width: 100vw; /* Utilise toute la largeur de la fenêtre */
+    margin: 0; /* Enlève toute marge autour du container */
+    padding: 0; /* Enlève le padding, pour éviter les espaces indésirables */
+    background-color: #8ECAE6;
+  }
+  
+  .form-content {
+    display: flex;
+    align-items: center;
+    max-width: 1200px; /* Agrandir l'espace global du formulaire */
+    width: 100%;
+    gap: 100px; /* Augmenter l'espace entre l'image et le formulaire */
+  }
+  
+  .image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 100px; /* Augmenter l'espace supplémentaire à droite de l'image */
+  }
+  
+  .image-section img {
+    max-width: 90%;
+    height: auto; /* Garder l'aspect ratio de l'image */
+    border-radius: 10px;
+  }
+  
+  .form-section {
+    flex: 1;
+    padding: 40px;
+    background-color: #ffe4ec; /* Couleur rose pour le formulaire */
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 450px;
+  }
+  
+  h3 {
+    text-align: center;
+    font-size: 30px;
+    font-family: Source Sans Pro;
+    margin-bottom: 30px;
+    color: #152522; /* Rose pour le texte du titre */
+  }
+  
+  .form-group {
+    margin-bottom: 30px; /* Ajout d'espace supplémentaire entre les champs */
+  }
+  
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #fff;
+    box-sizing: border-box; /* Garantir que le padding ne modifie pas la largeur */
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #ff4a6e;
+  }
+  
+  button {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff4a6e;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    box-sizing: border-box; /* Garantir que le padding ne modifie pas la largeur */
+  }
+  
+  button:hover {
+    background-color: #e63958;
+  }
+  
+  .forgot-password {
+    text-align: center;
+    font-size: 14px;
+    color: #333; /* Noir pour le texte */
+    margin-top: 25px; /* Ajoute plus d'espace sous le bouton */
+  }
+  
+  .forgot-password span {
+    color: #666; /* Gris pour le texte du lien */
+    cursor: pointer;
+  }
+  
+  .forgot-password span:hover {
+    text-decoration: underline;
+  }

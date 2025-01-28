@@ -1,0 +1,50 @@
+ 
+<div class="radio-page">
+   
+  <div class="top">
+      <a href="/lab-results" class="previous">Lab Results</a>
+      <img src="next.png" alt="next">
+      <a class="current">Blood Count Test</a>
+  </div>
+
+  <div class="table-container">
+      <table>
+          <thead>
+              <tr>
+                  <th>Date</th>
+                  <th>Radiology Type</th>
+                  <th>Made By</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let entry of radiologyData" (click)="openModal(entry)">
+                  <td>{{ entry.date }}</td>
+                  <td>{{ entry.type }}</td>
+                  <td>{{ modalData.by }}</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+
+  <div class="modal" [class.show]="isModalOpen" (click)="onBackgroundClick($event)">
+<div class="modal-content" (click)="$event.stopPropagation()">
+  <span class="close-button" (click)="closeModal()">&times;</span>
+  <div id="modal-images">
+    
+    
+    <div class="image-row">
+      <img *ngFor="let img of modalData.images.slice(2)" [src]="img" alt="Image" (click)="viewImage(img)" />
+    </div>
+  </div>
+  <h3 class="modal-title">Radiology Report</h3>
+  <div id="modal-summary">
+    {{ modalData.summary }}
+  </div>
+</div>
+</div>
+
+    
+</div>
+
+
+

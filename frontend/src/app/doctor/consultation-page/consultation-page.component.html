@@ -1,0 +1,36 @@
+<div class="main-container">
+  <!-- Sidebar can go here, if applicable -->
+
+  <div class="content">
+    <!-- Patient header with name -->
+    <div class="patient-header">
+      <h2 class="patient-name">{{ nom || 'Loading...' }}</h2>
+    </div>
+
+    <!-- Text and photo section -->
+    <div class="text-photo-container">
+      <div class="text">
+        <h2>Diagnostic Récent</h2>
+        <p>{{ maladie|| 'Not found...' }}</p>
+        <!--<p><strong>Diagnostiqué par :</strong> {{ patient?.doctor || 'Dr. Unknown' }}</p>-->
+
+        <h3>Outils Utilisés</h3>
+        <p>{{ toolsUsed || 'Not found...' }}</p>
+
+        <h3>Antécédents Médicaux</h3>
+        <p>{{ description|| 'Not found...' }}</p>
+        <h3> Type Antécédents Médicaux</h3>
+        <p>{{ typeAntecedent || 'Not found...' }}</p>
+
+        <h3>Prochain Rendez-vous</h3>
+        <p>{{ nextConsultationDate || 'Not found...' }}</p>
+      </div>
+
+      <div class="photo">
+        <img src="Medical.png" alt="Patient" class="photo-img" />
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isLoading" class="loading-container">
+    <p>Chargement des données...</p>
+</div>

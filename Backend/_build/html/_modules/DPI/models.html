@@ -1,0 +1,561 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DPI.models &mdash; Gestionnaire du dossier patient informatisé 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=29a6c3e3"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Gestionnaire du dossier patient informatisé
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Gestionnaire du dossier patient informatisé</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">DPI.models</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for DPI.models</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">django.core.validators</span> <span class="kn">import</span> <span class="n">FileExtensionValidator</span>
+<span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">ValidationError</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+
+<div class="viewcode-block" id="is_email">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.is_email">[docs]</a>
+<span class="k">def</span> <span class="nf">is_email</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">email_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">email_pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2"> n&#39;est pas une adresse électronique valide&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="is_NSS">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.is_NSS">[docs]</a>
+<span class="k">def</span> <span class="nf">is_NSS</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">NSS_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(0[1-9]|[1-4][0-9]|5[0-8]|99)(\d</span><span class="si">{2}</span><span class="s1">)(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])\d</span><span class="si">{5}</span><span class="s1">}$&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">NSS_pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2"> n&#39;est pas un NSS valide&quot;</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="is_phonenumber">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.is_phonenumber">[docs]</a>
+<span class="k">def</span> <span class="nf">is_phonenumber</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">phonenumber_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^0\d</span><span class="si">{9}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">phonenumber_pattern</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2"> n&#39;est pas un numéro de téléphone valide&quot;</span><span class="p">)</span></div>
+
+    
+<span class="c1"># Create your models here.</span>
+
+
+<div class="viewcode-block" id="Hopital">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.Hopital">[docs]</a>
+<span class="k">class</span> <span class="nc">Hopital</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">nom</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span></div>
+
+<span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_hopital&#39;</span>
+
+<div class="viewcode-block" id="ComptePersonne">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.ComptePersonne">[docs]</a>
+<span class="k">class</span> <span class="nc">ComptePersonne</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">OneToOneField</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">nomComplet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">motDePasse</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+<div class="viewcode-block" id="ComptePersonne.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.ComptePersonne.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+       <span class="n">abstract</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="ComptePersonne.get_profile_url">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.ComptePersonne.get_profile_url">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_profile_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Generate profile URL based on email</span>
+        <span class="c1"># This ensures the URL structure is consistent for all users</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;/profile/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">/&quot;</span></div>
+</div>
+
+
+<div class="viewcode-block" id="CompteAdministrateur">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.CompteAdministrateur">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteAdministrateur</span><span class="p">(</span><span class="n">ComptePersonne</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+<span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_compteadministrateur&#39;</span>
+
+<div class="viewcode-block" id="CompteEmployeeHopital">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.CompteEmployeeHopital">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteEmployeeHopital</span><span class="p">(</span><span class="n">ComptePersonne</span><span class="p">):</span>
+    <span class="n">idHopital</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Hopital</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="viewcode-block" id="CompteEmployeeHopital.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.CompteEmployeeHopital.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">abstract</span> <span class="o">=</span> <span class="kc">True</span></div>
+</div>
+
+
+<div class="viewcode-block" id="CompteMedecin">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.CompteMedecin">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteMedecin</span><span class="p">(</span><span class="n">CompteEmployeeHopital</span><span class="p">):</span>
+    <span class="n">SPEC_CHOIX</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;Chirurgien&#39;</span><span class="p">,</span><span class="s1">&#39;Chirurgien&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Généraliste&#39;</span><span class="p">,</span> <span class="s1">&#39;Généraliste&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Pédiatre&#39;</span><span class="p">,</span> <span class="s1">&#39;Pédiatre&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Endocrinologue&#39;</span><span class="p">,</span><span class="s1">&#39;Endocrinologue&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Cardiologue&#39;</span><span class="p">,</span> <span class="s1">&#39;Cardiologue&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Dermatologue&#39;</span><span class="p">,</span> <span class="s1">&#39;Dermatologue&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Neurologue&#39;</span><span class="p">,</span><span class="s1">&#39;Neurologue&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Obstétricien&#39;</span><span class="p">,</span><span class="s1">&#39;Obstétricien&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Ostéologue&#39;</span><span class="p">,</span><span class="s1">&#39;Ostéologue&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Ophtalmologue&#39;</span><span class="p">,</span><span class="s1">&#39;Ophtalmologue&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;ORL&#39;</span><span class="p">,</span><span class="s1">&#39;ORL&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Gastro-entérologue&#39;</span><span class="p">,</span><span class="s1">&#39;Gastro-entérologue&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Néphrologue&#39;</span><span class="p">,</span><span class="s1">&#39;Néphrologue&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Anesthésiste&#39;</span><span class="p">,</span><span class="s2">&quot;Anesthésiste&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">specialite</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;Généraliste&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">SPEC_CHOIX</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_comptemedecin&#39;</span>
+    
+<div class="viewcode-block" id="CompteMedecin.get_profile_url">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.CompteMedecin.get_profile_url">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_profile_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Generate profile URL based on email</span>
+        <span class="c1"># This ensures the URL structure is consistent for all users</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;/profile/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">/&quot;</span></div>
+</div>
+
+
+<div class="viewcode-block" id="CompteInfirmier">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.CompteInfirmier">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteInfirmier</span><span class="p">(</span><span class="n">CompteEmployeeHopital</span><span class="p">):</span>
+    <span class="n">SPEC_CHOIX</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;de bloc opératoire&#39;</span><span class="p">,</span> <span class="s1">&#39;de bloc opératoire&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;anesthésiste&#39;</span><span class="p">,</span> <span class="s1">&#39;anesthésiste&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;puériculteur&#39;</span><span class="p">,</span> <span class="s1">&#39;puériculteur&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;en pratique avancée&#39;</span><span class="p">,</span><span class="s1">&#39;en pratique avancée&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;hygiéniste&#39;</span><span class="p">,</span><span class="s1">&#39;hygiéniste&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;coordinateur&#39;</span><span class="p">,</span><span class="s1">&#39;coordinateur&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="n">specialiteInf</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">SPEC_CHOIX</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_compteinfirmier&#39;</span></div>
+
+
+
+<div class="viewcode-block" id="ComptePersonnelAdministratif">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.ComptePersonnelAdministratif">[docs]</a>
+<span class="k">class</span> <span class="nc">ComptePersonnelAdministratif</span><span class="p">(</span><span class="n">CompteEmployeeHopital</span><span class="p">):</span>
+    <span class="n">SERVICE_CHOIX</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;Urgences&#39;</span><span class="p">,</span> <span class="s1">&#39;Urgences&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Réanimation&#39;</span><span class="p">,</span> <span class="s1">&#39;Réanimation&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Pédiatrie&#39;</span><span class="p">,</span> <span class="s1">&#39;Pédiatrie&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Cardiologie&#39;</span><span class="p">,</span> <span class="s1">&#39;Cardiologie&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Endocrinologie&#39;</span><span class="p">,</span><span class="s1">&#39;Endocrinologie&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Dermatologie&#39;</span><span class="p">,</span> <span class="s1">&#39;Dermatologie&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Neurologie&#39;</span><span class="p">,</span><span class="s1">&#39;Neurologie&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Obstétrique&#39;</span><span class="p">,</span><span class="s1">&#39;Obstétrique&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Ostéologie&#39;</span><span class="p">,</span><span class="s1">&#39;Ostéologie&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Ophtalmologie&#39;</span><span class="p">,</span><span class="s1">&#39;Ophtalmologie&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;ORL&#39;</span><span class="p">,</span><span class="s1">&#39;ORL&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Gastro-entérologie&#39;</span><span class="p">,</span><span class="s1">&#39;Gastro-entérologie&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Néphrologie&#39;</span><span class="p">,</span><span class="s1">&#39;Néphrologie&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Orthopédie&#39;</span><span class="p">,</span><span class="s1">&#39;Orthopédie&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Anesthésiologie&#39;</span><span class="p">,</span><span class="s1">&#39;Anesthésiologie&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="n">service</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;Urgences&quot;</span><span class="p">,</span> <span class="n">max_length</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">SERVICE_CHOIX</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_personneladministratif&#39;</span></div>
+
+
+<div class="viewcode-block" id="CompteRadiologue">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.CompteRadiologue">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteRadiologue</span><span class="p">(</span><span class="n">CompteEmployeeHopital</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+<span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_compteradialogue&#39;</span>
+
+<div class="viewcode-block" id="CompteLaborantin">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.CompteLaborantin">[docs]</a>
+<span class="k">class</span> <span class="nc">CompteLaborantin</span><span class="p">(</span><span class="n">CompteEmployeeHopital</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+<span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_comptelaborantin&#39;</span>
+
+<div class="viewcode-block" id="ComptePharmacien">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.ComptePharmacien">[docs]</a>
+<span class="k">class</span> <span class="nc">ComptePharmacien</span><span class="p">(</span><span class="n">CompteEmployeeHopital</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.Meta">[docs]</a>
+<span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_comptepharmacien&#39;</span></div>
+
+
+<div class="viewcode-block" id="DPI">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.DPI">[docs]</a>
+<span class="k">class</span> <span class="nc">DPI</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">numeroSecuriteSociale</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+    <span class="n">dateDeNaissance</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">)</span>
+    <span class="n">adresse</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">telephone</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">decimal_places</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">mutuelle</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+    <span class="n">idMedecinTraitant</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">personneAcontacter</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_dpi&#39;</span></div>
+
+
+<div class="viewcode-block" id="ComptePatient">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.ComptePatient">[docs]</a>
+<span class="k">class</span> <span class="nc">ComptePatient</span><span class="p">(</span><span class="n">ComptePersonne</span><span class="p">):</span>
+    <span class="n">dossierPatient</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">DPI</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_comptepatient&#39;</span></div>
+
+
+<div class="viewcode-block" id="Sejour">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.Sejour">[docs]</a>
+<span class="k">class</span> <span class="nc">Sejour</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">idDossierPatient</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">DPI</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">idCompteMedecin</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">CompteMedecin</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">DO_NOTHING</span><span class="p">)</span>
+    <span class="n">dateDebutSejour</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">)</span>
+    <span class="n">dateFinSejour</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">)</span>
+    <span class="n">motifAdmission</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_sejour&#39;</span></div>
+
+
+<div class="viewcode-block" id="ConsultationMedicale">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.ConsultationMedicale">[docs]</a>
+<span class="k">class</span> <span class="nc">ConsultationMedicale</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">OUTILS</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;Stéthoscope&#39;</span><span class="p">,</span><span class="s1">&#39;Stéthoscope&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Tensiomètre&#39;</span><span class="p">,</span><span class="s1">&#39;Tensiomètre&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Thermomètre&#39;</span><span class="p">,</span><span class="s1">&#39;Tensiomètre&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="n">premiere</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">idSejour</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Sejour</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">dateConsultation</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">)</span>
+    <span class="n">outilsConsultation</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;Stéthoscope&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">OUTILS</span><span class="p">)</span>
+    <span class="n">resume</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+    <span class="n">dateProchaineConsultation</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_consultationmedicale&#39;</span></div>
+
+
+<div class="viewcode-block" id="Diagnostic">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.Diagnostic">[docs]</a>
+<span class="k">class</span> <span class="nc">Diagnostic</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">idSejour</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Sejour</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">idConsultation</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">ConsultationMedicale</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">descriptionMaladie</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_diagnostic&#39;</span></div>
+
+
+<div class="viewcode-block" id="Soin">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.Soin">[docs]</a>
+<span class="k">class</span> <span class="nc">Soin</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">SOIN_CHOIX</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;Soin d</span><span class="se">\&#39;</span><span class="s1">hygiène et de confort&#39;</span><span class="p">,</span> <span class="s1">&#39;Soin d</span><span class="se">\&#39;</span><span class="s1">hygiène et de confort&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Surveillance clinique&#39;</span><span class="p">,</span> <span class="s1">&#39;Surveillance clinique&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Soin medical&#39;</span><span class="p">,</span> <span class="s1">&#39;Soin médical&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Soin spécifique&#39;</span><span class="p">,</span><span class="s1">&#39;Soin spécifique&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Soin psycho-social&#39;</span><span class="p">,</span><span class="s1">&#39;Soin psycho-social&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Soin d</span><span class="se">\&#39;</span><span class="s1">éducation/prévention&#39;</span><span class="p">,</span><span class="s1">&#39;Soin d</span><span class="se">\&#39;</span><span class="s1">éducation/prévention&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Soin en cas d</span><span class="se">\&#39;</span><span class="s1">urgence&#39;</span><span class="p">,</span><span class="s1">&#39;Soin en cas d</span><span class="se">\&#39;</span><span class="s1">urgence&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="n">idSejour</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Sejour</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">idInfirmier</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">CompteInfirmier</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">DO_NOTHING</span><span class="p">,</span> <span class="n">to_field</span><span class="o">=</span><span class="s1">&#39;email&#39;</span><span class="p">)</span>
+    <span class="n">typeSoin</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;Soin médical&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">SOIN_CHOIX</span><span class="p">)</span>
+    <span class="n">resumeSoin</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;Fait&quot;</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_soin&#39;</span></div>
+
+
+
+
+<div class="viewcode-block" id="Antecedent">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.Antecedent">[docs]</a>
+<span class="k">class</span> <span class="nc">Antecedent</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">TYPE</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;Médical personnel&#39;</span><span class="p">,</span><span class="s1">&#39;Médical personnel&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Familial&#39;</span><span class="p">,</span><span class="s1">&#39;Familial&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Médicamenteux&#39;</span><span class="p">,</span><span class="s1">&#39;Médicamenteux&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Social et environnemental&#39;</span><span class="p">,</span><span class="s1">&#39;Social et environnemental&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Obstétrical et gynécologique&#39;</span><span class="p">,</span><span class="s1">&#39;Obstétrical et gynécologique&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="n">typeAntecedent</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;Médical personnel&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">TYPE</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+    <span class="n">idConsultation</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">ConsultationMedicale</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="Antecedent.clean">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.Antecedent.clean">[docs]</a>
+    <span class="k">def</span> <span class="nf">clean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idConsultation</span><span class="o">.</span><span class="n">premiere</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s2">&quot;Un antécédent ne peut pas être ajouté qu&#39;à une première consultation&quot;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">clean</span><span class="p">()</span></div>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_antecedent&#39;</span></div>
+
+
+<div class="viewcode-block" id="PieceJointe">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.PieceJointe">[docs]</a>
+<span class="k">class</span> <span class="nc">PieceJointe</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">URLField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FileField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="s1">&#39;Attached-files/&#39;</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">FileExtensionValidator</span><span class="p">(</span> <span class="p">[</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="s1">&#39;jpeg&#39;</span><span class="p">,</span><span class="s1">&#39;jpg&#39;</span><span class="p">]</span> <span class="p">)])</span> 
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_piecejointe&#39;</span></div>
+
+
+<div class="viewcode-block" id="ExamenComplementaire">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.ExamenComplementaire">[docs]</a>
+<span class="k">class</span> <span class="nc">ExamenComplementaire</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">idSejour</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Sejour</span><span class="p">,</span><span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">dateExamen</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">)</span>
+<div class="viewcode-block" id="ExamenComplementaire.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.ExamenComplementaire.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">abstract</span> <span class="o">=</span> <span class="kc">True</span></div>
+</div>
+
+
+<div class="viewcode-block" id="BilanRadiologique">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.BilanRadiologique">[docs]</a>
+<span class="k">class</span> <span class="nc">BilanRadiologique</span><span class="p">(</span><span class="n">ExamenComplementaire</span><span class="p">):</span>
+    <span class="n">TYPE</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;Radiographie&#39;</span><span class="p">,</span><span class="s1">&#39;Radiographie&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Echographie&#39;</span><span class="p">,</span><span class="s1">&#39;Echographie&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Scanner&#39;</span><span class="p">,</span><span class="s1">&#39;Scanner&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;IRM&#39;</span><span class="p">,</span><span class="s1">&#39;IRM&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;Radiographie&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">TYPE</span><span class="p">)</span>
+    <span class="n">rapport</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FileField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="s1">&#39;Attached-files/&#39;</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">FileExtensionValidator</span><span class="p">(</span> <span class="p">[</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="s1">&#39;jpeg&#39;</span><span class="p">,</span><span class="s1">&#39;jpg&#39;</span><span class="p">]</span> <span class="p">)])</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_bilanradiologique&#39;</span></div>
+
+    
+<div class="viewcode-block" id="BilanBiologique">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.BilanBiologique">[docs]</a>
+<span class="k">class</span> <span class="nc">BilanBiologique</span><span class="p">(</span><span class="n">ExamenComplementaire</span><span class="p">):</span>
+    <span class="n">resultatGlobal</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LigneBilanBiologique">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.LigneBilanBiologique">[docs]</a>
+<span class="k">class</span> <span class="nc">LigneBilanBiologique</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">UNIT</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;mm&#39;</span><span class="p">,</span><span class="s1">&#39;mm&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;mL&#39;</span><span class="p">,</span><span class="s1">&#39;mL&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;u/mL&#39;</span><span class="p">,</span><span class="s1">&#39;u/mL&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;mmHg&#39;</span><span class="p">,</span><span class="s1">&#39;mmHg&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;g/L&#39;</span><span class="p">,</span><span class="s1">&#39;g/L&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;mmol/mL&#39;</span><span class="p">,</span><span class="s1">&#39;mmol/mL&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span><span class="s1">&#39;%&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="n">idBilanBiologique</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">BilanBiologique</span><span class="p">,</span><span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">resultat</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">unite</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;ml&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">UNIT</span><span class="p">)</span>
+<div class="viewcode-block" id="LigneBilanBiologique.Meta">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.LigneBilanBiologique.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">abstract</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_bilanbiologique&#39;</span>        </div>
+</div>
+
+
+<div class="viewcode-block" id="LigneSigneVital">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.LigneSigneVital">[docs]</a>
+<span class="k">class</span> <span class="nc">LigneSigneVital</span><span class="p">(</span><span class="n">LigneBilanBiologique</span><span class="p">):</span>
+    <span class="n">TYPE</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;Glycémie&#39;</span><span class="p">,</span><span class="s1">&#39;Glycémie&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Tension artérielle systolique&#39;</span><span class="p">,</span><span class="s1">&#39;Tension artérielle systolique&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Tension artérielle diastolique&#39;</span><span class="p">,</span><span class="s1">&#39;Tension artérielle diastolique&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Rythme cardiaque&#39;</span><span class="p">,</span><span class="s1">&#39;Rythme cardiaque&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;Glycémie&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">TYPE</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_lignesignevital&#39;</span></div>
+
+
+<div class="viewcode-block" id="LigneAnalyse">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.LigneAnalyse">[docs]</a>
+<span class="k">class</span> <span class="nc">LigneAnalyse</span><span class="p">(</span><span class="n">LigneBilanBiologique</span><span class="p">):</span>
+    <span class="n">TYPE</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;Cholestérol&#39;</span><span class="p">,</span><span class="s1">&#39;Cholestérol&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Triglycérides&#39;</span><span class="p">,</span><span class="s1">&#39;Triglycérides&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Créatinine&#39;</span><span class="p">,</span><span class="s1">&#39;Créatinine&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Urée&#39;</span><span class="p">,</span><span class="s1">&#39;Urée&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Bilirubine&#39;</span><span class="p">,</span><span class="s1">&#39;Bilirubine&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;CRP&#39;</span><span class="p">,</span><span class="s1">&#39;CRP&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Hématies&#39;</span><span class="p">,</span><span class="s1">&#39;Hématies&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Hématocrites&#39;</span><span class="p">,</span><span class="s1">&#39;Hématocrites&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Hémoglobine&#39;</span><span class="p">,</span><span class="s1">&#39;Hémoglobine&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Leucocytes&#39;</span><span class="p">,</span><span class="s1">&#39;Leucocytes&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Granulocytes&#39;</span><span class="p">,</span><span class="s1">&#39;Granulocytes&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Thrombocytes&#39;</span><span class="p">,</span><span class="s1">&#39;Thrombocytes&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;GGT&#39;</span><span class="p">,</span><span class="s1">&#39;GGT&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;LDH&#39;</span><span class="p">,</span><span class="s1">&#39;LDH&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;Hémoglobine&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">TYPE</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_ligneanalyse&#39;</span></div>
+
+
+<div class="viewcode-block" id="Ordonnance">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.Ordonnance">[docs]</a>
+<span class="k">class</span> <span class="nc">Ordonnance</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">idSejour</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Sejour</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">DO_NOTHING</span><span class="p">)</span>
+    <span class="n">dateOrdonnance</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_ordonnance&#39;</span></div>
+
+
+<div class="viewcode-block" id="Medicament">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.Medicament">[docs]</a>
+<span class="k">class</span> <span class="nc">Medicament</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">TYPE_MED</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;Orale&#39;</span><span class="p">,</span> <span class="s1">&#39;Orale&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Injectable&#39;</span><span class="p">,</span> <span class="s1">&#39;Injectable&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Dermique&#39;</span><span class="p">,</span><span class="s1">&#39;Dermique&#39;</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">nomMedicament</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,)</span>
+    <span class="n">forme</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;Orale&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">TYPE_MED</span><span class="p">)</span>
+    <span class="n">quantiteStock</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">PositiveIntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_medicament&#39;</span></div>
+
+
+<div class="viewcode-block" id="Posologie">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.Posologie">[docs]</a>
+<span class="k">class</span> <span class="nc">Posologie</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="c1">#idSejour = models.ForeignKey(Sejour, on_delete=models.CASCADE)</span>
+    <span class="n">idSejour</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Sejour</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">nomMedicament</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Medicament</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">dose</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">Frequency</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">dureePrise</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Facture">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.Facture">[docs]</a>
+<span class="k">class</span> <span class="nc">Facture</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">idSejour</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Sejour</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">dateFacture</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">)</span>
+    <span class="n">montant</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LigneFacture">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.LigneFacture">[docs]</a>
+<span class="k">class</span> <span class="nc">LigneFacture</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">idFacture</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Facture</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">idSoin</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Soin</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">fraisSoin</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_lignefacture&#39;</span></div>
+
+
+<div class="viewcode-block" id="EffetSecondaire">
+<a class="viewcode-back" href="../../docs/DPI.html#DPI.models.EffetSecondaire">[docs]</a>
+<span class="k">class</span> <span class="nc">EffetSecondaire</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">nomMedicament</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Medicament</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">descriptionEffetSecondaire</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s1">&#39;dpi_effetsecondaire&#39;</span></div>
+
+
+
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TpIglTeam5Groupe6.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

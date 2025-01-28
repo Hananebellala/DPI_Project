@@ -1,0 +1,53 @@
+<div class="radiologue-page">
+    
+    <div class="page-content">
+        
+
+        <div class="rest-page">
+            <form (submit)="saveRadiologyFiles($event)" enctype="multipart/form-data">
+            <h2>Radiology Results</h2>
+            <div class="radiology-results">
+                <div class="report">
+                    <h3>Report</h3>
+                    <textarea #reportInput required name="" id="" cols="120" rows="10"></textarea>
+                </div>
+                <h3>Attach Radio</h3>
+                <div class="upload-container">
+                    <div class="type-files">
+                        <div class="attach">
+                            <select required id="radio-type" #radioTypeInput name="radio-type">
+                                <option value="IRM">IRM</option>
+                                <option value="Radiographie">Radiographie</option>
+                                <option value="Echographies">Echographies</option>
+                            </select>
+    
+                            <div class="upload" (click)="onUploadClick()">
+                                <img src="upload.png" alt="upload">
+                                <button #fileInput (change)="onFileSelected($event)" 
+                                accept="image/*,application/pdf">Upload Files</button>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="selected-files">
+                        <div class="selected-files-space">
+                            <div *ngFor="let file of selectedFiles; index as i">
+                                <div *ngIf="i < 4" class="file-item">
+                                  <span>{{ file.name }}</span>
+                                  <span class="delete-icon" (click)="removeFile(file)">X</span>
+                                </div>
+                              </div>
+                              
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="save-button-container">
+                    <button>Save</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
