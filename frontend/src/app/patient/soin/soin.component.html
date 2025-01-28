@@ -1,40 +1,40 @@
 <div class="soin-page">
-    <!-- Soin Table -->
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Infirmier</th>
-                    <th>Type de Soin</th>
-                    <th>Détails</th>
-                </tr>
-            </thead>
-            <tbody *ngIf="soins.length > 0; else loading">
-              <tr *ngFor="let soin of soins" (click)="openModal(soin)">
-                <td>{{ soin.infirmier }}</td>
-                <td>{{ soin.type }}</td>
-                <td>{{ soin.details }}</td>
-              </tr>
-            </tbody>
-            <ng-template #loading>
+  <!-- Soin Table -->
+  <div class="table-container">
+      <table>
+          <thead>
               <tr>
-                <td colspan="3">Loading data...</td>
+                  <th>Infirmier</th>
+                  <th>Type de Soin</th>
+                  <th>Détails</th>
               </tr>
-            </ng-template>
-        </table>
-    </div>
+          </thead>
+          <tbody >
+              <tr *ngFor="let soin of soins" (click)="openModal(soin)">
+                  <td>{{ soin.idInfirmier }}</td>
+                  <td>{{ soin.typeSoin }}</td>
+                  <td>tap for details </td> <!-- Added a fallback in case of missing summary -->
+              </tr>
+          </tbody>
+          <ng-template #loading>
+              <tr>
+                  <td colspan="3">Loading data...</td>
+              </tr>
+          </ng-template>
+      </table>
+  </div>
 
-    <!-- Modal -->
-    <div class="modal" [class.show]="isModalOpen" (click)="onBackgroundClick($event)">
-        <div class="modal-content" (click)="$event.stopPropagation()">
-            <span class="close-button" (click)="closeModal()">&times;</span>
-            <h3 class="modal-title">Résumé</h3>
-            <div id="modal-summary">
-                {{ modalData.details }}
-            </div>
-        </div>
-    </div>
+  <!-- Modal -->
+  <div class="modal" [class.show]="isModalOpen" (click)="onBackgroundClick($event)">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+          <span class="close-button" (click)="closeModal()">&times;</span>
+          <h3 class="modal-title">Résumé</h3>
+          <div id="modal-summary">
+              <!-- Bind to the summary in modalData to show detailed information -->
+              {{ modalData.summary || 'No detailed summary available' }}
+          </div>
+      </div>
+  </div>
 
-    <router-outlet></router-outlet>
-
+  <router-outlet></router-outlet>
 </div>

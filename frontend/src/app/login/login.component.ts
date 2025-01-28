@@ -90,14 +90,14 @@ login() {
                 break;
         
            case 'nurse':
-                  this.router.navigate(['/doctor-dashboard']); // Rediriger vers un tableau de bord des médecins
+                  this.router.navigate(['/infirmier']); // Rediriger vers un tableau de bord des médecins
                   break;
             case 'lab technician':
-                    this.router.navigate(['/doctor-dashboard']); // Rediriger vers un tableau de bord des médecins
+                    this.router.navigate(['/lab']); // Rediriger vers un tableau de bord des médecins
                     break;
         
             case 'admin':
-                      this.router.navigate(['/doctor-dashboard']); // Rediriger vers un tableau de bord des médecins
+                      this.router.navigate(['/admin']); // Rediriger vers un tableau de bord des médecins
                       break;
         
           // Ajoutez d'autres cas ici pour gérer d'autres rôles

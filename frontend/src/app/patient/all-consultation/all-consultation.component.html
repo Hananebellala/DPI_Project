@@ -48,21 +48,27 @@
 
 
         <div class="dossiers-container">
-          <div class="dossier" 
-          *ngFor="let dossier of dossiers"
-          [routerLink]="['/doctor/Patient/consultation'] "
-          [queryParams]="{
-            nom: nom, 
-             numSecuriteSociale: numSecuriteSociale, 
-             idSejour: idSejour,
-             debutSejour: debutSejour,
-             finSejour: finSejour,
-            idConsultation: dossier.id }">
-           <img src="Dossier.png" alt=" dossier.date" />
-            <div class="date">{{dossier.date }}</div>
+          <!-- Loop through dossiers -->
+          <div
+            class="dossier"
+            *ngFor="let dossier of dossiers"
+            [routerLink]="['/patient/Patient/consultation']"
+            [queryParams]="{
+              nom: nom,
+              numSecuriteSociale: numSecuriteSociale,
+              idSejour: idSejour,
+              debutSejour: debutSejour,
+              finSejour: finSejour,
+              idConsultation: dossier.id
+            }"
+          >
+            <!-- Dossier Icon -->
+            <img src="Dossier.png" alt="Dossier" />
+            <!-- Display Consultation Date -->
+            <div class="date">{{ dossier.dateConsultation }}</div>
           </div>
-         
         </div>
+        
 
 
       </div>

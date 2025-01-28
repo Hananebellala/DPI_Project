@@ -75,20 +75,28 @@ export class AllConsultationComponent implements OnInit {
 
   // Fetch consultations and filter by idSejour
   fetchConsultations(): void {
-    if (this.idSejour) {
-      this.http.get<any[]>(`http://127.0.0.1:8000/consultationmedicale/`).subscribe(
-        (consultations) => {
-          this.dossiers = consultations.filter((consultation) => consultation.idSejour === this.idSejour);
-          if (!this.dossiers.length) {
-            console.warn('Aucun dossier trouvé pour cet idSejour.');
-          }
-        },
-        (error) => {
-          console.error('Erreur lors de la récupération des consultations:', error);
-        }
-      );
+    if (!this.idSejour) {
+      console.error('ID Séjour non spécifié. Impossible de récupérer les consultations.');
+      return;
     }
+  
+    this.http.get<any[]>(`http://127.0.0.1:8000/consultationmedicale/`).subscribe(
+      (consultations) => {
+        // Filter consultations by idSejour (ensure it's a number for strict comparison)
+        this.dossiers = consultations.filter(
+          (consultation) => consultation.idSejour === Number(this.idSejour)
+        );
+  
+        if (!this.dossiers.length) {
+          console.warn(`Aucun dossier trouvé pour l'idSejour : ${this.idSejour}`);
+        }
+      },
+      (error) => {
+        console.error('Erreur lors de la récupération des consultations:', error);
+      }
+    );
   }
+  
 
   // Open the Add Diagnostic dialog
   

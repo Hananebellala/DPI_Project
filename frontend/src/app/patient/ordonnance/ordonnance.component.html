@@ -8,10 +8,10 @@
 
   <div class="added-medicaments">
     <div *ngFor="let med of medications" class="medicament-card">
-      <h3>Name:{{ med.name }}</h3>
+      <h3>Name: {{ med.nomMedicament }}</h3>
       <p><span>Dose:</span> {{ med.dose }}</p>
-      <p><span>frequency:</span> {{ med.frequency }}</p>
-      <p><span>Duration:</span>{{ med.duration }}</p>
+      <p><span>Frequency:</span> {{ med.Frequency }}</p>
+      <p><span>Duration:</span> {{ med.dureePrise }}</p>
     </div>
   </div>
   <router-outlet></router-outlet>

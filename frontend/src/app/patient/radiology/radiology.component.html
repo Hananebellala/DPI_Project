@@ -1,43 +1,37 @@
+ 
 <div class="radio-page">
-  <!-- Top Navigation -->
+   
   <div class="top">
-      <a href="/patient/lab-results" class="previous">Lab Results</a>
+      <a href="/lab-results" class="previous">Lab Results</a>
       <img src="next.png" alt="next">
-      <a class="current">Radiology</a>
+      <a class="current">Blood Count Test</a>
   </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Radiology Type</th>
-          <th>Rapport</th>
-        </tr>
-      </thead>
-      <table *ngIf="radiologyData && radiologyData.length > 0">
-        <div *ngFor="let radio of radiologyData">
-          <td>{{ radio.name }}</td>
-          <td>{{ radio.resume }}</td>
-          <td>{{ radio.infermier }}</td>
-        </div>
+  <div class="table-container">
+      <table>
+          <thead>
+              <tr>
+                  <th>Date</th>
+                  <th>Radiology Type</th>
+                  <th>Made By</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let entry of radiologyData" (click)="openModal(entry)">
+                  <td>{{ entry.date }}</td>
+                  <td>{{ entry.type }}</td>
+                  <td>{{ modalData.by }}</td>
+              </tr>
+          </tbody>
       </table>
-      <ng-template #loading>
-        <tr>
-          <td colspan="3">Loading data...</td>
-        </tr>
-      </ng-template>
-    </table>
+  </div>
 
-
-  <!-- Modal -->
   <div class="modal" [class.show]="isModalOpen" (click)="onBackgroundClick($event)">
 <div class="modal-content" (click)="$event.stopPropagation()">
   <span class="close-button" (click)="closeModal()">&times;</span>
   <div id="modal-images">
-    <!-- Display images in a 2x2 grid -->
-    <div class="image-row">
-      <img *ngFor="let img of modalData.images.slice(0, 2)" [src]="img" alt="Image" (click)="viewImage(img)" />
-    </div>
+    
+    
     <div class="image-row">
       <img *ngFor="let img of modalData.images.slice(2)" [src]="img" alt="Image" (click)="viewImage(img)" />
     </div>
@@ -48,10 +42,9 @@
   </div>
 </div>
 </div>
-<div class="content">
-<router-outlet></router-outlet>
 
+    
 </div>
 
 
-</div>
+

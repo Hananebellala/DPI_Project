@@ -8,5 +8,5 @@ import { RouterModule } from '@angular/router';
   styleUrl: './laborantin-layout.component.css'
 })
 export class LaborantinLayoutComponent {
-
+  
 }

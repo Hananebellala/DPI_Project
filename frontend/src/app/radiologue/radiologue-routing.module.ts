@@ -11,7 +11,7 @@ const routes: Routes = [
     component: RadiologueLayoutComponent, // Parent component with layout
     children: [
       { path: 'records', component: PatientsRecordsComponent },
-      { path: 'radiology', component: RadiologuePageComponent },
+      { path: 'radiologue/:idSejour', component: RadiologuePageComponent },
       
       { path: '', redirectTo: 'records', pathMatch: 'full' }, // Default route within the layout
     ],

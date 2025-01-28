@@ -18,64 +18,26 @@ import { LabsService } from '../../services/labs.service';
 
 
 export class LabPageComponent implements OnInit  {
-  labs: any[] = [];
-  currentView: string = '';
+  nom: string='';
+  numSecuriteSociale: string='';
+  idSejour: string='';
+  debutSejour: string='';
+  finSejour: string='';
 
-    constructor(private LabsService: LabsService
-      , private route: ActivatedRoute, // To get route parameters
-          private router: Router, // Inject Router here
-    ) {}
+  constructor(private route: ActivatedRoute) {}
 
-    ngOnInit(): void {
-      // Récupérer l'email et l'idSejour depuis l'URL
-      const email = this.getEmailFromRoute();
-      const idSejour = this.getIdSejourFromRoute();
+  ngOnInit(): void {
+    // Récupérer les queryParams lors de l'initialisation
+    this.route.queryParams.subscribe(params => {
+      this.nom = params['nom'];
+      this.numSecuriteSociale = params['numSecuriteSociale'];
+      this.idSejour = params['idSejour'];
+      this.debutSejour = params['debutSejour'];
+      this.finSejour = params['finSejour'];
+      
+      console.log('Patient Info in LabPage:', this.nom, this.numSecuriteSociale, this.idSejour, this.debutSejour, this.finSejour);
+    });
+  }
 
-      // Appeler le service pour obtenir les médicaments
-      this.LabsService.getLabs(email, idSejour).subscribe(
-        (data) => {
-          this.labs = [data];
-          console.log("the labs are : ", this.labs)
-        },
-        (error) => {
-          console.error('Erreur lors de la récupération des labs:', error);
-        }
-      );
-    }
-
-
-    getEmailFromRoute(): string {
-      // Récupération dynamique si vous utilisez ActivatedRoute
-      return window.location.pathname.split('/')[2]; // Remplacez par une méthode plus propre si nécessaire
-    }
-
-    // Fonction pour obtenir l'idSejour depuis l'URL
-    getIdSejourFromRoute(): number {
-      return parseInt(window.location.pathname.split('/')[3], 10);
-    }
-
-    goToBloodCount() {
-
-
-      const email = this.getEmailFromRoute();
-      const idSejour = this.getIdSejourFromRoute();
-
-      console.log('Navigating to Blood Count Test...');
-      console.log('url : ', `/profile/${email}/${idSejour}/labs/BloodCountTest`);
-
-      this.router.navigate([`/profile/${email}/${idSejour}/labs/BloodCountTest`]);
-
-    }
-
-    goToRadiology() {
-      this.currentView = 'Radiology';
-      const email = this.getEmailFromRoute();
-      const idSejour = this.getIdSejourFromRoute();
-
-      console.log('Navigating to Radiology...');
-      console.log('url: ', `/profile/${email}/${idSejour}/labs/Radiology`);
-
-      this.router.navigate(['/patient/lab']);
-    }
 
 }

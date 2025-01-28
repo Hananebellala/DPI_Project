@@ -5,7 +5,7 @@ import { PatientRoutingModule } from './patient-routing.module';
 import { OrdonnanceComponent } from './ordonnance/ordonnance.component';
 import { ConsultationPageComponent } from './consultation/consultation.component';
 import { LabPageComponent } from './lab/lab.component';
-import { SoinPageComponent } from './soin/soin.component';
+import { SoinComponent} from './soin/soin.component';
 import { PatientLayoutComponent } from './patient-layout/patient-layout.component';
 import { BloodCountPageComponent } from './blood-count/blood-count.component';
 import { RadiologyPageComponent } from './radiology/radiology.component';
@@ -21,7 +21,7 @@ import { AllConsultationComponent } from './all-consultation/all-consultation.co
     OrdonnanceComponent,
     ConsultationPageComponent,
     LabPageComponent,
-    SoinPageComponent,
+    SoinComponent,
     PatientLayoutComponent,
     BloodCountPageComponent,
     RadiologyPageComponent,

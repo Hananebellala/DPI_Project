@@ -1,60 +1,68 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { MedicamentService } from '../../services/medicament.service';
-
-
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'ordonnance-page',
   templateUrl: './ordonnance.component.html',
   styleUrls: ['./ordonnance.component.css'],
-  imports: [CommonModule, RouterModule], // Add CommonModule here
-  providers: [MedicamentService], // Add service if needed
+  imports: [CommonModule, RouterModule],
 })
-
-
 export class OrdonnanceComponent implements OnInit {
-  medications: any[] = []; // Pour stocker les médicaments récupérés
+  medications: any[] = []; // List of medications fetched
+  // Variables for storing patient info
+  nom: string = '';
+  numSecuriteSociale: string = '';
+  idSejour: string = '';
+  debutSejour: string = '';
+  finSejour: string = '';
 
-  constructor(private medicamentService: MedicamentService) {}
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute // Inject ActivatedRoute to get queryParams
+  ) {}
 
   ngOnInit(): void {
-    // Récupérer l'email et l'idSejour depuis l'URL
-    const email = this.getEmailFromRoute();
-    const idSejour = this.getIdSejourFromRoute();
+    // Retrieve query parameters when the component is initialized
+    this.route.queryParams.subscribe((params) => {
+      this.nom = params['nom'] || 'Default Name'; // Fallback value for nom
+      this.numSecuriteSociale = params['numSecuriteSociale'] || 'N/A';
+      this.idSejour = params['idSejour'] || '0';  // Default value for idSejour
+      this.debutSejour = params['debutSejour'] || 'N/A';
+      this.finSejour = params['finSejour'] || 'N/A';
 
-    // Appeler le service pour obtenir les médicaments
-    this.medicamentService.getMedications(email, idSejour).subscribe(
-      (data) => {
-        this.medications = [data];
-        console.log(this.medications)
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération des médicaments:', error);
+      console.log('Patient Info:', this.nom, this.numSecuriteSociale, this.idSejour, this.debutSejour, this.finSejour);
+
+      // If idSejour is missing or invalid, show an alert and stop further processing
+      if (this.idSejour === '0') {
+        alert('Error: Missing or invalid ID Sejour.');
+        return;
       }
-    );
+
+      // Fetch medications using the idSejour
+      this.fetchMedications(this.idSejour);
+    });
   }
 
-  // Fonction pour obtenir l'email depuis l'URL
-  getEmailFromRoute(): string {
-    // Récupération dynamique si vous utilisez ActivatedRoute
-    return window.location.pathname.split('/')[2]; // Remplacez par une méthode plus propre si nécessaire
-  }
+  // Function to fetch medications for a specific "idSejour"
+  fetchMedications(idsejour: string): void {
+    if (!idsejour) {
+      console.error('Invalid idSejour provided');
+      return;
+    }
 
-  // Fonction pour obtenir l'idSejour depuis l'URL
-  getIdSejourFromRoute(): number {
-    return parseInt(window.location.pathname.split('/')[3], 10);
+    this.http
+      .get<any[]>(`http://127.0.0.1:8000/posologie/sejour/${idsejour}/`) // Fetch medications from API
+      .subscribe(
+        (data) => {
+          this.medications = data;
+          console.log(`Medications fetched for sejour=${idsejour}:`, this.medications);
+        },
+        (error) => {
+          console.error('Error fetching medications:', error);
+          alert('Failed to fetch medications. Please try again later.');
+        }
+      );
   }
-
-  isValidMedication(medication: { name: string; dose: number; frequency: number; duration: number }): boolean {
-    // Ensure all fields are filled and dose, frequency, and duration are numbers
-    return (
-      medication.name.trim() !== '' &&
-      !isNaN(medication.dose) &&
-      !isNaN(medication.frequency) &&
-      !isNaN(medication.duration)
-    );
-  }
-
 }

@@ -17,7 +17,7 @@
             <div></div>
             <div class="profile">
                 <img src="Profile.png" alt="Profile Picture">
-                <span>Dr Hanane</span>
+                <span>{{ generalInfo?.nom || 'patient' }}</span>
             </div>
         </div>
 
@@ -25,13 +25,37 @@
         <div class="nav-bar">
 
 
-            <a [routerLink]="['patient/Patient/consultation']" routerLinkActive="active">Consultation</a>
+            <a [routerLink]="['/patient/Patient/all']" [queryParams]="{
+                nom: name, 
+                numSecuriteSociale: numSecuriteSociale, 
+                idSejour: idSejour,
+                debutSejour: debutSejour,
+                finSejour: finSejour
+              }" routerLinkActive="active">Consultation</a>
 
-              <a [routerLink]="['patient/Patient/medication']" routerLinkActive="active">Medication</a>
+              <a [routerLink]="['/patient/Patient/medication']" [queryParams]="{
+                nom: name, 
+                numSecuriteSociale: numSecuriteSociale, 
+                idSejour: idSejour,
+                debutSejour: debutSejour,
+                finSejour: finSejour
+              }" routerLinkActive="active">Medication</a>
 
-              <a [routerLink]="['patient/Patient/lab-results']" routerLinkActive="active">Lab Results</a>
+              <a [routerLink]="['/patient/Patient/lab-results']" [queryParams]="{
+                nom: name, 
+                numSecuriteSociale: numSecuriteSociale, 
+                idSejour: idSejour,
+                debutSejour: debutSejour,
+                finSejour: finSejour
+              }" routerLinkActive="active" >Lab Results</a>
 
-              <a [routerLink]="['patient/Patient/soins']" routerLinkActive="active">Soins</a>
+              <a [routerLink]="['/patient/Patient/soin']" [queryParams]="{
+                nom: name, 
+                numSecuriteSociale: numSecuriteSociale, 
+                idSejour: idSejour,
+                debutSejour: debutSejour,
+                finSejour: finSejour
+              }" routerLinkActive="active">Soins</a>
 
         </div>
 

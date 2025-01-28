@@ -7,10 +7,11 @@ import { RadiologyPageComponent } from './radiology/radiology.component';
 import { BloodCountPageComponent } from './blood-count/blood-count.component';
 import { ConsultationPageComponent } from './consultation/consultation.component';
 import { LabPageComponent } from './lab/lab.component';
-import { SoinPageComponent } from './soin/soin.component';
+
 import { SejourComponent } from './sejour/sejour.component';
 import { OrdonnanceComponent } from './ordonnance/ordonnance.component';
 import { AllConsultationComponent } from './all-consultation/all-consultation.component';
+import { SoinComponent } from './soin/soin.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,7 @@ const routes: Routes = [
       { path: 'blood', component: BloodCountPageComponent },
       { path: 'consultation', component: ConsultationPageComponent },
       { path: 'lab-results', component: LabPageComponent },
-      { path: 'soin', component: SoinPageComponent },
+      { path: 'soin', component: SoinComponent },
       
       { path: 'all', component: AllConsultationComponent },
       { path: '', redirectTo: 'sejour', pathMatch: 'full' }, // Default route within the layout

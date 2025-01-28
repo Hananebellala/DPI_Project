@@ -1,14 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   imports: [CommonModule],
   selector: 'app-laborantin-page',
   templateUrl: './laborantin-page.component.html',
-  styleUrl: './laborantin-page.component.css'
+  styleUrls: ['./laborantin-page.component.css']
 })
-export class LaborantinPageComponent{
+export class LaborantinPageComponent {
 
   @ViewChild('globulesBlanches') globulesBlanches!: ElementRef;
   @ViewChild('globulesRouges') globulesRouges!: ElementRef;
@@ -20,319 +21,80 @@ export class LaborantinPageComponent{
   @ViewChild('tadiastolique') tadiastolique!: ElementRef;
   @ViewChild('cholesterol') cholesterol!: ElementRef;
   @ViewChild('triglycerides') triglycerides!: ElementRef;
+  idSejour!: number;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
-  // Get CSRF Token from cookies
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.idSejour = +params['idSejour'];
+      console.log('idSejour:', this.idSejour);
+    });
+  }
+
   private getCSRFToken(): string {
     const name = 'csrftoken=';
     const value = document.cookie.split(';').find(cookie => cookie.trim().startsWith(name))?.split('=')[1];
     return value || '';
   }
 
-  // Submits the form
-  saveLigneAnalyse(event: Event): void {
-    event.preventDefault();
-
-    // A VERIFIER
-    var idBilanBiologique = 1;
-  
-    //GLOBULES BLANCS
-    var resultat = this.globulesBlanches.nativeElement.value.trim();
-    var unite = "u/mL"
-    var type = "Leucocytes";
-  
-    if (isNaN(Number(resultat))) {
-      alert('Veuillez remplir la case des globules blancs avec un nombre valide.');
+  // Helper function to submit data for each parameter
+  submitAnalysis(type: string, resultElement: ElementRef, unit: string, idBilanBiologique: number): void {
+    const result = resultElement.nativeElement.value.trim();
+    
+    if (isNaN(Number(result))) {
+      alert(`Veuillez remplir la case de ${type} avec un nombre valide.`);
       return;
     }
-  
-    var formData = new FormData();
-    formData.append('resultat', resultat); 
-    formData.append('unite', unite);
-    formData.append('type', type)
-    formData.append('idBilanBiologique', idBilanBiologique.toString())
 
-    // Extract CSRF token and include it in the headers
+    const formData = new FormData();
+    formData.append('resultat', result);
+    formData.append('unite', unit);
+    formData.append('type', type);
+    formData.append('idBilanBiologique', idBilanBiologique.toString());
+
     const csrfToken = this.getCSRFToken();
     const headers = new HttpHeaders({
-      'X-CSRFToken': csrfToken, // Add CSRF token to headers
+      'X-CSRFToken': csrfToken,
     });
-    this.http.post('http://127.0.0.1:8000/ligneanalyse/', formData, {headers,
-      withCredentials: false}).subscribe(
+
+    this.http.post('http://127.0.0.1:8000/ligneanalyse/', formData, { headers, withCredentials: false }).subscribe(
       response => {
-        console.log('Ligne d\'analyse ajoutée!', response);
-        this.resetForm();
+        console.log(`${type} analysée avec succès!`, response);
       },
       error => {
-        console.error('Erreur dans l\'ajout de la ligne d\'analyse des globules blancs', error);
-        alert('Erreur dans l\'ajout de la ligne d\'analyse des globules blancs.');
-      }
-    );
-
-
-    //GLOBULES ROUGES
-    var resultat = this.globulesRouges.nativeElement.value.trim();
-    unite = "u/mL"
-    type = "Hématies";
-  
-    if (isNaN(Number(resultat))) {
-      alert('Veuillez remplir la case des globules rouges avec un nombre valide.');
-      return;
-    }
-  
-    formData = new FormData();
-    formData.append('resultat', resultat); 
-    formData.append('unite', unite);
-    formData.append('type', type)
-    formData.append('idBilanBiologique', idBilanBiologique.toString())
-
-    this.http.post('http://127.0.0.1:8000/ligneanalyse/', formData, {headers,
-      withCredentials: false}).subscribe(
-      response => {
-        console.log('Ligne d\'analyse ajoutée!', response);
-        this.resetForm();
-      },
-      error => {
-        console.error('Erreur dans l\'ajout de la ligne d\'analyse des globules rouges', error);
-        alert('Erreur dans l\'ajout de la ligne d\'analyse des globules rouges.');
-      }
-    );
-
-    //HEMOGLOBINE
-    resultat = this.hemoglobine.nativeElement.value.trim();
-    unite = "g/L"
-    type = "Hémoglobine";
-  
-    if (isNaN(Number(resultat))) {
-      alert('Veuillez remplir la case de l\'hémoglobine avec un nombre valide.');
-      return;
-    }
-  
-    formData = new FormData();
-    formData.append('resultat', resultat); 
-    formData.append('unite', unite);
-    formData.append('type', type)
-    formData.append('idBilanBiologique', idBilanBiologique.toString())
-
-    this.http.post('http://127.0.0.1:8000/ligneanalyse/', formData, {headers,
-      withCredentials: false}).subscribe(
-      response => {
-        console.log('Ligne d\'analyse ajoutée!', response);
-        this.resetForm();
-      },
-      error => {
-        console.error('Erreur dans l\'ajout de la ligne d\'analyse de l\'hémoglobine', error);
-        alert('Erreur dans l\'ajout de la ligne d\'analyse de l\'hémoglobine.');
-      }
-    );
-    
-    //Hématocrites
-    resultat = this.hematocrites.nativeElement.value.trim();
-    unite = "%"
-    type = "Hématocrites";
-  
-    if (isNaN(Number(resultat))) {
-      alert('Veuillez remplir la case des hématocrites avec un nombre valide.');
-      return;
-    }
-  
-    formData = new FormData();
-    formData.append('resultat', resultat); 
-    formData.append('unite', unite);
-    formData.append('type', type)
-    formData.append('idBilanBiologique', idBilanBiologique.toString())
-
-    this.http.post('http://127.0.0.1:8000/ligneanalyse/', formData, {headers,
-      withCredentials: false}).subscribe(
-      response => {
-        console.log('Ligne d\'analyse ajoutée!', response);
-        this.resetForm();
-      },
-      error => {
-        console.error('Erreur dans l\'ajout de la ligne d\'analyse des hématocrites', error);
-        alert('Erreur dans l\'ajout de la ligne d\'analyse des hématocrites.');
-      }
-    );
-
-    //Thrombocytes
-    resultat = this.thrombocytes.nativeElement.value.trim();
-    unite = "u/mL"
-    type = "Thrombocytes";
-  
-    if (isNaN(Number(resultat))) {
-      alert('Veuillez remplir la case des thrombocytes avec un nombre valide.');
-      return;
-    }
-  
-    formData = new FormData();
-    formData.append('resultat', resultat); 
-    formData.append('unite', unite);
-    formData.append('type', type)
-    formData.append('idBilanBiologique', idBilanBiologique.toString())
-
-    this.http.post('http://127.0.0.1:8000/ligneanalyse/', formData, {headers,
-      withCredentials: false}).subscribe(
-      response => {
-        console.log('Ligne d\'analyse ajoutée!', response);
-        this.resetForm();
-      },
-      error => {
-        console.error('Erreur dans l\'ajout de la ligne d\'analyse des thrombocytes', error);
-        alert('Erreur dans l\'ajout de la ligne d\'analyse des thrombocytes.');
-      }
-    );
-
-    //Glycémie
-    resultat = this.glycemie.nativeElement.value.trim();
-    unite = "g/L"
-    type = "Glycémie";
-  
-    if (isNaN(Number(resultat))) {
-      alert('Veuillez remplir la case de la glycémie avec un nombre valide.');
-      return;
-    }
-  
-    formData = new FormData();
-    formData.append('resultat', resultat); 
-    formData.append('unite', unite);
-    formData.append('type', type)
-    formData.append('idBilanBiologique', idBilanBiologique.toString())
-
-    this.http.post('http://127.0.0.1:8000/lignesignevital/', formData, {headers,
-      withCredentials: false}).subscribe(
-      response => {
-        console.log('Ligne d\'analyse ajoutée!', response);
-        this.resetForm();
-      },
-      error => {
-        console.error('Erreur dans l\'ajout de la ligne d\'analyse de la glycémie', error);
-        alert('Erreur dans l\'ajout de la ligne d\'analyse de la glycémie.');
-      }
-    );
-    
-    //tasystolique
-    resultat = this.tasystolique.nativeElement.value.trim();
-    unite = "mmHg"
-    type = "Tension artérielle systolique";
-  
-    if(resultat !== ""){
-      if (isNaN(Number(resultat))) {
-        alert('Veuillez remplir la case de la tension artérielle systolique avec un nombre valide.');
-        return;
-      }
-    
-      formData = new FormData();
-      formData.append('resultat', resultat); 
-      formData.append('unite', unite);
-      formData.append('type', type)
-      formData.append('idBilanBiologique', idBilanBiologique.toString())
-
-      this.http.post('http://127.0.0.1:8000/lignesignevital/', formData, {headers,
-        withCredentials: false}).subscribe(
-        response => {
-          console.log('Ligne d\'analyse ajoutée!', response);
-          this.resetForm();
-        },
-        error => {
-          console.error('Erreur dans l\'ajout de la ligne d\'analyse de la tension artérielle systolique', error);
-          alert('Erreur dans l\'ajout de la ligne d\'analyse de la tension artérielle systolique.');
-        }
-      );
-    }
-
-    //tadiastolique
-    resultat = this.tadiastolique.nativeElement.value.trim();
-    unite = "mmHg"
-    type = "Tension artérielle diastolique";
-  
-    if (isNaN(Number(resultat))) {
-      alert('Veuillez remplir la case de la tension artérielle diastolique avec un nombre valide.');
-      return;
-    }
-  
-    formData = new FormData();
-    formData.append('resultat', resultat); 
-    formData.append('unite', unite);
-    formData.append('type', type)
-    formData.append('idBilanBiologique', idBilanBiologique.toString())
-
-    this.http.post('http://127.0.0.1:8000/lignesignevital/', formData, {headers,
-      withCredentials: false}).subscribe(
-      response => {
-        console.log('Ligne d\'analyse ajoutée!', response);
-        this.resetForm();
-      },
-      error => {
-        console.error('Erreur dans l\'ajout de la ligne d\'analyse de la tension artérielle diastolique', error);
-        alert('Erreur dans l\'ajout de la ligne d\'analyse de la tension artérielle diastolique.');
-      }
-    );
-
-    //Cholesterol
-    resultat = this.cholesterol.nativeElement.value.trim();
-    unite = "mmol/mL"
-    type = "Cholestérol";
-  
-    if (isNaN(Number(resultat))) {
-      alert('Veuillez remplir la case du choléstérol avec un nombre valide.');
-      return;
-    }
-  
-    formData = new FormData();
-    formData.append('resultat', resultat); 
-    formData.append('unite', unite);
-    formData.append('type', type)
-    formData.append('idBilanBiologique', idBilanBiologique.toString())
-
-    this.http.post('http://127.0.0.1:8000/ligneanalyse/', formData, {headers,
-      withCredentials: false}).subscribe(
-      response => {
-        console.log('Ligne d\'analyse ajoutée!', response);
-        this.resetForm();
-      },
-      error => {
-        console.error('Erreur dans l\'ajout de la ligne d\'analyse du cholestérol', error);
-        alert('Erreur dans l\'ajout de la ligne d\'analyse du cholestérol.');
-      }
-    );
-
-    //Triglycéride
-    resultat = this.triglycerides.nativeElement.value.trim();
-    unite = "g/L"
-    type = "Triglycérides";
-  
-    if (isNaN(Number(resultat))) {
-      alert('Veuillez remplir la case des triglycérides avec un nombre valide.');
-      return;
-    }
-  
-    formData = new FormData();
-    formData.append('resultat', resultat); 
-    formData.append('unite', unite);
-    formData.append('type', type)
-    formData.append('idBilanBiologique', idBilanBiologique.toString())
-
-    this.http.post('http://127.0.0.1:8000/ligneanalyse/', formData, {headers,
-      withCredentials: false}).subscribe(
-      response => {
-        console.log('Ligne d\'analyse ajoutée!', response);
-        alert('Analysis lign saved successfully!');
-        this.resetForm();
-      },
-      error => {
-        console.error('Erreur dans l\'ajout de la ligne d\'analyse des triglycérides', error);
-        alert('Erreur dans l\'ajout de la ligne d\'analyse des triglycérides.');
+        console.error(`Erreur dans l'ajout de l'analyse de ${type}`, error);
+        alert(`Erreur dans l'ajout de l'analyse de ${type}.`);
       }
     );
   }
 
-  //Resets the form
-  private resetForm(): void {
+  // Submit form for all tests
+  saveLigneAnalyse(event: Event): void {
+    event.preventDefault();
+    
+    const idBilanBiologique = 1; // A VERIFIER
+    
+    this.submitAnalysis('Leucocytes', this.globulesBlanches, 'u/mL', idBilanBiologique);
+    this.submitAnalysis('Hématies', this.globulesRouges, 'u/mL', idBilanBiologique);
+    this.submitAnalysis('Hémoglobine', this.hemoglobine, 'g/L', idBilanBiologique);
+    this.submitAnalysis('Hématocrites', this.hematocrites, '%', idBilanBiologique);
+    this.submitAnalysis('Thrombocytes', this.thrombocytes, 'u/mL', idBilanBiologique);
+    this.submitAnalysis('Glycémie', this.glycemie, 'g/L', idBilanBiologique);
+    this.submitAnalysis('Tension artérielle systolique', this.tasystolique, 'mmHg', idBilanBiologique);
+    this.submitAnalysis('Tension artérielle diastolique', this.tadiastolique, 'mmHg', idBilanBiologique);
+    this.submitAnalysis('Cholestérol', this.cholesterol, 'mmol/mL', idBilanBiologique);
+    this.submitAnalysis('Triglycérides', this.triglycerides, 'mmol/mL', idBilanBiologique);
+
+    this.resetForm();
+  }
+
+  // Reset form after submission
+  resetForm(): void {
     this.globulesBlanches.nativeElement.value = '';
     this.globulesRouges.nativeElement.value = '';
-    this.hematocrites.nativeElement.value = '';
     this.hemoglobine.nativeElement.value = '';
+    this.hematocrites.nativeElement.value = '';
     this.thrombocytes.nativeElement.value = '';
     this.glycemie.nativeElement.value = '';
     this.tasystolique.nativeElement.value = '';

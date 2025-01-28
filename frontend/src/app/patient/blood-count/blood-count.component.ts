@@ -1,61 +1,123 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { BloodCountService } from '../../services/blood-count.service';
-
-
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 @Component({
   selector: 'app-blood-count',
- templateUrl: './blood-count.component.html',
-  styleUrl: './blood-count.component.css',
-  imports: [CommonModule,RouterModule], // Add CommonModule here
-  providers: [BloodCountService], // Add service if needed
+  templateUrl: './blood-count.component.html',
+  styleUrls: ['./blood-count.component.css'],
+  imports:[CommonModule, CanvasJSAngularChartsModule,
+    MatTableModule,
+    MatInputModule,
+    FormsModule,
+    MatSelectModule,
+    MatIconModule,
+    RouterModule,]
 })
+export class BloodCountPageComponent {
+  nom: string = '';
+  numSecuriteSociale: string = '';
+  idSejour: string = '';
+  debutSejour: string = '';
+  finSejour: string = '';
+  imagePreviewUrl: string = 'blood.png';
+  bloodCountData: any[] = [
+    { resultat: '-', unite: '', type: 'Leucocytes', name: 'globules blancs' },
+    { resultat: '-', unite: '', type: 'Hématies', name: 'globules rouges' },
+    { resultat: '-', unite: '', type: 'Hémoglobine', name: 'hemoglobine' },
+    { resultat: '-', unite: '', type: 'Hématocrites', name: 'Hématocrites' },
+    { resultat: '-', unite: '', type: 'Thrombocytes', name: 'Thrombocytes' },
+  ];
+  vitalSignsData: any[] = [
+    { resultat: '--', unite: '', type: 'Glycémie', name: 'Glycémie' },
+    { resultat: '-', unite: '', type: 'Tension artérielle systolique', name: 'tasystolique' },
+    { resultat: '-', unite: '', type: 'Tension artérielle diastolique', name: 'tadiastolique' },
+    { resultat: '-', unite: '', type: 'Cholestérol', name: 'Cholesterol' },
+    { resultat: '-', unite: '', type: 'Triglycérides', name: 'Triglycéride' },
+  ];
 
 
-export class BloodCountPageComponent implements OnInit {
-   bloodCount: any[] = [];
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
-   labDetails: any = {};
-  loading: boolean = true;
-  error: string = '';
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.nom = params['nom'] || 'nn';
+      this.numSecuriteSociale = params['numSecuriteSociale'] || 'nn';
+      this.idSejour = params['idSejour'] || 'nn';
+      this.debutSejour = params['debutSejour'] || 'nn';
+      this.finSejour = params['finSejour'] || 'nn';
+    });
+    this.fetchRadiologyData();
+  }
 
+  fetchRadiologyData(): void {
+    this.http.get<any[]>('http://127.0.0.1:8000/bilanbiologique/').subscribe(
+      (sejours) => {
+        const sejourMatches = sejours.filter(
+          (sejour: any) => sejour.idSejour === Number(this.idSejour)
+        );
 
-    constructor(private BloodCountService: BloodCountService , private route: ActivatedRoute) {}
-
-    ngOnInit(): void {
-      // Récupérer l'email et l'idSejour depuis l'URL
-      console.log('BloodCountPageComponent ngOnInit triggered');
-      const email = this.getEmailFromRoute();
-      const idSejour = this.getIdSejourFromRoute();
-      console.log('Email:', email, 'ID Sejour:', idSejour);
-
-      console.log('Blood count data???' );
-
-      this.BloodCountService.getBloodCount(email, idSejour).subscribe(
-        (data) => {
-          console.log('Blood count data received:', data);
-          this.labDetails = data;
-          this.loading = false;
-        },
-        (error) => {
-          console.error('Error fetching blood count data:', error);
-          this.error = 'An error occurred while fetching the data.';
-          this.loading = false;
+        if (sejourMatches.length > 0) {
+          sejourMatches.forEach((sejourMatch: any) => {
+            this.http.get<any[]>('http://127.0.0.1:8000/ligneanalyse/').subscribe(
+              (billans) => {
+                billans
+                  .filter((billan) => billan.idBilanBiologique === sejourMatch.id)
+                  .forEach((billan) => {
+                    const updateData = (data: any[], type: string) => {
+                      const entry = data.find((item) => item.type === type);
+                      if (entry) {
+                        entry.resultat = billan.resultat;
+                        entry.unite = billan.unite;
+                      }
+                    };
+                    updateData(this.bloodCountData, billan.type);
+                    updateData(this.vitalSignsData, billan.type);
+                  });
+                
+              },
+              (error) => console.error('Erreur lors de la récupération des bilans :', error)
+            );
+          });
+        } else {
+          console.warn('Aucun séjour trouvé pour cet idSejour.');
         }
-      );
-    }
+      },
+      (error) => console.error('Erreur lors de la récupération des séjours:', error)
+    );
+  }
+  chartOptions: any = null;
 
-    // Fonction pour obtenir l'email depuis l'URL
-    getEmailFromRoute(): string {
-      // Récupération dynamique si vous utilisez ActivatedRoute
-      return window.location.pathname.split('/')[2]; // Remplacez par une méthode plus propre si nécessaire
-    }
+  visualizeGraph(category: string): void {
+    const dataPoints =
+      category === 'blood' ? this.bloodCountData : this.vitalSignsData;
 
-    // Fonction pour obtenir l'idSejour depuis l'URL
-    getIdSejourFromRoute(): number {
-      return parseInt(window.location.pathname.split('/')[3], 10);
-    }
+    this.chartOptions = {
+      animationEnabled: true,
+      exportEnabled: true,
+      theme: 'light2',
+      title: {
+        text: category === 'blood' ? 'Blood Count Data' : 'Vital Signs Data',
+      },
+      axisY: {
+        title: 'Values',
+        includeZero: true,
+      },
+      data: [
+        {
+          type: 'column',
+          dataPoints: dataPoints,
+        },
+      ],
+    };
+  }
+
 
 }

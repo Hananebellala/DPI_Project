@@ -12,7 +12,7 @@ const routes: Routes = [
     component: LaborantinLayoutComponent, // Parent component with layout
     children: [
       { path: 'records', component: PatientsRecordsComponent },
-      { path: 'radiology', component: LaborantinPageComponent },
+      { path: 'radiology/:idSejour', component: LaborantinPageComponent },
       
       { path: '', redirectTo: 'records', pathMatch: 'full' }, // Default route within the layout
     ],

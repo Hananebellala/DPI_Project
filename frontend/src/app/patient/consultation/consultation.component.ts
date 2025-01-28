@@ -1,114 +1,134 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { PatientService } from '../../services/patient-service.service';
 
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http'; // Importer HttpClient pour les requêtes HTTP
+import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';  // Import MatTableModule
+import { FormsModule } from '@angular/forms';  // Import FormsModule for ngModel
+import { RouterModule,ActivatedRoute } from '@angular/router';
+
+import { Optional } from '@angular/core';
+import { forkJoin } from 'rxjs';
 
 @Component({
-  imports: [
-    RouterModule
-  ],
-  selector: 'app-consultation',
+  selector: 'app-consultation-page',
   templateUrl: './consultation.component.html',
+  imports: [
+    RouterModule,
+    CommonModule,  // Import nécessaire pour routerLink
+    // autres imports nécessaires...
+  ],
   styleUrls: ['./consultation.component.css']
 })
-
-
 export class ConsultationPageComponent implements OnInit {
   patient: any;
-  email: string = '';
-  sejourId: string = '';
-  consultation_id: string = '';
-  consultationDetail: any = {};  // Changed from an array to an object
-  date  : any[] = [];
+  idConsultation: string = '';
+  debutSejour: string = '';
+  idSejour: string = '';
+  numSecuriteSociale: string = '';
+  nom: string = '';
+  finSejour: string = '';
+  dossiers: any[] = [];
+  nextConsultationDate: string = '';
+  toolsUsed: string[] = [];
+  typeAntecedent: string = '';
+  description: string[] = [];
+  maladie: string[] = [];
+  isLoading: boolean = true;
 
-
-  constructor(
-      private router: Router,
-      private http: HttpClient,
-      private route: ActivatedRoute,
-      private snackBar: MatSnackBar,
-      private patientService: PatientService,
-    ) {}
-
+  constructor(private router: Router, 
+    
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+    private http: HttpClient,) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.idConsultation = params['idConsultation'];
+             this.nom= params['nom'] ||'--', 
+             this.numSecuriteSociale=params['numSecuriteSociale'] , 
+             this.idSejour=params['idSejour'],
+             this.debutSejour= params['finSejour'],
+             this.finSejour= params['debutSejour'],
+      console.log('ID Consultation:', this.idConsultation);
 
-    console.log("mgInit Conultation start ") ;
-    this.email = this.route.snapshot.paramMap.get('email') || '';
+      if (this.idConsultation) {
+        // Utiliser forkJoin pour attendre la fin de toutes les requêtes HTTP
+        forkJoin({
+          consultations: this.http.get<any[]>('http://127.0.0.1:8000/consultationmedicale/'),
+          antecedents: this.http.get<any[]>('http://127.0.0.1:8000/antecedent/'),
+          diagnostics: this.http.get<any[]>('http://127.0.0.1:8000/diagnostic/')
+        }).subscribe(
+          ({ consultations, antecedents, diagnostics }) => {
+            this.dossiers = consultations.filter((consultation) => consultation.id === Number(this.idConsultation));
+            if (this.dossiers.length > 0) {
+              this.nextConsultationDate = this.dossiers[0].dateProchaineConsultation;
+              this.toolsUsed = this.dossiers[0].outilsConsultation;
+            } else {
+              console.warn('Aucun dossier trouvé pour cette consultation.');
+            }
 
-    this.route.parent?.params.subscribe(params => {
-      this.email = params['email'];
-      if (!this.email) {
-        console.error('sejourId is required but not provided');
-      }
-    });
+            this.dossiers = antecedents.filter((antecedent) => antecedent.idConsultation === Number(this.idConsultation));
+            if (this.dossiers.length > 0) {
+              this.description = this.dossiers[0].description;
+              this.typeAntecedent = this.dossiers[0].typeAntecedent;
+            } else {
+              console.warn('Aucun antécédent trouvé pour cette consultation.');
+            }
 
-    // this.sejourId = this.route.snapshot.paramMap.get('idSejour') || '';
-    console.log("mail is : ",this.email ) ;
+            this.dossiers = diagnostics.filter((diagnostic) => diagnostic.idConsultation === Number(this.idConsultation));
+            if (this.dossiers.length > 0) {
+              this.maladie = this.dossiers[0].descriptionMaladie;
+            } else {
+              console.warn('Aucun diagnostic trouvé pour cette consultation.');
+            }
 
-    this.route.parent?.params.subscribe(params => {
-      this.sejourId = params['sejourId'];
-      if (!this.sejourId) {
-        console.error('sejourId is required but not provided');
-      }
-    });
-
-    console.log("sejour in consultation is : ",this.sejourId ) ;
-
-
-    // if (!this.sejourId) {
-    //   console.error('sejourId is required but not provided');
-    //   this.snackBar.open('SejourId is missing', 'Close', { duration: 3000 });
-    //   return;
-    // }
-    this.consultation_id = this.route.snapshot.paramMap.get('consultation_id') || '';
-    console.log("cosul id : ",this.consultation_id ) ;
-
-    if (!this.consultation_id) {
-      console.error('consultationId is required but not provided');
-      this.snackBar.open('consultationId is missing', 'Close', { duration: 3000 });
-      return;
-    }
-
-    // Fetch the Sejour details for the specific SejourId
-    this.getConsultationDetails(this.email, this.sejourId, this.consultation_id);
-    };
-
-
-
-    getConsultationDetails(email: string, sejourId: string,
-      idConsultation : string ) {
-        if (typeof window !== 'undefined' && window.localStorage) {
-          const token = localStorage.getItem('authToken');
-          if (!token) {
-            this.snackBar.open('Authentication required', 'Close', { duration: 3000 });
-            return;
+            // Une fois que toutes les données ont été récupérées, on met isLoading à false
+            this.isLoading = false;
+          },
+          (error) => {
+            console.error('Erreur lors de la récupération des données:', error);
           }
+        );
+      }
 
-          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-          // Fetch the specific Sejour details from the backend
-          this.http.get(`http://127.0.0.1:8000/profile/${email}/${sejourId}/${idConsultation}`, { headers })
-            .subscribe(
-              (response: any) => {
-                console.log('consulattion details response :', response);
-
-                this.consultationDetail = response;
-                console.log('this.consultationDetail :', this.consultationDetail);
-
-              },
-              (error) => {
-                console.error('Error fetching Consultation details:', error);
-                this.snackBar.open('Failed to load Consultation details', 'Close', { duration: 3000 });
-              }
-            );
-        }
+  
+    });
+    this.patient = {
+      name: 'Marie Dupont',
+      age: 35,
+      diagnosis: this.maladie ||'Non spécifié',
+      symptoms: [
+        'Toux persistante',
+        'Fièvre',
+        'Douleurs thoraciques'
+      ],
+      diagnosedBy: 'Dr Hanane Bellala',
+      toolsUsed:this.toolsUsed|| 'Non spécifié',
+      medicalHistory: this.description|| 'Non spécifié',
+      type:this.typeAntecedent|| 'Non spécifié',
+      nextAppointment: this.nextConsultationDate || 'Non spécifié', // Afficher la date de la prochaine consultation
+      photo: 'Medical.png' // Remplacer par le chemin ou l'URL de l'image réelle
+    };
 
 
   }
 
-
+  getConsultationDetails() {
+    return {
+      nom:this.nom,
+      maladie:this.maladie,
+      nextConsultationDate: this.nextConsultationDate,
+      toolsUsed: this.toolsUsed,
+      description:this.description,
+      typeAntecedent:this.typeAntecedent,
+    };
+  }
 }

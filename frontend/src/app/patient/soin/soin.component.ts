@@ -1,105 +1,93 @@
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-
-
-import { RouterModule } from '@angular/router';
 import { SoinService } from '../../services/soin.service';
 
 @Component({
   selector: 'app-soin',
   templateUrl: './soin.component.html',
   styleUrls: ['./soin.component.css'],
-  imports: [CommonModule,
-    FormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatIconModule,
-    RouterModule,
-  ], // Add CommonModule here
-  providers: [SoinService], // Add service if needed
+  imports: [CommonModule, RouterModule],
+  providers: [SoinService]
 })
-
-
-export class SoinPageComponent {
-  soins: any[] = []; // Pour stocker les médicaments récupérés
-
-    constructor(private SoinServie: SoinService) {}
-
-    ngOnInit(): void {
-      // Récupérer l'email et l'idSejour depuis l'URL
-      const email = this.getEmailFromRoute();
-      const idSejour = this.getIdSejourFromRoute();
-
-      // Appeler le service pour obtenir les médicaments
-      this.SoinServie.getSoins(email, idSejour).subscribe(
-        (data) => {
-          this.soins = data.flat();
-          console.log("les soins : ", this.soins)
-        },
-        (error) => {
-          console.error('Erreur lors de la récupération des médicaments:', error);
-        }
-      );
-    }
-
-
-  // Fonction pour obtenir l'email depuis l'URL
-  getEmailFromRoute(): string {
-    // Récupération dynamique si vous utilisez ActivatedRoute
-    return window.location.pathname.split('/')[2]; // Remplacez par une méthode plus propre si nécessaire
-  }
-
-  // Fonction pour obtenir l'idSejour depuis l'URL
-  getIdSejourFromRoute(): number {
-    return parseInt(window.location.pathname.split('/')[3], 10);
-  }
-
-  // Mock data (replace with database fetch later)
-  // soinData = [
-  //   {
-  //     date: "8/12/2024",
-  //     infirmier: "Hanane Bellala",
-  //     type: "Injection",
-  //     details: "Details",
-  //     summary: "Details about Vitamin B12 injection, dosage, and effects."
-  //   },
-  //   {
-  //     date: "8/12/2024",
-  //     infirmier: "Wissal Messikh",
-  //     type: "Dressing",
-  //     details: "Details",
-  //     summary: "Wound dressing changes and progress."
-  //   }
-  // ];
+export class SoinComponent implements OnInit {
+  soins: any[] = []; // List of soins fetched
+   // Data object for storing soin details
 
   // Modal state and data
   isModalOpen = false;
   modalData: any = { summary: '' };
 
-  //Open modal
-  openModal(entry: any) {
-    console.log('Modal entry:', entry); // Debug log
-    this.modalData = entry;
+  // Variables for storing patient info
+  nom: string = '';
+  numSecuriteSociale: string = '';
+  idSejour: string = ''; // Initialize as empty string
+  debutSejour: string = '';
+  finSejour: string = '';
+
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+
+  ngOnInit(): void {
+    // Retrieve queryParams when the component is initialized
+    this.route.queryParams.subscribe((params) => {
+      this.nom = params['nom'] || 'Default Name';  // Fallback value for nom
+      this.numSecuriteSociale = params['numSecuriteSociale'] || 'N/A';
+      this.idSejour = params['idSejour'] || '';  // Default to empty string if not present
+      this.debutSejour = params['debutSejour'] || 'N/A';
+      this.finSejour = params['finSejour'] || 'N/A';
+
+      console.log('Patient Info in SoinPage:', this.nom, this.numSecuriteSociale, this.idSejour, this.debutSejour, this.finSejour);
+
+      // Validate and fetch soins data if idSejour is valid
+      if (!this.idSejour) {
+        alert('Error: Missing or invalid ID Sejour.');
+        return;
+      }
+
+      // Fetch soins using the idSejour
+      this.fetchSoins(Number(this.idSejour));
+    });
+  }
+
+  /**
+   * Fetch soin data from the backend and filter based on `idSejour`.
+   * @param idSejour - The ID of the sejour to filter the soins.
+   */
+  fetchSoins(idSejour: number): void {
+    if (!idSejour) {
+      console.error('Invalid idSejour provided');
+      alert('Invalid ID Sejour');
+      return;
+    }
+
+    this.http.get<any[]>('http://127.0.0.1:8000/soin/').subscribe(
+      (data) => {
+        console.log('Fetched Soin data:', data);  // Log for debugging
+        this.soins = data.filter((entry) => entry.idSejour === idSejour);
+        console.log('Filtered Soin data:', this.soins);
+      },
+      (error) => {
+        console.error('Error fetching soins data:', error);
+        alert('Failed to fetch soins data. Please try again later.');
+      }
+    );
+  }
+
+  // Open modal to view soin details
+  openModal(entry: any): void {
+    console.log('Modal entry:', entry);  // Log for debugging
+    this.modalData.summary = entry.resumeSoin;
     this.isModalOpen = true;
   }
 
   // Close modal
-  closeModal() {
+  closeModal(): void {
     this.isModalOpen = false;
   }
 
-  onBackgroundClick(event: MouseEvent) {
-    // If clicked outside modal-content, close the modal
+  // Close modal if clicked on the background
+  onBackgroundClick(event: MouseEvent): void {
     this.closeModal();
   }
 }
