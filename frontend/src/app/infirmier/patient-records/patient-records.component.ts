@@ -129,6 +129,6 @@ export class PatientRecordsComponent implements OnInit {
 
   navigateToPatientDetails(patient: any): void {
     // Naviguer vers la page de détails du patient avec les informations de l'état
-    this.router.navigate(['sejour'], { state: { patient } });
+    this.router.navigate(['/infirmier/patient-details'], { state: { patient } });
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-laborantin-layout',
@@ -8,5 +8,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './laborantin-layout.component.css'
 })
 export class LaborantinLayoutComponent {
-  
+  constructor(private router: Router) {}
+
+  goHome() {
+    this.router.navigate(['/lab/records']);
+  }
 }

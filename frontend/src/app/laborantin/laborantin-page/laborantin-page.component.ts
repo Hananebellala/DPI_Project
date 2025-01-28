@@ -21,6 +21,7 @@ export class LaborantinPageComponent {
   @ViewChild('tadiastolique') tadiastolique!: ElementRef;
   @ViewChild('cholesterol') cholesterol!: ElementRef;
   @ViewChild('triglycerides') triglycerides!: ElementRef;
+
   idSejour!: number;
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {}
@@ -38,7 +39,7 @@ export class LaborantinPageComponent {
     return value || '';
   }
 
-  // Helper function to submit data for each parameter
+  // Helper function to submit data for each LigneAnalyse
   submitAnalysis(type: string, resultElement: ElementRef, unit: string, idBilanBiologique: number): void {
     const result = resultElement.nativeElement.value.trim();
     
@@ -69,24 +70,47 @@ export class LaborantinPageComponent {
     );
   }
 
-  // Submit form for all tests
+  // Create BilanBiologique and then submit analyses
   saveLigneAnalyse(event: Event): void {
     event.preventDefault();
-    
-    const idBilanBiologique = 1; // A VERIFIER
-    
-    this.submitAnalysis('Leucocytes', this.globulesBlanches, 'u/mL', idBilanBiologique);
-    this.submitAnalysis('Hématies', this.globulesRouges, 'u/mL', idBilanBiologique);
-    this.submitAnalysis('Hémoglobine', this.hemoglobine, 'g/L', idBilanBiologique);
-    this.submitAnalysis('Hématocrites', this.hematocrites, '%', idBilanBiologique);
-    this.submitAnalysis('Thrombocytes', this.thrombocytes, 'u/mL', idBilanBiologique);
-    this.submitAnalysis('Glycémie', this.glycemie, 'g/L', idBilanBiologique);
-    this.submitAnalysis('Tension artérielle systolique', this.tasystolique, 'mmHg', idBilanBiologique);
-    this.submitAnalysis('Tension artérielle diastolique', this.tadiastolique, 'mmHg', idBilanBiologique);
-    this.submitAnalysis('Cholestérol', this.cholesterol, 'mmol/mL', idBilanBiologique);
-    this.submitAnalysis('Triglycérides', this.triglycerides, 'mmol/mL', idBilanBiologique);
 
-    this.resetForm();
+    // Create the BilanBiologique
+    const bilanData = {
+      id: '1',
+      dateExamen: new Date().toISOString().split('T')[0], // Current date
+      resultatGlobal: '',
+      idSejour: this.idSejour,
+    };
+
+    const csrfToken = this.getCSRFToken();
+    const headers = new HttpHeaders({
+      'X-CSRFToken': csrfToken,
+    });
+
+    this.http.post<any>('http://127.0.0.1:8000/bilanbiologique/', bilanData, { headers, withCredentials: false }).subscribe(
+      (bilanResponse) => {
+        console.log('BilanBiologique créé avec succès:', bilanResponse);
+        const idBilanBiologique = bilanResponse.id;
+
+        // Submit analyses using the created BilanBiologique ID
+        this.submitAnalysis('Leucocytes', this.globulesBlanches, 'u/mL', idBilanBiologique);
+        this.submitAnalysis('Hématies', this.globulesRouges, 'u/mL', idBilanBiologique);
+        this.submitAnalysis('Hémoglobine', this.hemoglobine, 'g/L', idBilanBiologique);
+        this.submitAnalysis('Hématocrites', this.hematocrites, '%', idBilanBiologique);
+        this.submitAnalysis('Thrombocytes', this.thrombocytes, 'u/mL', idBilanBiologique);
+        this.submitAnalysis('Glycémie', this.glycemie, 'g/L', idBilanBiologique);
+        this.submitAnalysis('Tension artérielle systolique', this.tasystolique, 'mmHg', idBilanBiologique);
+        this.submitAnalysis('Tension artérielle diastolique', this.tadiastolique, 'mmHg', idBilanBiologique);
+        this.submitAnalysis('Cholestérol', this.cholesterol, 'mmol/mL', idBilanBiologique);
+        this.submitAnalysis('Triglycérides', this.triglycerides, 'mmol/mL', idBilanBiologique);
+
+        this.resetForm();
+      },
+      (error) => {
+        console.error('Erreur lors de la création du BilanBiologiqueeeeee:', error);
+        alert('Erreur lors de la création du BilanBiologiqueeeee. Veuillez réessayer.');
+      }
+    );
   }
 
   // Reset form after submission

@@ -98,5 +98,9 @@ export class DoctorLayoutComponent implements OnInit {
   goHome() {
     this.router.navigate(['/doctor/']);
   }
+
+  logout(){
+    this.router.navigate(['/login']); 
+  }
   
 }

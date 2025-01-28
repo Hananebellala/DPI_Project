@@ -62,6 +62,11 @@
         <img src="patients.png" alt="Patients Icon" class="icon" />
         <span class="menu-text">Patient</span>
       </a>
+
+      <a (click)="logout()" class="menu-item">
+        <img src="logout.png" alt="Logout Icon" class="icon">
+        <span class="menu-text">Logout</span>
+      </a>
     </div>
   
     <div class="content">
@@ -75,6 +80,8 @@
         <button (click)="scanQrCode()" class="qr-button">
           <img src="qr-icon.png" alt="Scan QR">
         </button>
+
+        
         <div id="qr-scanner" *ngIf="isScanning" class="qr-scanner">
           <zxing-scanner
             [formats]="formats"
@@ -83,6 +90,8 @@
           ></zxing-scanner>
           <button mat-button color="warn" (click)="closeQrScanner()">Close Scanner</button>
         </div>
+
+        
         <div class="profile" (click)="toggleProfileDropdown()">
           <img src="Profile.png" alt="Profile Picture" />
           <span>{{ profile.name || 'Dr. Unknown' }}</span>
